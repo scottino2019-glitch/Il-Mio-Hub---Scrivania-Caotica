@@ -1815,7 +1815,70 @@ export default function App() {
               ))}
             </div>
           </div>
+{/* EXTRA CARD: BOZZE & CODICE (CSS ARTIST) */}
+<div className="desk-card bg-stone-100 p-6 rounded-md shadow-2xl relative border-2 border-stone-200/60" style={{ '--hover-rot': '2deg' } as any}>
+  {/* Nastro adesivo in cima */}
+  <div className="postit-tape"></div>
 
+  {/* Segnalibro Post-it sporgente sul lato destro */}
+  <div className="absolute -right-2 top-10 bg-rose-400 text-rose-950 text-[8px] font-bold font-mono px-2.5 py-1 rounded-l-md shadow-sm transform rotate-3">
+    CSS ART
+  </div>
+  <div className="absolute -right-1 top-18 bg-yellow-400 text-yellow-950 text-[8px] font-bold font-mono px-2 py-1 rounded-l-md shadow-sm transform -rotate-2">
+    CODE
+  </div>
+
+  <div className="relative mt-2">
+    {/* Etichetta del Blocco Schizzi */}
+    <div className="inline-block bg-[#001f3f]/10 text-[#001f3f] font-mono text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-widest mb-2 border border-[#001f3f]/30">
+      🎨 Bozze & Codice
+    </div>
+
+    <h3 className="font-serif font-bold text-stone-900 text-lg tracking-tight mb-1">
+      CSS Artist
+    </h3>
+    <p className="text-[10px] text-stone-500 font-sans italic mb-4">
+      Interfacce e creazioni d'arte programmate in CSS puro.
+    </p>
+
+    {/* Lista Progetti */}
+    <ul className="space-y-2 mb-5 max-h-[190px] overflow-y-auto pr-1">
+      {[
+        { name: "Graphic Atelier", url: "https://graphic-atelier.netlify.app/" },
+        { name: "Comix Studio", url: "https://comic-studio-five.vercel.app/" },
+        { name: "AnalogCraft", url: "https://analog-craft.vercel.app/" },
+        { name: "Creative Card", url: "https://creative-card-code-editor.vercel.app/" },
+        { name: "Hover Craft", url: "https://hover-craft-tau.vercel.app/" },
+        { name: "Analogue Studio", url: "https://analogue-studio.vercel.app/" },
+        { name: "Gliph Forge", url: "https://gliph-forge.netlify.app/" },
+      ].map((proj, idx) => (
+        <li key={idx} className="border-b border-dashed border-stone-300 pb-1">
+          <a 
+            href={proj.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={() => playSoundBlip?.(750, 'triangle', 0.04)}
+            className="group flex items-center justify-between text-stone-700 hover:text-stone-950 font-mono text-[11px] transition-colors"
+          >
+            <span className="group-hover:translate-x-1 transition-transform">📂 {proj.name}</span>
+            <span className="text-[8px] text-stone-400 opacity-80 group-hover:text-stone-700">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    {/* Bottone d'azione stile schizzo a mano inferiore */}
+    <a 
+      href="https://artisan-studio-psi.vercel.app/" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      onClick={() => playSoundBlip?.(900, 'sine', 0.06)}
+      className="block text-center py-2 px-3 bg-stone-900 text-stone-100 hover:bg-stone-800 rounded-lg text-xs font-bold tracking-wider hover:shadow-lg transition-all border-b-4 border-stone-950 hover:border-stone-900 active:scale-[0.98]"
+    >
+      + Crea Nuovo background 🖌️
+    </a>
+  </div>
+</div>
           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4033] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
