@@ -1384,6 +1384,18 @@ export default function App() {
               </li>
             </ul>
           </div>
+          {/*  Card Scura con Bordo Vetro (Glassmorphism / Tech) */}
+          <div className="desk-card bg-[#1e293b]/50 backdrop-blur-md p-6 rounded-3xl border border-white/10 shadow-xl" style={{ '--hover-rot': '1deg' } as any}>
+  <h3 className="text-base font-bold text-white mb-2">
+    ⚡ Link Utile
+  </h3>
+  <p className="text-xs text-stone-300 mb-4">
+    Un collegamento veloce alle tue risorse esterne preferite.
+  </p>
+  <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="inline-block bg-teal-500 hover:bg-teal-400 text-stone-900 text-xs font-bold px-4 py-2 rounded-xl transition-all">
+    Apri Risorsa →
+  </a>
+</div>
 {/* CARD EXTRA: PDF CREATOR & TEMPLATES (FOGLIO STRAPPATO ROSA) */}
 <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1.5deg' } as any}>
   <div style={{
@@ -1633,7 +1645,52 @@ export default function App() {
               + Crea Nuovo background
             </a>
           </div>
-
+{/* CARD EXTRA: POLAROID SCRAPBOOK MEMORIES */}
+<div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
+  <div className="p-4 flex items-center justify-center min-h-full">
+    <div className="polaroid-container bg-white p-5 pb-10 shadow-2xl rotate-[-2deg] rounded-sm cursor-pointer border border-stone-100">
+      {/* Photo Frame Container */}
+      <div className="w-64 aspect-square bg-zinc-200 overflow-hidden mb-6 relative border-2 border-stone-200/50">
+        <img 
+          src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4MDc1Mjd8MHwxfHNlYXJjaHw2fHxtYXJlfGVufDB8fHx8MTc3OTgzMDg4Nnww&ixlib=rb-4.1.0&q=85" 
+          className="w-full h-full object-cover grayscale-[25%]" 
+          alt="Original Scrapbook Nature Photo"
+          referrerPolicy="no-referrer"
+        />
+        {/* Warm Orange overlay filter */}
+        <div className="absolute inset-0 bg-amber-500/10 mix-blend-overlay"></div>
+      </div>
+      
+      {/* Scrapbook handwritten Link entries */}
+      <div className="font-serif text-lg md:text-xl text-stone-800 text-center italic tracking-wide">
+        <ul className="list-none p-0 m-0 flex flex-col gap-2.5">
+          <li>
+            <a 
+              href="https://arty-scrapbook.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-amber-700 underline decoration-dotted transition-colors"
+              onClick={() => playSoundBlip(680, 'triangle', 0.06)}
+            >
+              Arty Scrapbook
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://scrapbook-magic.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-amber-700 underline decoration-dotted transition-colors"
+              onClick={() => playSoundBlip(720, 'triangle', 0.06)}
+            >
+              Scrapbook magic
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
           {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
             <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900">
@@ -1685,7 +1742,27 @@ export default function App() {
               </div>
             </div>
           </div>
-
+          {/*. Card Stile Taccuino Quadrettato (Semplice & Elegante) */}
+<div className="desk-card squared-paper p-6 rounded-lg" style={{ '--hover-rot': '-1deg' } as any}>
+  <h3 className="text-lg font-bold text-stone-950 font-sans mb-3 border-b-2 border-stone-200 pb-1">
+    📓 Il Mio Nuovo Quaderno
+  </h3>
+  <p className="text-xs text-stone-700 leading-relaxed font-mono">
+    Scrivi qui i tuoi appunti, idee di codice o note veloci. Puoi usare classi Tailwind per personalizzare i testi.
+  </p>
+</div>
+          {/*. Card Stile Taccuino Quadrettato (Semplice & Elegante) */}
+          <div className="desk-card postit-card postit-pink p-6" style={{ '--hover-rot': '1.5deg' } as any}>
+  {/* Effetto nastro adesivo trasparente in cima */}
+  <div className="postit-tape"></div>
+  
+  <h3 className="text-md font-bold text-pink-950 font-sans mt-2 mb-2">
+    📌 Promemoria Volante
+  </h3>
+  <p className="text-xs text-pink-900 font-sans">
+    Non dimenticare di caricare il nuovo aggiornamento su GitHub prima di cena! 🚀
+  </p>
+</div>
           {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="retro-pc-case">
