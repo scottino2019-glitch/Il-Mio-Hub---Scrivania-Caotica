@@ -2078,103 +2078,64 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               )}
             </div>
           </div>
-{/* CARD: DIDATTICA, LINGUE & CREATIVITÀ */}
-<div 
-  className="desk-card hover-rot-1" 
-  style={{ '--hover-rot': '2deg' } as any}
->
-  <div className="w-full bg-amber-50 border-4 border-amber-900/60 rounded-3xl shadow-[8px_8px_0_#451a03] p-5 relative overflow-hidden text-stone-900">
-    {/* Piccolo pezzetto di nastro adesivo in cima per bellezza */}
-    <div 
-      className="absolute -top-1 left-12 w-20 h-5 bg-amber-200/50 backdrop-blur-sm shadow-sm rotate-2 border-x-2 border-dashed border-amber-800/10"
-      style={{ transform: 'rotate(-4deg)' }}
-    ></div>
+{/* CARD EXTRA: PORTAL CARDS */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="p-8 flex items-center justify-center min-h-full">
+              <div className="relative w-[320px] h-[560px] rounded-3xl bg-[#ff8f95] p-4 overflow-hidden shadow-2xl">
+                <div className="absolute top-20 -left-5 w-40 h-40 rounded-3xl bg-[#8fd5ff] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div className="absolute bottom-10 -right-5 w-40 h-40 rounded-3xl bg-[#ffd57a] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div className="relative w-full h-full bg-white rounded-2xl shadow-lg px-6 pt-6 pb-8 flex flex-col items-center justify-between">
+                  <div className="w-full flex items-center justify-between text-xs font-medium text-gray-700">
+                    <span>3/100</span>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
+                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
+                    </div>
+                  </div>
+                  
+                  <div className="relative flex flex-col items-start justify-center gap-2.5 my-auto w-full">
+                    <ul className="list-none space-y-1 text-sm text-gray-800 font-medium w-full">
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="generatore-card-orientali.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">🧧 Creatore di Card Orientali</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="hanziBuilderPro.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">㊗ Hanzi Builder Pro</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://le-app-studio.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-500 flex items-center gap-1.5">🎓 App-Studio</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://whats-app-chat-designer.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-500 flex items-center gap-1.5">🗯 ChatBuilder</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://grammar-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-yellow-600 flex items-center gap-1.5">📔 Grammar Creator</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://librocreator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-500 flex items-center gap-1.5">📙 Libro Creator</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://flashcard-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-indigo-500 flex items-center gap-1.5">🎴 Flashcard Creator</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://linguaeditpro.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-purple-500 flex items-center gap-1.5">🗣 Lingua Edit Pro</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://dialogue-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5">💬 Dialogue Creator</a>
+                      </li>
+                    </ul>
+                  </div>
 
-    <h3 className="font-sans font-black text-lg text-amber-950 mb-4 pt-2 border-b-2 border-dashed border-amber-900/20 pb-2 flex items-center gap-2">
-      <span>🎓</span> Studio & Creatività
-    </h3>
-    
-    <ul className="flex flex-col gap-2.5 list-none pl-0">
-      <li>
-        <a 
-          href="https://le-app-studio.netlify.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
-          onClick={() => playSoundBlip(750, 'sine', 0.07)}
-        >
-          <span>🎓</span> Le App-Studio
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://whats-app-chat-designer.vercel.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
-          onClick={() => playSoundBlip(770, 'sine', 0.07)}
-        >
-          <span>🗯</span> ChatBuilder
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://grammar-creator.vercel.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
-          onClick={() => playSoundBlip(790, 'sine', 0.07)}
-        >
-          <span>📔</span> Grammar Creator
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://librocreator.netlify.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
-          onClick={() => playSoundBlip(810, 'sine', 0.07)}
-        >
-          <span>📙</span> Libro Creator
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://flashcard-creator.netlify.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
-          onClick={() => playSoundBlip(830, 'sine', 0.07)}
-        >
-          <span>🎴</span> Flashcard Creator
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://linguaeditpro.netlify.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
-          onClick={() => playSoundBlip(850, 'sine', 0.07)}
-        >
-          <span>🗣</span> Lingua Edit Pro
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://dialogue-creator.netlify.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
-          onClick={() => playSoundBlip(870, 'sine', 0.07)}
-        >
-          <span>💬</span> Dialogue Creator
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+                  <div className="w-full flex items-center justify-between text-xs text-gray-500">
+                    <span className="text-[11px]">Tocca per ascoltare</span>
+                    <div className="flex gap-2">
+                      <div className="px-3 py-1.5 rounded-full bg-[#ff8f95] text-[11px] font-semibold text-white shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Indietro</div>
+                      <div className="px-3 py-1.5 rounded-full bg-[#ffbd4a] text-[11px] font-semibold text-gray-900 shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Avanti</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
           <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="editor-header">
