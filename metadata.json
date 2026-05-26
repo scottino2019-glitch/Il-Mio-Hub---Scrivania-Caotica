@@ -1,0 +1,6 @@
+{
+  "name": "Il Mio Hub - Scrivania Caotica",
+  "description": "Una scrivania digitale ricca di taccuini interattivi, lavagne, widget scolastici e strumenti per il coding con layout fluido.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

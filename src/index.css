@@ -1,0 +1,575 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Flavors&family=Montserrat:wght@400;500;600;700&family=Playpen+Sans:wght@400;600;800&family=VT323&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  body {
+    /* Sfondo scuro e profondo con gradiente radiale accattivante */
+    background-color: #121826;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.2), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(15, 118, 110, 0.2), transparent 25%);
+    color: #f8fafc;
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* =========================================
+   SFONDO EMOJI SCRIVANIA (Texture in filigrana)
+   ========================================= */
+.bg-emojis {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1; /* Davanti allo sfondo di base, dietro tutto il resto */
+  pointer-events: none; /* Non blocca i click */
+  overflow: hidden;
+}
+
+.bg-emoji {
+  position: absolute;
+  opacity: 0.05; /* Molto leggero ed elegante */
+  user-select: none;
+  animation: floatEmoji 24s infinite ease-in-out alternate;
+}
+
+@keyframes floatEmoji {
+  0% { transform: translateY(0px) rotate(var(--rot)); }
+  100% { transform: translateY(-35px) rotate(var(--rot)); }
+}
+
+/* =========================================
+   LA MENU DOCK SUPERIORE (Glassmorfismo)
+   ========================================= */
+.top-dock {
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 41, 59, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 14px;
+  z-index: 50;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  max-width: 95vw;
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar for clean visual on mobile */
+}
+
+.top-dock::-webkit-scrollbar {
+  display: none;
+}
+
+.dock-item {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: white;
+  border: 1px solid transparent;
+}
+
+.dock-item:hover {
+  transform: translateY(-8px) scale(1.18);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dock-item.android:hover {
+  box-shadow: 0 10px 20px rgba(61, 220, 132, 0.45);
+  border-color: #3ddc84;
+}
+
+.dock-item.school:hover {
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.45);
+  border-color: #ef4444;
+}
+
+.dock-item.eserciziario:hover {
+  box-shadow: 0 10px 20px rgba(236, 72, 153, 0.45);
+  border-color: #ec4899;
+}
+
+.dock-item.windows:hover {
+  box-shadow: 0 10px 20px rgba(0, 164, 239, 0.45);
+  border-color: #00a4ef;
+}
+
+.dock-item.immagini:hover {
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.45);
+  border-color: #3b82f6;
+}
+
+.dock-item.ricettario:hover {
+  box-shadow: 0 10px 20px rgba(245, 158, 11, 0.45);
+  border-color: #f59e0b;
+}
+
+.dock-item.film:hover {
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.45);
+  border-color: #8b5cf6;
+}
+
+.dock-item.Musica:hover {
+  box-shadow: 0 10px 20px rgba(244, 63, 94, 0.45);
+  border-color: #f43f5e;
+}
+
+.dock-item.Coding:hover {
+  box-shadow: 0 10px 20px rgba(6, 182, 212, 0.45);
+  border-color: #06b6d4;
+}
+
+/* Tooltip a comparsa */
+.dock-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -38px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  pointer-events: none;
+}
+
+.dock-item:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
+/* =========================================
+   SCREENS & CONTEXT CONTAINER
+   ========================================= */
+.main-content {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  z-index: 10;
+}
+
+/* CARDS STYLINGS */
+.desk-card {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 2rem;
+  break-inside: avoid;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15), box-shadow 0.3s ease;
+}
+
+.desk-card:hover {
+  transform: translateY(-4px) rotate(var(--hover-rot, 0deg));
+}
+
+/* 1. RETRO TACCUINO / NOTEBOOK (PREFERITI) */
+.card-links-app {
+  background: #fdf6e3; /* Avorio caldo */
+  border-left: 15px solid #2d3748; /* Dorso taccuino scuro */
+  border-radius: 4px 8px 8px 4px;
+  box-shadow: 8px 8px 0px rgba(0,0,0,0.25);
+  position: relative;
+  padding: 15px 15px 15px 28px;
+}
+
+.card-links-app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 6px;
+  width: 8px;
+  height: 100%;
+  background-image: radial-gradient(circle, #121826 3.5px, transparent 4px);
+  background-size: 100% 24px;
+}
+
+.link-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px dashed rgba(0,0,0,0.15);
+  padding-bottom: 12px;
+}
+
+.link-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  padding: 4px;
+  color: #333;
+}
+
+.link-input:focus {
+  outline: none;
+  border-bottom: 2px solid #3b82f6;
+}
+
+.link-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06); /* Righe quaderno */
+}
+
+.link-item a {
+  color: #1a365d;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.88rem;
+  transition: color 0.15s;
+}
+
+.link-item a:hover {
+  color: #ef4444;
+  text-decoration: underline;
+}
+
+/* 2. CORKBOARD MOOD BOARD */
+.card-mood {
+  background-color: #d4a373; /* Sughero caldo */
+  background-image: radial-gradient(#8b5a2b 0.6px, transparent 0.6px);
+  background-size: 14px 14px;
+  border: 10px solid #5c4033;
+  padding: 20px;
+  box-shadow: 8px 10px 16px rgba(0,0,0,0.4);
+}
+
+.mood-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mood-item {
+  background: white;
+  padding: 6px 6px 14px 6px;
+  box-shadow: 3px 5px 10px rgba(0,0,0,0.3);
+  transform: rotate(var(--r, 0deg));
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.mood-item img {
+  width: 100%;
+  height: 85px;
+  object-fit: cover;
+}
+
+.mood-item .caption {
+  font-family: 'Caveat', cursive;
+  font-size: 0.9rem;
+  color: #222;
+  text-align: center;
+  margin-top: 6px;
+  font-weight: bold;
+  line-height: 1.1;
+}
+
+.mood-item .remove-mood {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #f43f5e;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  z-index: 20;
+}
+
+/* 3. LAVAGNA COMPITI */
+.wooden-frame {
+  background: #5c3a21;
+  background-image: linear-gradient(135deg, #4d301b 25%, #5c3a21 25%, #5c3a21 50%, #4d301b 50%, #4d301b 75%, #5c3a21 75%, #5c3a21 100%);
+  background-size: 32px 32px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 16px 35px rgba(0,0,0,0.55), inset 0 2px 6px rgba(255,255,255,0.25);
+  border: 4px solid #331d10;
+}
+
+.slate-surface {
+  position: relative;
+  background: #193124; /* Classico verde scuro lavagna */
+  border-radius: 4px;
+  padding: 24px 20px 48px 20px;
+  box-shadow: inset 0 8px 24px rgba(0,0,0,0.85);
+  overflow: hidden;
+  border: 3px solid #112118;
+}
+
+.chalk-dust-1 {
+  position: absolute;
+  top: 10%; left: 15%;
+  width: 220px; height: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0) 75%);
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.chalk-dust-2 {
+  position: absolute;
+  bottom: 15%; right: 10%;
+  width: 260px; height: 120px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 80%);
+  transform: rotate(18deg);
+  pointer-events: none;
+}
+
+.chalk-link {
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.chalk-pink { color: #ff9fb2; text-shadow: 0 0 2px rgba(255, 159, 178, 0.5); }
+.chalk-blue { color: #a0dbf0; text-shadow: 0 0 2px rgba(160, 219, 240, 0.5); }
+.chalk-yellow { color: #ffeb95; text-shadow: 0 0 2px rgba(255, 235, 149, 0.5); }
+.chalk-green { color: #a8f5b4; text-shadow: 0 0 2px rgba(168, 245, 180, 0.5); }
+.chalk-red { color: #ff8c69; text-shadow: 0 0 2px rgba(255, 140, 105, 0.5); }
+
+.chalk-link::after {
+  content: '';
+  position: absolute;
+  left: -6px; right: -6px; bottom: -2px;
+  height: 4px;
+  border-radius: 50%;
+  border-bottom: 2px double currentColor;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.25), opacity 0.2s;
+}
+
+.chalk-link:hover {
+  transform: rotate(-1.5deg) scale(1.05);
+  text-shadow: 0 0 8px currentColor, 1px 1.5px 2px rgba(0,0,0,0.6);
+}
+
+.chalk-link:hover::after {
+  opacity: 0.85;
+  transform: scaleX(1);
+}
+
+/* 4. CODE EDITOR WIDGET */
+.card-editor {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #333;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+
+.editor-header {
+  background: #2d2d2d;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  gap: 8px;
+  border-bottom: 1px solid #202020;
+}
+
+.mac-btn {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+}
+.mac-btn.close { background: #ff5f56; }
+.mac-btn.min { background: #ffbd2e; }
+.mac-btn.max { background: #27c93f; }
+
+/* 5. SMARTPHONE SIMULATOR */
+.smartphone-bezel {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  border-radius: 40px;
+  border: 12px solid #F34E90;
+  background-color: #0b0c10;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65), inset 0 2px 4px rgba(255,255,255,0.15);
+}
+
+.top-ears {
+  height: 20px;
+  background-color: #1AEF72;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 20%; right: 20%;
+  border-radius: 0 0 14px 14px;
+  z-index: 20;
+}
+
+.notch-camera {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background-color: #0d0e12;
+  margin-right: 10px;
+}
+
+.ear-speaker {
+  width: 44px; height: 3.5px;
+  border-radius: 2px;
+  background-color: #1a2228;
+}
+
+.smartphone-screen {
+  background-image: url("https://images.unsplash.com/photo-1677462679593-97b817fb118a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4MDc1Mjd8MHwxfHNlYXJjaHwyOXx8bGlicmklMjBhbnRpY2hpfGVufDB8fHx8MTc3OTc1MjI5NXww&ixlib=rb-4.1.0&q=85");
+  background-position: center;
+  background-size: cover;
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 14px 14px 18px 14px;
+  position: relative;
+}
+
+.app-tile {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 12px 10px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.app-tile:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #0cebeb;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(12, 235, 235, 0.18), 0 0 8px rgba(12, 235, 235, 0.1);
+}
+
+/* =========================================
+   CARDS DECORATIVE NUOVE ED EFFETTI
+   ========================================= */
+
+/* A. POST-IT NOTE CARD */
+.postit-card {
+  background: #fef08a; /* Giallo postit */
+  box-shadow: 6px 8px 0px rgba(0,0,0,0.25);
+  position: relative;
+  border-bottom-right-radius: 40px 10px; /* Angolo ricurvo */
+}
+
+.postit-pink {
+  background: #fbcfe8 !important; /* Rosa postit */
+}
+
+.postit-blue {
+  background: #bae6fd !important; /* Azzurro postit */
+}
+
+/* Nastro adesivo trasparente in cima */
+.postit-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 90px;
+  height: 25px;
+  background: rgba(254, 254, 254, 0.35);
+  backdrop-filter: blur(1.5px);
+  border-left: 2px dashed rgba(0,0,0,0.06);
+  border-right: 2px dashed rgba(0,0,0,0.06);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* B. CLOCK ANCHOR & PENDULUM */
+@keyframes swing {
+  0% { transform: rotate(15deg); }
+  100% { transform: rotate(-15deg); }
+}
+
+.pendulum-arm {
+  transform-origin: top center;
+  animation: swing 1s ease-in-out infinite alternate;
+}
+
+/* C. STEAM LINES FOR THE COFFEE */
+@keyframes steamLine {
+  0% { transform: translateY(0) scaleX(1); opacity: 0; }
+  25% { opacity: 0.6; }
+  50% { transform: translateY(-12px) scaleX(1.3); opacity: 0.3; }
+  100% { transform: translateY(-24px) scaleX(0.8); opacity: 0; }
+}
+
+.steam-smoke {
+  animation: steamLine 3s infinite ease-in-out;
+}
+
+/* D. ROTATING REELS FOR CASSETTE PLAYER */
+@keyframes rotateReel {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinning-reel {
+  animation: rotateReel 4s linear infinite;
+  transform-origin: center;
+}
+
+/* E. GRID NOTEBOOK PATTERNS */
+.squared-paper {
+  background-color: #fafaf9;
+  background-image: linear-gradient(#e7e5e4 1px, transparent 1px), linear-gradient(90deg, #e7e5e4 1px, transparent 1px);
+  background-size: 16px 16px;
+  border: 1px solid #d6d3d1;
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.15);
+}
+
+/* F. WALKING ANIME ANIMATIONS FOR TAMAGOTCHI */
+@keyframes bouncePet {
+  0%, 100% { transform: translateY(0px) scaleY(1); }
+  50% { transform: translateY(-4px) scaleY(0.92); }
+}
+
+.bouncing-pet {
+  animation: bouncePet 1.4s infinite ease-in-out;
+}
+
+/* G. SUBTITLE CUTE CURSIVE FONT */
+.header-subtitle {
+  font-family: "Flavors", cursive !important;
+  font-size: clamp(0.7rem, 1.5vw, 1.05rem);
+  line-height: 1.3;
+  color: #a6ff00; /* Retro lime highlight color */
+  text-shadow: 1.5px 2px 4px rgba(0,0,0,0.6);
+  letter-spacing: 0.04em;
+}
