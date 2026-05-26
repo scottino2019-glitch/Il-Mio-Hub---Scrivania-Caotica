@@ -156,7 +156,24 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('deskNotes', JSON.stringify(notes));
   }, [notes]);
+// Incolla questi stati all'inizio di App.tsx (sotto gli altri useState)
+const [pinkPaperDraft, setPinkPaperDraft] = useState(() => {
+  return localStorage.getItem('pink_notepad_draft') || 'Appunti veloci per i miei PDF...';
+});
 
+const [stickyColor, setStickyColor] = useState(() => {
+  return localStorage.getItem('sticky_saved_color') || '#fef08a'; // Giallo di default
+});
+
+const [polaroidCaption, setPolaroidCaption] = useState(() => {
+  return localStorage.getItem('polaroid_saved_caption') || 'Ricordi Creativi 🌊';
+});
+
+const [polaroidImg, setPolaroidImg] = useState(() => {
+  return localStorage.getItem('polaroid_saved_img') || 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4MDc1Mjd8MHwxfHNlYXJjaHw2fHxtYXJlfGVufDB8fHx8MTc3OTgzMDg4Nnww&ixlib=rb-4.1.0&q=85';
+});
+
+const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
   // =========================================
   // RANDOM DESK BACKGROUND ELEMENTS (Stable)
   // =========================================
@@ -1384,18 +1401,7 @@ export default function App() {
               </li>
             </ul>
           </div>
-          {/*  Card Scura con Bordo Vetro (Glassmorphism / Tech) */}
-          <div className="desk-card bg-[#1e293b]/50 backdrop-blur-md p-6 rounded-3xl border border-white/10 shadow-xl" style={{ '--hover-rot': '1deg' } as any}>
-  <h3 className="text-base font-bold text-white mb-2">
-    ⚡ Link Utile
-  </h3>
-  <p className="text-xs text-stone-300 mb-4">
-    Un collegamento veloce alle tue risorse esterne preferite.
-  </p>
-  <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="inline-block bg-teal-500 hover:bg-teal-400 text-stone-900 text-xs font-bold px-4 py-2 rounded-xl transition-all">
-    Apri Risorsa →
-  </a>
-</div>
+          
 {/* CARD EXTRA: PDF CREATOR & TEMPLATES (FOGLIO STRAPPATO ROSA) */}
 <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1.5deg' } as any}>
   <div style={{
@@ -1645,52 +1651,103 @@ export default function App() {
               + Crea Nuovo background
             </a>
           </div>
-{/* CARD EXTRA: POLAROID SCRAPBOOK MEMORIES */}
-<div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
-  <div className="p-4 flex items-center justify-center min-h-full">
-    <div className="polaroid-container bg-white p-5 pb-10 shadow-2xl rotate-[-2deg] rounded-sm cursor-pointer border border-stone-100">
-      {/* Photo Frame Container */}
-      <div className="w-64 aspect-square bg-zinc-200 overflow-hidden mb-6 relative border-2 border-stone-200/50">
-        <img 
-          src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4MDc1Mjd8MHwxfHNlYXJjaHw2fHxtYXJlfGVufDB8fHx8MTc3OTgzMDg4Nnww&ixlib=rb-4.1.0&q=85" 
-          className="w-full h-full object-cover grayscale-[25%]" 
-          alt="Original Scrapbook Nature Photo"
-          referrerPolicy="no-referrer"
-        />
-        {/* Warm Orange overlay filter */}
-        <div className="absolute inset-0 bg-amber-500/10 mix-blend-overlay"></div>
-      </div>
+{/* 3. IL POLAROID SCRAPBOOK INTERATTIVO */}
+<div className="desk-card hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
+  <div className="bg-white p-4 pb-6 border-2 border-stone-300 shadow-2xl rounded-sm cursor-pointer hover:rotate-0 transition-all duration-300">
+    
+    {/* Contenitore Immagine con Filtro */}
+    <div className="w-64 h-64 bg-stone-200 overflow-hidden mb-4 relative border border-stone-100">
+      <img 
+        src={polaroidImg} 
+        className={`w-full h-full object-cover transition-all duration-500 ${polaroidFilter}`} 
+        alt="Visual Scrapbook"
+      />
+      <div className="absolute inset-0 bg-orange-500/5 mix-blend-overlay"></div>
       
-      {/* Scrapbook handwritten Link entries */}
-      <div className="font-serif text-lg md:text-xl text-stone-800 text-center italic tracking-wide">
-        <ul className="list-none p-0 m-0 flex flex-col gap-2.5">
-          <li>
-            <a 
-              href="https://arty-scrapbook.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-amber-700 underline decoration-dotted transition-colors"
-              onClick={() => playSoundBlip(680, 'triangle', 0.06)}
-            >
-              Arty Scrapbook
-            </a>
-          </li>
-          <li>
-            <a 
-              href="https://scrapbook-magic.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-amber-700 underline decoration-dotted transition-colors"
-              onClick={() => playSoundBlip(720, 'triangle', 0.06)}
-            >
-              Scrapbook magic
-            </a>
-          </li>
-        </ul>
+      {/* Controlli Filtro sul Polaroid */}
+      <div className="absolute bottom-2 right-2 flex gap-1 bg-black/50 p-1 rounded backdrop-blur-xs select-none">
+        <button 
+          onClick={(e) => { e.stopPropagation(); playSoundBlip(600, 'sine', 0.03); setPolaroidFilter('grayscale-0'); }}
+          className="text-[9px] text-white px-1.5 py-0.5 hover:bg-white/20 rounded font-mono font-bold"
+        >
+          COLORE
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); playSoundBlip(620, 'sine', 0.03); setPolaroidFilter('grayscale-[80%]'); }}
+          className="text-[9px] text-white px-1.5 py-0.5 hover:bg-white/20 rounded font-mono font-bold"
+        >
+          RETRO
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); playSoundBlip(640, 'sine', 0.03); setPolaroidFilter('contrast-[110%] brightness-[90%] sepia'); }}
+          className="text-[9px] text-white px-1.5 py-0.5 hover:bg-white/20 rounded font-mono font-bold"
+        >
+          VINTAGE
+        </button>
       </div>
     </div>
+
+    {/* Input per cambiare l'immagine della Polaroid */}
+    <div className="mb-3 px-1">
+      <input 
+        type="text"
+        placeholder="Incolla URL immagine per cambiarla..."
+        value={polaroidImg}
+        onChange={(e) => {
+          setPolaroidImg(e.target.value);
+          localStorage.setItem('polaroid_saved_img', e.target.value);
+        }}
+        className="w-full text-[9px] p-1 bg-stone-50 border border-stone-300 rounded font-mono text-stone-600 focus:outline-none focus:border-stone-500"
+      />
+    </div>
+
+    {/* I link Scrapbook */}
+    <div className="space-y-1 mb-4 px-1">
+      <div className="bg-stone-50 hover:bg-stone-100 border border-stone-200 p-2 rounded transition-colors">
+        <a 
+          href="https://arty-scrapbook.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center justify-between text-xs text-stone-800 font-bold font-sans hover:text-black"
+          onClick={() => playSoundBlip(800, 'sine', 0.05)}
+        >
+          <span>🌸 Arty Scrapbook</span>
+          <span className="text-[10px] font-mono text-stone-400">APRI ↗</span>
+        </a>
+      </div>
+      <div className="bg-stone-50 hover:bg-stone-100 border border-stone-200 p-2 rounded transition-colors">
+        <a 
+          href="https://scrapbook-magic.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center justify-between text-xs text-stone-800 font-bold font-sans hover:text-black"
+          onClick={() => playSoundBlip(820, 'sine', 0.05)}
+        >
+          <span>✨ Scrapbook Magic</span>
+          <span className="text-[10px] font-mono text-stone-400">APRI ↗</span>
+        </a>
+      </div>
+    </div>
+
+    {/* Scrittura a mano sul fondo della Polaroid */}
+    <div className="pt-2 border-t border-dashed border-stone-200 text-center">
+      <input 
+        type="text"
+        value={polaroidCaption}
+        onChange={(e) => {
+          setPolaroidCaption(e.target.value);
+          localStorage.setItem('polaroid_saved_caption', e.target.value);
+        }}
+        className="w-full text-center bg-transparent focus:outline-none text-stone-800 text-xl font-bold tracking-tight select-text"
+        style={{ fontFamily: "'Special Elite', Georgia, serif" }}
+        placeholder="Scrivi una didascalia..."
+      />
+      <div className="text-[8px] uppercase tracking-wider text-stone-400 font-mono mt-1">Clicca per modificare la didascalia</div>
+    </div>
+
   </div>
 </div>
+
           {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
             <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900">
@@ -1742,26 +1799,60 @@ export default function App() {
               </div>
             </div>
           </div>
-          {/*. Card Stile Taccuino Quadrettato (Semplice & Elegante) */}
-<div className="desk-card squared-paper p-6 rounded-lg" style={{ '--hover-rot': '-1deg' } as any}>
-  <h3 className="text-lg font-bold text-stone-950 font-sans mb-3 border-b-2 border-stone-200 pb-1">
-    📓 Il Mio Nuovo Quaderno
-  </h3>
-  <p className="text-xs text-stone-700 leading-relaxed font-mono">
-    Scrivi qui i tuoi appunti, idee di codice o note veloci. Puoi usare classi Tailwind per personalizzare i testi.
-  </p>
-</div>
-          {/*. Card Stile Taccuino Quadrettato (Semplice & Elegante) */}
-          <div className="desk-card postit-card postit-pink p-6" style={{ '--hover-rot': '1.5deg' } as any}>
-  {/* Effetto nastro adesivo trasparente in cima */}
+        
+          {/* 2. LA PICCOLA NOTA CON NASTRO ADESIVO INTERATTIVA */}
+<div 
+  className="desk-card postit-card p-6" 
+  style={{ 
+    backgroundColor: stickyColor,
+    boxShadow: '6px 8px 0px rgba(0,0,0,0.22)',
+    position: 'relative',
+    borderBottomRightRadius: '40px 10px',
+    border: '2.5px solid #292524',
+    '--hover-rot': '1.5deg',
+    transition: 'background-color 0.3s ease'
+  } as any}
+>
+  {/* Nastro adesivo semitrasparente in cima */}
   <div className="postit-tape"></div>
-  
-  <h3 className="text-md font-bold text-pink-950 font-sans mt-2 mb-2">
-    📌 Promemoria Volante
-  </h3>
-  <p className="text-xs text-pink-900 font-sans">
-    Non dimenticare di caricare il nuovo aggiornamento su GitHub prima di cena! 🚀
-  </p>
+
+  {/* Barra degli strumenti per cambiare colore alla nota al volo */}
+  <div className="flex justify-between items-center mb-2 mt-4">
+    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-900/80 font-mono">🎨 Nota adesiva</span>
+    <div className="flex gap-1">
+      {['#fef08a', '#fbcfe8', '#bae6fd', '#bbf7d0'].map((color) => (
+        <button
+          key={color}
+          onClick={() => {
+            playSoundBlip(900, 'sine', 0.04);
+            setStickyColor(color);
+            localStorage.setItem('sticky_saved_color', color);
+          }}
+          className="w-3.5 h-3.5 rounded-full border border-stone-800/40 transition-transform hover:scale-125"
+          style={{ backgroundColor: color }}
+          title="Cambia colore nota"
+        />
+      ))}
+    </div>
+  </div>
+
+  {/* Contenitore della nota con input interattivo */}
+  <div className="bg-white/40 p-2.5 rounded border border-amber-900/10 shadow-sm">
+    <textarea
+      value={noteInput}
+      onChange={(e) => {
+        setNoteInput(e.target.value);
+      }}
+      className="w-full bg-transparent text-xs text-stone-800 font-sans focus:outline-none placeholder:text-stone-500/60 leading-relaxed font-semibold resize-none"
+      placeholder="Clicca e scrivi un promemoria rapido qui... Si salverà automaticamente!"
+      rows={4}
+    />
+  </div>
+
+  <div className="mt-3 flex justify-between items-center text-[9px] font-mono text-amber-950/70 font-bold">
+    <span>📍 PINNED TO BOARD</span>
+    <span>AUTO-SAVE</span>
+  </div>
 </div>
           {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
