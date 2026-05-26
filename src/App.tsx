@@ -1963,7 +1963,7 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
                 
                 <div className="text-center mb-6">
                   <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-                    Compiti di Oggi (Matematica & Code)
+                    Lingue e utility 
                   </h3>
                   <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
                 </div>
@@ -2015,7 +2015,7 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
                       <a href="https://quaderno-digitale.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-red">
                         5. Quaderno Digitale
                       </a>
-                      <span className="block text-[9px] text-white/50">Raccolta di studi informatici</span>
+                      <span className="block text-[9px] text-white/50">Quaderno per esercizi</span>
                     </div>
                   </div>
                 </div>
@@ -2078,7 +2078,103 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               )}
             </div>
           </div>
+{/* CARD: DIDATTICA, LINGUE & CREATIVITÀ */}
+<div 
+  className="desk-card hover-rot-1" 
+  style={{ '--hover-rot': '2deg' } as any}
+>
+  <div className="w-full bg-amber-50 border-4 border-amber-900/60 rounded-3xl shadow-[8px_8px_0_#451a03] p-5 relative overflow-hidden text-stone-900">
+    {/* Piccolo pezzetto di nastro adesivo in cima per bellezza */}
+    <div 
+      className="absolute -top-1 left-12 w-20 h-5 bg-amber-200/50 backdrop-blur-sm shadow-sm rotate-2 border-x-2 border-dashed border-amber-800/10"
+      style={{ transform: 'rotate(-4deg)' }}
+    ></div>
 
+    <h3 className="font-sans font-black text-lg text-amber-950 mb-4 pt-2 border-b-2 border-dashed border-amber-900/20 pb-2 flex items-center gap-2">
+      <span>🎓</span> Studio & Creatività
+    </h3>
+    
+    <ul className="flex flex-col gap-2.5 list-none pl-0">
+      <li>
+        <a 
+          href="https://le-app-studio.netlify.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
+          onClick={() => playSoundBlip(750, 'sine', 0.07)}
+        >
+          <span>🎓</span> Le App-Studio
+        </a>
+      </li>
+      <li>
+        <a 
+          href="https://whats-app-chat-designer.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
+          onClick={() => playSoundBlip(770, 'sine', 0.07)}
+        >
+          <span>🗯</span> ChatBuilder
+        </a>
+      </li>
+      <li>
+        <a 
+          href="https://grammar-creator.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
+          onClick={() => playSoundBlip(790, 'sine', 0.07)}
+        >
+          <span>📔</span> Grammar Creator
+        </a>
+      </li>
+      <li>
+        <a 
+          href="https://librocreator.netlify.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
+          onClick={() => playSoundBlip(810, 'sine', 0.07)}
+        >
+          <span>📙</span> Libro Creator
+        </a>
+      </li>
+      <li>
+        <a 
+          href="https://flashcard-creator.netlify.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
+          onClick={() => playSoundBlip(830, 'sine', 0.07)}
+        >
+          <span>🎴</span> Flashcard Creator
+        </a>
+      </li>
+      <li>
+        <a 
+          href="https://linguaeditpro.netlify.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
+          onClick={() => playSoundBlip(850, 'sine', 0.07)}
+        >
+          <span>🗣</span> Lingua Edit Pro
+        </a>
+      </li>
+      <li>
+        <a 
+          href="https://dialogue-creator.netlify.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 p-2 rounded-xl bg-white border-2 border-amber-900/40 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-all shadow-sm"
+          onClick={() => playSoundBlip(870, 'sine', 0.07)}
+        >
+          <span>💬</span> Dialogue Creator
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
           <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="editor-header">
