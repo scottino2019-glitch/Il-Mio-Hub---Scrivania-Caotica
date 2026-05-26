@@ -1384,7 +1384,160 @@ export default function App() {
               </li>
             </ul>
           </div>
+{/* CARD EXTRA: PDF CREATOR & TEMPLATES (FOGLIO STRAPPATO ROSA) */}
+<div className="desk-card hover-rot-1" style={{ '--hover-rot': '1.5deg' } as any}>
+  <div style={{
+    width: '100%',
+    minHeight: '320px',
+    padding: '35px 25px 25px 25px',
+    backgroundColor: '#fff1f2', // Caldo rosa confetto/pastello
+    borderRadius: '16px',
+    boxShadow: '10px 10px 0px #1e293b', // Ombra rigida cartoon coerente con lo stile
+    border: '3px solid #1e293b',
+    position: 'relative',
+    overflow: 'visible',
+    display: 'flex',
+    flexDirection: 'column',
+    boxSizing: 'border-box',
+    borderTop: '28px solid #f1f5f9'
+  }}>
+    {/* Buchi del quaderno strappato in alto */}
+    <div style={{
+      position: 'absolute',
+      top: '-14px',
+      left: '0',
+      right: '0',
+      height: '12px',
+      background: 'repeating-linear-gradient(90deg, #1e293b, #1e293b 8px, transparent 8px, transparent 18px)'
+    }}></div>
+    
+    {/* Mollette/segnalibri decorativi per l'effetto disordine */}
+    <div style={{
+      position: 'absolute',
+      top: '-20px',
+      right: '40px',
+      width: '30px',
+      height: '10px',
+      backgroundColor: '#f43f5e',
+      transform: 'rotate(-5deg)',
+      opacity: 0.85
+    }}></div>
 
+    <div style={{
+      fontFamily: '"Space Grotesk", sans-serif',
+      marginBottom: '14px'
+    }}>
+      <span style={{
+        backgroundColor: '#fda4af',
+        color: '#4c0519',
+        fontSize: '10px',
+        fontWeight: 'extrabold',
+        padding: '3px 8px',
+        borderRadius: '5px',
+        border: '1.5px solid #4c0519',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em'
+      }}>
+        PDF Templates
+      </span>
+      <h3 style={{
+        fontSize: '20px',
+        fontWeight: 900,
+        color: '#1e293b',
+        marginTop: '8px'
+      }}>
+        Crea & Modifica PDF
+      </h3>
+    </div>
+
+    {/* Lista dei Link */}
+    <ul style={{
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '10px',
+      flex: 1
+    }}>
+      <li style={{
+        background: '#ffffff',
+        border: '2px solid #1e293b',
+        borderRadius: '8px',
+        boxShadow: '3px 3px 0px #1e293b',
+        transition: 'all 0.1s'
+      }}>
+        <a 
+          href="editor-pdf-quadretti.html" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          onClick={() => playSoundBlip?.(800, 'sine', 0.05)}
+          style={{
+            display: 'block',
+            padding: '10px 14px',
+            fontFamily: '"Space Grotesk", sans-serif',
+            fontWeight: 700,
+            fontSize: '13.5px',
+            color: '#1e293b',
+            textDecoration: 'none'
+          }}
+        >
+          📝 Pdf editor a quadretti
+        </a>
+      </li>
+
+      <li style={{
+        background: '#ffffff',
+        border: '2px solid #1e293b',
+        borderRadius: '8px',
+        boxShadow: '3px 3px 0px #1e293b'
+      }}>
+        <a 
+          href="righe-pdf-editor.html" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          onClick={() => playSoundBlip?.(850, 'sine', 0.05)}
+          style={{
+            display: 'block',
+            padding: '10px 14px',
+            fontFamily: '"Space Grotesk", sans-serif',
+            fontWeight: 700,
+            fontSize: '13.5px',
+            color: '#1e293b',
+            textDecoration: 'none'
+          }}
+        >
+          📄 Pdf editor a righe
+        </a>
+      </li>
+
+      <li style={{
+        background: '#ffffff',
+        border: '2px solid #1e293b',
+        borderRadius: '8px',
+        boxShadow: '3px 3px 0px #1e293b'
+      }}>
+        <a 
+          href="pdf-creator.html" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          onClick={() => playSoundBlip?.(900, 'sine', 0.05)}
+          style={{
+            display: 'block',
+            padding: '10px 14px',
+            fontFamily: '"Space Grotesk", sans-serif',
+            fontWeight: 700,
+            fontSize: '13.5px',
+            color: '#1e293b',
+            textDecoration: 'none'
+          }}
+        >
+          📃 Pdf Creator
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
           {/* ALBUM CSS GRANDE - CSS Artist Draft */}
           <div className="desk-card album-css-grande hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
             {/* Effetti di disordine */}
