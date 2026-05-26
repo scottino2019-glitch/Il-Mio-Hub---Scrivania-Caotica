@@ -1533,6 +1533,93 @@ export default function App() {
             </div>
           </div>
 
+          {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="retro-pc-case">
+              {/* Glowing CRT Glass Bezel Cover */}
+              <div className="monitor-glass shadow-2xl">
+                {/* Screen Scanlines Mesh */}
+                <div className="crt-scanlines"></div>
+                <div className="crt-flicker"></div>
+                <div className="screen-glare"></div>
+                
+                {/* System Shell Prompt Header */}
+                <div className="terminal-shell">
+                  <div className="sys-info font-mono">
+                    BIOS v4.12 - MEM: 640KB BASE OK
+                    <br />[CODELINK RETRO OS - CONSOLE ATTIVA]
+                  </div>
+                  
+                  {/* List of Hyperlinks in Matrix console screen */}
+                  <div className="console-entries mt-6">
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="Snake Arcade Retro.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(600, 'triangle', 0.1)}
+                      >
+                        🐍 Snake
+                      </a>
+                      <span className="status-label font-mono">[READY]</span>
+                    </div>
+                    
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="memory.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(650, 'triangle', 0.1)}
+                      >
+                        🃏 Memory
+                      </a>
+                      <span className="status-label font-mono">[READY]</span>
+                    </div>
+                    
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="type-invader.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(700, 'triangle', 0.1)}
+                      >
+                        🔠 Type Invaders
+                      </a>
+                      <span className="status-label font-mono">[STABLE]</span>
+                    </div>
+                    
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="campo-minato.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(750, 'triangle', 0.1)}
+                      >
+                        💣 Campo minato
+                      </a>
+                      <span className="status-label font-mono">[ONLINE]</span>
+                    </div>
+                  </div>
+                  
+                  {/* Interactive Input Prompt with blinking cursors */}
+                  <div className="active-prompt mt-5 font-mono">
+                    <span className="prompt-symbol">&gt;</span>
+                    <span className="typing-placeholder">SISTEMA PRONTO...</span>
+                    <span className="blinking-cursor">▒</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
             <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
