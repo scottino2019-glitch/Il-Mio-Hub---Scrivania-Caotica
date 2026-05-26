@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di CSS Art Kawaii</title>
+    <style>
+        /* =========================================
+           STILI DEL GENERATORE (Interfaccia Utente)
+           ========================================= */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; color: #333; }
+        h1 { text-align: center; color: #2c3e50; }
+        .app-container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto; }
+
+        .controls { flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .control-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #34495e; }
+        select, input[type="color"] { width: 100%; padding: 10px; border: 2px solid #bdc3c7; border-radius: 8px; font-size: 16px; cursor: pointer; background: white; }
+
+        .preview-section { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 20px; }
+        .preview-box { background: #eaddcf; height: 350px; border-radius: 15px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; position: relative; transition: background 0.3s; }
+
+        .code-box { background: #282c34; padding: 20px; border-radius: 15px; color: #abb2bf; font-family: monospace; overflow-x: auto; font-size: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); white-space: pre-wrap; line-height: 1.4; max-height: 400px;}
+        .code-box h3 { color: #fff; margin-top: 0; }
+
+        /* =========================================
+           STILI DELLA CSS ART (Il motore di disegno)
+           ========================================= */
+        .character-container {
+            position: relative;
+            animation: floating 3s ease-in-out infinite;
+            margin-top: 40px; 
+        }
+
+        .character-body {
+            position: relative;
+            background: var(--body-color, #fffcf5);
+            border: 5px solid var(--ink, #2b2b2b);
+            box-shadow: inset -10px -10px 0px rgba(0,0,0,0.05);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        /* 1. Forme del corpo */
+        .shape-round { border-radius: 50%; width: 150px; height: 150px; }
+        .shape-baozi { border-radius: 70px 70px 40px 40px; width: 160px; height: 120px; }
+        .shape-squircle { border-radius: 40px; width: 150px; height: 140px; }
+        .shape-drop { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; width: 150px; height: 160px; }
+
+        /* 2. Orecchie base */
+        .character-body::before, .character-body::after {
+            content: ''; position: absolute; background: var(--body-color, #fffcf5); border: 5px solid var(--ink, #2b2b2b); z-index: -1; transition: all 0.3s ease; display: none;
+        }
+
+        .ears-rabbit::before, .ears-rabbit::after,
+        .ears-cat::before, .ears-cat::after,
+        .ears-bear::before, .ears-bear::after,
+        .ears-baozi::before, .ears-baozi::after {
+            display: block;
+        }
+
+        /* Orecchie Coniglio */
+        .ears-rabbit::before, .ears-rabbit::after { top: -80px; width: 40px; height: 110px; border-radius: 50% 50% 10% 10%; box-shadow: inset 0px -20px 0px rgba(255,182,193,0.5); }
+        .ears-rabbit::before { left: 20px; transform: rotate(-15deg); transform-origin: bottom center; }
+        .ears-rabbit::after { right: 20px; transform: rotate(15deg); transform-origin: bottom center; }
+
+        /* Orecchie Gatto (Migliorate) */
+        .ears-cat::before, .ears-cat::after { top: -25px; width: 45px; height: 45px; box-shadow: inset 0px -10px 0px rgba(255,182,193,0.5); }
+        .ears-cat::before { left: 15px; border-radius: 10px 40px 10px 10px; transform: rotate(-15deg); }
+        .ears-cat::after { right: 15px; border-radius: 40px 10px 10px 10px; transform: rotate(15deg); }
+
+        /* Orecchie Orso (Migliorate) */
+        .ears-bear::before, .ears-bear::after { top: -25px; width: 55px; height: 55px; border-radius: 50%; box-shadow: inset 0px -10px 0px rgba(255,182,193,0.5); }
+        .ears-bear::before { left: -10px; transform: rotate(-15deg); }
+        .ears-bear::after { right: -10px; transform: rotate(15deg); }
+
+        /* Orecchie Cane */
+        
+
+        /* Pieghe Baozi */
+        .ears-baozi::before, .ears-baozi::after { top: -10px; width: 35px; height: 25px; border-radius: 50%; }
+        .ears-baozi::before { left: 30px; transform: rotate(-20deg); }
+        .ears-baozi::after { right: 30px; transform: rotate(20deg); }
+
+        /* 3. Viso Base */
+        .eye { position: absolute; width: 15px; height: 20px; background-color: var(--ink, #2b2b2b); border-radius: 50%; animation: blink 4s infinite; top: 45%; }
+        .eye::after { content: ''; position: absolute; top: 3px; left: 3px; width: 5px; height: 6px; background: white; border-radius: 50%; }
+        .eye.left { left: 25px; }
+        .eye.right { right: 25px; }
+
+        .eye-happy { height: 6px; border-radius: 0; background: transparent; border-top: 5px solid var(--ink, #2b2b2b); border-top-left-radius: 20px; border-top-right-radius: 20px; margin-top: 7px; animation: none;}
+        .eye-happy::after { display: none; }
+
+        .blush { position: absolute; top: 55%; width: 25px; height: 12px; background: var(--blush, rgba(255, 100, 100, 0.5)); border-radius: 50%; transition: opacity 0.3s; }
+        .blush.left { left: 12px; }
+        .blush.right { right: 12px; }
+
+        /* 4. Bocche */
+        .mouth-wrapper { position: absolute; top: 60%; left: 50%; transform: translateX(-50%); width: 30px; height: 20px; display: flex; justify-content: center; }
+
+        .mouth-w { position: relative; width: 24px; height: 10px; }
+        .mouth-w .mouth-curve { position: absolute; width: 12px; height: 10px; border-bottom: 4px solid var(--ink, #2b2b2b); border-radius: 50%; }
+        .mouth-w .mouth-curve.left { left: 0; border-left: 2px solid transparent; }
+        .mouth-w .mouth-curve.right { right: 0; border-right: 2px solid transparent; }
+
+        .mouth-smile { width: 15px; height: 10px; border-bottom: 4px solid var(--ink, #2b2b2b); border-radius: 50%; margin-top: 2px; }
+
+        .mouth-o { width: 12px; height: 15px; background: #ff9999; border: 4px solid var(--ink, #2b2b2b); border-radius: 50%; margin-top: 2px; }
+
+        .mouth-tongue { position: relative; width: 16px; height: 8px; border-bottom: 4px solid var(--ink); border-radius: 50%; margin-top: 2px; }
+        .mouth-tongue::after { content: ''; position: absolute; top: 8px; left: 2px; width: 12px; height: 14px; background: #ff7675; border: 3px solid var(--ink); border-radius: 0 0 10px 10px; }
+
+        @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        @keyframes blink { 0%, 95%, 98%, 100% { transform: scaleY(1); } 96%, 99% { transform: scaleY(0.1); } }
+
+    </style>
+</head>
+<body>
+
+    <h1>✨ Generatore di Kawaii CSS Art ✨</h1>
+
+    <div class="app-container">
+        <!-- PANNELLO DI CONTROLLO -->
+        <div class="controls">
+            <h2>Personalizza il pupazzetto</h2>
+
+            <div class="control-group">
+                <label>Forma del Corpo</label>
+                <select id="ctrl-shape">
+                    <option value="shape-baozi">Baozi (Schiacciato sotto)</option>
+                    <option value="shape-round">Rotondo / Palla</option>
+                    <option value="shape-squircle">Quadrato Arrotondato</option>
+                    <option value="shape-drop">Goccia / Pera</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Orecchie / Cappello</label>
+                <select id="ctrl-ears">
+                    <option value="ears-baozi">Pieghe da Baozi</option>
+                    <option value="ears-rabbit">Orecchie da Coniglio</option>
+                    <option value="ears-cat">Orecchie da Gatto</option>
+                    <option value="ears-bear">Orecchie da Orsetto</option>
+                    
+                    <option value="none">Senza orecchie</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Occhi</label>
+                <select id="ctrl-eyes">
+                    <option value="eye-normal">Normali (Sbattono le palpebre)</option>
+                    <option value="eye-happy">Felici (Archi chiusi)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Bocca</label>
+                <select id="ctrl-mouth">
+                    <option value="mouth-smile">Sorriso semplice</option>
+                    <option value="mouth-w">Musetto a "W" (Gatto/Coniglio)</option>
+                    <option value="mouth-o">Bocca a "O" (Stupito)</option>
+                    <option value="mouth-tongue">Linguetta fuori</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Mostra Guance Rosse</label>
+                <select id="ctrl-blush">
+                    <option value="yes">Sì</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Colore Corpo</label>
+                <input type="color" id="ctrl-color-body" value="#fffcf5">
+            </div>
+
+            <div class="control-group">
+                <label>Colore Sfondo</label>
+                <input type="color" id="ctrl-color-bg" value="#eaddcf">
+            </div>
+        </div>
+
+        <!-- AREA ANTEPRIMA E CODICE -->
+        <div class="preview-section">
+            <div class="preview-box" id="preview-bg">
+                <div class="character-container">
+                    <div id="character" class="character-body shape-baozi ears-baozi">
+                        <div class="eye left" id="eye-l"></div>
+                        <div class="eye right" id="eye-r"></div>
+                        <div class="blush left" id="blush-l"></div>
+                        <div class="blush right" id="blush-r"></div>
+                        <div class="mouth-wrapper" id="mouth-render">
+                            <div class="mouth-smile"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-box">
+                <h3>Codice Generato Pronto da Copiare:</h3>
+                <div id="output-code">Attendi...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DEL GENERATORE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const charEl = document.getElementById('character');
+            const mouthEl = document.getElementById('mouth-render');
+            const bgEl = document.getElementById('preview-bg');
+            const codeOutput = document.getElementById('output-code');
+            const eyeL = document.getElementById('eye-l');
+            const eyeR = document.getElementById('eye-r');
+            const blushL = document.getElementById('blush-l');
+            const blushR = document.getElementById('blush-r');
+
+            const shapeCtrl = document.getElementById('ctrl-shape');
+            const earsCtrl = document.getElementById('ctrl-ears');
+            const eyesCtrl = document.getElementById('ctrl-eyes');
+            const mouthCtrl = document.getElementById('ctrl-mouth');
+            const blushCtrl = document.getElementById('ctrl-blush');
+            const bodyColorCtrl = document.getElementById('ctrl-color-body');
+            const bgColorCtrl = document.getElementById('ctrl-color-bg');
+
+            function updateArt() {
+                const shape = shapeCtrl.value;
+                const ears = earsCtrl.value;
+                const eyes = eyesCtrl.value;
+                const mouth = mouthCtrl.value;
+                const showBlush = blushCtrl.value;
+                const bColor = bodyColorCtrl.value;
+                const bgColor = bgColorCtrl.value;
+
+                // 1. Aggiorna la vista nel browser
+                charEl.className = `character-body ${shape} ${ears}`;
+                charEl.style.setProperty('--body-color', bColor);
+                bgEl.style.backgroundColor = bgColor;
+
+                if(eyes === 'eye-happy') {
+                    eyeL.classList.add('eye-happy');
+                    eyeR.classList.add('eye-happy');
+                } else {
+                    eyeL.classList.remove('eye-happy');
+                    eyeR.classList.remove('eye-happy');
+                }
+
+                if(showBlush === 'no') {
+                    blushL.style.opacity = '0';
+                    blushR.style.opacity = '0';
+                } else {
+                    blushL.style.opacity = '1';
+                    blushR.style.opacity = '1';
+                }
+
+                if(mouth === 'mouth-w') {
+                    mouthEl.innerHTML = `<div class="mouth-w"><div class="mouth-curve left"></div><div class="mouth-curve right"></div></div>`;
+                } else if(mouth === 'mouth-o') {
+                    mouthEl.innerHTML = `<div class="mouth-o"></div>`;
+                } else if(mouth === 'mouth-tongue') {
+                    mouthEl.innerHTML = `<div class="mouth-tongue"></div>`;
+                } else {
+                    mouthEl.innerHTML = `<div class="mouth-smile"></div>`;
+                }
+
+                // 2. Genera il codice (HTML + CSS)
+                let htmlCode = `<div class="container">
+  <div class="character ${shape} ${ears}">
+    <div class="eye left ${eyes === 'eye-happy' ? 'eye-happy' : ''}"></div>
+    <div class="eye right ${eyes === 'eye-happy' ? 'eye-happy' : ''}"></div>
+    ${showBlush === 'yes' ? '<div class="blush left"></div>\n    <div class="blush right"></div>' : ''}
+    <div class="mouth-wrapper">
+      ${mouthEl.innerHTML}
+    </div>
+  </div>
+</div>`;
+
+                htmlCode = htmlCode.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+                let cssCode = `/* CSS DEL PUPAZZETTO */
+body { background-color: ${bgColor}; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+:root { --body: ${bColor}; --ink: #2b2b2b; --blush: rgba(255, 100, 100, 0.5); }
+
+/* Corpo base animato */
+.container { animation: floating 3s ease-in-out infinite; margin-top: 40px; }
+.character { position: relative; background: var(--body); border: 5px solid var(--ink); box-shadow: inset -10px -10px 0px rgba(0,0,0,0.05); z-index: 2; }
+`;
+
+                if(shape === 'shape-round') cssCode += `.shape-round { border-radius: 50%; width: 150px; height: 150px; }
+`;
+                if(shape === 'shape-baozi') cssCode += `.shape-baozi { border-radius: 70px 70px 40px 40px; width: 160px; height: 120px; }
+`;
+                if(shape === 'shape-squircle') cssCode += `.shape-squircle { border-radius: 40px; width: 150px; height: 140px; }
+`;
+                if(shape === 'shape-drop') cssCode += `.shape-drop { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; width: 150px; height: 160px; }
+`;
+
+                if(ears !== 'none') {
+                    cssCode += `
+/* Orecchie generate con pseudo-elementi */
+.character::before, .character::after { content: ''; position: absolute; background: var(--body); border: 5px solid var(--ink); z-index: -1; }
+`;
+                    if(ears === 'ears-rabbit') cssCode += `.ears-rabbit::before, .ears-rabbit::after { top: -80px; width: 40px; height: 110px; border-radius: 50% 50% 10% 10%; box-shadow: inset 0px -20px 0px rgba(255,182,193,0.5); } .ears-rabbit::before { left: 20px; transform: rotate(-15deg); transform-origin: bottom center; } .ears-rabbit::after { right: 20px; transform: rotate(15deg); transform-origin: bottom center; }
+`;
+                    if(ears === 'ears-cat') cssCode += `.ears-cat::before, .ears-cat::after { top: -25px; width: 45px; height: 45px; box-shadow: inset 0px -10px 0px rgba(255,182,193,0.5); } .ears-cat::before { left: 15px; border-radius: 10px 40px 10px 10px; transform: rotate(-15deg); } .ears-cat::after { right: 15px; border-radius: 40px 10px 10px 10px; transform: rotate(15deg); }
+`;
+                    if(ears === 'ears-bear') cssCode += `.ears-bear::before, .ears-bear::after { top: -25px; width: 55px; height: 55px; border-radius: 50%; box-shadow: inset 0px -10px 0px rgba(255,182,193,0.5); } .ears-bear::before { left: -10px; transform: rotate(-15deg); } .ears-bear::after { right: -10px; transform: rotate(15deg); }
+`;
+                    if(ears === 'ears-dog') cssCode += `.ears-dog::before, .ears-dog::after { top: 10px; width: 40px; height: 70px; border-radius: 20px 20px 50% 50%; box-shadow: inset 0px -10px 0px rgba(255,182,193,0.5); z-index: 3; } .ears-dog::before { left: -25px; transform: rotate(20deg); } .ears-dog::after { right: -25px; transform: rotate(-20deg); }
+`;
+                    if(ears === 'ears-baozi') cssCode += `.ears-baozi::before, .ears-baozi::after { top: -10px; width: 35px; height: 25px; border-radius: 50%; } .ears-baozi::before { left: 30px; transform: rotate(-20deg); } .ears-baozi::after { right: 30px; transform: rotate(20deg); }
+`;
+                }
+
+                cssCode += `
+/* Dettagli del viso */
+.eye { position: absolute; width: 15px; height: 20px; background-color: var(--ink); border-radius: 50%; animation: blink 4s infinite; top: 45%; }
+.eye::after { content: ''; position: absolute; top: 3px; left: 3px; width: 5px; height: 6px; background: white; border-radius: 50%; }
+.eye.left { left: 25px; } .eye.right { right: 25px; }
+.eye.eye-happy { height: 6px; border-radius: 0; background: transparent; border-top: 5px solid var(--ink); border-top-left-radius: 20px; border-top-right-radius: 20px; margin-top: 7px; animation: none; } .eye.eye-happy::after { display: none; }
+`;
+
+                if(showBlush === 'yes') {
+                    cssCode += `.blush { position: absolute; top: 55%; width: 25px; height: 12px; background: var(--blush); border-radius: 50%; }
+.blush.left { left: 12px; } .blush.right { right: 12px; }
+`;
+                }
+
+                cssCode += `.mouth-wrapper { position: absolute; top: 60%; left: 50%; transform: translateX(-50%); width: 30px; height: 20px; display: flex; justify-content: center; }
+`;
+
+                if(mouth === 'mouth-smile') cssCode += `.mouth-smile { width: 15px; height: 10px; border-bottom: 4px solid var(--ink); border-radius: 50%; margin-top: 2px; }
+`;
+                if(mouth === 'mouth-w') cssCode += `.mouth-w { position: relative; width: 24px; height: 10px; } .mouth-w .mouth-curve { position: absolute; width: 12px; height: 10px; border-bottom: 4px solid var(--ink); border-radius: 50%; } .mouth-w .mouth-curve.left { left: 0; border-left: 2px solid transparent; } .mouth-w .mouth-curve.right { right: 0; border-right: 2px solid transparent; }
+`;
+                if(mouth === 'mouth-o') cssCode += `.mouth-o { width: 12px; height: 15px; background: #ff9999; border: 4px solid var(--ink); border-radius: 50%; margin-top: 2px; }
+`;
+                if(mouth === 'mouth-tongue') cssCode += `.mouth-tongue { position: relative; width: 16px; height: 8px; border-bottom: 4px solid var(--ink); border-radius: 50%; margin-top: 2px; } .mouth-tongue::after { content: ''; position: absolute; top: 8px; left: 2px; width: 12px; height: 14px; background: #ff7675; border: 3px solid var(--ink); border-radius: 0 0 10px 10px; }
+`;
+
+                cssCode += `
+/* Animazioni */
+@keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+@keyframes blink { 0%, 95%, 98%, 100% { transform: scaleY(1); } 96%, 99% { transform: scaleY(0.1); } }`;
+
+                codeOutput.innerHTML = `<strong>${htmlCode}</strong>
+
+${cssCode}`;
+            }
+
+            shapeCtrl.addEventListener('change', updateArt);
+            earsCtrl.addEventListener('change', updateArt);
+            eyesCtrl.addEventListener('change', updateArt);
+            mouthCtrl.addEventListener('change', updateArt);
+            blushCtrl.addEventListener('change', updateArt);
+            bodyColorCtrl.addEventListener('input', updateArt);
+            bgColorCtrl.addEventListener('input', updateArt);
+
+            updateArt();
+        });
+    </script>
+</body>
+</html>
