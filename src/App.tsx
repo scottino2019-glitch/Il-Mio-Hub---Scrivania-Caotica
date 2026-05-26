@@ -2658,7 +2658,115 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               Pesca un'altra carta 🔮
             </button>
           </div>
+import React, { useState } from 'react';
 
+export function JsonEditorCard() {
+  const [jsonString, setJsonString] = useState<string>('{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}');
+  const [filename, setFilename] = useState<string>('miei_dati.json');
+  const [status, setStatus] = useState<{ message: string; isError: boolean } | null>(null);
+
+  // Formatta automaticamente il JSON con 2 spazi di rientro
+  const handleFormat = () => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      setJsonString(JSON.stringify(parsed, null, 2));
+      setStatus({ message: "JSON formattato con successo!", isError: false });
+    } catch (e: any) {
+      setStatus({ message: `Errore nello schema: ${e.message}`, isError: true });
+    }
+  };
+
+  // Valida e scarica il file JSON localmente nel browser
+  const handleSave = () => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      const cleanJson = JSON.stringify(parsed, null, 2);
+      
+      const blob = new Blob([cleanJson], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.href = url;
+      downloadAnchor.download = filename.endsWith('.json') ? filename : `${filename}.json`;
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      
+      document.body.removeChild(downloadAnchor);
+      URL.revokeObjectURL(url);
+
+      setStatus({ message: "File JSON salvato e scaricato!", isError: false });
+    } catch (e: any) {
+      setStatus({ message: `Salvataggio fallito: JSON non valido (${e.message})`, isError: true });
+    }
+  };
+
+  return (
+    <div className="desk-card w-full max-w-3xl rounded-2xl p-6 relative bg-white border-4 border-stone-800 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
+      {/* Badge JSON */}
+      <div className="absolute -top-4 right-4 bg-pink-400 text-stone-900 border-4 border-stone-800 px-4 py-1.5 font-black uppercase tracking-wider rotate-6 text-sm">
+        JSON
+      </div>
+
+      <h1 className="text-3xl font-black text-stone-800 mb-5 flex items-center gap-3">
+        <span>💾</span> Incolla e salva JSON
+      </h1>
+
+      <div className="flex justify-between items-center mb-2">
+        <label htmlFor="jsonInput" className="block text-lg font-bold text-stone-700">
+          Codice JSON
+        </label>
+        <button 
+          onClick={handleFormat}
+          className="text-xs font-black text-blue-600 hover:text-blue-800 underline cursor-pointer"
+        >
+          ✨ Formatta ed Indenta
+        </button>
+      </div>
+
+      <textarea
+        id="jsonInput"
+        rows={14}
+        spellCheck="false"
+        value={jsonString}
+        onChange={(e) => {
+          setJsonString(e.target.value);
+          setStatus(null); // Resetta i messaggi d'errore alla scrittura
+        }}
+        className="w-full p-4 rounded-xl border-4 border-stone-800 focus:outline-none focus:ring-4 focus:ring-blue-100 resize-y font-mono text-base bg-stone-50 text-stone-900"
+        placeholder={`{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}`}
+      />
+
+      <div className="mt-4 flex flex-col sm:flex-row gap-3 items-center">
+        <input
+          id="filename"
+          type="text"
+          value={filename}
+          onChange={(e) => setFilename(e.target.value)}
+          className="w-full sm:flex-1 p-3 rounded-xl border-4 border-stone-800 bg-white text-stone-900 font-bold focus:outline-none"
+          placeholder="nome_file.json"
+        />
+
+        <button
+          id="saveBtn"
+          onClick={handleSave}
+          className="w-full sm:w-auto px-6 py-3 rounded-xl font-black border-4 border-stone-800 bg-green-400 hover:bg-green-500 active:translate-y-1 active:shadow-none shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all cursor-pointer text-stone-900"
+        >
+          Salva JSON
+        </button>
+      </div>
+
+      {/* Messaggi di Validazione / Stato */}
+      {status && (
+        <div className={`mt-4 p-3 rounded-xl border-4 border-stone-800 font-black ${
+          status.isError ? "bg-red-200 text-red-800" : "bg-green-200 text-green-800"
+        }`}>
+          {status.isError ? "❌ " : "✅ "}
+          {status.message}
+        </div>
+      )}
+    </div>
+  );
+}
           {/* EXTRA CARD 8: INTERACTIVE COFFEE DISH FORTUNE MUG */}
           <div className="desk-card bg-amber-900/10 p-5 rounded-3xl border-2 border-amber-900/20 shadow-xl relative w-full" style={{ '--hover-rot': '1deg' } as any}>
             {/* Coffee stain ring behind */}
