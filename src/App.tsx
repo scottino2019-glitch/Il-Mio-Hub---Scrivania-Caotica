@@ -1601,76 +1601,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* CARD EXTRA: JSON EDITOR */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900 relative">
-              {/* Badge JSON */}
-              <div className="absolute -top-3.5 right-4 bg-pink-400 text-stone-900 border-2 border-stone-800 px-3 py-1 font-black uppercase tracking-wider rotate-6 text-2xs z-10">
-                JSON
-              </div>
-
-              <h1 className="text-xl font-black mb-3 text-stone-800 flex items-center gap-2">
-                <span>💾</span> Incolla e salva JSON
-              </h1>
-
-              <div className="flex justify-between items-center mb-1.5">
-                <label htmlFor="jsonInputSelector" className="block text-xs font-bold text-stone-700">
-                  Codice JSON:
-                </label>
-                <button 
-                  onClick={formatJson}
-                  className="text-2xs font-extrabold text-blue-600 hover:text-blue-800 underline cursor-pointer"
-                >
-                  ✨ Formatta ed Indenta
-                </button>
-              </div>
-
-              <textarea
-                id="jsonInputSelector"
-                rows={10}
-                spellCheck={false}
-                value={jsonInput}
-                onChange={(e) => {
-                  setJsonInput(e.target.value);
-                  setIsJsonStatusVisible(false);
-                }}
-                className="w-full p-3 rounded-xl border-2 border-stone-300 focus:outline-none focus:border-blue-500 resize-y font-mono text-xs bg-stone-100 text-stone-900 caret-stone-900 placeholder:text-stone-400"
-                placeholder={`{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}`}
-              />
-
-              <div className="mt-3 flex flex-col gap-2">
-                <div className="flex gap-2">
-                  <input
-                    id="jsonFilenameSelector"
-                    type="text"
-                    value={jsonFilename}
-                    onChange={(e) => setJsonFilename(e.target.value)}
-                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border-2 border-stone-400 font-bold bg-white text-stone-800 placeholder:text-stone-400"
-                    placeholder="miei_dati.json"
-                  />
-
-                  <button
-                    id="jsonSaveBtnSelector"
-                    onClick={saveJsonFile}
-                    className="px-4 py-1.5 rounded-lg bg-green-400 hover:bg-green-500 text-stone-950 font-black border-2 border-stone-800 shadow-[0_2.5px_0_#1c1917] active:translate-y-0.5 active:shadow-none text-xs transition-all cursor-pointer"
-                  >
-                    Salva JSON
-                  </button>
-                </div>
-
-                {isJsonStatusVisible && jsonStatusMsg && (
-                  <p id="jsonStatusMsgSelector" className={`text-[10px] font-bold text-center p-1.5 rounded-lg border ${
-                    isJsonError 
-                      ? "text-red-800 bg-red-50 border-red-200" 
-                      : "text-emerald-800 bg-emerald-50 border-emerald-200"
-                  }`}>
-                    {isJsonError ? "❌ " : "✅ "}
-                    {jsonStatusMsg}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
+       
 
           {/* CARD EXTRA: PORTAL CARDS */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
@@ -1753,7 +1684,7 @@ export default function App() {
                 
                 <div className="text-center mb-6">
                   <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-                    Compiti di Oggi (Matematica & Code)
+                   Lingua e Utility
                   </h3>
                   <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
                 </div>
@@ -2202,7 +2133,76 @@ export default function App() {
               </div>
             </div>
           </div>
+   {/* CARD EXTRA: JSON EDITOR */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900 relative">
+              {/* Badge JSON */}
+              <div className="absolute -top-3.5 right-4 bg-pink-400 text-stone-900 border-2 border-stone-800 px-3 py-1 font-black uppercase tracking-wider rotate-6 text-2xs z-10">
+                JSON
+              </div>
 
+              <h1 className="text-xl font-black mb-3 text-stone-800 flex items-center gap-2">
+                <span>💾</span> Incolla e salva JSON
+              </h1>
+
+              <div className="flex justify-between items-center mb-1.5">
+                <label htmlFor="jsonInputSelector" className="block text-xs font-bold text-stone-700">
+                  Codice JSON:
+                </label>
+                <button 
+                  onClick={formatJson}
+                  className="text-2xs font-extrabold text-blue-600 hover:text-blue-800 underline cursor-pointer"
+                >
+                  ✨ Formatta ed Indenta
+                </button>
+              </div>
+
+              <textarea
+                id="jsonInputSelector"
+                rows={10}
+                spellCheck={false}
+                value={jsonInput}
+                onChange={(e) => {
+                  setJsonInput(e.target.value);
+                  setIsJsonStatusVisible(false);
+                }}
+                className="w-full p-3 rounded-xl border-2 border-stone-300 focus:outline-none focus:border-blue-500 resize-y font-mono text-xs bg-stone-100 text-stone-900 caret-stone-900 placeholder:text-stone-400"
+                placeholder={`{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}`}
+              />
+
+              <div className="mt-3 flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <input
+                    id="jsonFilenameSelector"
+                    type="text"
+                    value={jsonFilename}
+                    onChange={(e) => setJsonFilename(e.target.value)}
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border-2 border-stone-400 font-bold bg-white text-stone-800 placeholder:text-stone-400"
+                    placeholder="miei_dati.json"
+                  />
+
+                  <button
+                    id="jsonSaveBtnSelector"
+                    onClick={saveJsonFile}
+                    className="px-4 py-1.5 rounded-lg bg-green-400 hover:bg-green-500 text-stone-950 font-black border-2 border-stone-800 shadow-[0_2.5px_0_#1c1917] active:translate-y-0.5 active:shadow-none text-xs transition-all cursor-pointer"
+                  >
+                    Salva JSON
+                  </button>
+                </div>
+
+                {isJsonStatusVisible && jsonStatusMsg && (
+                  <p id="jsonStatusMsgSelector" className={`text-[10px] font-bold text-center p-1.5 rounded-lg border ${
+                    isJsonError 
+                      ? "text-red-800 bg-red-50 border-red-200" 
+                      : "text-emerald-800 bg-emerald-50 border-emerald-200"
+                  }`}>
+                    {isJsonError ? "❌ " : "✅ "}
+                    {jsonStatusMsg}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
           {/* EXTRA CARD 4: RETRO ARCADE TAMAGOTCHI PET */}
           <div className="desk-card bg-[#38bdf8] p-5 rounded-[2rem] border-4 border-[#0284c7] shadow-2xl relative w-full" style={{ '--hover-rot': '1.5deg' } as any}>
             <div className="flex justify-center mb-1">
