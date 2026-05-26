@@ -1752,104 +1752,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* CARD E: MOOD BOARD CORKBOARD */}
-          <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
-              Mood Board 🖼️
-            </div>
-            
-            <div className="flex gap-1.5 mb-4">
-              <input 
-                type="text" 
-                placeholder="URL Foto o Pensiero..." 
-                value={moodInput}
-                onChange={(e) => setMoodInput(e.target.value)}
-                className="bg-white/95 text-xs text-stone-800 rounded px-2 py-1.5 flex-grow font-sans border border-amber-900/20 shadow-inner"
-              />
-              <button 
-                onClick={addMoodItem}
-                className="bg-green-700 hover:bg-green-600 font-bold px-3 py-1 text-white rounded cursor-pointer text-xs"
-              >
-                📌
-              </button>
-            </div>
-
-            <div className="mood-display">
-              {moods.map(item => {
-                const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
-                return (
-                  <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
-                    <button 
-                      onClick={() => deleteMood(item.id)}
-                      className="remove-mood"
-                    >
-                      ✕
-                    </button>
-                    {isImg ? (
-                      <img src={item.text} alt="Mood board snap" className="rounded-sm" />
-                    ) : null}
-                    <div className="caption truncate">
-                      {isImg ? 'Inspiration' : item.text}
-                    </div>
-                  </div>
-                );
-              })}
-              {moods.length === 0 && (
-                <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
-              )}
-            </div>
-          </div>
-
-          {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
-          <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="editor-header">
-              <div className="mac-btn close"></div>
-              <div className="mac-btn min"></div>
-              <div className="mac-btn max"></div>
-              <span className="text-[10px] text-stone-500 font-mono ml-2 mt-0.5">VS Code Lite</span>
-            </div>
-            <div className="p-4 font-mono text-xs">
-              <div className="text-sky-400 font-bold mb-3">&lt;DevTools /&gt;</div>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://scottino2019-glitch.github.io/web-designer/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Web Designer"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://htmlcssedit.netlify.app" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Editor Html"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://tailwind-code-lab.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Tailwind Coding"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://portofolio-pi-kohl.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Portofolio"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://mini-ide.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Mini Ide"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Div Generator"
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+         
 
           {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
@@ -2131,6 +2034,104 @@ export default function App() {
                   RESET
                 </button>
               </div>
+            </div>
+          </div>
+           {/* CARD E: MOOD BOARD CORKBOARD */}
+          <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
+              Mood Board 🖼️
+            </div>
+            
+            <div className="flex gap-1.5 mb-4">
+              <input 
+                type="text" 
+                placeholder="URL Foto o Pensiero..." 
+                value={moodInput}
+                onChange={(e) => setMoodInput(e.target.value)}
+                className="bg-white/95 text-xs text-stone-800 rounded px-2 py-1.5 flex-grow font-sans border border-amber-900/20 shadow-inner"
+              />
+              <button 
+                onClick={addMoodItem}
+                className="bg-green-700 hover:bg-green-600 font-bold px-3 py-1 text-white rounded cursor-pointer text-xs"
+              >
+                📌
+              </button>
+            </div>
+
+            <div className="mood-display">
+              {moods.map(item => {
+                const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
+                return (
+                  <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
+                    <button 
+                      onClick={() => deleteMood(item.id)}
+                      className="remove-mood"
+                    >
+                      ✕
+                    </button>
+                    {isImg ? (
+                      <img src={item.text} alt="Mood board snap" className="rounded-sm" />
+                    ) : null}
+                    <div className="caption truncate">
+                      {isImg ? 'Inspiration' : item.text}
+                    </div>
+                  </div>
+                );
+              })}
+              {moods.length === 0 && (
+                <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
+              )}
+            </div>
+          </div>
+
+          {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
+          <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="editor-header">
+              <div className="mac-btn close"></div>
+              <div className="mac-btn min"></div>
+              <div className="mac-btn max"></div>
+              <span className="text-[10px] text-stone-500 font-mono ml-2 mt-0.5">VS Code Lite</span>
+            </div>
+            <div className="p-4 font-mono text-xs">
+              <div className="text-sky-400 font-bold mb-3">&lt;DevTools /&gt;</div>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-1.5 text-stone-300">
+                  <span className="text-purple-400">import</span>
+                  <a href="https://scottino2019-glitch.github.io/web-designer/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+                    "Web Designer"
+                  </a>
+                </li>
+                <li className="flex items-center gap-1.5 text-stone-300">
+                  <span className="text-purple-400">import</span>
+                  <a href="https://htmlcssedit.netlify.app" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+                    "Editor Html"
+                  </a>
+                </li>
+                <li className="flex items-center gap-1.5 text-stone-300">
+                  <span className="text-purple-400">import</span>
+                  <a href="https://tailwind-code-lab.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+                    "Tailwind Coding"
+                  </a>
+                </li>
+                <li className="flex items-center gap-1.5 text-stone-300">
+                  <span className="text-purple-400">import</span>
+                  <a href="https://portofolio-pi-kohl.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+                    "Portofolio"
+                  </a>
+                </li>
+                <li className="flex items-center gap-1.5 text-stone-300">
+                  <span className="text-purple-400">import</span>
+                  <a href="https://mini-ide.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+                    "Mini Ide"
+                  </a>
+                </li>
+                <li className="flex items-center gap-1.5 text-stone-300">
+                  <span className="text-purple-400">import</span>
+                  <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+                    "Div Generator"
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
    {/* CARD EXTRA: JSON EDITOR */}
