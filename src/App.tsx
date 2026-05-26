@@ -108,6 +108,42 @@ export default function App() {
   const [moodInput, setMoodInput] = useState('');
   const [noteInput, setNoteInput] = useState('');
 
+  // Sincronizzazione LocalStorage editor_text
+  const [textInput, setTextInput] = useState(() => {
+    return localStorage.getItem('editor_text') || 'Questo è un piccolo editor di testo salvato nel browser.\nScrivi qui qualsiasi nota o codice!';
+  });
+  const [textFilename, setTextFilename] = useState('appunti.txt');
+  const [textStatusMsg, setTextStatusMsg] = useState('');
+  const [isStatusVisible, setIsStatusVisible] = useState(false);
+
+  const saveTextFile = () => {
+    playSoundBlip(1000, 'sine', 0.08);
+    localStorage.setItem('editor_text', textInput);
+    try {
+      const blob = new Blob([textInput], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = textFilename || 'appunti.txt';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      setTextStatusMsg(`File "${textFilename}" salvato con successo!`);
+      setIsStatusVisible(true);
+      setTimeout(() => {
+        setIsStatusVisible(false);
+      }, 3000);
+    } catch (e) {
+      setTextStatusMsg('Errore nel salvare il file.');
+      setIsStatusVisible(true);
+      setTimeout(() => {
+        setIsStatusVisible(false);
+      }, 3000);
+    }
+  };
+
   // Sincronizzazione LocalStorage
   useEffect(() => {
     localStorage.setItem('my_links', JSON.stringify(links));
@@ -1295,6 +1331,208 @@ export default function App() {
             </div>
           </div>
 
+          {/* L'AGENDA (Ufficio / Utility) */}
+          <div className="desk-card card-agenda hover-rot-1" style={{ '--hover-rot': '1.5deg' } as any}>
+            {/* Custom spiral loops */}
+            <div className="agenda-rings">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="agenda-ring" />
+              ))}
+            </div>
+
+            <h2 className="group-title">Utility & Ufficio</h2>
+            <ul className="app-list">
+              <li>
+                <a 
+                  href="https://ufficio-personale.netlify.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
+                >
+                  💼 Ufficio Personale
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://editor-di-testo.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
+                >
+                  📝 Editor di Testo Pro
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://pdf-notepad.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
+                >
+                  📑 Pdf Notepad
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://pdf-editor-text.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
+                >
+                  🗒 Pdf Editor Text
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* ALBUM CSS GRANDE - CSS Artist Draft */}
+          <div className="desk-card album-css-grande hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
+            {/* Effetti di disordine */}
+            <div className="nastro-adesivo"></div>
+            <div className="segnalibro-postit">ART</div>
+            <div className="segnalibro-2"></div>
+
+            <div className="etichetta-album">Bozze & Codice</div>
+            <h3>CSS Artist</h3>
+            <p className="Progetti-con-css">Progetti con css.</p>
+            
+            {/* LISTA DEI LINK AI TUOI PROGETTI */}
+            <ul className="lista-progetti">
+              <li>
+                <a 
+                  href="https://graphic-atelier.netlify.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Graphic Atelier
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://comic-studio-five.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Comix Studio
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://analog-craft.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  AnalogCraft
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://creative-card-code-editor.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Creative Card
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://hover-craft-tau.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Hover Craft
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://analogue-studio.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Analogue Studio
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://gliph-forge.netlify.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Gliph Forge
+                </a>
+              </li>
+            </ul>
+
+            <a 
+              href="https://artisan-studio-psi.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn-schizzo"
+              onClick={() => playSoundBlip(950, 'sine', 0.06)}
+            >
+              + Crea Nuovo background
+            </a>
+          </div>
+
+          {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
+            <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900">
+              <h1 className="text-xl font-black mb-3 text-stone-800 flex items-center gap-2">
+                <span>📝</span> Editor testo
+              </h1>
+
+              <label htmlFor="textInputSelector" className="block text-xs font-bold mb-1.5 text-stone-700">
+                Scrivi o incolla il testo:
+              </label>
+
+              <textarea
+                id="textInputSelector"
+                rows={10}
+                value={textInput}
+                onChange={(e) => {
+                  setTextInput(e.target.value);
+                  localStorage.setItem('editor_text', e.target.value);
+                }}
+                className="w-full p-3 rounded-xl border-2 border-stone-300 focus:outline-none focus:border-blue-500 resize-y font-mono text-xs bg-stone-100 text-stone-900 caret-stone-900 placeholder:text-stone-400"
+                placeholder="Scrivi qui il tuo testo..."
+              />
+
+              <div className="mt-3 flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <input
+                    id="textFilenameSelector"
+                    type="text"
+                    value={textFilename}
+                    onChange={(e) => setTextFilename(e.target.value)}
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border-2 border-stone-400 font-bold bg-white text-stone-800 placeholder:text-stone-400"
+                    placeholder="nomefile.txt"
+                  />
+
+                  <button
+                    id="textSaveBtnSelector"
+                    type="button"
+                    onClick={saveTextFile}
+                    className="px-4 py-1.5 rounded-lg bg-red-500 hover:bg-red-600 text-white font-black border-2 border-red-800 shadow-[0_2.5px_0_#7f1d1d] active:translate-y-0.5 active:shadow-none text-xs transition-all"
+                  >
+                    Salva file
+                  </button>
+                </div>
+                {isStatusVisible && textStatusMsg && (
+                  <p id="textStatusMsgSelector" className="text-[10px] font-bold text-center text-emerald-800 bg-emerald-50 border border-emerald-200 p-1.5 rounded-lg">
+                    {textStatusMsg}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
           {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
             <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
@@ -1317,7 +1555,7 @@ export default function App() {
                 
                 <div className="text-center mb-6">
                   <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-                    Siti di Lingua e Utility
+                    Compiti di Oggi (Matematica & Code)
                   </h3>
                   <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
                 </div>
@@ -1432,101 +1670,7 @@ export default function App() {
               )}
             </div>
           </div>
-           {/* CARD: L'AGENDA (Ufficio & Utility) */}
-<div className="desk-card relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 p-1.5 shadow-2xl" style={{ '--hover-rot': '-1deg' } as any}>
-  {/* Dorso effetto Pelle dell'Agenda */}
-  <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 shadow-inner flex flex-col justify-around items-center py-8 z-20 border-r border-amber-950/40">
-    {/* Anelli d'acciaio realistici dell'agenda */}
-    {[1, 2, 3, 4, 5].map((ring) => (
-      <div key={ring} className="w-6 h-2 bg-gradient-to-b from-stone-400 via-stone-200 to-stone-500 rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.6)] border-b border-white/20 -mr-4 transform hover:scale-105 transition-transform" />
-    ))}
-  </div>
 
-  {/* Pagina Interna dell'Agenda (Effetto Carta a Righe con Margine) */}
-  <div className="bg-[#fcf8f0] text-stone-900 min-h-[360px] ml-7 p-6 rounded-r-xl relative shadow-l flex flex-col justify-between select-none">
-    {/* Linea verticale rossa del margine */}
-    <div className="absolute top-0 bottom-0 left-5 w-[1px] bg-red-300/80"></div>
-
-    <div>
-      {/* Intestazione Agenda */}
-      <div className="flex justify-between items-baseline mb-6 pl-2">
-        <div>
-          <h2 className="text-xs font-mono tracking-widest text-stone-400 uppercase font-black">Planner utility</h2>
-          <h3 className="text-xl font-sans font-extrabold tracking-tight text-stone-800 flex items-center gap-1.5">
-            <span>📅</span> Utility & Ufficio
-          </h3>
-        </div>
-        <span className="text-[10px] font-mono text-amber-800 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20 font-semibold shadow-xs">
-          AGENDA
-        </span>
-      </div>
-
-      {/* Lista delle tue Applicazioni (App List in formato Agenda) */}
-      <ul className="space-y-3.5 pl-2">
-        {[
-          {
-            name: "Ufficio Personale",
-            emoji: "💼",
-            url: "https://ufficio-personale.netlify.app/",
-            host: "Netlify",
-            hostColor: "bg-teal-500/10 text-teal-700 border-teal-500/20"
-          },
-          {
-            name: "Editor di Testo Pro",
-            emoji: "📝",
-            url: "https://editor-di-testo.vercel.app/",
-            host: "Vercel",
-            hostColor: "bg-blue-500/10 text-blue-700 border-blue-500/20"
-          },
-          {
-            name: "Pdf Notepad",
-            emoji: "📑",
-            url: "https://pdf-notepad.vercel.app/",
-            host: "External",
-            hostColor: "bg-purple-500/10 text-purple-700 border-purple-500/20"
-          },
-          {
-            name: "Pdf Editor Text",
-            emoji: "🗒",
-            url: "https://pdf-editor-text.vercel.app/",
-            host: "External",
-            hostColor: "bg-indigo-500/10 text-indigo-700 border-indigo-500/20"
-          }
-        ].map((app, idx) => (
-          <li key={idx} className="border-b border-dashed border-stone-300 pb-1.5 last:border-b-0">
-            <a 
-              href={app.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              onClick={() => playSoundBlip(880, 'sine', 0.04)}
-              className="group flex items-center justify-between hover:translate-x-1.5 transition-transform duration-200"
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-base group-hover:scale-125 transition-transform duration-200">{app.emoji}</span>
-                <span className="text-xs font-medium text-stone-700 group-hover:text-stone-900 group-hover:font-semibold">
-                  {app.name}
-                </span>
-              </div>
-              
-              <div className="flex items-center gap-1">
-                <span className={`text-[8px] font-bold font-mono px-1.5 py-0.5 rounded border ${app.hostColor}`}>
-                  {app.host}
-                </span>
-                <span className="text-[9px] text-stone-400 group-hover:text-stone-800 transition-colors">↗</span>
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    {/* Piè di pagina dell'Agenda */}
-    <div className="mt-6 pt-3 border-t border-stone-300/60 flex justify-between items-center pl-2 text-[10px] text-stone-400 font-mono">
-      <span>STATO: COLLEGATO 🌐</span>
-      <span>PAG. 03</span>
-    </div>
-  </div>
-</div>
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
           <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="editor-header">
@@ -1815,70 +1959,7 @@ export default function App() {
               ))}
             </div>
           </div>
-{/* EXTRA CARD: BOZZE & CODICE (CSS ARTIST) */}
-<div className="desk-card bg-stone-100 p-6 rounded-md shadow-2xl relative border-2 border-stone-200/60" style={{ '--hover-rot': '2deg' } as any}>
-  {/* Nastro adesivo in cima */}
-  <div className="postit-tape"></div>
 
-  {/* Segnalibro Post-it sporgente sul lato destro */}
-  <div className="absolute -right-2 top-10 bg-rose-400 text-rose-950 text-[8px] font-bold font-mono px-2.5 py-1 rounded-l-md shadow-sm transform rotate-3">
-    CSS ART
-  </div>
-  <div className="absolute -right-1 top-18 bg-yellow-400 text-yellow-950 text-[8px] font-bold font-mono px-2 py-1 rounded-l-md shadow-sm transform -rotate-2">
-    CODE
-  </div>
-
-  <div className="relative mt-2">
-    {/* Etichetta del Blocco Schizzi */}
-    <div className="inline-block bg-[#001f3f]/10 text-[#001f3f] font-mono text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-widest mb-2 border border-[#001f3f]/30">
-      🎨 Bozze & Codice
-    </div>
-
-    <h3 className="font-serif font-bold text-stone-900 text-lg tracking-tight mb-1">
-      CSS Artist
-    </h3>
-    <p className="text-[10px] text-stone-500 font-sans italic mb-4">
-      Interfacce e creazioni d'arte programmate in CSS puro.
-    </p>
-
-    {/* Lista Progetti */}
-    <ul className="space-y-2 mb-5 max-h-[190px] overflow-y-auto pr-1">
-      {[
-        { name: "Graphic Atelier", url: "https://graphic-atelier.netlify.app/" },
-        { name: "Comix Studio", url: "https://comic-studio-five.vercel.app/" },
-        { name: "AnalogCraft", url: "https://analog-craft.vercel.app/" },
-        { name: "Creative Card", url: "https://creative-card-code-editor.vercel.app/" },
-        { name: "Hover Craft", url: "https://hover-craft-tau.vercel.app/" },
-        { name: "Analogue Studio", url: "https://analogue-studio.vercel.app/" },
-        { name: "Gliph Forge", url: "https://gliph-forge.netlify.app/" },
-      ].map((proj, idx) => (
-        <li key={idx} className="border-b border-dashed border-stone-300 pb-1">
-          <a 
-            href={proj.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            onClick={() => playSoundBlip?.(750, 'triangle', 0.04)}
-            className="group flex items-center justify-between text-stone-700 hover:text-stone-950 font-mono text-[11px] transition-colors"
-          >
-            <span className="group-hover:translate-x-1 transition-transform">📂 {proj.name}</span>
-            <span className="text-[8px] text-stone-400 opacity-80 group-hover:text-stone-700">↗</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-
-    {/* Bottone d'azione stile schizzo a mano inferiore */}
-    <a 
-      href="https://artisan-studio-psi.vercel.app/" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      onClick={() => playSoundBlip?.(900, 'sine', 0.06)}
-      className="block text-center py-2 px-3 bg-stone-900 text-stone-100 hover:bg-stone-800 rounded-lg text-xs font-bold tracking-wider hover:shadow-lg transition-all border-b-4 border-stone-950 hover:border-stone-900 active:scale-[0.98]"
-    >
-      + Crea Nuovo background 🖌️
-    </a>
-  </div>
-</div>
           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4033] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
