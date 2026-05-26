@@ -1317,7 +1317,7 @@ export default function App() {
                 
                 <div className="text-center mb-6">
                   <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-                    Compiti di Oggi (Matematica & Code)
+                    Siti di Lingua e Utility
                   </h3>
                   <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
                 </div>
@@ -1432,7 +1432,101 @@ export default function App() {
               )}
             </div>
           </div>
+           {/* CARD: L'AGENDA (Ufficio & Utility) */}
+<div className="desk-card relative overflow-hidden rounded-2xl bg-stone-900 border border-stone-800 p-1.5 shadow-2xl" style={{ '--hover-rot': '-1deg' } as any}>
+  {/* Dorso effetto Pelle dell'Agenda */}
+  <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 shadow-inner flex flex-col justify-around items-center py-8 z-20 border-r border-amber-950/40">
+    {/* Anelli d'acciaio realistici dell'agenda */}
+    {[1, 2, 3, 4, 5].map((ring) => (
+      <div key={ring} className="w-6 h-2 bg-gradient-to-b from-stone-400 via-stone-200 to-stone-500 rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.6)] border-b border-white/20 -mr-4 transform hover:scale-105 transition-transform" />
+    ))}
+  </div>
 
+  {/* Pagina Interna dell'Agenda (Effetto Carta a Righe con Margine) */}
+  <div className="bg-[#fcf8f0] text-stone-900 min-h-[360px] ml-7 p-6 rounded-r-xl relative shadow-l flex flex-col justify-between select-none">
+    {/* Linea verticale rossa del margine */}
+    <div className="absolute top-0 bottom-0 left-5 w-[1px] bg-red-300/80"></div>
+
+    <div>
+      {/* Intestazione Agenda */}
+      <div className="flex justify-between items-baseline mb-6 pl-2">
+        <div>
+          <h2 className="text-xs font-mono tracking-widest text-stone-400 uppercase font-black">Planner utility</h2>
+          <h3 className="text-xl font-sans font-extrabold tracking-tight text-stone-800 flex items-center gap-1.5">
+            <span>📅</span> Utility & Ufficio
+          </h3>
+        </div>
+        <span className="text-[10px] font-mono text-amber-800 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20 font-semibold shadow-xs">
+          AGENDA
+        </span>
+      </div>
+
+      {/* Lista delle tue Applicazioni (App List in formato Agenda) */}
+      <ul className="space-y-3.5 pl-2">
+        {[
+          {
+            name: "Ufficio Personale",
+            emoji: "💼",
+            url: "https://ufficio-personale.netlify.app/",
+            host: "Netlify",
+            hostColor: "bg-teal-500/10 text-teal-700 border-teal-500/20"
+          },
+          {
+            name: "Editor di Testo Pro",
+            emoji: "📝",
+            url: "https://editor-di-testo.vercel.app/",
+            host: "Vercel",
+            hostColor: "bg-blue-500/10 text-blue-700 border-blue-500/20"
+          },
+          {
+            name: "Pdf Notepad",
+            emoji: "📑",
+            url: "https://pdf-notepad.vercel.app/",
+            host: "External",
+            hostColor: "bg-purple-500/10 text-purple-700 border-purple-500/20"
+          },
+          {
+            name: "Pdf Editor Text",
+            emoji: "🗒",
+            url: "https://pdf-editor-text.vercel.app/",
+            host: "External",
+            hostColor: "bg-indigo-500/10 text-indigo-700 border-indigo-500/20"
+          }
+        ].map((app, idx) => (
+          <li key={idx} className="border-b border-dashed border-stone-300 pb-1.5 last:border-b-0">
+            <a 
+              href={app.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onClick={() => playSoundBlip(880, 'sine', 0.04)}
+              className="group flex items-center justify-between hover:translate-x-1.5 transition-transform duration-200"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-base group-hover:scale-125 transition-transform duration-200">{app.emoji}</span>
+                <span className="text-xs font-medium text-stone-700 group-hover:text-stone-900 group-hover:font-semibold">
+                  {app.name}
+                </span>
+              </div>
+              
+              <div className="flex items-center gap-1">
+                <span className={`text-[8px] font-bold font-mono px-1.5 py-0.5 rounded border ${app.hostColor}`}>
+                  {app.host}
+                </span>
+                <span className="text-[9px] text-stone-400 group-hover:text-stone-800 transition-colors">↗</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Piè di pagina dell'Agenda */}
+    <div className="mt-6 pt-3 border-t border-stone-300/60 flex justify-between items-center pl-2 text-[10px] text-stone-400 font-mono">
+      <span>STATO: COLLEGATO 🌐</span>
+      <span>PAG. 03</span>
+    </div>
+  </div>
+</div>
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
           <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="editor-header">
