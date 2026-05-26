@@ -144,6 +144,74 @@ export default function App() {
     }
   };
 
+  // Sincronizzazione LocalStorage per JSON Editor
+  const [jsonInput, setJsonInput] = useState(() => {
+    return localStorage.getItem('json_editor_input') || '{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}';
+  });
+  const [jsonFilename, setJsonFilename] = useState('miei_dati.json');
+  const [jsonStatusMsg, setJsonStatusMsg] = useState('');
+  const [isJsonStatusVisible, setIsJsonStatusVisible] = useState(false);
+  const [isJsonError, setIsJsonError] = useState(false);
+
+  const saveJsonFile = () => {
+    playSoundBlip(1000, 'sine', 0.08);
+    localStorage.setItem('json_editor_input', jsonInput);
+    try {
+      const parsed = JSON.parse(jsonInput);
+      const cleanJson = JSON.stringify(parsed, null, 2);
+      
+      const blob = new Blob([cleanJson], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = jsonFilename.endsWith('.json') ? jsonFilename : `${jsonFilename}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      setIsJsonError(false);
+      setJsonStatusMsg(`File "${jsonFilename}" salvato con successo!`);
+      setIsJsonStatusVisible(true);
+      setTimeout(() => {
+        setIsJsonStatusVisible(false);
+      }, 3000);
+    } catch (e: any) {
+      setIsJsonError(true);
+      setJsonStatusMsg(`Errore JSON non valido: ${e.message}`);
+      setIsJsonStatusVisible(true);
+      setTimeout(() => {
+        setIsJsonStatusVisible(false);
+      }, 5000);
+    }
+  };
+
+  const formatJson = () => {
+    playSoundBlip(900, 'sine', 0.05);
+    try {
+      const parsed = JSON.parse(jsonInput);
+      setJsonInput(JSON.stringify(parsed, null, 2));
+      setIsJsonError(false);
+      setJsonStatusMsg("JSON formattato con successo!");
+      setIsJsonStatusVisible(true);
+      setTimeout(() => {
+        setIsJsonStatusVisible(false);
+      }, 3000);
+    } catch (e: any) {
+      setIsJsonError(true);
+      setJsonStatusMsg(`Errore nello schema: ${e.message}`);
+      setIsJsonStatusVisible(true);
+      setTimeout(() => {
+        setIsJsonStatusVisible(false);
+      }, 5000);
+    }
+  };
+
+  // Sincronizzazione LocalStorage
+  useEffect(() => {
+    localStorage.setItem('json_editor_input', jsonInput);
+  }, [jsonInput]);
+
   // Sincronizzazione LocalStorage
   useEffect(() => {
     localStorage.setItem('my_links', JSON.stringify(links));
@@ -156,24 +224,7 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('deskNotes', JSON.stringify(notes));
   }, [notes]);
-// Incolla questi stati all'inizio di App.tsx (sotto gli altri useState)
-const [pinkPaperDraft, setPinkPaperDraft] = useState(() => {
-  return localStorage.getItem('pink_notepad_draft') || 'Appunti veloci per i miei PDF...';
-});
 
-const [stickyColor, setStickyColor] = useState(() => {
-  return localStorage.getItem('sticky_saved_color') || '#fef08a'; // Giallo di default
-});
-
-const [polaroidCaption, setPolaroidCaption] = useState(() => {
-  return localStorage.getItem('polaroid_saved_caption') || 'Ricordi Creativi 🌊';
-});
-
-const [polaroidImg, setPolaroidImg] = useState(() => {
-  return localStorage.getItem('polaroid_saved_img') || 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4MDc1Mjd8MHwxfHNlYXJjaHw2fHxtYXJlfGVufDB8fHx8MTc3OTgzMDg4Nnww&ixlib=rb-4.1.0&q=85';
-});
-
-const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
   // =========================================
   // RANDOM DESK BACKGROUND ELEMENTS (Stable)
   // =========================================
@@ -1401,161 +1452,7 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               </li>
             </ul>
           </div>
-          
-{/* CARD EXTRA: PDF CREATOR & TEMPLATES (FOGLIO STRAPPATO ROSA) */}
-<div className="desk-card hover-rot-1" style={{ '--hover-rot': '1.5deg' } as any}>
-  <div style={{
-    width: '100%',
-    minHeight: '320px',
-    padding: '35px 25px 25px 25px',
-    backgroundColor: '#fff1f2', // Caldo rosa confetto/pastello
-    borderRadius: '16px',
-    boxShadow: '10px 10px 0px #1e293b', // Ombra rigida cartoon coerente con lo stile
-    border: '3px solid #1e293b',
-    position: 'relative',
-    overflow: 'visible',
-    display: 'flex',
-    flexDirection: 'column',
-    boxSizing: 'border-box',
-    borderTop: '28px solid #f1f5f9'
-  }}>
-    {/* Buchi del quaderno strappato in alto */}
-    <div style={{
-      position: 'absolute',
-      top: '-14px',
-      left: '0',
-      right: '0',
-      height: '12px',
-      background: 'repeating-linear-gradient(90deg, #1e293b, #1e293b 8px, transparent 8px, transparent 18px)'
-    }}></div>
-    
-    {/* Mollette/segnalibri decorativi per l'effetto disordine */}
-    <div style={{
-      position: 'absolute',
-      top: '-20px',
-      right: '40px',
-      width: '30px',
-      height: '10px',
-      backgroundColor: '#f43f5e',
-      transform: 'rotate(-5deg)',
-      opacity: 0.85
-    }}></div>
 
-    <div style={{
-      fontFamily: '"Space Grotesk", sans-serif',
-      marginBottom: '14px'
-    }}>
-      <span style={{
-        backgroundColor: '#fda4af',
-        color: '#4c0519',
-        fontSize: '10px',
-        fontWeight: 'extrabold',
-        padding: '3px 8px',
-        borderRadius: '5px',
-        border: '1.5px solid #4c0519',
-        textTransform: 'uppercase',
-        letterSpacing: '0.05em'
-      }}>
-        PDF Templates
-      </span>
-      <h3 style={{
-        fontSize: '20px',
-        fontWeight: 900,
-        color: '#1e293b',
-        marginTop: '8px'
-      }}>
-        Crea & Modifica PDF
-      </h3>
-    </div>
-
-    {/* Lista dei Link */}
-    <ul style={{
-      listStyle: 'none',
-      padding: 0,
-      margin: 0,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '10px',
-      flex: 1
-    }}>
-      <li style={{
-        background: '#ffffff',
-        border: '2px solid #1e293b',
-        borderRadius: '8px',
-        boxShadow: '3px 3px 0px #1e293b',
-        transition: 'all 0.1s'
-      }}>
-        <a 
-          href="editor-pdf-quadretti.html" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          onClick={() => playSoundBlip?.(800, 'sine', 0.05)}
-          style={{
-            display: 'block',
-            padding: '10px 14px',
-            fontFamily: '"Space Grotesk", sans-serif',
-            fontWeight: 700,
-            fontSize: '13.5px',
-            color: '#1e293b',
-            textDecoration: 'none'
-          }}
-        >
-          📝 Pdf editor a quadretti
-        </a>
-      </li>
-
-      <li style={{
-        background: '#ffffff',
-        border: '2px solid #1e293b',
-        borderRadius: '8px',
-        boxShadow: '3px 3px 0px #1e293b'
-      }}>
-        <a 
-          href="righe-pdf-editor.html" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          onClick={() => playSoundBlip?.(850, 'sine', 0.05)}
-          style={{
-            display: 'block',
-            padding: '10px 14px',
-            fontFamily: '"Space Grotesk", sans-serif',
-            fontWeight: 700,
-            fontSize: '13.5px',
-            color: '#1e293b',
-            textDecoration: 'none'
-          }}
-        >
-          📄 Pdf editor a righe
-        </a>
-      </li>
-
-      <li style={{
-        background: '#ffffff',
-        border: '2px solid #1e293b',
-        borderRadius: '8px',
-        boxShadow: '3px 3px 0px #1e293b'
-      }}>
-        <a 
-          href="pdf-creator.html" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          onClick={() => playSoundBlip?.(900, 'sine', 0.05)}
-          style={{
-            display: 'block',
-            padding: '10px 14px',
-            fontFamily: '"Space Grotesk", sans-serif',
-            fontWeight: 700,
-            fontSize: '13.5px',
-            color: '#1e293b',
-            textDecoration: 'none'
-          }}
-        >
-          📃 Pdf Creator
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
           {/* ALBUM CSS GRANDE - CSS Artist Draft */}
           <div className="desk-card album-css-grande hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
             {/* Effetti di disordine */}
@@ -1651,102 +1548,6 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               + Crea Nuovo background
             </a>
           </div>
-{/* 3. IL POLAROID SCRAPBOOK INTERATTIVO */}
-<div className="desk-card hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
-  <div className="bg-white p-4 pb-6 border-2 border-stone-300 shadow-2xl rounded-sm cursor-pointer hover:rotate-0 transition-all duration-300">
-    
-    {/* Contenitore Immagine con Filtro */}
-    <div className="w-64 h-64 bg-stone-200 overflow-hidden mb-4 relative border border-stone-100">
-      <img 
-        src={polaroidImg} 
-        className={`w-full h-full object-cover transition-all duration-500 ${polaroidFilter}`} 
-        alt="Visual Scrapbook"
-      />
-      <div className="absolute inset-0 bg-orange-500/5 mix-blend-overlay"></div>
-      
-      {/* Controlli Filtro sul Polaroid */}
-      <div className="absolute bottom-2 right-2 flex gap-1 bg-black/50 p-1 rounded backdrop-blur-xs select-none">
-        <button 
-          onClick={(e) => { e.stopPropagation(); playSoundBlip(600, 'sine', 0.03); setPolaroidFilter('grayscale-0'); }}
-          className="text-[9px] text-white px-1.5 py-0.5 hover:bg-white/20 rounded font-mono font-bold"
-        >
-          COLORE
-        </button>
-        <button 
-          onClick={(e) => { e.stopPropagation(); playSoundBlip(620, 'sine', 0.03); setPolaroidFilter('grayscale-[80%]'); }}
-          className="text-[9px] text-white px-1.5 py-0.5 hover:bg-white/20 rounded font-mono font-bold"
-        >
-          RETRO
-        </button>
-        <button 
-          onClick={(e) => { e.stopPropagation(); playSoundBlip(640, 'sine', 0.03); setPolaroidFilter('contrast-[110%] brightness-[90%] sepia'); }}
-          className="text-[9px] text-white px-1.5 py-0.5 hover:bg-white/20 rounded font-mono font-bold"
-        >
-          VINTAGE
-        </button>
-      </div>
-    </div>
-
-    {/* Input per cambiare l'immagine della Polaroid */}
-    <div className="mb-3 px-1">
-      <input 
-        type="text"
-        placeholder="Incolla URL immagine per cambiarla..."
-        value={polaroidImg}
-        onChange={(e) => {
-          setPolaroidImg(e.target.value);
-          localStorage.setItem('polaroid_saved_img', e.target.value);
-        }}
-        className="w-full text-[9px] p-1 bg-stone-50 border border-stone-300 rounded font-mono text-stone-600 focus:outline-none focus:border-stone-500"
-      />
-    </div>
-
-    {/* I link Scrapbook */}
-    <div className="space-y-1 mb-4 px-1">
-      <div className="bg-stone-50 hover:bg-stone-100 border border-stone-200 p-2 rounded transition-colors">
-        <a 
-          href="https://arty-scrapbook.vercel.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center justify-between text-xs text-stone-800 font-bold font-sans hover:text-black"
-          onClick={() => playSoundBlip(800, 'sine', 0.05)}
-        >
-          <span>🌸 Arty Scrapbook</span>
-          <span className="text-[10px] font-mono text-stone-400">APRI ↗</span>
-        </a>
-      </div>
-      <div className="bg-stone-50 hover:bg-stone-100 border border-stone-200 p-2 rounded transition-colors">
-        <a 
-          href="https://scrapbook-magic.vercel.app/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center justify-between text-xs text-stone-800 font-bold font-sans hover:text-black"
-          onClick={() => playSoundBlip(820, 'sine', 0.05)}
-        >
-          <span>✨ Scrapbook Magic</span>
-          <span className="text-[10px] font-mono text-stone-400">APRI ↗</span>
-        </a>
-      </div>
-    </div>
-
-    {/* Scrittura a mano sul fondo della Polaroid */}
-    <div className="pt-2 border-t border-dashed border-stone-200 text-center">
-      <input 
-        type="text"
-        value={polaroidCaption}
-        onChange={(e) => {
-          setPolaroidCaption(e.target.value);
-          localStorage.setItem('polaroid_saved_caption', e.target.value);
-        }}
-        className="w-full text-center bg-transparent focus:outline-none text-stone-800 text-xl font-bold tracking-tight select-text"
-        style={{ fontFamily: "'Special Elite', Georgia, serif" }}
-        placeholder="Scrivi una didascalia..."
-      />
-      <div className="text-[8px] uppercase tracking-wider text-stone-400 font-mono mt-1">Clicca per modificare la didascalia</div>
-    </div>
-
-  </div>
-</div>
 
           {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
@@ -1799,142 +1600,131 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               </div>
             </div>
           </div>
-        
-          {/* 2. LA PICCOLA NOTA CON NASTRO ADESIVO INTERATTIVA */}
-<div 
-  className="desk-card postit-card p-6" 
-  style={{ 
-    backgroundColor: stickyColor,
-    boxShadow: '6px 8px 0px rgba(0,0,0,0.22)',
-    position: 'relative',
-    borderBottomRightRadius: '40px 10px',
-    border: '2.5px solid #292524',
-    '--hover-rot': '1.5deg',
-    transition: 'background-color 0.3s ease'
-  } as any}
->
-  {/* Nastro adesivo semitrasparente in cima */}
-  <div className="postit-tape"></div>
 
-  {/* Barra degli strumenti per cambiare colore alla nota al volo */}
-  <div className="flex justify-between items-center mb-2 mt-4">
-    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-900/80 font-mono">🎨 Nota adesiva</span>
-    <div className="flex gap-1">
-      {['#fef08a', '#fbcfe8', '#bae6fd', '#bbf7d0'].map((color) => (
-        <button
-          key={color}
-          onClick={() => {
-            playSoundBlip(900, 'sine', 0.04);
-            setStickyColor(color);
-            localStorage.setItem('sticky_saved_color', color);
-          }}
-          className="w-3.5 h-3.5 rounded-full border border-stone-800/40 transition-transform hover:scale-125"
-          style={{ backgroundColor: color }}
-          title="Cambia colore nota"
-        />
-      ))}
-    </div>
-  </div>
+          {/* CARD EXTRA: JSON EDITOR */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900 relative">
+              {/* Badge JSON */}
+              <div className="absolute -top-3.5 right-4 bg-pink-400 text-stone-900 border-2 border-stone-800 px-3 py-1 font-black uppercase tracking-wider rotate-6 text-2xs z-10">
+                JSON
+              </div>
 
-  {/* Contenitore della nota con input interattivo */}
-  <div className="bg-white/40 p-2.5 rounded border border-amber-900/10 shadow-sm">
-    <textarea
-      value={noteInput}
-      onChange={(e) => {
-        setNoteInput(e.target.value);
-      }}
-      className="w-full bg-transparent text-xs text-stone-800 font-sans focus:outline-none placeholder:text-stone-500/60 leading-relaxed font-semibold resize-none"
-      placeholder="Clicca e scrivi un promemoria rapido qui... Si salverà automaticamente!"
-      rows={4}
-    />
-  </div>
+              <h1 className="text-xl font-black mb-3 text-stone-800 flex items-center gap-2">
+                <span>💾</span> Incolla e salva JSON
+              </h1>
 
-  <div className="mt-3 flex justify-between items-center text-[9px] font-mono text-amber-950/70 font-bold">
-    <span>📍 PINNED TO BOARD</span>
-    <span>AUTO-SAVE</span>
-  </div>
-</div>
-          {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
+              <div className="flex justify-between items-center mb-1.5">
+                <label htmlFor="jsonInputSelector" className="block text-xs font-bold text-stone-700">
+                  Codice JSON:
+                </label>
+                <button 
+                  onClick={formatJson}
+                  className="text-2xs font-extrabold text-blue-600 hover:text-blue-800 underline cursor-pointer"
+                >
+                  ✨ Formatta ed Indenta
+                </button>
+              </div>
+
+              <textarea
+                id="jsonInputSelector"
+                rows={10}
+                spellCheck={false}
+                value={jsonInput}
+                onChange={(e) => {
+                  setJsonInput(e.target.value);
+                  setIsJsonStatusVisible(false);
+                }}
+                className="w-full p-3 rounded-xl border-2 border-stone-300 focus:outline-none focus:border-blue-500 resize-y font-mono text-xs bg-stone-100 text-stone-900 caret-stone-900 placeholder:text-stone-400"
+                placeholder={`{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}`}
+              />
+
+              <div className="mt-3 flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <input
+                    id="jsonFilenameSelector"
+                    type="text"
+                    value={jsonFilename}
+                    onChange={(e) => setJsonFilename(e.target.value)}
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border-2 border-stone-400 font-bold bg-white text-stone-800 placeholder:text-stone-400"
+                    placeholder="miei_dati.json"
+                  />
+
+                  <button
+                    id="jsonSaveBtnSelector"
+                    onClick={saveJsonFile}
+                    className="px-4 py-1.5 rounded-lg bg-green-400 hover:bg-green-500 text-stone-950 font-black border-2 border-stone-800 shadow-[0_2.5px_0_#1c1917] active:translate-y-0.5 active:shadow-none text-xs transition-all cursor-pointer"
+                  >
+                    Salva JSON
+                  </button>
+                </div>
+
+                {isJsonStatusVisible && jsonStatusMsg && (
+                  <p id="jsonStatusMsgSelector" className={`text-[10px] font-bold text-center p-1.5 rounded-lg border ${
+                    isJsonError 
+                      ? "text-red-800 bg-red-50 border-red-200" 
+                      : "text-emerald-800 bg-emerald-50 border-emerald-200"
+                  }`}>
+                    {isJsonError ? "❌ " : "✅ "}
+                    {jsonStatusMsg}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* CARD EXTRA: PORTAL CARDS */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="retro-pc-case">
-              {/* Glowing CRT Glass Bezel Cover */}
-              <div className="monitor-glass shadow-2xl">
-                {/* Screen Scanlines Mesh */}
-                <div className="crt-scanlines"></div>
-                <div className="crt-flicker"></div>
-                <div className="screen-glare"></div>
-                
-                {/* System Shell Prompt Header */}
-                <div className="terminal-shell">
-                  <div className="sys-info font-mono">
-                    BIOS v4.12 - MEM: 640KB BASE OK
-                    <br />[CODELINK RETRO OS - CONSOLE ATTIVA]
-                  </div>
-                  
-                  {/* List of Hyperlinks in Matrix console screen */}
-                  <div className="console-entries mt-6">
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="Snake Arcade Retro.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(600, 'triangle', 0.1)}
-                      >
-                        🐍 Snake
-                      </a>
-                      <span className="status-label font-mono">[READY]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="memory.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(650, 'triangle', 0.1)}
-                      >
-                        🃏 Memory
-                      </a>
-                      <span className="status-label font-mono">[READY]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="type-invader.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(700, 'triangle', 0.1)}
-                      >
-                        🔠 Type Invaders
-                      </a>
-                      <span className="status-label font-mono">[STABLE]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="campo-minato.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(750, 'triangle', 0.1)}
-                      >
-                        💣 Campo minato
-                      </a>
-                      <span className="status-label font-mono">[ONLINE]</span>
+            <div className="p-8 flex items-center justify-center min-h-full">
+              <div className="relative w-[320px] h-[560px] rounded-3xl bg-[#ff8f95] p-4 overflow-hidden shadow-2xl">
+                <div className="absolute top-20 -left-5 w-40 h-40 rounded-3xl bg-[#8fd5ff] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div className="absolute bottom-10 -right-5 w-40 h-40 rounded-3xl bg-[#ffd57a] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div className="relative w-full h-full bg-white rounded-2xl shadow-lg px-6 pt-6 pb-8 flex flex-col items-center justify-between">
+                  <div className="w-full flex items-center justify-between text-xs font-medium text-gray-700">
+                    <span>3/100</span>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
+                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
                     </div>
                   </div>
                   
-                  {/* Interactive Input Prompt with blinking cursors */}
-                  <div className="active-prompt mt-5 font-mono">
-                    <span className="prompt-symbol">&gt;</span>
-                    <span className="typing-placeholder">SISTEMA PRONTO...</span>
-                    <span className="blinking-cursor">▒</span>
+                  <div className="relative flex flex-col items-start justify-center gap-2.5 my-auto w-full">
+                    <ul className="list-none space-y-1 text-sm text-gray-800 font-medium w-full">
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="generatore-card-orientali.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">🧧 Creatore di Card Orientali</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="hanziBuilderPro.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">㊗ Hanzi Builder Pro</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://le-app-studio.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-500 flex items-center gap-1.5">🎓 App-Studio</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://whats-app-chat-designer.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-500 flex items-center gap-1.5">🗯 ChatBuilder</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://grammar-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-yellow-600 flex items-center gap-1.5">📔 Grammar Creator</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://librocreator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-500 flex items-center gap-1.5">📙 Libro Creator</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://flashcard-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-indigo-500 flex items-center gap-1.5">🎴 Flashcard Creator</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://linguaeditpro.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-purple-500 flex items-center gap-1.5">🗣 Lingua Edit Pro</a>
+                      </li>
+                      <li className="hover:translate-x-1.5 transition-transform duration-200">
+                        <a href="https://dialogue-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5">💬 Dialogue Creator</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="w-full flex items-center justify-between text-xs text-gray-500">
+                    <span className="text-[11px]">Tocca per ascoltare</span>
+                    <div className="flex gap-2">
+                      <div className="px-3 py-1.5 rounded-full bg-[#ff8f95] text-[11px] font-semibold text-white shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Indietro</div>
+                      <div className="px-3 py-1.5 rounded-full bg-[#ffbd4a] text-[11px] font-semibold text-gray-900 shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Avanti</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1963,7 +1753,7 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
                 
                 <div className="text-center mb-6">
                   <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-                    Lingue e utility 
+                    Compiti di Oggi (Matematica & Code)
                   </h3>
                   <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
                 </div>
@@ -2015,7 +1805,7 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
                       <a href="https://quaderno-digitale.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-red">
                         5. Quaderno Digitale
                       </a>
-                      <span className="block text-[9px] text-white/50">Quaderno per esercizi</span>
+                      <span className="block text-[9px] text-white/50">Raccolta di studi informatici</span>
                     </div>
                   </div>
                 </div>
@@ -2078,64 +1868,7 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               )}
             </div>
           </div>
-{/* CARD EXTRA: PORTAL CARDS */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="p-8 flex items-center justify-center min-h-full">
-              <div className="relative w-[320px] h-[560px] rounded-3xl bg-[#ff8f95] p-4 overflow-hidden shadow-2xl">
-                <div className="absolute top-20 -left-5 w-40 h-40 rounded-3xl bg-[#8fd5ff] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div className="absolute bottom-10 -right-5 w-40 h-40 rounded-3xl bg-[#ffd57a] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div className="relative w-full h-full bg-white rounded-2xl shadow-lg px-6 pt-6 pb-8 flex flex-col items-center justify-between">
-                  <div className="w-full flex items-center justify-between text-xs font-medium text-gray-700">
-                    <span>3/100</span>
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
-                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
-                    </div>
-                  </div>
-                  
-                  <div className="relative flex flex-col items-start justify-center gap-2.5 my-auto w-full">
-                    <ul className="list-none space-y-1 text-sm text-gray-800 font-medium w-full">
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="generatore-card-orientali.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">🧧 Creatore di Card Orientali</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="hanziBuilderPro.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">㊗ Hanzi Builder Pro</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://le-app-studio.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-500 flex items-center gap-1.5">🎓 App-Studio</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://whats-app-chat-designer.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-500 flex items-center gap-1.5">🗯 ChatBuilder</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://grammar-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-yellow-600 flex items-center gap-1.5">📔 Grammar Creator</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://librocreator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-500 flex items-center gap-1.5">📙 Libro Creator</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://flashcard-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-indigo-500 flex items-center gap-1.5">🎴 Flashcard Creator</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://linguaeditpro.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-purple-500 flex items-center gap-1.5">🗣 Lingua Edit Pro</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://dialogue-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5">💬 Dialogue Creator</a>
-                      </li>
-                    </ul>
-                  </div>
 
-                  <div className="w-full flex items-center justify-between text-xs text-gray-500">
-                    <span className="text-[11px]">Tocca per ascoltare</span>
-                    <div className="flex gap-2">
-                      <div className="px-3 py-1.5 rounded-full bg-[#ff8f95] text-[11px] font-semibold text-white shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Indietro</div>
-                      <div className="px-3 py-1.5 rounded-full bg-[#ffbd4a] text-[11px] font-semibold text-gray-900 shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Avanti</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
           <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="editor-header">
@@ -2658,115 +2391,7 @@ const [polaroidFilter, setPolaroidFilter] = useState('grayscale-[30%]');
               Pesca un'altra carta 🔮
             </button>
           </div>
-import React, { useState } from 'react';
 
-export function JsonEditorCard() {
-  const [jsonString, setJsonString] = useState<string>('{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}');
-  const [filename, setFilename] = useState<string>('miei_dati.json');
-  const [status, setStatus] = useState<{ message: string; isError: boolean } | null>(null);
-
-  // Formatta automaticamente il JSON con 2 spazi di rientro
-  const handleFormat = () => {
-    try {
-      const parsed = JSON.parse(jsonString);
-      setJsonString(JSON.stringify(parsed, null, 2));
-      setStatus({ message: "JSON formattato con successo!", isError: false });
-    } catch (e: any) {
-      setStatus({ message: `Errore nello schema: ${e.message}`, isError: true });
-    }
-  };
-
-  // Valida e scarica il file JSON localmente nel browser
-  const handleSave = () => {
-    try {
-      const parsed = JSON.parse(jsonString);
-      const cleanJson = JSON.stringify(parsed, null, 2);
-      
-      const blob = new Blob([cleanJson], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.href = url;
-      downloadAnchor.download = filename.endsWith('.json') ? filename : `${filename}.json`;
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      
-      document.body.removeChild(downloadAnchor);
-      URL.revokeObjectURL(url);
-
-      setStatus({ message: "File JSON salvato e scaricato!", isError: false });
-    } catch (e: any) {
-      setStatus({ message: `Salvataggio fallito: JSON non valido (${e.message})`, isError: true });
-    }
-  };
-
-  return (
-    <div className="desk-card w-full max-w-3xl rounded-2xl p-6 relative bg-white border-4 border-stone-800 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)]">
-      {/* Badge JSON */}
-      <div className="absolute -top-4 right-4 bg-pink-400 text-stone-900 border-4 border-stone-800 px-4 py-1.5 font-black uppercase tracking-wider rotate-6 text-sm">
-        JSON
-      </div>
-
-      <h1 className="text-3xl font-black text-stone-800 mb-5 flex items-center gap-3">
-        <span>💾</span> Incolla e salva JSON
-      </h1>
-
-      <div className="flex justify-between items-center mb-2">
-        <label htmlFor="jsonInput" className="block text-lg font-bold text-stone-700">
-          Codice JSON
-        </label>
-        <button 
-          onClick={handleFormat}
-          className="text-xs font-black text-blue-600 hover:text-blue-800 underline cursor-pointer"
-        >
-          ✨ Formatta ed Indenta
-        </button>
-      </div>
-
-      <textarea
-        id="jsonInput"
-        rows={14}
-        spellCheck="false"
-        value={jsonString}
-        onChange={(e) => {
-          setJsonString(e.target.value);
-          setStatus(null); // Resetta i messaggi d'errore alla scrittura
-        }}
-        className="w-full p-4 rounded-xl border-4 border-stone-800 focus:outline-none focus:ring-4 focus:ring-blue-100 resize-y font-mono text-base bg-stone-50 text-stone-900"
-        placeholder={`{\n  "titolo": "Esempio",\n  "tipo": "prova"\n}`}
-      />
-
-      <div className="mt-4 flex flex-col sm:flex-row gap-3 items-center">
-        <input
-          id="filename"
-          type="text"
-          value={filename}
-          onChange={(e) => setFilename(e.target.value)}
-          className="w-full sm:flex-1 p-3 rounded-xl border-4 border-stone-800 bg-white text-stone-900 font-bold focus:outline-none"
-          placeholder="nome_file.json"
-        />
-
-        <button
-          id="saveBtn"
-          onClick={handleSave}
-          className="w-full sm:w-auto px-6 py-3 rounded-xl font-black border-4 border-stone-800 bg-green-400 hover:bg-green-500 active:translate-y-1 active:shadow-none shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] transition-all cursor-pointer text-stone-900"
-        >
-          Salva JSON
-        </button>
-      </div>
-
-      {/* Messaggi di Validazione / Stato */}
-      {status && (
-        <div className={`mt-4 p-3 rounded-xl border-4 border-stone-800 font-black ${
-          status.isError ? "bg-red-200 text-red-800" : "bg-green-200 text-green-800"
-        }`}>
-          {status.isError ? "❌ " : "✅ "}
-          {status.message}
-        </div>
-      )}
-    </div>
-  );
-}
           {/* EXTRA CARD 8: INTERACTIVE COFFEE DISH FORTUNE MUG */}
           <div className="desk-card bg-amber-900/10 p-5 rounded-3xl border-2 border-amber-900/20 shadow-xl relative w-full" style={{ '--hover-rot': '1deg' } as any}>
             {/* Coffee stain ring behind */}
