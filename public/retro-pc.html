@@ -40,6 +40,42 @@
     .border-retro-black {
       border-color: #141414;
     }
+    .kbd-key {
+      background: linear-gradient(to bottom, #f5f5f4 0%, #d6d3d1 100%);
+      border-color: #e7e5e4 #78716c #57534e #e7e5e4;
+      border-style: solid;
+      border-width: 1px 1.5px 3.5px 1.5px;
+      border-radius: 4px;
+      box-shadow: 0 1.5px 2px rgba(0,0,0,0.3);
+      color: #292524;
+      font-weight: 900;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+      transition: all 0.05s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .kbd-key:active {
+      transform: translateY(1.5px);
+      border-bottom-width: 1px;
+      box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    }
+    .kbd-key-dark {
+      background: linear-gradient(to bottom, #78716c 0%, #44403c 100%);
+      border-color: #a8a29e #292524 #1c1917 #a8a29e;
+      color: #fafaf9;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    }
+    .kbd-key-accent {
+      background: linear-gradient(to bottom, #fbbf24 0%, #d97706 100%);
+      border-color: #fde047 #b45309 #78350f #fde047;
+      color: #1c1917;
+    }
+    .kbd-key-red {
+      background: linear-gradient(to bottom, #ef4444 0%, #b91c1c 100%);
+      border-color: #fca5a5 #991b1b #7f1d1d #fca5a5;
+      color: #ffffff;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body class="bg-stone-950 text-stone-900 font-sans h-screen w-screen flex items-center justify-center p-0.5 antialiased overflow-hidden">
@@ -133,24 +169,76 @@
           </div>
 
           <!-- Bottom micro controls & floppy drawer -->
-          <div class="flex items-center justify-between bg-stone-200 border-2 border-stone-400 p-1.5 rounded-xl select-none shrink-0">
+          <div class="flex items-center justify-between bg-stone-200 border-2 border-stone-400 p-1 rounded-xl select-none shrink-0 animate-fade-in">
             <!-- Floppy insert slot -->
             <div class="flex items-center gap-1.5">
-              <button id="pc-insert-floppy" class="px-1 py-0.5 text-[7.5px] bg-stone-700 hover:bg-stone-600 border border-stone-800 text-stone-200 font-bold shadow active:translate-y-0.5 cursor-pointer">💾 FLOPPY</button>
-              <div id="floppy-led" class="w-1.5 h-1.5 rounded-full bg-stone-800"></div>
+              <button id="pc-insert-floppy" class="px-1.5 py-0.5 text-[7.5px] bg-stone-700 hover:bg-stone-600 border border-stone-800 text-stone-200 font-bold shadow active:translate-y-0.5 cursor-pointer rounded">💾 FLOPPY</button>
+              <div id="floppy-led" class="w-1.5 h-1.5 rounded-full bg-stone-800 border border-stone-400 animate-pulse"></div>
             </div>
 
-            <!-- Virtual keys keyboard mockup row -->
-            <div class="flex gap-0.5 items-center">
-              <button onclick="pcTypeChar('E')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">E</button>
-              <button onclick="pcTypeChar('D')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">D</button>
-              <button onclick="pcTypeChar('I')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">I</button>
-              <button onclick="pcTypeChar('T')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">T</button>
-              <button onclick="pcEnterKey()" class="px-1 h-4.5 bg-amber-400 hover:bg-amber-300 text-[7.5px] font-black border border-stone-900 rounded active:translate-y-px cursor-pointer flex items-center justify-center uppercase">INVIO</button>
+            <!-- Dashboard status text -->
+            <span class="text-[8px] text-stone-600 font-mono tracking-wide font-extrabold uppercase">IBM XT 8086</span>
+
+            <!-- Red PC Switch button representation -->
+            <div class="flex items-center gap-1">
+              <span class="text-[7.5px] text-stone-600 font-bold uppercase">POWER:</span>
+              <button id="pc-power-toggle" class="w-5 h-5 rounded-full bg-red-650 hover:bg-red-550 border-2 border-stone-900 active:scale-95 shadow flex items-center justify-center cursor-pointer"></button>
+            </div>
+          </div>
+
+          <!-- GORGEOUS DETAILED CLASSIC MECHANICAL KEYBOARD TRAY -->
+          <div class="bg-stone-350 p-1 rounded-xl border border-stone-400 shadow-inner shrink-0 flex flex-col gap-0.5 select-none">
+            <!-- Row 1: Q W E R T Y U I O P Backspace -->
+            <div class="flex gap-0.5 justify-center w-full">
+              <button onclick="pcTypeChar('Q')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">Q</button>
+              <button onclick="pcTypeChar('W')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">W</button>
+              <button onclick="pcTypeChar('E')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">E</button>
+              <button onclick="pcTypeChar('R')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">R</button>
+              <button onclick="pcTypeChar('T')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">T</button>
+              <button onclick="pcTypeChar('Y')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">Y</button>
+              <button onclick="pcTypeChar('U')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">U</button>
+              <button onclick="pcTypeChar('I')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">I</button>
+              <button onclick="pcTypeChar('O')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">O</button>
+              <button onclick="pcTypeChar('P')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">P</button>
+              <button onclick="pcBackspaceKey()" class="kbd-key kbd-key-dark px-1 h-5 text-[7px] flex items-center justify-center font-bold">BKSP</button>
+            </div>
+            
+            <!-- Row 2: A S D F G H J K L ; Enter -->
+            <div class="flex gap-0.5 justify-center w-full">
+              <button onclick="pcTypeChar('A')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">A</button>
+              <button onclick="pcTypeChar('S')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">S</button>
+              <button onclick="pcTypeChar('D')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">D</button>
+              <button onclick="pcTypeChar('F')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">F</button>
+              <button onclick="pcTypeChar('G')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">G</button>
+              <button onclick="pcTypeChar('H')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">H</button>
+              <button onclick="pcTypeChar('J')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">J</button>
+              <button onclick="pcTypeChar('K')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">K</button>
+              <button onclick="pcTypeChar('L')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">L</button>
+              <button onclick="pcTypeChar(';')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">;</button>
+              <button onclick="pcEnterKey()" class="kbd-key kbd-key-accent px-2.5 h-5 text-[7px] flex items-center justify-center font-bold">INVIO</button>
             </div>
 
-            <!-- Red PC Switch button -->
-            <button id="pc-power-toggle" class="w-6 h-6 rounded-full bg-red-650 hover:bg-red-550 border-2 border-stone-900 active:scale-95 shadow flex items-center justify-center cursor-pointer"></button>
+            <!-- Row 3: ESC Z X C V B N M , . COLOR -->
+            <div class="flex gap-0.5 justify-center w-full">
+              <button onclick="closePcEditor()" class="kbd-key kbd-key-red px-1 h-5 text-[6.5px] flex items-center justify-center font-bold">ESC</button>
+              <button onclick="pcTypeChar('Z')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">Z</button>
+              <button onclick="pcTypeChar('X')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">X</button>
+              <button onclick="pcTypeChar('C')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">C</button>
+              <button onclick="pcTypeChar('V')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">V</button>
+              <button onclick="pcTypeChar('B')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">B</button>
+              <button onclick="pcTypeChar('N')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">N</button>
+              <button onclick="pcTypeChar('M')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">M</button>
+              <button onclick="pcTypeChar(',')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">,</button>
+              <button onclick="pcTypeChar('.')" class="kbd-key flex-1 h-5 text-[7.5px] flex items-center justify-center">.</button>
+              <button onclick="cycleColors()" class="kbd-key kbd-key-dark px-1 h-5 text-[6.5px] flex items-center justify-center font-bold">SCHERMO</button>
+            </div>
+
+            <!-- Row 4: HELP SPACE EDIT -->
+            <div class="flex gap-0.5 justify-center w-full">
+              <button onclick="quickHelpCmd()" class="kbd-key kbd-key-dark px-2.5 h-5 text-[7px] flex items-center justify-center font-bold uppercase">💡 AIUTO</button>
+              <button onclick="pcSpaceKey()" class="kbd-key flex-[3.8] h-5 text-[7.5px] flex items-center justify-center font-bold">SPAZIO</button>
+              <button onclick="quickEditCmd()" class="kbd-key kbd-key-dark px-2.5 h-5 text-[7px] flex items-center justify-center font-bold uppercase">✏️ DOS EDIT</button>
+            </div>
           </div>
         </div>
       
@@ -299,11 +387,94 @@
 
         window.pcTypeChar = function(char) {
           if (!pcOn) return;
-          // Only allow typing in classical ASCII range for OS style
-          if (command.length >= 40) return; // Limit size
           playKeySound(800 + Math.random() * 300);
-          command += char;
+          
+          const pcEditorView = document.getElementById('pc-editor-view');
+          const pcEditorTextarea = document.getElementById('pc-editor-textarea');
+          
+          // Check if editor is open and showing
+          if (pcEditorView && !pcEditorView.classList.contains('hidden')) {
+            const el = pcEditorTextarea;
+            const start = el.selectionStart;
+            const end = el.selectionEnd;
+            const text = el.value;
+            el.value = text.substring(0, start) + char + text.substring(end);
+            el.selectionStart = el.selectionEnd = start + char.length;
+            el.focus();
+          } else {
+            // Write to DOS terminal command prompt
+            if (command.length >= 40) return; // Limit size
+            command += char;
+            caretText.textContent = command;
+          }
+        };
+
+        window.pcBackspaceKey = function() {
+          if (!pcOn) return;
+          playKeySound(600 + Math.random() * 200);
+          
+          const pcEditorView = document.getElementById('pc-editor-view');
+          const pcEditorTextarea = document.getElementById('pc-editor-textarea');
+          
+          if (pcEditorView && !pcEditorView.classList.contains('hidden')) {
+            const el = pcEditorTextarea;
+            const start = el.selectionStart;
+            const end = el.selectionEnd;
+            const text = el.value;
+            if (start === end && start > 0) {
+              el.value = text.substring(0, start - 1) + text.substring(end);
+              el.selectionStart = el.selectionEnd = start - 1;
+            } else if (start !== end) {
+              el.value = text.substring(0, start) + text.substring(end);
+              el.selectionStart = el.selectionEnd = start;
+            }
+            el.focus();
+          } else {
+            if (command.length > 0) {
+              command = command.slice(0, -1);
+              caretText.textContent = command;
+            }
+          }
+        };
+
+        window.pcSpaceKey = function() {
+          window.pcTypeChar(' ');
+        };
+
+        const themeList = ['cyan', 'green', 'amber', 'white'];
+        window.cycleColors = function() {
+          if (!pcOn) return;
+          const nextIdx = (themeList.indexOf(currentThemeColor) + 1) % themeList.length;
+          applyColorTheme(themeList[nextIdx]);
+          playKeySound(950, 0.04);
+          showNotification("🎨 Colore schermo modificato in: " + themeList[nextIdx].toUpperCase());
+        };
+
+        window.quickEditCmd = function() {
+          if (!pcOn) return;
+          const pcEditorView = document.getElementById('pc-editor-view');
+          if (pcEditorView && !pcEditorView.classList.contains('hidden')) return; // already inside
+          playKeySound(800, 0.03);
+          command = "EDIT LEGGIMI.TXT";
           caretText.textContent = command;
+          setTimeout(() => {
+            window.pcEnterKey();
+          }, 250);
+        };
+
+        window.quickHelpCmd = function() {
+          if (!pcOn) return;
+          const pcEditorView = document.getElementById('pc-editor-view');
+          if (pcEditorView && !pcEditorView.classList.contains('hidden')) {
+            // Close editor first
+            window.closePcEditor();
+          }
+          playKeySound(800, 0.03);
+          command = "HELP";
+          caretText.textContent = command;
+          setTimeout(() => {
+            window.pcEnterKey();
+          }, 250);
         };
 
         window.openPcEditor = function() {

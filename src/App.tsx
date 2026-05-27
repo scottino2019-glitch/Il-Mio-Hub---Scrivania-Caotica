@@ -2155,22 +2155,22 @@ export default function App() {
                 </li>
                 <li>
                   <a 
-                    href="https://creative-card-code-editor.vercel.app/" 
+                    href="https://arty-scrapbook.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(820, 'sine', 0.05)}
                   >
-                    Creative Card
+                    Arty Scrapbook
                   </a>
                 </li>
                 <li>
                   <a 
-                    href="https://calligraphy-font-art-editor.vercel.app/" 
+                    href="https://scrapbook-magic.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(840, 'sine', 0.05)}
                   >
-                    Calligraphy Font
+                    Scrapbook magic
                   </a>
                 </li>
                 <li>
