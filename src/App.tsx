@@ -2155,12 +2155,12 @@ export default function App() {
                 </li>
                 <li>
                   <a 
-                    href="https://polyglot-pix.netlify.app/" 
+                    href="https://creative-card-code-editor.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(820, 'sine', 0.05)}
                   >
-                    Polyglot pix
+                    Creative Card
                   </a>
                 </li>
                 <li>
