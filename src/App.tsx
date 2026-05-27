@@ -1423,7 +1423,36 @@ export default function App() {
               </div>
             </div>
           </div>
+ {/* CARD EXTRA: RETRO PERSONAL COMPUTER DEVICE */}
+          <div className="desk-card hover-rot-1 lg:col-span-2 xl:col-span-2" style={{ '--hover-rot': '0.5deg' } as any}>
+            <div className="p-4 bg-stone-900 border-4 border-stone-800 rounded-3xl shadow-2xl relative w-full overflow-hidden">
+              {/* Retro monitor glowing status and knobs */}
+              <div className="flex justify-between items-center px-1.5 mb-2.5">
+                <div className="flex gap-2 items-center">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                  <span className="text-[10px] text-zinc-400 font-mono tracking-wider">VINTAGE MONITOR SYSTEM v5.10</span>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-3.5 h-3.5 rounded-full bg-stone-750 shadow-inner border border-stone-800"></div>
+                  <div className="w-3.5 h-3.5 rounded-full bg-stone-750 shadow-inner border border-stone-800"></div>
+                </div>
+              </div>
 
+              {/* Sandbox iframe loading local retro-pc.html */}
+              <iframe 
+                src="retro-pc.html" 
+                className="w-full h-[520px] rounded-2xl border-none"
+                allow="autoplay; clipboard-write; encrypted-media"
+                sandbox="allow-scripts allow-same-origin allow-forms"
+                loading="lazy"
+                title="La Mia Computer Classico"
+              />
+
+              <div className="text-[9px] text-stone-500 text-center font-mono mt-3 uppercase tracking-widest">
+                📼 Retro Device Terminal Emulator - DOS Shell v5.10
+              </div>
+            </div>
+          </div>
           {/* ALBUM CSS GRANDE - CSS Artist Draft */}
           <div className="desk-card album-css-grande hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
             {/* Effetti di disordine */}
@@ -1764,7 +1793,75 @@ export default function App() {
             </div>
           </div>
 
-       
+         {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
+            <div className="app-group card-tavolozza">
+              <h2 className="group-title">🎨 Foto Design</h2>
+              <ul className="app-list">
+                <li>
+                  <a 
+                    href="https://vector-sketch.netlify.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                  >
+                    Vector Sketch
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://arty-scrapbook.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(820, 'sine', 0.05)}
+                  >
+                    Arty Scrapbook
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://scrapbook-magic.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(840, 'sine', 0.05)}
+                  >
+                    Scrapbook magic
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://stickers-creator.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(860, 'sine', 0.05)}
+                  >
+                    Stickers Creator
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://artiscard.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(880, 'sine', 0.05)}
+                  >
+                    ArtisCard
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://arte-libera-studio.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                    ArteLibera Studio
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
 
           {/* CARD EXTRA: PORTAL CARDS */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
