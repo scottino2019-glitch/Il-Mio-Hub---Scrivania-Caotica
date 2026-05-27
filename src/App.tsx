@@ -1754,19 +1754,93 @@ export default function App() {
               </div>
             </div>
           </div>
-
-          {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
-              <iframe 
-                src="https://calendario-strappato.vercel.app/?embed=true&paper=lined&font=handwriting&tape=transparent" 
-                style={{ border: 'none', overflow: 'hidden', background: 'transparent' }} 
-                width="100%" 
-                height="450" 
-                title="Calendario Strappato"
-              />
+  {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="retro-pc-case">
+              {/* Glowing CRT Glass Bezel Cover */}
+              <div className="monitor-glass shadow-2xl">
+                {/* Screen Scanlines Mesh */}
+                <div className="crt-scanlines"></div>
+                <div className="crt-flicker"></div>
+                <div className="screen-glare"></div>
+                
+                {/* System Shell Prompt Header */}
+                <div className="terminal-shell">
+                  <div className="sys-info font-mono">
+                    BIOS v4.12 - MEM: 640KB BASE OK
+                    <br />[CODELINK RETRO OS - CONSOLE ATTIVA]
+                  </div>
+                  
+                  {/* List of Hyperlinks in Matrix console screen */}
+                  <div className="console-entries mt-6">
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="Snake Arcade Retro.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(600, 'triangle', 0.1)}
+                      >
+                        🐍 Snake
+                      </a>
+                      <span className="status-label font-mono">[READY]</span>
+                    </div>
+                    
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="memory.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(650, 'triangle', 0.1)}
+                      >
+                        🃏 Memory
+                      </a>
+                      <span className="status-label font-mono">[READY]</span>
+                    </div>
+                    
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="type-invader.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(700, 'triangle', 0.1)}
+                      >
+                        🔠 Type Invaders
+                      </a>
+                      <span className="status-label font-mono">[STABLE]</span>
+                    </div>
+                    
+                    <div className="console-row">
+                      <span className="prompt-symbol">&gt;</span>
+                      <a 
+                        href="campo-minato.html" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="matrix-link"
+                        onClick={() => playSoundBlip(750, 'triangle', 0.1)}
+                      >
+                        💣 Campo minato
+                      </a>
+                      <span className="status-label font-mono">[ONLINE]</span>
+                    </div>
+                  </div>
+                  
+                  {/* Interactive Input Prompt with blinking cursors */}
+                  <div className="active-prompt mt-5 font-mono">
+                    <span className="prompt-symbol">&gt;</span>
+                    <span className="typing-placeholder">SISTEMA PRONTO...</span>
+                    <span className="blinking-cursor">▒</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          
 
         
          
@@ -1920,45 +1994,7 @@ export default function App() {
              NATIVE EXTRA FLUID CARDS
              ========================================= */}
 
-          {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
-          <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
-            <div className="postit-tape"></div>
-            <div className="flex items-center gap-1.5 mb-3 mt-1 text-yellow-950 font-bold font-sans">
-              <SparklesIcon className="w-4 h-4 text-amber-800" />
-              <span className="font-bold tracking-wider text-base">Sticky Note Board 📌</span>
-            </div>
-
-            <div className="space-y-3 mb-4">
-              <input 
-                type="text" 
-                placeholder="Nuovo appunto..." 
-                value={noteInput} 
-                onChange={(e) => setNoteInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && addNote()}
-                className="w-full bg-white/50 border-b border-yellow-600/30 text-xs py-1 px-2 text-stone-900 focus:outline-none focus:border-yellow-700 font-sans"
-              />
-              <button 
-                onClick={addNote}
-                className="w-full bg-yellow-600/25 hover:bg-yellow-600/40 text-stone-900 text-[10px] font-bold py-1 rounded transition-all "
-              >
-                Aggiungi Nota Rapida
-              </button>
-            </div>
-
-            <div className="space-y-2 max-h-[180px] overflow-y-auto">
-              {notes.map((note, index) => (
-                <div key={index} className="flex justify-between items-start bg-yellow-200/40 p-2 rounded text-xs text-stone-800 font-sans border border-yellow-500/10">
-                  <span className="leading-tight font-medium">{note}</span>
-                  <button onClick={() => deleteNote(index)} className="text-stone-600 hover:text-red-500 pl-2">
-                    ✕
-                  </button>
-                </div>
-              ))}
-              {notes.length === 0 && (
-                <div className="text-center text-[10px] italic text-stone-600">Nessun promemoria attivo.</div>
-              )}
-            </div>
-          </div>
+        
 
           {/* EXTRA CARD 2: REFRESHING COLOR MARKERS & COASTER */}
           <div className="desk-card bg-neutral-800/80 p-5 rounded-3xl border border-white/5 hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
@@ -1993,7 +2029,71 @@ export default function App() {
               ))}
             </div>
           </div>
+         {/* EXTRA CARD 4: RETRO ARCADE TAMAGOTCHI PET */}
+          <div className="desk-card bg-[#38bdf8] p-5 rounded-[2rem] border-4 border-[#0284c7] shadow-2xl relative w-full" style={{ '--hover-rot': '1.5deg' } as any}>
+            <div className="flex justify-center mb-1">
+              <span className="bg-[#0284c7] text-white font-mono font-black text-[9px] px-3 py-0.5 rounded-full uppercase tracking-wider">
+                Pocket Tamagotchi
+              </span>
+            </div>
 
+            {/* Glowing pixel screen representation */}
+            <div className="bg-[#a8a29e] rounded-xl p-3 border-4 border-stone-800 shadow-inner relative text-stone-900 min-h-[140px] font-mono">
+              <div className="flex justify-between text-[8px] border-b border-stone-900/35 pb-1 mb-2 font-bold uppercase">
+                <span>🍖 Cibo: {100 - petHunger}%</span>
+                <span>❤️ Gioia: {petHappy}%</span>
+              </div>
+
+              <div className="flex flex-col items-center justify-center pt-2">
+                {petAction === 'idle' && (
+                  <div className="bouncing-pet text-4xl cursor-pointer" onClick={() => interactPet('play')}>
+                    👾
+                  </div>
+                )}
+                {petAction === 'eating' && (
+                  <div className="bouncing-pet text-4xl">
+                    🍕 👾
+                  </div>
+                )}
+                {petAction === 'playing' && (
+                  <div className="bouncing-pet text-4xl">
+                    🎾 👾
+                  </div>
+                )}
+                {petAction === 'sleeping' && (
+                  <div className="text-4xl">
+                    💤 👾
+                  </div>
+                )}
+                <span className="text-[10px] font-bold tracking-widest mt-2">{petName.toUpperCase()}</span>
+                {petAction === 'sleeping' && <span className="text-[7.5px] italic">Stanno riposando...</span>}
+              </div>
+            </div>
+
+            {/* Retro Action buttons grid overlay */}
+            <div className="grid grid-cols-3 gap-1.5 mt-4">
+              <button 
+                onClick={() => interactPet('feed')}
+                disabled={petAction === 'sleeping'}
+                className="bg-sky-900 hover:bg-sky-800 disabled:opacity-45 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
+              >
+                Cibo 🍉
+              </button>
+              <button 
+                onClick={() => interactPet('play')}
+                disabled={petAction === 'sleeping'}
+                className="bg-sky-900 hover:bg-sky-800 disabled:opacity-45 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
+              >
+                Gioca 🎾
+              </button>
+              <button 
+                onClick={() => interactPet('sleep')}
+                className="bg-amber-900 hover:bg-amber-800 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
+              >
+                {petAction === 'sleeping' ? 'SVEGLIA' : 'SONNO'}
+              </button>
+            </div>
+          </div>
           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4033] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
@@ -2039,93 +2139,46 @@ export default function App() {
             </div>
           </div>
           
-          {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="retro-pc-case">
-              {/* Glowing CRT Glass Bezel Cover */}
-              <div className="monitor-glass shadow-2xl">
-                {/* Screen Scanlines Mesh */}
-                <div className="crt-scanlines"></div>
-                <div className="crt-flicker"></div>
-                <div className="screen-glare"></div>
-                
-                {/* System Shell Prompt Header */}
-                <div className="terminal-shell">
-                  <div className="sys-info font-mono">
-                    BIOS v4.12 - MEM: 640KB BASE OK
-                    <br />[CODELINK RETRO OS - CONSOLE ATTIVA]
-                  </div>
-                  
-                  {/* List of Hyperlinks in Matrix console screen */}
-                  <div className="console-entries mt-6">
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="Snake Arcade Retro.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(600, 'triangle', 0.1)}
-                      >
-                        🐍 Snake
-                      </a>
-                      <span className="status-label font-mono">[READY]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="memory.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(650, 'triangle', 0.1)}
-                      >
-                        🃏 Memory
-                      </a>
-                      <span className="status-label font-mono">[READY]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="type-invader.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(700, 'triangle', 0.1)}
-                      >
-                        🔠 Type Invaders
-                      </a>
-                      <span className="status-label font-mono">[STABLE]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="campo-minato.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(750, 'triangle', 0.1)}
-                      >
-                        💣 Campo minato
-                      </a>
-                      <span className="status-label font-mono">[ONLINE]</span>
-                    </div>
-                  </div>
-                  
-                  {/* Interactive Input Prompt with blinking cursors */}
-                  <div className="active-prompt mt-5 font-mono">
-                    <span className="prompt-symbol">&gt;</span>
-                    <span className="typing-placeholder">SISTEMA PRONTO...</span>
-                    <span className="blinking-cursor">▒</span>
-                  </div>
+        
+            {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
+          <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
+            <div className="postit-tape"></div>
+            <div className="flex items-center gap-1.5 mb-3 mt-1 text-yellow-950 font-bold font-sans">
+              <SparklesIcon className="w-4 h-4 text-amber-800" />
+              <span className="font-bold tracking-wider text-base">Sticky Note Board 📌</span>
+            </div>
+
+            <div className="space-y-3 mb-4">
+              <input 
+                type="text" 
+                placeholder="Nuovo appunto..." 
+                value={noteInput} 
+                onChange={(e) => setNoteInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && addNote()}
+                className="w-full bg-white/50 border-b border-yellow-600/30 text-xs py-1 px-2 text-stone-900 focus:outline-none focus:border-yellow-700 font-sans"
+              />
+              <button 
+                onClick={addNote}
+                className="w-full bg-yellow-600/25 hover:bg-yellow-600/40 text-stone-900 text-[10px] font-bold py-1 rounded transition-all "
+              >
+                Aggiungi Nota Rapida
+              </button>
+            </div>
+
+            <div className="space-y-2 max-h-[180px] overflow-y-auto">
+              {notes.map((note, index) => (
+                <div key={index} className="flex justify-between items-start bg-yellow-200/40 p-2 rounded text-xs text-stone-800 font-sans border border-yellow-500/10">
+                  <span className="leading-tight font-medium">{note}</span>
+                  <button onClick={() => deleteNote(index)} className="text-stone-600 hover:text-red-500 pl-2">
+                    ✕
+                  </button>
                 </div>
-              </div>
+              ))}
+              {notes.length === 0 && (
+                <div className="text-center text-[10px] italic text-stone-600">Nessun promemoria attivo.</div>
+              )}
             </div>
           </div>
-          
            {/* CARD E: MOOD BOARD CORKBOARD */}
           <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
             <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
@@ -2173,7 +2226,18 @@ export default function App() {
               )}
             </div>
           </div>
-
+{/* CARD C: CALENDARIO STRAPPATO IFRAME */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
+              <iframe 
+                src="https://calendario-strappato.vercel.app/?embed=true&paper=lined&font=handwriting&tape=transparent" 
+                style={{ border: 'none', overflow: 'hidden', background: 'transparent' }} 
+                width="100%" 
+                height="450" 
+                title="Calendario Strappato"
+              />
+            </div>
+          </div>
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
           <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="editor-header">
@@ -2294,71 +2358,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          {/* EXTRA CARD 4: RETRO ARCADE TAMAGOTCHI PET */}
-          <div className="desk-card bg-[#38bdf8] p-5 rounded-[2rem] border-4 border-[#0284c7] shadow-2xl relative w-full" style={{ '--hover-rot': '1.5deg' } as any}>
-            <div className="flex justify-center mb-1">
-              <span className="bg-[#0284c7] text-white font-mono font-black text-[9px] px-3 py-0.5 rounded-full uppercase tracking-wider">
-                Pocket Tamagotchi
-              </span>
-            </div>
-
-            {/* Glowing pixel screen representation */}
-            <div className="bg-[#a8a29e] rounded-xl p-3 border-4 border-stone-800 shadow-inner relative text-stone-900 min-h-[140px] font-mono">
-              <div className="flex justify-between text-[8px] border-b border-stone-900/35 pb-1 mb-2 font-bold uppercase">
-                <span>🍖 Cibo: {100 - petHunger}%</span>
-                <span>❤️ Gioia: {petHappy}%</span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center pt-2">
-                {petAction === 'idle' && (
-                  <div className="bouncing-pet text-4xl cursor-pointer" onClick={() => interactPet('play')}>
-                    👾
-                  </div>
-                )}
-                {petAction === 'eating' && (
-                  <div className="bouncing-pet text-4xl">
-                    🍕 👾
-                  </div>
-                )}
-                {petAction === 'playing' && (
-                  <div className="bouncing-pet text-4xl">
-                    🎾 👾
-                  </div>
-                )}
-                {petAction === 'sleeping' && (
-                  <div className="text-4xl">
-                    💤 👾
-                  </div>
-                )}
-                <span className="text-[10px] font-bold tracking-widest mt-2">{petName.toUpperCase()}</span>
-                {petAction === 'sleeping' && <span className="text-[7.5px] italic">Stanno riposando...</span>}
-              </div>
-            </div>
-
-            {/* Retro Action buttons grid overlay */}
-            <div className="grid grid-cols-3 gap-1.5 mt-4">
-              <button 
-                onClick={() => interactPet('feed')}
-                disabled={petAction === 'sleeping'}
-                className="bg-sky-900 hover:bg-sky-800 disabled:opacity-45 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
-              >
-                Cibo 🍉
-              </button>
-              <button 
-                onClick={() => interactPet('play')}
-                disabled={petAction === 'sleeping'}
-                className="bg-sky-900 hover:bg-sky-800 disabled:opacity-45 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
-              >
-                Gioca 🎾
-              </button>
-              <button 
-                onClick={() => interactPet('sleep')}
-                className="bg-amber-900 hover:bg-amber-800 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
-              >
-                {petAction === 'sleeping' ? 'SVEGLIA' : 'SONNO'}
-              </button>
-            </div>
-          </div>
+ 
 
           {/* EXTRA CARD 5: RETRO CASSETTE TAPE RECORDER */}
           <div className="desk-card bg-neutral-900 p-5 rounded-[1.8rem] border-4 border-neutral-750 shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
