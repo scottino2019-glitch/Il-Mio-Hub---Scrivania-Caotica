@@ -1994,7 +1994,51 @@ export default function App() {
              NATIVE EXTRA FLUID CARDS
              ========================================= */}
 
-        
+           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
+          <div className="desk-card bg-[#5c4033] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
+              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+            </div>
+
+            <div className="text-center text-white mt-1">
+              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
+              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
+                {currentTime.toLocaleTimeString('it-IT')}
+              </div>
+            </div>
+
+            {/* Swing pendulum container */}
+            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
+              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
+                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
+              </div>
+            </div>
+
+            {/* Focus pomodoro timer interface */}
+            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
+              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
+                <span>STAGE: {pomoMode.toUpperCase()}</span>
+                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
+              </div>
+
+              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
+                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
+              </div>
+
+              <div className="flex gap-2 justify-center mt-3">
+                <button 
+                  onClick={togglePomo} 
+                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
+                >
+                  {pomoActive ? 'PAUSA' : 'START'}
+                </button>
+                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
+                  RESET
+                </button>
+              </div>
+            </div>
+          </div>
+          
 
           {/* EXTRA CARD 2: REFRESHING COLOR MARKERS & COASTER */}
           <div className="desk-card bg-neutral-800/80 p-5 rounded-3xl border border-white/5 hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
@@ -2094,52 +2138,124 @@ export default function App() {
               </button>
             </div>
           </div>
-          {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
-          <div className="desk-card bg-[#5c4033] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+         {/* EXTRA CARD 6: INTERACTIVE TIC-TAC-TOE ON TORN NOTEBOOK */}
+          <div className="desk-card squared-paper p-5 rounded-md hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-sm font-bold text-stone-800 font-sans tracking-wide leading-none">Tris del Gatto 🐾</span>
+              <button onClick={resetGame} className="px-2 py-0.5 rounded bg-stone-200 hover:bg-stone-300 text-[9.5px] font-sans font-bold text-stone-800">
+                Resetta
+              </button>
             </div>
 
-            <div className="text-center text-white mt-1">
-              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
-              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
-                {currentTime.toLocaleTimeString('it-IT')}
-              </div>
-            </div>
+            <p className="text-[10px] text-stone-500 font-sans mb-3 leading-tight">
+              Sfida Cat-Bot in questo vecchio quaderno caotico. Fai 3 segni consecutivi!
+            </p>
 
-            {/* Swing pendulum container */}
-            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
-              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
-                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
-              </div>
-            </div>
-
-            {/* Focus pomodoro timer interface */}
-            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
-              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
-                <span>STAGE: {pomoMode.toUpperCase()}</span>
-                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
-              </div>
-
-              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
-                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
-              </div>
-
-              <div className="flex gap-2 justify-center mt-3">
-                <button 
-                  onClick={togglePomo} 
-                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
+            <div className="grid grid-cols-3 gap-1 bg-stone-300 rounded p-1 max-w-[180px] mx-auto">
+              {board.map((cell, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleCellClick(idx)}
+                  className="w-14 h-14 bg-stone-50 hover:bg-stone-100 flex items-center justify-center font-sans font-black text-2xl text-stone-800 transition-all rounded cursor-pointer"
                 >
-                  {pomoActive ? 'PAUSA' : 'START'}
+                  {cell === 'X' && <span className="text-pink-600">X</span>}
+                  {cell === 'O' && <span className="text-blue-600">O</span>}
                 </button>
-                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
-                  RESET
-                </button>
+              ))}
+            </div>
+
+            {gameResult && (
+              <div className="text-center font-bold text-xs text-stone-900 mt-3 font-sans leading-none">
+                Risultato: {gameResult}
               </div>
+            )}
+          </div>
+
+          {/* EXTRA CARD 7: DEVELOPER TAROTS & DIVINATIONS */}
+          <div className="desk-card bg-indigo-950 p-5 rounded-3xl border-4 border-indigo-900 shadow-2xl text-center relative w-full overflow-hidden" style={{ '--hover-rot': '-1.5deg' } as any}>
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-pink-500 via-indigo-500 to-sky-500"></div>
+            
+            <div className="font-bold text-yellow-300 text-xs tracking-wider uppercase mb-3 mt-1 font-mono">
+              🔮 Tarocchi del Programmatore
+            </div>
+
+            <div className="bg-gradient-to-tr from-indigo-900 to-slate-900 rounded-2xl p-4 border border-indigo-800 text-stone-100 min-h-[145px] flex flex-col justify-between mb-4 shadow-inner relative">
+              <div>
+                <span className="text-[10px] text-pink-400 font-semibold uppercase tracking-wider block mb-1">CARTA PRESENTE</span>
+                <h4 className="font-extrabold text-base text-yellow-100 tracking-wide">{activeFortune.text}</h4>
+                <p className="text-[11px] text-stone-300 italic leading-snug tracking-wider mt-3 font-medium">
+                  "{activeFortune.motto}"
+                </p>
+              </div>
+              <div className="text-[8px] border-t border-indigo-800/60 pt-2 text-indigo-300 font-mono tracking-wide uppercase">
+                Stato astrale: {activeFortune.status}
+              </div>
+            </div>
+
+            <button 
+              onClick={shuffleFortune}
+              className="w-full bg-indigo-700 hover:bg-indigo-600 active:translate-y-px text-white rounded-lg text-xs font-bold py-1.5 uppercase tracking-widest transition-all"
+            >
+              Pesca un'altra carta 🔮
+            </button>
+          </div>
+
+          {/* EXTRA CARD 8: INTERACTIVE COFFEE DISH FORTUNE MUG */}
+          <div className="desk-card bg-amber-900/10 p-5 rounded-3xl border-2 border-amber-900/20 shadow-xl relative w-full" style={{ '--hover-rot': '1deg' } as any}>
+            {/* Coffee stain ring behind */}
+            <div className="absolute top-4 left-4 w-24 h-24 rounded-full border-4 border-amber-900/10 pointer-events-none"></div>
+            
+            <div className="flex justify-between items-center mb-3 text-amber-300">
+              <span className="font-bold text-stone-200 text-xs tracking-wider uppercase font-mono">Isola del Caffè ☕</span>
+              <span className="text-[10px] font-mono text-amber-400/90 font-bold">CARICHE: {coffeeSips}/3</span>
+            </div>
+
+            <div className="flex justify-center items-center my-4 relative">
+              {/* Cup container click to sip */}
+              <button 
+                onClick={sipCoffee} 
+                className="w-20 h-20 bg-stone-890 hover:bg-stone-840 rounded-full border-4 border-amber-700 flex flex-col items-center justify-center transition-all active:scale-95 cursor-pointer relative shadow-lg"
+              >
+                <span className="text-3xl filter drop-shadow">☕</span>
+                <div className="absolute top-1 rotate-12 flex space-x-1">
+                  <span className="steam-smoke block w-0.5 h-3 bg-white/40 rounded"></span>
+                  <span className="steam-smoke block w-0.5 h-4 bg-white/40 rounded delay-75"></span>
+                  <span className="steam-smoke block w-0.5 h-3 bg-white/40 rounded delay-150"></span>
+                </div>
+              </button>
+            </div>
+
+            <div className="bg-stone-900/60 rounded-xl p-3 border border-amber-900/15 text-center min-h-[60px] flex items-center justify-center mb-3 select-none">
+              <p className="text-[10px] font-sans italic text-stone-300 leading-normal">
+                {coffeeQuote}
+              </p>
+            </div>
+
+            {coffeeSips === 0 && (
+              <button 
+                onClick={refillCoffee}
+                className="w-full bg-amber-800 hover:bg-amber-700 text-white rounded-lg text-xs font-bold py-1 font-mono uppercase tracking-widest"
+              >
+                Riempi tazza 🔄
+              </button>
+            )}
+          </div>
+
+        </div>
+        
+{/* CARD C: CALENDARIO STRAPPATO IFRAME */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
+              <iframe 
+                src="https://calendario-strappato.vercel.app/?embed=true&paper=lined&font=handwriting&tape=transparent" 
+                style={{ border: 'none', overflow: 'hidden', background: 'transparent' }} 
+                width="100%" 
+                height="450" 
+                title="Calendario Strappato"
+              />
             </div>
           </div>
           
-        
             {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
           <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
             <div className="postit-tape"></div>
@@ -2224,18 +2340,6 @@ export default function App() {
               {moods.length === 0 && (
                 <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
               )}
-            </div>
-          </div>
-{/* CARD C: CALENDARIO STRAPPATO IFRAME */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
-              <iframe 
-                src="https://calendario-strappato.vercel.app/?embed=true&paper=lined&font=handwriting&tape=transparent" 
-                style={{ border: 'none', overflow: 'hidden', background: 'transparent' }} 
-                width="100%" 
-                height="450" 
-                title="Calendario Strappato"
-              />
             </div>
           </div>
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
@@ -2421,110 +2525,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* EXTRA CARD 6: INTERACTIVE TIC-TAC-TOE ON TORN NOTEBOOK */}
-          <div className="desk-card squared-paper p-5 rounded-md hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="flex justify-between items-center mb-3">
-              <span className="text-sm font-bold text-stone-800 font-sans tracking-wide leading-none">Tris del Gatto 🐾</span>
-              <button onClick={resetGame} className="px-2 py-0.5 rounded bg-stone-200 hover:bg-stone-300 text-[9.5px] font-sans font-bold text-stone-800">
-                Resetta
-              </button>
-            </div>
-
-            <p className="text-[10px] text-stone-500 font-sans mb-3 leading-tight">
-              Sfida Cat-Bot in questo vecchio quaderno caotico. Fai 3 segni consecutivi!
-            </p>
-
-            <div className="grid grid-cols-3 gap-1 bg-stone-300 rounded p-1 max-w-[180px] mx-auto">
-              {board.map((cell, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleCellClick(idx)}
-                  className="w-14 h-14 bg-stone-50 hover:bg-stone-100 flex items-center justify-center font-sans font-black text-2xl text-stone-800 transition-all rounded cursor-pointer"
-                >
-                  {cell === 'X' && <span className="text-pink-600">X</span>}
-                  {cell === 'O' && <span className="text-blue-600">O</span>}
-                </button>
-              ))}
-            </div>
-
-            {gameResult && (
-              <div className="text-center font-bold text-xs text-stone-900 mt-3 font-sans leading-none">
-                Risultato: {gameResult}
-              </div>
-            )}
-          </div>
-
-          {/* EXTRA CARD 7: DEVELOPER TAROTS & DIVINATIONS */}
-          <div className="desk-card bg-indigo-950 p-5 rounded-3xl border-4 border-indigo-900 shadow-2xl text-center relative w-full overflow-hidden" style={{ '--hover-rot': '-1.5deg' } as any}>
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-pink-500 via-indigo-500 to-sky-500"></div>
-            
-            <div className="font-bold text-yellow-300 text-xs tracking-wider uppercase mb-3 mt-1 font-mono">
-              🔮 Tarocchi del Programmatore
-            </div>
-
-            <div className="bg-gradient-to-tr from-indigo-900 to-slate-900 rounded-2xl p-4 border border-indigo-800 text-stone-100 min-h-[145px] flex flex-col justify-between mb-4 shadow-inner relative">
-              <div>
-                <span className="text-[10px] text-pink-400 font-semibold uppercase tracking-wider block mb-1">CARTA PRESENTE</span>
-                <h4 className="font-extrabold text-base text-yellow-100 tracking-wide">{activeFortune.text}</h4>
-                <p className="text-[11px] text-stone-300 italic leading-snug tracking-wider mt-3 font-medium">
-                  "{activeFortune.motto}"
-                </p>
-              </div>
-              <div className="text-[8px] border-t border-indigo-800/60 pt-2 text-indigo-300 font-mono tracking-wide uppercase">
-                Stato astrale: {activeFortune.status}
-              </div>
-            </div>
-
-            <button 
-              onClick={shuffleFortune}
-              className="w-full bg-indigo-700 hover:bg-indigo-600 active:translate-y-px text-white rounded-lg text-xs font-bold py-1.5 uppercase tracking-widest transition-all"
-            >
-              Pesca un'altra carta 🔮
-            </button>
-          </div>
-
-          {/* EXTRA CARD 8: INTERACTIVE COFFEE DISH FORTUNE MUG */}
-          <div className="desk-card bg-amber-900/10 p-5 rounded-3xl border-2 border-amber-900/20 shadow-xl relative w-full" style={{ '--hover-rot': '1deg' } as any}>
-            {/* Coffee stain ring behind */}
-            <div className="absolute top-4 left-4 w-24 h-24 rounded-full border-4 border-amber-900/10 pointer-events-none"></div>
-            
-            <div className="flex justify-between items-center mb-3 text-amber-300">
-              <span className="font-bold text-stone-200 text-xs tracking-wider uppercase font-mono">Isola del Caffè ☕</span>
-              <span className="text-[10px] font-mono text-amber-400/90 font-bold">CARICHE: {coffeeSips}/3</span>
-            </div>
-
-            <div className="flex justify-center items-center my-4 relative">
-              {/* Cup container click to sip */}
-              <button 
-                onClick={sipCoffee} 
-                className="w-20 h-20 bg-stone-890 hover:bg-stone-840 rounded-full border-4 border-amber-700 flex flex-col items-center justify-center transition-all active:scale-95 cursor-pointer relative shadow-lg"
-              >
-                <span className="text-3xl filter drop-shadow">☕</span>
-                <div className="absolute top-1 rotate-12 flex space-x-1">
-                  <span className="steam-smoke block w-0.5 h-3 bg-white/40 rounded"></span>
-                  <span className="steam-smoke block w-0.5 h-4 bg-white/40 rounded delay-75"></span>
-                  <span className="steam-smoke block w-0.5 h-3 bg-white/40 rounded delay-150"></span>
-                </div>
-              </button>
-            </div>
-
-            <div className="bg-stone-900/60 rounded-xl p-3 border border-amber-900/15 text-center min-h-[60px] flex items-center justify-center mb-3 select-none">
-              <p className="text-[10px] font-sans italic text-stone-300 leading-normal">
-                {coffeeQuote}
-              </p>
-            </div>
-
-            {coffeeSips === 0 && (
-              <button 
-                onClick={refillCoffee}
-                className="w-full bg-amber-800 hover:bg-amber-700 text-white rounded-lg text-xs font-bold py-1 font-mono uppercase tracking-widest"
-              >
-                Riempi tazza 🔄
-              </button>
-            )}
-          </div>
-
-        </div>
+        
       </main>
     </div>
   );
