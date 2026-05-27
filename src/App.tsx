@@ -2155,22 +2155,22 @@ export default function App() {
                 </li>
                 <li>
                   <a 
-                    href="https://arty-scrapbook.vercel.app/" 
+                    href="https://polyglot-pix.netlify.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(820, 'sine', 0.05)}
                   >
-                    Arty Scrapbook
+                    Polyglot pix
                   </a>
                 </li>
                 <li>
                   <a 
-                    href="https://scrapbook-magic.vercel.app/" 
+                    href="https://calligraphy-font-art-editor.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(840, 'sine', 0.05)}
                   >
-                    Scrapbook magic
+                    Calligraphy Font
                   </a>
                 </li>
                 <li>
