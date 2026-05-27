@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake Arcade Retro</title>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            overflow: hidden; 
+        }
+
+        .ui-panel {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            box-sizing: border-box;
+            font-size: 14px;
+            height: 60px;
+            max-width: 800px;
+        }
+
+        #game-container {
+            position: relative;
+            border: 4px solid #334155;
+            background-color: #020617;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            touch-action: none;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        #overlay-title {
+            font-size: 24px;
+            color: #22c55e;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        #overlay-title.game-over { color: #ef4444 !important; }
+        
+        #overlay-msg {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+            padding: 0 16px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .btn-start {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: #22c55e;
+            border: none;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui-panel">
+        <div>SCORE: <span id="score">0</span></div>
+        <div>BEST: <span id="high-score">0</span></div>
+    </div>
+
+    <div id="game-container">
+        <canvas id="snakeCanvas"></canvas>
+        <div id="overlay">
+            <h1 id="overlay-title">SNAKE RETRO</h1>
+            <p id="overlay-msg">TRASCINA IL DITO (SWIPE)<br>PER MUOVERTI</p>
+            <button id="start-btn" class="btn-start">GIOCA</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('snakeCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const highScoreEl = document.getElementById('high-score');
+        const overlay = document.getElementById('overlay');
+        const startBtn = document.getElementById('start-btn');
+        const overlayTitle = document.getElementById('overlay-title');
+        const overlayMsg = document.getElementById('overlay-msg');
+
+        let gridSize, tileCountX, tileCountY;
+        let snake = [];
+        let food = { x: 5, y: 5 };
+        let dx = 0; let dy = 0;
+        let nextDx = 0; let nextDy = 0;
+        let score = 0;
+        let highScore = localStorage.getItem('snakeHighScore') || 0;
+        let gameLoop;
+        let speed = 150;
+
+        function setupCanvas() {
+            const padding = 16;
+            const uiHeight = 60;
+            
+            let w = window.innerWidth - padding;
+            let h = window.innerHeight - uiHeight - padding;
+            
+            if (window.innerWidth > 800) {
+                w = Math.min(w, 600);
+                h = Math.min(h, 600);
+            }
+            
+            gridSize = 20; 
+            
+            canvas.width = Math.floor(w / gridSize) * gridSize;
+            canvas.height = Math.floor(h / gridSize) * gridSize;
+            
+            tileCountX = canvas.width / gridSize;
+            tileCountY = canvas.height / gridSize;
+            
+            highScoreEl.innerText = highScore;
+        }
+
+        function initGame() {
+            const startX = Math.floor(tileCountX / 2);
+            const startY = Math.floor(tileCountY / 2);
+            snake = [
+                { x: startX, y: startY },
+                { x: startX, y: startY + 1 },
+                { x: startX, y: startY + 2 }
+            ];
+            dx = 0; dy = -1;
+            nextDx = 0; nextDy = -1;
+            score = 0; speed = 150;
+            scoreEl.innerText = score;
+            spawnFood();
+            overlay.style.display = 'none';
+            if (gameLoop) clearInterval(gameLoop);
+            gameLoop = setInterval(draw, speed);
+        }
+
+        function spawnFood() {
+            food.x = Math.floor(Math.random() * tileCountX);
+            food.y = Math.floor(Math.random() * tileCountY);
+            snake.forEach(part => {
+                if (part.x === food.x && part.y === food.y) spawnFood();
+            });
+        }
+
+        function draw() {
+            dx = nextDx; dy = nextDy;
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+            if (head.x < 0 || head.x >= tileCountX || head.y < 0 || head.y >= tileCountY) return gameOver();
+            
+            for (let i = 0; i < snake.length; i++) {
+                if (snake[i].x === head.x && snake[i].y === head.y) return gameOver();
+            }
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                score += 10;
+                scoreEl.innerText = score;
+                if (score > highScore) {
+                    highScore = score;
+                    highScoreEl.innerText = highScore;
+                    localStorage.setItem('snakeHighScore', highScore);
+                }
+                spawnFood();
+                if (speed > 70) {
+                    clearInterval(gameLoop);
+                    speed -= 2;
+                    gameLoop = setInterval(draw, speed);
+                }
+            } else {
+                snake.pop();
+            }
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ef4444';
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#ef4444';
+            ctx.fillRect(food.x * gridSize + 2, food.y * gridSize + 2, gridSize - 4, gridSize - 4);
+            ctx.shadowBlur = 0;
+
+            snake.forEach((part, index) => {
+                ctx.fillStyle = index === 0 ? '#22c55e' : '#166534';
+                ctx.fillRect(part.x * gridSize + 1, part.y * gridSize + 1, gridSize - 2, gridSize - 2);
+            });
+        }
+
+        function gameOver() {
+            clearInterval(gameLoop);
+            overlayTitle.innerText = "GAME OVER";
+            overlayTitle.classList.add("game-over");
+            overlayMsg.innerHTML = `PUNTEGGIO: ${score}`;
+            startBtn.innerText = "RIPROVA";
+            overlay.style.display = 'flex';
+        }
+
+        window.addEventListener('keydown', e => {
+            if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'w', 'a', 's', 'd'].includes(e.key)) {
+                if(overlay.style.display === 'none') e.preventDefault();
+            }
+            switch (e.key.toLowerCase()) {
+                case 'arrowup': case 'w': if (dy !== 1) { nextDx = 0; nextDy = -1; } break;
+                case 'arrowdown': case 's': if (dy !== -1) { nextDx = 0; nextDy = 1; } break;
+                case 'arrowleft': case 'a': if (dx !== 1) { nextDx = -1; nextDy = 0; } break;
+                case 'arrowright': case 'd': if (dx !== -1) { nextDx = 1; nextDy = 0; } break;
+            }
+        }, { passive: false });
+
+        // --- SISTEMA SWIPE ANTI-TREMOLIO ---
+        let touchStartX = null; 
+        let touchStartY = null;
+        let lastGesture = null; // Ricorda l'ultima direzione eseguita
+
+        document.addEventListener('touchstart', e => {
+            if(e.target.tagName.toLowerCase() === 'button') return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            lastGesture = null; // Resetta la memoria al nuovo tocco
+        }, { passive: false });
+
+        document.addEventListener('touchmove', e => {
+            if (overlay.style.display === 'none' && e.target === canvas) e.preventDefault();
+            if (!touchStartX || !touchStartY) return;
+
+            const touchMoveX = e.touches[0].clientX;
+            const touchMoveY = e.touches[0].clientY;
+            const deltaX = touchMoveX - touchStartX;
+            const deltaY = touchMoveY - touchStartY;
+
+            // Soglia aumentata a 30px: ignora movimenti troppo leggeri
+            if (Math.abs(deltaX) > 30 || Math.abs(deltaY) > 30) {
+                let currentGesture = null;
+                
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    currentGesture = deltaX > 0 ? 'RIGHT' : 'LEFT';
+                } else {
+                    currentGesture = deltaY > 0 ? 'DOWN' : 'UP';
+                }
+
+                // Evita di inviare comandi doppi e previene gli zig-zag!
+                if (currentGesture !== lastGesture) {
+                    if (currentGesture === 'RIGHT' && dx !== -1) { nextDx = 1; nextDy = 0; }
+                    else if (currentGesture === 'LEFT' && dx !== 1) { nextDx = -1; nextDy = 0; }
+                    else if (currentGesture === 'DOWN' && dy !== -1) { nextDx = 0; nextDy = 1; }
+                    else if (currentGesture === 'UP' && dy !== 1) { nextDx = 0; nextDy = -1; }
+                    
+                    lastGesture = currentGesture; // Salva la direzione presa
+                    
+                    // Ricalcola il centro solo quando fai una vera e propria curva
+                    touchStartX = touchMoveX; 
+                    touchStartY = touchMoveY;
+                }
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', e => { 
+            touchStartX = null; 
+            touchStartY = null; 
+        }, { passive: false });
+
+        startBtn.addEventListener('click', initGame);
+        window.addEventListener('load', setupCanvas);
+        window.addEventListener('resize', setupCanvas);
+    </script>
+</body>
+</html>

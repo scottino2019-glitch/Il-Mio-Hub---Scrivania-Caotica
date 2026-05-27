@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor PDF Professionale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kablammo&family=Monsieur+La+Doulaise&family=My+Soul&family=Nabla&family=Special+Elite&family=Splash&display=swap" rel="stylesheet">
+    <style>
+        /* Struttura fissa per garantire che il menu non copra il foglio */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f3f4f6; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
+        
+        .toolbar {
+            flex-shrink: 0; 
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .toolbar-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .editor-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+            overflow-y: auto;
+            height: calc(100vh - 100px);
+            scroll-behavior: smooth;
+
+        }
+
+        /* Simulazione Pagine A4 (Tuo CSS Originale) */
+        #paper {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            background: white;
+            background-image: linear-gradient(to bottom, transparent 296mm, #e5e7eb 296mm, #e5e7eb 297mm);
+            background-size: 100% 297mm;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            outline: none;
+            cursor: text;
+            position: relative;
+        }
+
+        /* Tipografia (Tua Originale) */
+        #paper h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; }
+        #paper h2 { font-size: 2rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        #paper h3 { font-size: 1.5rem; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+        #paper p { margin-bottom: 1rem; line-height: 1.6; }
+        #paper hr { border: 0; border-top: 1px solid #d1d5db; margin: 1.5rem 0; height: 1px; display: block; }
+        .custom-box { border: 2px solid #3b82f6; background: #eff6ff; padding: 15px; border-radius: 6px; margin: 15px 0; color: #1e40af; }
+        #paper ul { list-style-type: disc !important; margin-left: 1.5rem !important; margin-bottom: 1rem !important; }
+        #paper ol { list-style-type: decimal !important; margin-left: 1.5rem !important; margin-bottom: 1rem !important; }
+        #paper li { display: list-item !important; margin-bottom: 0.25rem; }
+        #paper table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        #paper table, #paper th, #paper td { border: 1px solid #d1d5db; padding: 8px; text-align: left; min-width: 50px; }
+        .red-underline { border-bottom: 2px solid #ef4444; padding-bottom: 1px; display: inline-block; text-decoration: none !important; }
+        .blue-underline { border-bottom: 2px solid #3b82f6; padding-bottom: 1px; display: inline-block; text-decoration: none !important; }
+
+        /* Stili Gruppi Toolbar */
+        .t-group { display: flex; background: #f3f4f6; padding: 3px; border-radius: 8px; gap: 2px; align-items: center; }
+        .t-btn { padding: 4px 8px; font-size: 12px; font-weight: 600; border-radius: 5px; transition: all 0.2s; color: #4b5563; border: 1px solid transparent; cursor: pointer; background: transparent; white-space: nowrap; }
+        .t-btn:hover { background: white; border-color: #d1d5db; }
+        .t-input { width: 40px; text-align: center; font-size: 11px; border: 1px solid #d1d5db; border-radius: 4px; padding: 2px; }
+        .color-picker { width: 28px; height: 28px; border: 2px solid #d1d5db; border-radius: 50%; cursor: pointer; padding: 0; overflow: hidden; background: none; }
+
+        @media print { 
+            .no-print { display: none !important; } 
+            #paper { box-shadow: none; margin: 0; background-image: none; padding: 0; } 
+        }
+    </style>
+</head>
+<body>
+
+    <header class="toolbar no-print">
+        <!-- RIGA 1: Azioni Principali e Formattazione Base -->
+        <div class="toolbar-row">
+            <button onmousedown="event.preventDefault()" onclick="newDoc()" class="t-btn text-red-600 font-bold">Nuovo</button>
+           <button onmousedown="event.preventDefault()" onclick="pdf()" class="t-btn bg-blue-600 text-white ml-auto px-4">Esporta PDF</button>
+            <div class="t-group">
+                <button title="Titolo 1" onmousedown="event.preventDefault()" onclick="exec('formatBlock', 'H1')" class="t-btn">H1</button>
+                <button title="Titolo 2" onmousedown="event.preventDefault()" onclick="exec('formatBlock', 'H2')" class="t-btn">H2</button>
+                <button title="Titolo 3" onmousedown="event.preventDefault()" onclick="exec('formatBlock', 'H3')" class="t-btn">H3</button>
+                <button title="Paragrafo" onmousedown="event.preventDefault()" onclick="exec('formatBlock', 'P')" class="t-btn">P</button>
+            </div>
+            <div class="t-group">
+                <button title="Grassetto" onmousedown="event.preventDefault()" onclick="exec('bold')" class="t-btn font-bold">B</button>
+                <button title="Corsivo" onmousedown="event.preventDefault()" onclick="exec('italic')" class="t-btn italic">I</button>
+                <button title="Sottolinea Rosso" onmousedown="event.preventDefault()" onclick="applyCustomUnderline('red-underline')" class="t-btn text-red-500 border-b-2 border-red-500">A</button>
+                <button title="Sottolinea Blu" onmousedown="event.preventDefault()" onclick="applyCustomUnderline('blue-underline')" class="t-btn text-blue-500 border-b-2 border-blue-500">A</button>
+<button title="Inserisci Linea" onmousedown="event.preventDefault()" onclick="exec('insertHorizontalRule')" class="t-btn">— Linea</button>
+           
+            
+                <button title="Allinea a Sinistra" onmousedown="event.preventDefault()" onclick="exec('justifyLeft')" class="t-btn">S</button>
+                <button title="Allinea al Centro" onmousedown="event.preventDefault()" onclick="exec('justifyCenter')" class="t-btn">C</button>
+                <button title="Allinea a Destra" onmousedown="event.preventDefault()" onclick="exec('justifyRight')" class="t-btn">D</button>
+                <button title="Giustificato" onmousedown="event.preventDefault()" onclick="exec('justifyFull')" class="t-btn">G</button>
+<label class="text-[10px] px-1 text-gray-500 uppercase font-bold"></label>
+                <input type="color" id="fontColor" class="color-picker" title="Colore Font" oninput="exec('foreColor', this.value)">
+            </div>
+ 
+        </div>
+
+        <!-- RIGA 2: Font e Dimensioni -->
+        <div class="toolbar-row">
+            <div class="t-group">
+                <button title="Inter" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Inter')" class="t-btn">Inter</button>
+                <button title="Libre Baskerville" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Libre Baskerville')" class="t-btn">Baskerville</button>
+                <button title="My Soul" onmousedown="event.preventDefault()" onclick="exec('fontName', 'My Soul')" class="t-btn">My Soul</button>
+                <button title="Special Elite" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Special Elite')" class="t-btn">Special Elite</button>
+                <button title="Splash" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Splash')" class="t-btn">Splash</button>
+</div>
+<div class="t-group">
+                <button title="Monsieur La Doulaise" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Monsieur La Doulaise')" class="t-btn">Monsieur</button>
+                <button title="Nabla" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Nabla')" class="t-btn">Nabla</button>
+                <button title="Kablammo" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Kablammo')" class="t-btn">Kablammo</button>
+            
+            
+                <button title="Piccolo" onmousedown="event.preventDefault()" onclick="exec('fontSize', '1')" class="t-btn">P</button>
+                <button title="Normale" onmousedown="event.preventDefault()" onclick="exec('fontSize', '3')" class="t-btn">N</button>
+                <button title="Grande" onmousedown="event.preventDefault()" onclick="exec('fontSize', '5')" class="t-btn">G</button>
+                <button title="Gigante" onmousedown="event.preventDefault()" onclick="exec('fontSize', '7')" class="t-btn">Gi</button>
+            </div>
+        </div>
+
+        <!-- RIGA 3: Elementi e Colore -->
+        <div class="toolbar-row">
+            <div class="t-group">
+                <button title="Lista Puntata" onmousedown="event.preventDefault()" onclick="exec('insertUnorderedList')" class="t-btn">• Elenco</button>
+                <button title="Lista Ordinata" onmousedown="event.preventDefault()" onclick="exec('insertOrderedList')" class="t-btn">1. Elenco</button>
+                <button title="Box Evidenziato" onmousedown="event.preventDefault()" onclick="insBox()" class="t-btn bg-blue-100 text-blue-700">Box</button>
+                
+         
+                <button title="Crea Tabella" onmousedown="event.preventDefault()" onclick="insT()" class="t-btn text-blue-600 font-bold">Tabella</button>
+                <input type="number" id="r" value="2" class="t-input ml-1" title="Righe">
+                <span class="text-[10px] text-gray-400">x</span>
+                <input type="number" id="c" value="2" class="t-input" title="Colonne">
+            
+                
+            </div>
+        </div>
+    </header>
+
+    <div class="editor-container">
+        <div id="paper" contenteditable="true">
+            <h1>Documento Aggiornato</h1>
+            <p>Il menu ora è organizzato in righe fisse in alto. Tutte le funzioni del tuo file originale sono presenti e il foglio scorre correttamente.</p>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-4 right-4 bg-gray-900 text-white text-xs px-4 py-2 rounded shadow-lg opacity-0 transition-opacity pointer-events-none"></div>
+
+    <script>
+        const paper = document.getElementById('paper');
+        const toast = document.getElementById('toast');
+
+        // Funzioni Originali (Intatte)
+        function exec(command, value = null) {
+            paper.focus();
+            document.execCommand(command, false, value);
+        }
+
+        function showToast(msg) {
+            toast.innerText = msg;
+            toast.style.opacity = '1';
+            setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+        }
+
+        function newDoc() {
+            if (confirm("Vuoi svuotare il foglio?")) {
+                paper.innerHTML = "<h1>Nuovo Documento</h1><p>Scrivi qui...</p>";
+                showToast("Foglio svuotato");
+            }
+        }
+
+        function insBox() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount) return;
+            const range = sel.getRangeAt(0);
+            const div = document.createElement('div');
+            div.className = 'custom-box';
+            div.contentEditable = 'true';
+            div.innerHTML = sel.toString() || 'Testo del box...';
+            range.deleteContents();
+            range.insertNode(div);
+            const br = document.createElement('div');
+            br.innerHTML = '<br>';
+            div.after(br);
+            paper.focus();
+        }
+
+        function applyCustomUnderline(className) {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return;
+            const range = sel.getRangeAt(0);
+            const span = document.createElement('span');
+            span.className = className;
+            try {
+                span.appendChild(range.extractContents());
+                range.insertNode(span);
+                paper.focus();
+            } catch (e) { console.error(e); }
+        }
+
+        function insT() {
+            const rows = document.getElementById('r').value || 2;
+            const cols = document.getElementById('c').value || 2;
+            let html = '<table>';
+            for (let i = 0; i < rows; i++) {
+                html += '<tr>';
+                for (let j = 0; j < cols; j++) { html += '<td>Cella</td>'; }
+                html += '</tr>';
+            }
+            html += '</table><p><br></p>';
+            const sel = window.getSelection();
+            if (sel.rangeCount) {
+                const range = sel.getRangeAt(0);
+                const frag = range.createContextualFragment(html);
+                range.insertNode(frag);
+                paper.focus();
+            }
+        }
+
+        function pdf() {
+            showToast("Generazione PDF...");
+            const element = document.getElementById('paper');
+            const opt = {
+                margin: 10,
+                filename: 'documento.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save().then(() => {
+                showToast("PDF Scaricato!");
+            });
+        }
+
+        window.onload = () => { paper.focus(); };
+    </script>
+</body>
+</html>

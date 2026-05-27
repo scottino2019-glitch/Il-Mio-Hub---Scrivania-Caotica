@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo Minato - Windows Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #008080; /* Classico verde acqua Windows 95 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .win-border {
+            border: 3px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            background-color: #c0c0c0;
+            padding: 10px;
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            border: 3px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            user-select: none;
+        }
+        .cell.revealed {
+            border: 1px solid #808080;
+            background-color: #bdbdbd;
+        }
+        .cell.mine {
+            background-color: red;
+        }
+        .status-bar {
+            border: 3px inset #ffffff;
+            background-color: #c0c0c0;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .lcd {
+            background-color: black;
+            color: red;
+            padding: 2px 5px;
+            font-size: 20px;
+            min-width: 50px;
+            text-align: right;
+        }
+        .face {
+            width: 35px;
+            height: 35px;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="win-border">
+    <div class="status-bar">
+        <div id="mine-count" class="lcd">010</div>
+        <div id="restart-btn" class="face">🙂</div>
+        <div id="timer" class="lcd">000</div>
+    </div>
+    
+    <div id="grid" class="grid grid-cols-10 gap-0 border-2 border-gray-600">
+        <!-- Celle generate da JS -->
+    </div>
+</div>
+
+<script>
+    const ROWS = 10;
+    const COLS = 10;
+    const MINES_COUNT = 10;
+    
+    let gridData = [];
+    let revealedCount = 0;
+    let gameOver = false;
+    let timerInterval = null;
+    let seconds = 0;
+
+    const gridElement = document.getElementById('grid');
+    const mineCountDisplay = document.getElementById('mine-count');
+    const timerDisplay = document.getElementById('timer');
+    const faceBtn = document.getElementById('restart-btn');
+
+    function initGame() {
+        gridData = [];
+        revealedCount = 0;
+        gameOver = false;
+        seconds = 0;
+        clearInterval(timerInterval);
+        timerDisplay.textContent = "000";
+        faceBtn.textContent = "🙂";
+        mineCountDisplay.textContent = "010";
+        gridElement.innerHTML = '';
+
+        // Crea griglia vuota
+        for (let r = 0; r < ROWS; r++) {
+            gridData[r] = [];
+            for (let c = 0; c < COLS; c++) {
+                gridData[r][c] = {
+                    isMine: false,
+                    revealed: false,
+                    flagged: false,
+                    neighborMines: 0,
+                    r, c
+                };
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.r = r;
+                cell.dataset.c = c;
+                cell.addEventListener('click', () => handleCellClick(r, c));
+                cell.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    handleRightClick(r, c);
+                });
+                gridElement.appendChild(cell);
+            }
+        }
+
+        // Posiziona mine
+        let placedMines = 0;
+        while (placedMines < MINES_COUNT) {
+            let r = Math.floor(Math.random() * ROWS);
+            let c = Math.floor(Math.random() * COLS);
+            if (!gridData[r][c].isMine) {
+                gridData[r][c].isMine = true;
+                placedMines++;
+            }
+        }
+
+        // Calcola vicini
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                if (!gridData[r][c].isMine) {
+                    let count = 0;
+                    for (let dr = -1; dr <= 1; dr++) {
+                        for (let dc = -1; dc <= 1; dc++) {
+                            let nr = r + dr, nc = c + dc;
+                            if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS && gridData[nr][nc].isMine) {
+                                count++;
+                            }
+                        }
+                    }
+                    gridData[r][c].neighborMines = count;
+                }
+            }
+        }
+    }
+
+    function startTimer() {
+        if (timerInterval) return;
+        timerInterval = setInterval(() => {
+            seconds++;
+            timerDisplay.textContent = seconds.toString().padStart(3, '0');
+        }, 1000);
+    }
+
+    function handleCellClick(r, c) {
+        if (gameOver || gridData[r][c].revealed || gridData[r][c].flagged) return;
+        
+        startTimer();
+        const cellData = gridData[r][c];
+        const cellEl = gridElement.children[r * COLS + c];
+
+        if (cellData.isMine) {
+            endGame(false);
+            return;
+        }
+
+        revealCell(r, c);
+
+        if (revealedCount === (ROWS * COLS) - MINES_COUNT) {
+            endGame(true);
+        }
+    }
+
+    function handleRightClick(r, c) {
+        if (gameOver || gridData[r][c].revealed) return;
+        const cellData = gridData[r][c];
+        const cellEl = gridElement.children[r * COLS + c];
+        
+        cellData.flagged = !cellData.flagged;
+        cellEl.textContent = cellData.flagged ? '🚩' : '';
+    }
+
+    function revealCell(r, c) {
+        const cellData = gridData[r][c];
+        if (cellData.revealed) return;
+
+        cellData.revealed = true;
+        revealedCount++;
+        const cellEl = gridElement.children[r * COLS + c];
+        cellEl.classList.add('revealed');
+        
+        if (cellData.neighborMines > 0) {
+            cellEl.textContent = cellData.neighborMines;
+            const colors = ['', 'blue', 'green', 'red', 'darkblue', 'maroon', 'cyan', 'black', 'gray'];
+            cellEl.style.color = colors[cellData.neighborMines];
+        } else {
+            // Se zero, rivela ricorsivamente i vicini
+            for (let dr = -1; dr <= 1; dr++) {
+                for (let dc = -1; dc <= 1; dc++) {
+                    let nr = r + dr, nc = c + dc;
+                    if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) {
+                        revealCell(nr, nc);
+                    }
+                }
+            }
+        }
+    }
+
+    function endGame(won) {
+        gameOver = true;
+        clearInterval(timerInterval);
+        faceBtn.textContent = won ? "😎" : "😵";
+
+        // Mostra tutte le mine
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                if (gridData[r][c].isMine) {
+                    const cellEl = gridElement.children[r * COLS + c];
+                    cellEl.textContent = '💣';
+                    if (!won) cellEl.classList.add('mine');
+                }
+            }
+        }
+        
+        if (won) {
+            setTimeout(() => alert("Hai vinto!"), 100);
+        }
+    }
+
+    faceBtn.addEventListener('click', initGame);
+    initGame();
+</script>
+
+</body>
+</html>
+
+

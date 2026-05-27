@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy Sculptor: Dettagli e Curve</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg: #030303;
+            --panel: #0a0a0c;
+            --accent: #3b82f6;
+            --border: #1a1a1e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #d1d5db;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .viewport {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #111 0%, #030303 100%);
+            position: relative;
+        }
+
+        .canvas {
+            position: relative;
+            width: 600px;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar {
+            width: 500px;
+            background: var(--panel);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            z-index: 50;
+        }
+
+        .editor {
+            font-family: 'JetBrains Mono', monospace;
+            background: #050505;
+            color: #93c5fd;
+            padding: 1.5rem;
+            font-size: 13px;
+            line-height: 1.6;
+            flex: 1;
+            resize: none;
+            outline: none;
+            border: none;
+            scrollbar-width: thin;
+        }
+
+        .header {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .part { position: absolute; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        /* Struttura interna degli occhi */
+        .pupil {
+            position: absolute;
+            background: #000;
+            border-radius: 50%;
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+        }
+        .pupil::after {
+            content: '';
+            position: absolute;
+            background: white;
+            width: 30%;
+            height: 30%;
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+        }
+
+        .badge {
+            font-size: 9px;
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: var(--accent);
+            color: white;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="viewport">
+        <div class="canvas" id="stage">
+            <!-- Layers -->
+            <div class="part tail"></div>
+            <div class="part leg leg-l"></div>
+            <div class="part leg leg-r"></div>
+            <div class="part arm arm-l"></div>
+            <div class="part arm arm-r"></div>
+            <div class="part body"></div>
+            
+            <div class="part head">
+                <div class="part ear ear-l"></div>
+                <div class="part ear ear-r"></div>
+                <div class="part eyebrow brow-l"></div>
+                <div class="part eyebrow brow-r"></div>
+                <div class="part eye eye-l"><div class="pupil"></div></div>
+                <div class="part eye eye-r"><div class="pupil"></div></div>
+                <div class="part snout">
+                    <div class="part nose"></div>
+                    <div class="part mouth"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="sidebar">
+        <div class="header">
+            <h1 class="text-xl font-black text-white">Anatomy Sculptor <span class="text-blue-500">Pro</span></h1>
+            <p class="text-[10px] text-gray-500 mt-1 uppercase">Modellazione organica completa</p>
+        </div>
+
+        <textarea id="css-editor" class="editor" spellcheck="false"></textarea>
+
+        <div class="p-6 border-t border-border space-y-3">
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="loadBlueprint('organic')" class="bg-zinc-800 hover:bg-zinc-700 p-3 rounded text-[10px] font-bold uppercase tracking-tighter">Personaggio Completo</button>
+                <button onclick="loadBlueprint('exaggerated')" class="bg-zinc-800 hover:bg-zinc-700 p-3 rounded text-[10px] font-bold uppercase tracking-tighter">Curve Esasperate</button>
+            </div>
+            <button onclick="copyToClipboard()" class="w-full bg-blue-600 hover:bg-blue-500 text-white p-3 rounded font-black text-xs uppercase">Esporta CSS</button>
+        </div>
+    </aside>
+
+    <style id="live-styles"></style>
+
+    <script>
+        const editor = document.getElementById('css-editor');
+        const styleTag = document.getElementById('live-styles');
+
+        const blueprints = {
+            organic: `/* ANATOMIA COMPLETA CON DETTAGLI E CURVATURE */
+
+:root {
+  --skin: #fecaca; /* Rosa carne chiaro */
+  --skin-dark: #f87171;
+  --detail: #450a0a;
+}
+
+/* Corpo: Schiena curva vs Addome morbido */
+.body {
+  width: 170px;
+  height: 230px;
+  background: var(--skin-dark);
+  top: 240px;
+  border-radius: 55% 45% 45% 55% / 65% 60% 40% 35%;
+  box-shadow: inset -20px 0 40px rgba(0,0,0,0.1);
+}
+
+/* Testa: Forma a "pera" rovesciata (guance) */
+.head {
+  width: 140px;
+  height: 150px;
+  background: var(--skin);
+  top: 110px;
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  z-index: 10;
+}
+
+/* Orecchie: Curvatura puntata */
+.ear {
+  width: 45px;
+  height: 60px;
+  background: var(--skin-dark);
+  top: -20px;
+  border-radius: 80% 20% 50% 50% / 100% 0% 100% 0%;
+}
+.ear-l { left: 10px; transform: rotate(-20deg); }
+.ear-r { right: 10px; transform: rotate(20deg); scaleX(-1); }
+
+/* Occhi e Sopracciglia */
+.eye {
+  width: 35px;
+  height: 40px;
+  background: #fff;
+  top: 45px;
+  border-radius: 50% 50% 40% 40%;
+  border: 2px solid var(--detail);
+}
+.eye-l { left: 25px; transform: rotate(-5deg); }
+.eye-r { right: 25px; transform: rotate(5deg); }
+
+.eyebrow {
+  width: 40px;
+  height: 15px;
+  border-top: 5px solid var(--detail);
+  border-radius: 50% 50% 0 0;
+  top: 25px;
+}
+.brow-l { left: 20px; transform: rotate(-15deg); }
+.brow-r { right: 20px; transform: rotate(15deg); }
+
+/* Muso: Naso e Bocca */
+.snout {
+  width: 80px;
+  height: 60px;
+  background: rgba(0,0,0,0.05);
+  bottom: 10px;
+  left: 30px;
+  border-radius: 50%;
+}
+
+.nose {
+  width: 20px;
+  height: 12px;
+  background: var(--detail);
+  top: 15px;
+  left: 30px;
+  border-radius: 40% 40% 60% 60%;
+}
+
+.mouth {
+  width: 30px;
+  height: 15px;
+  border-bottom: 3px solid var(--detail);
+  border-radius: 0 0 50% 50%;
+  top: 30px;
+  left: 25px;
+}
+
+/* Arti Sinuosi */
+.arm {
+  width: 30px;
+  height: 150px;
+  background: var(--skin);
+  border-radius: 50% 50% 20px 20px / 10% 10% 90% 90%;
+  top: 250px;
+}
+.arm-l { left: 130px; transform: rotate(25deg); }
+.arm-r { right: 130px; transform: rotate(-25deg); }
+
+.leg {
+  width: 45px;
+  height: 130px;
+  background: var(--skin-dark);
+  border-radius: 40% 40% 50% 50%;
+  top: 440px;
+}
+.leg-l { left: 175px; transform: rotate(5deg); }
+.leg-r { right: 175px; transform: rotate(-5deg); }
+
+/* Coda Curva */
+.tail {
+  width: 140px;
+  height: 100px;
+  border-right: 15px solid var(--skin-dark);
+  border-radius: 50%;
+  top: 360px;
+  left: 90px;
+  transform: rotate(-40deg);
+  filter: drop-shadow(-5px 5px 2px rgba(0,0,0,0.1));
+}`,
+            exaggerated: `/* CURVE STILIZZATE ED ENFATICHE */
+.body {
+  width: 180px;
+  height: 180px;
+  border-radius: 60% 40% 70% 30% / 60% 30% 70% 40%;
+  background: #7c3aed;
+  top: 260px;
+}
+.head {
+  width: 150px; height: 100px;
+  border-radius: 100px 100px 50px 50px;
+  background: #a78bfa;
+  top: 150px;
+}
+.tail {
+  width: 200px; height: 50px;
+  background: #7c3aed;
+  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  top: 350px; left: 50px;
+  transform: rotate(-20deg);
+}`
+        };
+
+        function update() { styleTag.textContent = editor.value; }
+        function loadBlueprint(key) { 
+            editor.value = blueprints[key]; 
+            update(); 
+        }
+
+        async function copyToClipboard() {
+            try {
+                await navigator.clipboard.writeText(editor.value);
+                const btn = event.target;
+                btn.innerText = "COPIATO!";
+                setTimeout(() => btn.innerText = "Esporta CSS", 2000);
+            } catch (err) {}
+        }
+
+        editor.addEventListener('input', update);
+        window.onload = () => loadBlueprint('organic');
+    </script>
+</body>
+</html>
