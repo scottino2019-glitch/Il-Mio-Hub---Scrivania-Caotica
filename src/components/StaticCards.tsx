@@ -625,6 +625,9 @@ export const PortalCardsCard: React.FC = () => {
                 <li className="hover:translate-x-1.5 transition-transform duration-200">
                   <a href="https://dialogue-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold">💬 Dialogue Creator</a>
                 </li>
+                 <li className="hover:translate-x-1.5 transition-transform duration-200">
+                  <a href="https://polyglot-pix.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold"> 🃏 Poliglot pix  </a>
+                </li>
               </ul>
             </div>
 
