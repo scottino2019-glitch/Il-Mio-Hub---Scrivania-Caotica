@@ -381,13 +381,8 @@ export const VsCodeCard: React.FC = () => {
             <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
               "Div Generator"
             </a>
-    https://parallax-studio-sage.vercel.app/      </li>
-<li className="flex items-center gap-1.5 text-stone-300">
-            <span className="text-purple-400">import</span>
-            <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-              "Div Generator"
-            </a>
           </li>
+
 
 <li className="flex items-center gap-1.5 text-stone-300">
             <span className="text-purple-400">import</span>
