@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svolgi Esercizi PDF Lingua</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pdf-container {
+            max-height: 80vh;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 10px;
+            width: 100%;
+        }
+        .pdf-canvas {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+        }
+        .answer-overlay {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #3b82f6;
+            border-radius: 4px;
+            padding: 2px;
+            width: 120px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-size: 11px;
+            z-index: 10;
+            transform: translate(-50%, -50%);
+        }
+        .answer-input {
+            border: 1px solid #d1d5db;
+            background: white;
+            outline: none;
+            width: 100%;
+            font-size: 10px;
+            padding: 1px 3px;
+            border-radius: 2px;
+            height: 18px;
+            box-sizing: border-box;
+        }
+        .answer-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+        }
+        .completed-answer {
+            background-color: #dcfce7;
+            border-color: #16a34a;
+        }
+        .answer-item {
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        .answer-item.completed {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+        .canvas-container {
+            position: relative;
+            display: inline-block;
+            line-height: 0;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-6">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">📝 Svolgi Esercizi PDF Lingua</h1>
+            
+            <!-- File Upload -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Carica PDF con esercizi:</label>
+                <input type="file" id="pdfFile" accept=".pdf" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            </div>
+
+            <!-- PDF Navigation -->
+            <div class="bg-gray-50 rounded-lg p-4 mb-4" id="pdfControls" style="display: none;">
+                <!-- First row: Navigation buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-3">
+                    <button id="prevPage" class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 text-sm">
+                        <span>←</span> Prec
+                    </button>
+                    <div class="bg-white px-3 py-2 rounded-lg border-2 border-blue-200">
+                        <span class="text-gray-700 font-bold">
+                            <span id="currentPage" class="text-blue-600">1</span> / <span id="totalPages">1</span>
+                        </span>
+                    </div>
+                    <button id="nextPage" class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 text-sm">
+                        Succ <span>→</span>
+                    </button>
+                </div>
+                
+                <!-- Second row: Go to page and zoom controls -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-lg border border-gray-300">
+                        <label class="text-xs text-gray-600 font-medium">Pagina:</label>
+                        <input type="number" id="pageInput" min="1" class="w-16 px-2 py-1 border border-gray-300 rounded text-center text-sm">
+                        <button id="goToPage" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs transition-colors">
+                            Vai
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="zoomOut" class="bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded text-xs">
+                            🔍-
+                        </button>
+                        <span id="zoomLevel" class="text-xs text-gray-600 font-medium min-w-12 text-center">100%</span>
+                        <button id="zoomIn" class="bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded text-xs">
+                            🔍+
+                        </button>
+                        <button id="fitWidth" class="bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded text-xs">
+                            📐
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-3">
+                <button id="addAnswer" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    ✏️ Aggiungi Risposta
+                </button>
+                <button id="saveProgress" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    💾 Salva Progresso
+                </button>
+                <button id="loadProgress" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    📂 Carica Progresso
+                </button>
+                <button id="deleteLastAnswer" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    ↶ Elimina Ultima Risposta
+                </button>
+                <button id="clearAllAnswers" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    🗑️ Elimina Tutte Risposte
+                </button>
+                <button id="deleteSave" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    🗂️ Elimina Salvataggio
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- PDF Viewer -->
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">📄 PDF Esercizi</h2>
+                <div id="pdfViewer" class="pdf-container border-2 border-gray-200 rounded-lg relative bg-gray-50 min-h-96 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Carica un PDF per iniziare a svolgere gli esercizi</p>
+                </div>
+            </div>
+
+            <!-- Answers Panel -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">✅ Le Tue Risposte</h2>
+                <div id="answersList" class="space-y-2 max-h-96 overflow-y-auto pr-2">
+                    <p class="text-gray-500 text-center">Nessuna risposta ancora</p>
+                </div>
+                
+                <!-- Save Management -->
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-700 mb-3">💾 Gestione Salvataggi</h3>
+                    <div class="mb-3">
+                        <input type="text" id="saveName" placeholder="Nome salvataggio..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <select id="savedFiles" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3">
+                        <option value="">Seleziona salvataggio...</option>
+                    </select>
+                    <div class="text-sm text-gray-600">
+                        <p>📊 Risposte totali: <span id="totalAnswers">0</span></p>
+                        <p>✅ Completate: <span id="completedAnswers">0</span></p>
+                        <p>📄 Pagina corrente: <span id="currentPageInfo">-</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class PDFExerciseApp {
+            constructor() {
+                this.answers = [];
+                this.currentPdf = null;
+                this.pdfDoc = null;
+                this.currentPageNum = 1;
+                this.totalPages = 0;
+                this.answerCounter = 0;
+                this.isAddingAnswer = false;
+                this.scale = 2.0;
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.loadSavedFilesList();
+                this.updateStats();
+            }
+
+            bindEvents() {
+                document.getElementById('pdfFile').addEventListener('change', (e) => this.loadPDF(e));
+                document.getElementById('addAnswer').addEventListener('click', () => this.toggleAddAnswer());
+                document.getElementById('saveProgress').addEventListener('click', () => this.saveProgress());
+                document.getElementById('loadProgress').addEventListener('click', () => this.loadProgress());
+                document.getElementById('deleteLastAnswer').addEventListener('click', () => this.deleteLastAnswer());
+                document.getElementById('clearAllAnswers').addEventListener('click', () => this.clearAllAnswers());
+                document.getElementById('deleteSave').addEventListener('click', () => this.deleteSave());
+                
+                // PDF Navigation
+                document.getElementById('prevPage').addEventListener('click', () => this.prevPage());
+                document.getElementById('nextPage').addEventListener('click', () => this.nextPage());
+                document.getElementById('goToPage').addEventListener('click', () => this.goToPage());
+                document.getElementById('pageInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.goToPage();
+                });
+                
+                // Zoom controls
+                document.getElementById('zoomIn').addEventListener('click', () => this.zoomIn());
+                document.getElementById('zoomOut').addEventListener('click', () => this.zoomOut());
+                document.getElementById('fitWidth').addEventListener('click', () => this.fitWidth());
+            }
+
+            async loadPDF(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const fileReader = new FileReader();
+                fileReader.onload = async (e) => {
+                    const typedarray = new Uint8Array(e.target.result);
+                    
+                    try {
+                        this.pdfDoc = await pdfjsLib.getDocument(typedarray).promise;
+                        this.totalPages = this.pdfDoc.numPages;
+                        this.currentPageNum = 1;
+                        
+                        document.getElementById('totalPages').textContent = this.totalPages;
+                        document.getElementById('pageInput').max = this.totalPages;
+                        document.getElementById('pdfControls').style.display = 'flex';
+                        
+                        await this.renderPage(this.currentPageNum);
+                        this.updateStats();
+                        
+                    } catch (error) {
+                        alert('Errore nel caricamento del PDF: ' + error.message);
+                    }
+                };
+                fileReader.readAsArrayBuffer(file);
+            }
+
+            async renderPage(pageNum) {
+                if (!this.pdfDoc) return;
+
+                try {
+                    const page = await this.pdfDoc.getPage(pageNum);
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    const viewport = page.getViewport({ scale: this.scale });
+                    
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    canvas.className = 'pdf-canvas';
+                    
+                    await page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    }).promise;
+                    
+                    const pdfViewer = document.getElementById('pdfViewer');
+                    pdfViewer.innerHTML = '';
+                    
+                    // Create container for canvas and overlays
+                    const canvasContainer = document.createElement('div');
+                    canvasContainer.className = 'canvas-container';
+                    canvasContainer.appendChild(canvas);
+                    
+                    pdfViewer.appendChild(canvasContainer);
+                    
+                    this.currentPdf = canvas;
+                    this.canvasContainer = canvasContainer;
+                    this.currentPageNum = pageNum;
+                    
+                    document.getElementById('currentPage').textContent = pageNum;
+                    document.getElementById('pageInput').value = pageNum;
+                    document.getElementById('zoomLevel').textContent = Math.round(this.scale * 100) + '%';
+                    
+                    // Update navigation buttons
+                    const prevBtn = document.getElementById('prevPage');
+                    const nextBtn = document.getElementById('nextPage');
+                    
+                    if (pageNum <= 1) {
+                        prevBtn.disabled = true;
+                        prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        prevBtn.disabled = false;
+                        prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                    
+                    if (pageNum >= this.totalPages) {
+                        nextBtn.disabled = true;
+                        nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        nextBtn.disabled = false;
+                        nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                    
+                    this.setupPdfInteraction();
+                    this.renderAnswersForCurrentPage();
+                    this.updateStats();
+                    
+                } catch (error) {
+                    alert('Errore nel rendering della pagina: ' + error.message);
+                }
+            }
+
+            async prevPage() {
+                if (this.currentPageNum > 1) {
+                    await this.renderPage(this.currentPageNum - 1);
+                }
+            }
+
+            async nextPage() {
+                if (this.currentPageNum < this.totalPages) {
+                    await this.renderPage(this.currentPageNum + 1);
+                }
+            }
+
+            async goToPage() {
+                const pageNum = parseInt(document.getElementById('pageInput').value);
+                if (pageNum >= 1 && pageNum <= this.totalPages) {
+                    await this.renderPage(pageNum);
+                }
+            }
+
+            async zoomIn() {
+                if (!this.pdfDoc) return;
+                this.scale = Math.min(this.scale + 0.25, 3.0);
+                await this.renderPage(this.currentPageNum);
+            }
+
+            async zoomOut() {
+                if (!this.pdfDoc) return;
+                this.scale = Math.max(this.scale - 0.25, 0.5);
+                await this.renderPage(this.currentPageNum);
+            }
+
+            async fitWidth() {
+                if (!this.pdfDoc) return;
+                const pdfViewer = document.getElementById('pdfViewer');
+                const containerWidth = pdfViewer.clientWidth - 80; // Account for padding and scrollbar
+                
+                const page = await this.pdfDoc.getPage(this.currentPageNum);
+                const viewport = page.getViewport({ scale: 1.0 });
+                this.scale = Math.max(containerWidth / viewport.width, 0.5);
+                await this.renderPage(this.currentPageNum);
+            }
+
+            setupPdfInteraction() {
+                const canvas = this.currentPdf;
+                canvas.style.cursor = 'default';
+                
+                canvas.addEventListener('click', (e) => {
+                    if (this.isAddingAnswer) {
+                        this.createAnswer(e);
+                    }
+                });
+            }
+
+            toggleAddAnswer() {
+                this.isAddingAnswer = !this.isAddingAnswer;
+                const btn = document.getElementById('addAnswer');
+                
+                if (this.isAddingAnswer) {
+                    btn.textContent = '❌ Annulla';
+                    btn.className = 'bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors';
+                    if (this.currentPdf) {
+                        this.currentPdf.style.cursor = 'crosshair';
+                    }
+                } else {
+                    btn.textContent = '✏️ Aggiungi Risposta';
+                    btn.className = 'bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors';
+                    if (this.currentPdf) {
+                        this.currentPdf.style.cursor = 'default';
+                    }
+                }
+            }
+
+            createAnswer(event) {
+                if (!this.currentPdf) return;
+
+                const rect = this.currentPdf.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) / rect.width) * 100;
+                const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+                this.answerCounter++;
+                const answer = {
+                    id: this.answerCounter,
+                    page: this.currentPageNum,
+                    x: x,
+                    y: y,
+                    text: '',
+                    completed: false,
+                    timestamp: new Date().toISOString()
+                };
+
+                this.answers.push(answer);
+                this.renderAnswerOnPdf(answer);
+                this.updateAnswersList();
+                this.updateStats();
+                this.toggleAddAnswer();
+            }
+
+            renderAnswerOnPdf(answer) {
+                if (answer.page !== this.currentPageNum) return;
+
+                const overlay = document.createElement('div');
+                overlay.className = `answer-overlay ${answer.completed ? 'completed-answer' : ''}`;
+                overlay.style.left = answer.x + '%';
+                overlay.style.top = answer.y + '%';
+                overlay.innerHTML = `
+                    <input type="text" class="answer-input" placeholder="Risposta..." value="${answer.text}" 
+                           onchange="app.updateAnswerText(${answer.id}, this.value)"
+                           onfocus="this.select()">
+                    <div style="font-size: 8px; color: #666; margin-top: 1px;">#${answer.id}</div>
+                `;
+
+                this.canvasContainer.appendChild(overlay);
+            }
+
+            renderAnswersForCurrentPage() {
+                // Remove all existing overlays
+                const overlays = document.querySelectorAll('.answer-overlay');
+                overlays.forEach(overlay => overlay.remove());
+
+                // Render answers for current page
+                this.answers
+                    .filter(answer => answer.page === this.currentPageNum)
+                    .forEach(answer => this.renderAnswerOnPdf(answer));
+            }
+
+            updateAnswerText(id, text) {
+                const answer = this.answers.find(ans => ans.id === id);
+                if (answer) {
+                    answer.text = text;
+                    answer.completed = text.trim() !== '';
+                    this.updateAnswersList();
+                    this.updateStats();
+                    
+                    // Update overlay appearance
+                    this.renderAnswersForCurrentPage();
+                }
+            }
+
+            updateAnswersList() {
+                const list = document.getElementById('answersList');
+                
+                if (this.answers.length === 0) {
+                    list.innerHTML = '<p class="text-gray-500 text-center">Nessuna risposta ancora</p>';
+                    return;
+                }
+
+                // Group answers by page
+                const answersByPage = {};
+                this.answers.forEach(answer => {
+                    if (!answersByPage[answer.page]) {
+                        answersByPage[answer.page] = [];
+                    }
+                    answersByPage[answer.page].push(answer);
+                });
+
+                let html = '';
+                Object.keys(answersByPage).sort((a, b) => parseInt(a) - parseInt(b)).forEach(page => {
+                    html += `<div class="mb-3">
+                        <h4 class="font-medium text-gray-700 mb-1 text-sm">📄 Pagina ${page}</h4>`;
+                    
+                    answersByPage[page].forEach(answer => {
+                        html += `
+                            <div class="answer-item ${answer.completed ? 'completed' : ''}">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-medium text-xs">#${answer.id}</span>
+                                    <div class="flex gap-1">
+                                        <button onclick="app.goToAnswerPage(${answer.page})" class="text-blue-600 hover:text-blue-800 text-xs">
+                                            👁️
+                                        </button>
+                                        <button onclick="app.deleteAnswer(${answer.id})" class="text-red-600 hover:text-red-800 text-xs">
+                                            🗑️
+                                        </button>
+                                    </div>
+                                </div>
+                                <textarea class="w-full px-2 py-1 text-xs border border-gray-300 rounded resize-none" 
+                                         rows="1" placeholder="Scrivi la risposta..."
+                                         onchange="app.updateAnswerText(${answer.id}, this.value)">${answer.text}</textarea>
+                                <div class="mt-1 text-xs ${answer.completed ? 'text-green-600' : 'text-gray-500'}">
+                                    ${answer.completed ? '✅' : '⏳'}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                });
+
+                list.innerHTML = html;
+            }
+
+            async goToAnswerPage(page) {
+                if (page !== this.currentPageNum) {
+                    await this.renderPage(page);
+                }
+            }
+
+            deleteAnswer(id) {
+                this.answers = this.answers.filter(ans => ans.id !== id);
+                this.renderAnswersForCurrentPage();
+                this.updateAnswersList();
+                this.updateStats();
+            }
+
+            deleteLastAnswer() {
+                if (this.answers.length === 0) {
+                    alert('Nessuna risposta da eliminare!');
+                    return;
+                }
+                
+                this.answers.pop();
+                this.renderAnswersForCurrentPage();
+                this.updateAnswersList();
+                this.updateStats();
+            }
+
+            clearAllAnswers() {
+                if (confirm('Sei sicuro di voler eliminare tutte le risposte?')) {
+                    this.answers = [];
+                    this.renderAnswersForCurrentPage();
+                    this.updateAnswersList();
+                    this.updateStats();
+                }
+            }
+
+            saveProgress() {
+                const saveName = document.getElementById('saveName').value.trim();
+                if (!saveName) {
+                    alert('Inserisci un nome per il salvataggio!');
+                    return;
+                }
+
+                const saveData = {
+                    name: saveName,
+                    answers: this.answers,
+                    currentPage: this.currentPageNum,
+                    totalPages: this.totalPages,
+                    answerCounter: this.answerCounter,
+                    timestamp: new Date().toISOString()
+                };
+
+                localStorage.setItem(`pdfExercise_${saveName}`, JSON.stringify(saveData));
+                document.getElementById('saveName').value = '';
+                this.loadSavedFilesList();
+                alert('Progresso salvato con successo!');
+            }
+
+            async loadProgress() {
+                const selectedSave = document.getElementById('savedFiles').value;
+                if (!selectedSave) {
+                    alert('Seleziona un salvataggio da caricare!');
+                    return;
+                }
+
+                const saveData = JSON.parse(localStorage.getItem(selectedSave));
+                if (saveData) {
+                    this.answers = saveData.answers || [];
+                    this.answerCounter = saveData.answerCounter || 0;
+                    
+                    if (this.pdfDoc && saveData.currentPage) {
+                        await this.renderPage(saveData.currentPage);
+                    }
+                    
+                    this.updateAnswersList();
+                    this.updateStats();
+                    alert('Progresso caricato con successo!');
+                }
+            }
+
+            deleteSave() {
+                const selectedSave = document.getElementById('savedFiles').value;
+                if (!selectedSave) {
+                    alert('Seleziona un salvataggio da eliminare!');
+                    return;
+                }
+
+                if (confirm('Sei sicuro di voler eliminare questo salvataggio?')) {
+                    localStorage.removeItem(selectedSave);
+                    this.loadSavedFilesList();
+                    alert('Salvataggio eliminato!');
+                }
+            }
+
+            loadSavedFilesList() {
+                const select = document.getElementById('savedFiles');
+                select.innerHTML = '<option value="">Seleziona salvataggio...</option>';
+
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('pdfExercise_')) {
+                        const saveData = JSON.parse(localStorage.getItem(key));
+                        const date = new Date(saveData.timestamp).toLocaleDateString('it-IT');
+                        select.innerHTML += `<option value="${key}">${saveData.name} (${date})</option>`;
+                    }
+                }
+            }
+
+            updateStats() {
+                document.getElementById('totalAnswers').textContent = this.answers.length;
+                document.getElementById('completedAnswers').textContent = 
+                    this.answers.filter(ans => ans.completed).length;
+                document.getElementById('currentPageInfo').textContent = 
+                    this.pdfDoc ? `${this.currentPageNum}/${this.totalPages}` : '-';
+            }
+        }
+
+        // Initialize the app
+        const app = new PDFExerciseApp();
+    </script>
+</body>
+</html>
