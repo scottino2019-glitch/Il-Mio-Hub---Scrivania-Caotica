@@ -1545,7 +1545,7 @@ export default function App() {
                   <a href="https://character-marker.vercel.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
                     🐱 Character Marker
                   </a>
-                  <a href="generatore-kawaii.hltm" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                  <a href="generatore-kawaii.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
                     👑 Generatore di Kawaii
                   </a>
                   <a href="character-engine.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
@@ -1741,7 +1741,7 @@ export default function App() {
                   <a href="https://character-marker.vercel.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
                     🐱 Character Marker
                   </a>
-                  <a href="generatore-kawaii.hltm" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                  <a href="generatore-kawaii.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
                     👑 Generatore di Kawaii
                   </a>
                   <a href="character-engine.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
@@ -1788,7 +1788,7 @@ export default function App() {
                   </div>
 
                   <div className="text-center font-bold text-white tracking-wider text-base mt-2 mb-6" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
-                    📚 Libri & Codex
+                    📚 Libri
                   </div>
 
                   {/* Icon apps grid list */}
@@ -1830,15 +1830,15 @@ export default function App() {
                     </a>
 
                     <a 
-                      href="https://mdn.mozilla.org" 
+                      href="https://z-library.bz/" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       onClick={() => playSoundBlip(880, 'sine', 0.05)}
                       className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
                     >
-                      <span className="text-3xl mb-1.5">💡</span>
+                      <span className="text-3xl mb-1.5">🗄</span>
                       <span className="text-[11px] text-white font-bold tracking-tight">Z-Library</span>
-                      <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">INFO CODIRE ↗</span>
+                      <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85"> LINK DIRETTO ↗</span>
                     </a>
                   </div>
                 </div>
@@ -2171,24 +2171,15 @@ export default function App() {
                 </li>
                 <li>
                   <a 
-                    href="https://arty-scrapbook.vercel.app/" 
+                    href="calligraphy-font-art-editor.vercel.app" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(820, 'sine', 0.05)}
                   >
-                    Arty Scrapbook
+                    calligraphy-font-art
                   </a>
                 </li>
-                <li>
-                  <a 
-                    href="https://scrapbook-magic.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(840, 'sine', 0.05)}
-                  >
-                    Scrapbook magic
-                  </a>
-                </li>
+                
                 <li>
                   <a 
                     href="https://stickers-creator.vercel.app/" 
