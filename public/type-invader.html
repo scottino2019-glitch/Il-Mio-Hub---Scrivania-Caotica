@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Type Invader - Optimized Vertical</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&display=swap');
+        
+        body {
+            font-family: 'Fira Code', monospace;
+            overflow: hidden;
+            background: #020617;
+            touch-action: none;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Container dinamico basato sulla tastiera mobile */
+        #game-viewport {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Gestito via VisualViewport API */
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lane {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            border-right: 1px solid rgba(59, 130, 246, 0.08);
+        }
+
+        .word-entity {
+            position: absolute;
+            white-space: nowrap;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #1e293b;
+            border: 2px solid #334155;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #94a3b8;
+            z-index: 10;
+            will-change: transform;
+            transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+
+        .word-entity.targeted {
+            border-color: #3b82f6;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            z-index: 20;
+            transform: scale(1.1);
+        }
+
+        .char-correct { color: #22c55e; text-shadow: 0 0 8px #22c55e; }
+        .char-next { text-decoration: underline; color: #3b82f6; }
+
+        /* Effetto Laser */
+        #laser {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa, #ffffff);
+            box-shadow: 0 0 15px #3b82f6;
+            transform-origin: 0 50%;
+            pointer-events: none;
+            display: none;
+            z-index: 5;
+            border-radius: 4px;
+        }
+
+        .base-danger {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 6px;
+            background: #ef4444;
+            box-shadow: 0 -4px 15px rgba(239, 68, 68, 0.6);
+            z-index: 30;
+        }
+
+        #mobile-input {
+            position: fixed;
+            top: -200px;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* HUD minimale */
+        #hud {
+            position: absolute;
+            top: env(safe-area-inset-top, 10px);
+            left: 0;
+            width: 100%;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .hud-item {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        #input-indicator {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 41, 59, 0.95);
+            border: 2px solid #3b82f6;
+            padding: 6px 20px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 40;
+            min-width: 120px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="mobile-input" autocomplete="off" autocapitalize="none" spellcheck="false">
+
+    <div id="game-viewport">
+        <!-- Status Bar -->
+        <div id="hud">
+            <div class="hud-item text-blue-400">PUNTI: <span id="score">0</span></div>
+            <div id="lives" class="text-red-500 text-lg">♥♥♥</div>
+            <div class="hud-item text-emerald-400">LVL: <span id="level">1</span></div>
+        </div>
+
+        <div id="game-area" class="relative w-full h-full overflow-hidden">
+            <!-- Griglia visiva -->
+            <div id="lanes-container" class="absolute inset-0 flex">
+                <div class="lane flex-1"></div>
+                <div class="lane flex-1"></div>
+                <div class="lane flex-1"></div>
+            </div>
+            
+            <div id="laser"></div>
+            <div class="base-danger"></div>
+
+            <!-- Box di digitazione proprio sopra la linea di pericolo -->
+            <div id="input-indicator">
+                <span class="text-blue-500 font-bold">></span>
+                <div id="current-input" class="text-xl font-bold tracking-widest uppercase text-white min-w-[10px]"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schermata Iniziale -->
+    <div id="overlay" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md flex items-center justify-center z-[200] p-6">
+        <div class="text-center max-w-sm w-full bg-slate-900 border border-slate-800 p-10 rounded-3xl shadow-2xl">
+            <h1 class="text-4xl font-black mb-4 text-blue-500 italic tracking-tighter">TYPE INVADER</h1>
+            <p class="text-slate-400 mb-8 text-sm leading-relaxed">
+                Le parole cadono dall'alto.<br>
+                Digitale prima che tocchino la linea rossa.<br>
+                <span class="text-blue-400 font-bold">Ottimizzato per tastiera mobile.</span>
+            </p>
+            <button id="start-btn" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-xl transition-all shadow-lg shadow-blue-900/40">
+                GIOCA ORA
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const words = ["CASA", "MARE", "SOLE", "VITA", "LUCE", "MONDO", "PIZZA", "CALCIO", "MUSICA", "STORIA", "LAVORO", "SCUOLA", "GIORNO", "NOTTE", "TEMPO", "CITTA", "LINGUA", "RADIO", "AEREO", "ROBOT", "ASTRO", "CHIAVE", "FUOCO", "GATTO", "TRENO", "VERDE", "ROSSO", "MARE", "CIELO", "FIORE"];
+
+        const viewport = document.getElementById('game-viewport');
+        const gameArea = document.getElementById('game-area');
+        const scoreEl = document.getElementById('score');
+        const livesEl = document.getElementById('lives');
+        const levelEl = document.getElementById('level');
+        const inputEl = document.getElementById('current-input');
+        const mobileInput = document.getElementById('mobile-input');
+        const startBtn = document.getElementById('start-btn');
+        const overlay = document.getElementById('overlay');
+        const laser = document.getElementById('laser');
+
+        let state = {
+            running: false,
+            score: 0,
+            lives: 3,
+            level: 1,
+            activeWords: [],
+            typed: "",
+            target: null,
+            lastSpawn: 0,
+            spawnRate: 3500
+        };
+
+        // Gestione Spazio Tastiera Mobile
+        function handleViewport() {
+            if (window.visualViewport) {
+                const vv = window.visualViewport;
+                viewport.style.height = `${vv.height}px`;
+                viewport.style.top = `${vv.offsetTop}px`;
+                window.scrollTo(0, 0);
+            }
+        }
+
+        window.visualViewport?.addEventListener('resize', handleViewport);
+        window.visualViewport?.addEventListener('scroll', handleViewport);
+
+        function init() {
+            state = { running: true, score: 0, lives: 3, level: 1, activeWords: [], typed: "", target: null, lastSpawn: 0, spawnRate: 3500 };
+            updateUI();
+            handleViewport();
+            gameArea.querySelectorAll('.word-entity').forEach(e => e.remove());
+            overlay.classList.add('hidden');
+            mobileInput.focus();
+            requestAnimationFrame(tick);
+        }
+
+        function spawn() {
+            const laneCount = 3;
+            const lane = Math.floor(Math.random() * laneCount);
+            const text = words[Math.floor(Math.random() * words.length)];
+            const laneWidth = gameArea.clientWidth / laneCount;
+            const x = (lane * laneWidth) + (laneWidth * 0.1);
+
+            const w = {
+                text,
+                x,
+                // Spostato lo spawn più in alto per dare più tempo di reazione
+                y: -60,
+                // Velocità ridotta per bilanciare lo spazio ristretto su mobile
+                speed: 0.4 + (state.level * 0.1),
+                el: document.createElement('div')
+            };
+
+            w.el.className = 'word-entity';
+            w.el.innerText = text;
+            w.el.style.left = `${x}px`;
+            gameArea.appendChild(w.el);
+            state.activeWords.push(w);
+        }
+
+        function tick(time) {
+            if (!state.running) return;
+
+            if (time - state.lastSpawn > state.spawnRate) {
+                spawn();
+                state.lastSpawn = time;
+                // Bilanciamento rateo di spawn
+                state.spawnRate = Math.max(1500, 3500 - (state.level * 200));
+            }
+
+            const limit = gameArea.clientHeight;
+            for (let i = state.activeWords.length - 1; i >= 0; i--) {
+                const w = state.activeWords[i];
+                w.y += w.speed;
+                w.el.style.transform = `translateY(${w.y}px)`;
+
+                // Collisione con linea rossa
+                if (w.y > limit - 45) {
+                    if (state.target === w) resetTarget();
+                    state.lives--;
+                    w.el.style.background = '#ef4444';
+                    setTimeout(() => w.el.remove(), 100);
+                    state.activeWords.splice(i, 1);
+                    updateUI();
+                    if (state.lives <= 0) endGame();
+                }
+            }
+
+            updateLaser();
+            requestAnimationFrame(tick);
+        }
+
+        function updateLaser() {
+            if (state.target) {
+                const startX = gameArea.clientWidth / 2;
+                const startY = gameArea.clientHeight;
+
+                const rect = state.target.el.getBoundingClientRect();
+                const areaRect = gameArea.getBoundingClientRect();
+                
+                const endX = (rect.left + rect.width / 2) - areaRect.left;
+                const endY = (rect.top + rect.height / 2) - areaRect.top;
+
+                const dx = endX - startX;
+                const dy = endY - startY;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                const angle = Math.atan2(dy, dx);
+
+                laser.style.display = 'block';
+                laser.style.left = startX + 'px';
+                laser.style.top = startY + 'px';
+                laser.style.width = dist + 'px';
+                laser.style.transform = `rotate(${angle}rad)`;
+            } else {
+                laser.style.display = 'none';
+            }
+        }
+
+        function handleChar(char) {
+            char = char.toUpperCase();
+            if (!/[A-Z]/.test(char)) return;
+
+            if (!state.target) {
+                // Seleziona la parola più vicina al fondo (pericolo imminente)
+                const matches = state.activeWords
+                    .filter(w => w.text[0] === char)
+                    .sort((a, b) => b.y - a.y);
+
+                if (matches.length > 0) {
+                    state.target = matches[0];
+                    state.typed = char;
+                    state.target.el.classList.add('targeted');
+                }
+            } else {
+                if (state.target.text[state.typed.length] === char) {
+                    state.typed += char;
+                }
+            }
+
+            if (state.target && state.typed === state.target.text) {
+                state.score += 10;
+                state.level = Math.floor(state.score / 150) + 1;
+                
+                // Effetto distruzione
+                const el = state.target.el;
+                el.style.borderColor = '#22c55e';
+                el.style.transform += ' scale(1.2)';
+                el.style.opacity = '0';
+                
+                setTimeout(() => el.remove(), 100);
+                state.activeWords = state.activeWords.filter(w => w !== state.target);
+                resetTarget();
+            }
+            updateUI();
+            refreshVisuals();
+        }
+
+        function refreshVisuals() {
+            state.activeWords.forEach(w => {
+                if (w === state.target) {
+                    const t = w.text.substring(0, state.typed.length);
+                    const n = w.text.substring(state.typed.length);
+                    w.el.innerHTML = `<span class="char-correct">${t}</span><span class="char-next">${n[0]||''}</span>${n.substring(1)}`;
+                } else {
+                    w.el.innerHTML = w.text;
+                }
+            });
+        }
+
+        function resetTarget() {
+            if (state.target) state.target.el.classList.remove('targeted');
+            state.target = null;
+            state.typed = "";
+        }
+
+        function updateUI() {
+            scoreEl.innerText = state.score;
+            levelEl.innerText = state.level;
+            livesEl.innerText = "♥".repeat(Math.max(0, state.lives));
+            inputEl.innerText = state.typed;
+        }
+
+        function endGame() {
+            state.running = false;
+            overlay.classList.remove('hidden');
+            overlay.querySelector('h1').innerText = "SISTEMA COMPROMESSO";
+            overlay.querySelector('p').innerHTML = `Punteggio: <span class="text-blue-400 font-bold">${state.score}</span><br>Riprova per migliorare i tuoi riflessi.`;
+            startBtn.innerText = "RIAVVIA SISTEMA";
+        }
+
+        // Gestione Input unificata
+        mobileInput.addEventListener('input', (e) => {
+            const v = e.target.value;
+            if (v) { 
+                handleChar(v[v.length-1]); 
+                e.target.value = ""; 
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace') {
+                state.typed = state.typed.slice(0, -1);
+                if (!state.typed) resetTarget();
+                updateUI(); refreshVisuals();
+            } else if (e.key.length === 1) handleChar(e.key);
+        });
+
+        // Forza il focus all'input quando si tocca l'area di gioco
+        document.body.addEventListener('touchstart', (e) => { 
+            if(state.running && e.target !== startBtn) {
+                mobileInput.focus();
+            }
+        });
+
+        startBtn.addEventListener('click', init);
+    </script>
+</body>
+</html>
+
+
