@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { jsPDF } from "jspdf";
 
 interface StaticCardsProps {
   playSoundBlip: (freq: number, type?: OscillatorType, duration?: number) => void;
@@ -184,15 +185,15 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
               </a>
 
               <a 
-                href="https://1lib.sk/s/As%20salam%20alaikum" 
+                href="https://mdn.mozilla.org" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.05)}
                 className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
               >
-                <span className="text-3xl mb-1.5">🌐</span>
+                <span className="text-3xl mb-1.5">💡</span>
                 <span className="text-[11px] text-white font-bold tracking-tight">Z-Library</span>
-                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">Z Library ↗</span>
+                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">INFO CODIRE ↗</span>
               </a>
             </div>
           </div>
@@ -380,20 +381,6 @@ export const VsCodeCard: React.FC = () => {
             <span className="text-purple-400">import</span>
             <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
               "Div Generator"
-            </a>
-          </li>
-
-
-<li className="flex items-center gap-1.5 text-stone-300">
-            <span className="text-purple-400">import</span>
-            <a href="https://parallax-studio-sage.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-              "Parallax Studio"
-            </a>
-          </li>
-<li className="flex items-center gap-1.5 text-stone-300">
-            <span className="text-purple-400">import</span>
-            <a href="https://scroll-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-              "Scroll Studio"
             </a>
           </li>
         </ul>
@@ -626,9 +613,6 @@ export const PortalCardsCard: React.FC = () => {
                 <li className="hover:translate-x-1.5 transition-transform duration-200">
                   <a href="https://dialogue-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold">💬 Dialogue Creator</a>
                 </li>
-<li className="hover:translate-x-1.5 transition-transform duration-200">
-                  <a href="https://polyglot-pix.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-purple-500 flex items-center gap-1.5 font-bold">🎴 Polyglot-pix</a>
-                </li>
               </ul>
             </div>
 
@@ -805,6 +789,327 @@ export const ArtistPaletteCard: React.FC<StaticCardsProps> = ({ playSoundBlip })
             </a>
           </li>
         </ul>
+      </div>
+    </div>
+  );
+};
+
+// =========================================
+// 💖 PINK SPIRAL NOTEBOOK (Quadretti / Righe + PDF Creator)
+// =========================================
+export const PinkPdfNotebookCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
+  const [style, setStyle] = useState<'quadretti' | 'righe'>('quadretti');
+  const [title, setTitle] = useState('La Mia Nota');
+  const [content, setContent] = useState('Scrivi qui le tue formule, appunti o pensieri da stampare...');
+
+  const handleCreatePdf = () => {
+    playSoundBlip(1000, 'sine', 0.12);
+    try {
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+      });
+
+      // 1. Fill beautiful pinkish light background tint (#fdf2f8)
+      doc.setFillColor(253, 242, 248);
+      doc.rect(0, 0, 210, 297, "F");
+
+      // 2. Draw styled Grid margins or Lined tracks
+      doc.setDrawColor(249, 168, 212); // pink-300 lines
+      doc.setLineWidth(0.12);
+
+      if (style === 'quadretti') {
+        const gridGap = 8; // 8mm grids
+        for (let x = 10; x < 200; x += gridGap) {
+          doc.line(x, 10, x, 287);
+        }
+        for (let y = 10; y < 287; y += gridGap) {
+          doc.line(10, y, 200, y);
+        }
+      } else {
+        const lineGap = 9; // 9mm ruled spacing
+        for (let y = 20; y < 287; y += lineGap) {
+          doc.line(10, y, 200, y);
+        }
+      }
+
+      // 3. Highlight Header Line
+      doc.setDrawColor(219, 39, 119); // pink-600 border
+      doc.setLineWidth(0.6);
+      doc.line(15, 28, 195, 28);
+
+      // 4. Add Title Heading
+      doc.setTextColor(31, 41, 55); // slate-805
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(20);
+      doc.text(title || "BlocNote PDF Artist", 15, 24);
+
+      // 5. Add Body paragraph notes
+      doc.setTextColor(55, 65, 81); // Slate gray
+      doc.setFont("Helvetica", "normal");
+      doc.setFontSize(11);
+      
+      const cleanContent = content || "Nessuna nota aggiuntiva.";
+      const lines = doc.splitTextToSize(cleanContent, 175);
+      doc.text(lines, 15, 36);
+
+      // 6. Draw vintage retro stamp at the bottom corner of the page
+      doc.setFillColor(251, 191, 36); // Yellow label bg
+      doc.setDrawColor(217, 119, 6);  // Orange dashed lines
+      doc.rect(132, 264, 62, 16, "FD");
+      
+      doc.setTextColor(30, 41, 59);
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(9);
+      doc.text("CREATIVE PDF LAB", 136, 270);
+      doc.setFont("Helvetica", "normal");
+      doc.setFontSize(7);
+      doc.text("Generatore di Fogli Vintage", 136, 276);
+
+      // Save output
+      doc.save(`${title.toLowerCase().replace(/\s+/g, '_') || 'quaderno_pdf'}.pdf`);
+    } catch (e) {
+      console.error("Errore generazione PDF: ", e);
+    }
+  };
+
+  return (
+    <div className="desk-card pink-spiral-notebook hover-rot-1" style={{ '--hover-rot': '1.5deg' } as any}>
+      {/* Silver Bindings Metal Rings */}
+      <div className="spiral-rings-left">
+        {Array.from({ length: 12 }).map((_, idx) => (
+          <div key={idx} className="spiral-wire" />
+        ))}
+      </div>
+
+      {/* Retro stickers */}
+      <div className="notebook-sticker">★ PDF STUDIO</div>
+      <div className="notebook-sticker-heart">💖</div>
+
+      {/* Internal Ruled or Squared Sheets */}
+      <div className={`pink-notebook-sheet min-h-[440px] flex flex-col justify-between ${style === 'quadretti' ? 'bg-quadretti' : 'bg-righe'}`}>
+        <div>
+          <div className="flex justify-between items-center mb-3">
+            <span className="text-[10px] font-mono text-pink-600 font-extrabold uppercase bg-pink-100 px-2 py-0.5 rounded border border-pink-300">
+              🗒️ Quaderno Creatore PDF
+            </span>
+            <div className="flex gap-1">
+              <button 
+                onClick={() => { playSoundBlip(800, 'sine', 0.04); setStyle('quadretti'); }}
+                className={`px-1.5 py-0.5 text-[8px] font-bold rounded cursor-pointer transition-all ${style === 'quadretti' ? 'bg-pink-600 text-white' : 'bg-white text-pink-700 border border-pink-200'}`}
+              >
+                Quadretti ⚃
+              </button>
+              <button 
+                onClick={() => { playSoundBlip(800, 'sine', 0.04); setStyle('righe'); }}
+                className={`px-1.5 py-0.5 text-[8px] font-bold rounded cursor-pointer transition-all ${style === 'righe' ? 'bg-pink-600 text-white' : 'bg-white text-pink-700 border border-pink-200'}`}
+              >
+                Righe ☰
+              </button>
+            </div>
+          </div>
+
+          {/* Form Content */}
+          <div className="space-y-2 mt-4 select-text">
+            <div>
+              <label className="block text-[8px] font-mono uppercase text-pink-800 font-black tracking-wider">Oggetto / Titolo:</label>
+              <input 
+                type="text" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full bg-white/70 border-b border-pink-300/60 focus:border-pink-500 font-semibold focus:outline-none text-xs text-stone-900 py-1" 
+              />
+            </div>
+            <div>
+              <label className="block text-[8px] font-mono uppercase text-pink-800 font-black tracking-wider">Contenuto Quaderno:</label>
+              <textarea 
+                value={content} 
+                onChange={(e) => setContent(e.target.value)}
+                rows={4}
+                className="w-full bg-white/60 border border-pink-200 focus:border-pink-500 rounded p-1.5 focus:outline-none text-[11px] text-stone-850" 
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Action button to trigger JS download */}
+        <div className="mt-4 pt-4 border-t border-pink-350/40">
+          <button 
+            onClick={handleCreatePdf}
+            className="w-full py-2 bg-pink-600 hover:bg-pink-700 active:translate-y-px text-white text-[10.5px] font-extrabold tracking-wider rounded-xl shadow-[0_3px_0px_#db2777] active:shadow-none transition-all flex items-center justify-center gap-1 cursor-pointer"
+          >
+            <span>🖨️ Crea & Scarica PDF {style === 'quadretti' ? 'a Quadretti' : 'a Righe'}</span>
+          </button>
+
+          {/* Direct Retro Link List for other PDF devices */}
+          <div className="mt-3 bg-white/50 border border-pink-200 rounded-lg p-1.5 space-y-1 text-[9px] font-mono text-pink-905">
+            <div className="font-extrabold text-[8px] uppercase tracking-wide text-pink-800 mb-1 flex items-center gap-1">
+              <span>🚀</span> Altri editor PDF sulla scrivania:
+            </div>
+            <a href="https://pdf-notepad.vercel.app/" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
+              ➜ 📑 Pdf Notepad (Quadretti integrati)
+            </a>
+            <a href="https://pdf-editor-text.vercel.app/" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
+              ➜ 🗒 Pdf Editor Text (Linee scritte)
+            </a>
+            <a href="https://ufficio-personale.netlify.app/" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
+              ➜ 💼 Ufficio Personale Creator
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// =========================================
+// 📸 VINTAGE POLAROID CARD (La Polaroid)
+// =========================================
+export const PolaroidCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
+  const [caption, setCaption] = useState('Vintage Desk Sunset 🌅');
+  const [photoSeed, setPhotoSeed] = useState(42);
+  const [filter, setFilter] = useState<'sepia' | 'cold' | 'mono'>('sepia');
+  const [flashing, setFlashing] = useState(false);
+
+  // Generate nice retro aesthetic image url using unsplash visual topics (retro, desk, art, anime, tape, wood)
+  const imageUrl = `https://picsum.photos/seed/${photoSeed}/320/320`;
+
+  const handleSnap = () => {
+    playSoundBlip(1200, 'sine', 0.15);
+    setFlashing(true);
+    setTimeout(() => {
+      // Load a different aesthetic image seed on snap click!
+      setPhotoSeed(Math.floor(Math.random() * 9999));
+      setFlashing(false);
+    }, 400);
+  };
+
+  return (
+    <div className="desk-card polaroid-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+      {/* Picture Frame area */}
+      <div className="polaroid-photo-space">
+        {/* Flash flash overlay */}
+        <div className={`polaroid-flash ${flashing ? 'camera-flash-active' : ''}`} />
+
+        {/* Vintage Image view */}
+        <img 
+          src={imageUrl} 
+          alt="Vintage Polaroid View" 
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+          className={`polaroid-image ${filter === 'sepia' ? 'vintage-sepia' : filter === 'cold' ? 'vintage-cold' : 'vintage-mono'}`}
+        />
+
+        {/* Decorative corner tag */}
+        <div className="absolute top-1 px-1 bg-stone-900/80 text-[7px] text-white/80 font-mono tracking-widest uppercase rounded">
+          FILM 600
+        </div>
+      </div>
+
+      {/* Filter and settings bar */}
+      <div className="mt-2.5 flex justify-between items-center bg-stone-100 p-1.5 rounded-lg border border-stone-200">
+        <div className="flex gap-0.5">
+          <button 
+            onClick={() => { playSoundBlip(700, 'sine', 0.05); setFilter('sepia'); }}
+            className={`px-1 py-0.5 text-[8px] font-mono border rounded cursor-pointer ${filter === 'sepia' ? 'bg-amber-100 text-amber-800 border-amber-305' : 'bg-white border-stone-200 text-stone-500'}`}
+          >
+            SEPIA
+          </button>
+          <button 
+            onClick={() => { playSoundBlip(700, 'sine', 0.05); setFilter('cold'); }}
+            className={`px-1 py-0.5 text-[8px] font-mono border rounded cursor-pointer ${filter === 'cold' ? 'bg-sky-100 text-sky-800 border-sky-305' : 'bg-white border-stone-200 text-stone-500'}`}
+          >
+            COLD
+          </button>
+          <button 
+            onClick={() => { playSoundBlip(700, 'sine', 0.05); setFilter('mono'); }}
+            className={`px-1 py-0.5 text-[8px] font-mono border rounded cursor-pointer ${filter === 'mono' ? 'bg-stone-300 text-stone-800 border-stone-400' : 'bg-white border-stone-200 text-stone-500'}`}
+          >
+            MONO
+          </button>
+        </div>
+
+        <button 
+          onClick={handleSnap}
+          className="px-2 py-0.5 bg-[#db2777] hover:bg-[#be185d] text-white font-bold text-[8.5px] rounded border border-[#be185d] shadow active:translate-y-px cursor-pointer"
+        >
+          Take Snap 📸
+        </button>
+      </div>
+
+      {/* Writeable Marker Caption bottom area */}
+      <input 
+        type="text" 
+        value={caption} 
+        onChange={(e) => setCaption(e.target.value)}
+        className="polaroid-marker-text w-full bg-transparent border-none text-center focus:outline-none placeholder-stone-400 select-text mb-2.5"
+        placeholder="Scrivi qui..." 
+      />
+
+      {/* Retro Links attached to the Polaroid bottom border */}
+      <div className="mt-2 pt-2 border-t border-stone-200/60 flex flex-col gap-1.5 text-[9px] font-mono select-text">
+        <span className="text-[7.5px] uppercase font-black text-stone-400 tracking-wider text-center block mb-0.5">🚀 Link Rapidi Applicazioni</span>
+        <div className="grid grid-cols-2 gap-1.5">
+          <a 
+            href="https://pdf-notepad.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            onClick={() => playSoundBlip(950, "sine", 0.05)}
+            className="px-1.5 py-1 bg-yellow-100 hover:bg-yellow-200 text-yellow-905 border border-yellow-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
+            title="Apri Pdf Notepad"
+          >
+            📑 PDF Notepad ➜
+          </a>
+          <a 
+            href="https://pdf-editor-text.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            onClick={() => playSoundBlip(950, "sine", 0.05)}
+            className="px-1.5 py-1 bg-sky-100 hover:bg-sky-200 text-sky-905 border border-sky-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
+            title="Apri Pdf Editor Text"
+          >
+            🗒 PDF Editor ➜
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// =========================================
+// 📌 APPUNTI VOLANTI (Floating paper note)
+// =========================================
+export const AppuntiVolantiCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
+  const [text, setText] = useState(() => {
+    return localStorage.getItem('my_appunti_volanti_text') || 
+      "✒️ APPUNTI VOLANTI\n\n• Studiare i verbi\n• Sviluppare il blocco PDF\n• Sistemare la polaroid sulla scrivania ☀️";
+  });
+
+  useEffect(() => {
+    localStorage.setItem('my_appunti_volanti_text', text);
+  }, [text]);
+
+  return (
+    <div className="desk-card appunti-volante hover-rot-1 select-text" style={{ '--hover-rot': '-1deg' } as any}>
+      {/* Ribbon translucent green adhesive tape on top */}
+      <div className="washi-tape-sticky" />
+      <div className="washi-tape-pink" />
+
+      <div className="flex justify-between items-center mb-1 font-mono text-[9px] text-amber-900/60 leading-none">
+        <span>MEMO SCRAP PAD</span>
+        <span className="font-bold">#VOLANTE</span>
+      </div>
+
+      <textarea 
+        value={text} 
+        onChange={(e) => { setText(e.target.value); if (Math.random() > 0.8) playSoundBlip(900, 'triangle', 0.015); }}
+        className="w-full bg-transparent border-none focus:outline-none min-h-[140px] text-[11.5px] font-sans text-stone-900 leading-[20px] font-bold tracking-wide placeholder-stone-600 select-text"
+        placeholder="Digita qualcosa al volo..."
+      />
+
+      <div className="text-right text-[7.5px] text-stone-400 font-mono mt-1">
+        💾 salvataggio automatico
       </div>
     </div>
   );

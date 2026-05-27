@@ -34,7 +34,10 @@ import {
   AlbumCssCard, 
   PortalCardsCard, 
   CrtMonitorCard, 
-  ArtistPaletteCard 
+  ArtistPaletteCard,
+  PinkPdfNotebookCard,
+  PolaroidCard,
+  AppuntiVolantiCard
 } from "./components/StaticCards";
 
 // =========================================
@@ -102,8 +105,10 @@ export default function App() {
   const [moods, setMoods] = useState<MoodItemType[]>(() => {
     const saved = localStorage.getItem('my_mood_board_data');
     return saved ? JSON.parse(saved) : [
-      { id: 1, text: 'https://picsum.photos/seed/art/200' },
-      { id: 2, text: 'Il caos è l\'ordine non ancora decifrato.' }
+      { id: 1, text: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=300&auto=format&fit=crop&q=60' },
+      { id: 2, text: 'Creatività è inventare, sperimentare, crescere! ✨' },
+      { id: 3, text: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=300&auto=format&fit=crop&q=60' },
+      { id: 4, text: 'Quadretti e righe allineano i pensieri!' }
     ];
   });
 
@@ -1354,6 +1359,12 @@ export default function App() {
           {/* CARD A: RETRO IPOD PLAYER IFRAME */}
           <IpodCard />
 
+          {/* RETRO SNAPSHOT POLAROID CAMERA WIDGET */}
+          <PolaroidCard playSoundBlip={playSoundBlip} />
+
+          {/* QUICK NOTEBOOK SCATTERED PAPERS */}
+          <AppuntiVolantiCard playSoundBlip={playSoundBlip} />
+
           {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
           <CalendarioCard />
 
@@ -1429,6 +1440,8 @@ export default function App() {
                 const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
                 return (
                   <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
+                    {/* Red thumbtack visual */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-sm z-10 pointer-events-none drop-shadow-md select-none">📌</div>
                     <button 
                       onClick={() => deleteMood(item.id)}
                       className="remove-mood"
@@ -1686,6 +1699,9 @@ export default function App() {
 
           {/* L'AGENDA (Ufficio / Utility) */}
           <AgendaCard playSoundBlip={playSoundBlip} />
+
+          {/* PINK RING BINDER & PDF SQUARES/LINES BINDER */}
+          <PinkPdfNotebookCard playSoundBlip={playSoundBlip} />
 
           {/* ALBUM CSS GRANDE - CSS Artist Draft */}
           <AlbumCssCard playSoundBlip={playSoundBlip} />
