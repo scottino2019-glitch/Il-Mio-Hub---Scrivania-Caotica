@@ -1058,21 +1058,21 @@ export const PolaroidCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
         <span className="text-[7.5px] uppercase font-black text-stone-400 tracking-wider text-center block mb-0.5">🚀 Link Rapidi Applicazioni</span>
         <div className="grid grid-cols-2 gap-1.5">
           <a 
-            href="scrapbook-magic.vercel.app" 
+            href="https://scrapbook-magic.vercel.app/" 
             target="_blank" 
             rel="noopener noreferrer" 
             onClick={() => playSoundBlip(950, "sine", 0.05)}
-            className="px-1.5 py-1 bg-yellow-100 hover:bg-yellow-200 text-red-905 border border-yellow-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
+            className="px-1.5 py-1 bg-yellow-100 hover:bg-yellow-200 text-black-905 border border-yellow-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
             title=" Apri Scrapbook Magic"
           >
             🪟 Scrapbook Magic ➜
           </a>
           <a 
-            href="arty-scrapbook.vercel.app/" 
+            href="https://arty-scrapbook.vercel.app/" 
             target="_blank" 
             rel="noopener noreferrer" 
             onClick={() => playSoundBlip(950, "sine", 0.05)}
-            className="px-1.5 py-1 bg-sky-100 hover:bg-sky-200 text-red-905 border border-sky-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
+            className="px-1.5 py-1 bg-sky-100 hover:bg-sky-200 text-black-905 border border-sky-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
             title="Apri Arty Scrapbook"
           >
              🪟 Arty Scrapbook ➜
