@@ -1519,7 +1519,92 @@ export default function App() {
               + Crea Nuovo background
             </a>
           </div>
+             {/* TV BOX */}
+<div className="tv-box">
+  <div className="tv-screen-container">
+    <div className="tv-screen">
+      {/* Rumore statico di sottofondo */}
+      <div className="static"></div>
+      
+      {/* Contenuto dello Schermo */}
+      <div className="flex flex-col items-center justify-center p-4 h-full relative z-10 select-none">
+        
+        {/* Titolo Canale Retro */}
+        <span className="text-emerald-400 font-mono text-[10px] tracking-widest uppercase mb-3 drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]">
+          📺 MENU PROGETTI
+        </span>
+        
+        {/* Lista di 5 canali (Collegamenti) */}
+        <ul className="space-y-2 font-mono text-[11px] text-left w-full px-2">
+          <li>
+            <a 
+              href="https://v-maker-studio.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+            >
+              <span>📟</span> CH 01: V-MAKER
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://toonscriptstudio.netlify.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+            >
+              <span>📟</span> CH 02: TOONSCRIPT
+            </a>
+          </li>
+          <li>
+            <a 
+              href="slide-text.html" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+            >
+              <span>📟</span> CH 03: SLIDE TEXT
+            </a>
+          </li>
+          <li>
+            <a 
+              href="slide-con-immagini-e-testo.html" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+            >
+              <span>📟</span> CH 04: SLIDE IMMAGINI
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://audio-edu-creator.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+            >
+              <span>📟</span> CH 05: AUDIO EDU 
+            </a>
+          </li>
+        </ul>
 
+        {/* Testo in sovrimpressione analogico */}
+        <div className="overlay-text">CHANNEL 04</div>
+      </div>
+      
+      {/* Effetti visivi CRT */}
+      <div className="scanlines"></div>
+      <div className="reflection"></div>
+    </div>
+  </div>
+  
+  {/* Componenti fisiche della TV */}
+  <div className="tv-controls">
+    <div className="dial-large"></div>
+    <div className="dial-small"></div>
+    <div className="vents"></div>
+  </div>
+</div>
           {/* CARD B: NOTEBOOK PREFERITI */}
           <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="flex items-center gap-2 mb-4">
