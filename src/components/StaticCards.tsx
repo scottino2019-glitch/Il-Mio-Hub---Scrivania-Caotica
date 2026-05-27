@@ -184,15 +184,15 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
               </a>
 
               <a 
-                href="https://mdn.mozilla.org" 
+                href="https://1lib.sk/s/As%20salam%20alaikum" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.05)}
                 className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
               >
-                <span className="text-3xl mb-1.5">💡</span>
+                <span className="text-3xl mb-1.5">🌐</span>
                 <span className="text-[11px] text-white font-bold tracking-tight">Z-Library</span>
-                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">INFO CODIRE ↗</span>
+                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">Z Library ↗</span>
               </a>
             </div>
           </div>
@@ -380,6 +380,25 @@ export const VsCodeCard: React.FC = () => {
             <span className="text-purple-400">import</span>
             <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
               "Div Generator"
+            </a>
+    https://parallax-studio-sage.vercel.app/      </li>
+<li className="flex items-center gap-1.5 text-stone-300">
+            <span className="text-purple-400">import</span>
+            <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+              "Div Generator"
+            </a>
+          </li>
+
+<li className="flex items-center gap-1.5 text-stone-300">
+            <span className="text-purple-400">import</span>
+            <a href="https://parallax-studio-sage.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+              "Parallax Studio"
+            </a>
+          </li>
+<li className="flex items-center gap-1.5 text-stone-300">
+            <span className="text-purple-400">import</span>
+            <a href="https://scroll-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+              "Scroll Studio"
             </a>
           </li>
         </ul>
@@ -611,6 +630,9 @@ export const PortalCardsCard: React.FC = () => {
                 </li>
                 <li className="hover:translate-x-1.5 transition-transform duration-200">
                   <a href="https://dialogue-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold">💬 Dialogue Creator</a>
+                </li>
+<li className="hover:translate-x-1.5 transition-transform duration-200">
+                  <a href="https://polyglot-pix.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-purple-500 flex items-center gap-1.5 font-bold">🎴 Polyglot-pix</a>
                 </li>
               </ul>
             </div>
