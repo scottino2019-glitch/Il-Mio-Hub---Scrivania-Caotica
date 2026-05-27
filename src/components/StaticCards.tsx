@@ -1062,7 +1062,7 @@ export const PolaroidCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             target="_blank" 
             rel="noopener noreferrer" 
             onClick={() => playSoundBlip(950, "sine", 0.05)}
-            className="px-1.5 py-1 bg-yellow-100 hover:bg-yellow-200 text-yellow-905 border border-yellow-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
+            className="px-1.5 py-1 bg-yellow-100 hover:bg-yellow-200 text-red-905 border border-yellow-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
             title=" Apri Scrapbook Magic"
           >
             🪟 Scrapbook Magic ➜
@@ -1072,7 +1072,7 @@ export const PolaroidCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             target="_blank" 
             rel="noopener noreferrer" 
             onClick={() => playSoundBlip(950, "sine", 0.05)}
-            className="px-1.5 py-1 bg-sky-100 hover:bg-sky-200 text-sky-905 border border-sky-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
+            className="px-1.5 py-1 bg-sky-100 hover:bg-sky-200 text-red-905 border border-sky-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
             title="Apri Arty Scrapbook"
           >
              🪟 Arty Scrapbook ➜
