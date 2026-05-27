@@ -182,69 +182,6 @@
 .desk-card:hover {
   transform: translateY(-4px) rotate(var(--hover-rot, 0deg));
 }
-/* =========================================
-   I LINK DELLA TAVOLOZZA (Incisi nel legno)
-   ========================================= */
-.card-tavolozza .app-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-    padding-right: 45px; /* Spazio per non finire nel buco del pollice */
-    list-style: none; 
-    margin-left: 10px;
-}
-
-.card-tavolozza a {
-    display: flex; /* Allinea perfettamente testo e goccia di colore */
-    align-items: center;
-    background: transparent; /* Niente sfondo bianco! Si vede il legno */
-    color: #4a3b22; /* Marrone scurissimo, come inchiostro scuro o legno bruciato */
-    font-weight: 800; /* Molto spesso per essere leggibile */
-    font-size: 1.15rem; 
-    font-family: system-ui, -apple-system, sans-serif;
-    position: relative;
-    padding: 8px 0 8px 40px; /* Spazio a sinistra solo per la goccia */
-    text-decoration: none;
-    /* Effetto "inciso nel legno": ombra bianca sotto il testo scuro */
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border: none;
-    box-shadow: none;
-}
-
-/* Le macchie di colore (vernice) a sinistra del testo */
-.card-tavolozza a::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 24px; /* Gocce di vernice belle grandi */
-    height: 24px;
-    /* Forma leggermente irregolare per sembrare vernice fresca */
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    /* Ombra scura sotto la vernice e riflesso di luce sopra (effetto 3D lucido) */
-    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), inset 2px 2px 4px rgba(255,255,255,0.5), 2px 3px 5px rgba(0,0,0,0.2); 
-    transition: all 0.3s;
-}
-
-/* I colori sgargianti delle tempere */
-.card-tavolozza li:nth-child(1) a::before { background-color: #ef4444; } /* Rosso vivo */
-.card-tavolozza li:nth-child(2) a::before { background-color: #3b82f6; } /* Blu elettrico */
-.card-tavolozza li:nth-child(3) a::before { background-color: #facc15; } /* Giallo sole */
-.card-tavolozza li:nth-child(4) a::before { background-color: #10b981; } /* Verde smeraldo */
-.card-tavolozza li:nth-child(5) a::before { background-color: #a855f7; } /* Viola acceso */
-.card-tavolozza li:nth-child(6) a::before { background-color: #FF00FF; } /* Magenta acceso */
-
-/* Interazione: il testo si scurisce e la goccia "si muove" */
-.card-tavolozza a:hover {
-    color: #291f10; /* Diventa ancora più scuro e marcato */
-    transform: translateX(10px);
-}
-
-.card-tavolozza a:hover::before {
-    /* La goccia ruota e si espande leggermente */
-    transform: translateY(-10%) scale(1.2) rotate(45deg);
-}
-
 
 /* 1. RETRO TACCUINO / NOTEBOOK (PREFERITI) */
 .card-links-app {
@@ -897,486 +834,442 @@
   color: #1e3a8a;
   transform: translateX(4px);
 }
-/* Stili specifici per la Card Retro TV */
-.tv-box {
-  background: #4a3728;
-  width: 320px; /* Ridimensionata a 320px per incastrarsi perfettamente sulla scrivania */
-  height: 480px;
-  border-radius: 24px;
-  padding: 20px;
+
+
+/* =========================================
+   RETRO PC CASE & CRT TERMINAL SCREEN
+   ========================================= */
+.retro-pc-case {
+  width: 100%;
+  background-color: #ded1b8; /* Classic vintage beige computer case color */
+  border-radius: 20px;
+  padding: 24px;
   box-shadow: 
-    0 30px 60px rgba(0,0,0,0.5),
-    inset 0 2px 5px rgba(255,255,255,0.1),
-    6px 6px 0px #1c1917; /* Per accoppiarsi con lo stile cartoon rigido */
-  border: 4px solid #1c1917;
-  display: flex;
-  flex-direction: column; /* Cambiato a colonna per spazi verticali contenuti */
-  gap: 15px;
+    0 12px 30px rgba(0,0,0,0.5),
+    inset 0 4px 8px rgba(255,255,255,0.7),
+    inset 0 -10px 20px rgba(0,0,0,0.4);
+  border: 8px solid #bbaaa0;
   position: relative;
-  box-sizing: border-box;
+  transition: all 0.2s ease-out;
+}
+
+/* Curved CRT screen frame */
+.monitor-glass {
+  position: relative;
+  background-color: #051606;
+  border-top: 15px solid #1c271d;
+  border-left: 15px solid #223024;
+  border-right: 15px solid #223024;
+  border-bottom: 20px solid #2e3e2f;
+  border-radius: 30px;
+  padding: 20px 18px 24px 18px;
+  box-shadow: 
+    inset 0 10px 30px rgba(0,0,0,0.95),
+    0 10px 0 #2c2c2c;
+  overflow: hidden;
+}
+
+/* CRT Scanlines overlays */
+.crt-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.4) 50%
+  ), linear-gradient(
+    90deg, 
+    rgba(255, 0, 0, 0.04), 
+    rgba(0, 255, 0, 0.02), 
+    rgba(0, 0, 255, 0.04)
+  );
+  background-size: 100% 4px, 6px 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Screen Flicker loop for realistic Retro atmosphere */
+@keyframes crt-flicker-anim {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.97; }
+}
+
+.crt-flicker {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 255, 18, 0.015);
+  opacity: 0.15;
+  animation: crt-flicker-anim 0.1s infinite;
+  z-index: 9;
+  pointer-events: none;
+}
+
+/* Glass mirror reflection */
+.screen-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(
+    135deg, 
+    rgba(255,255,255,0.08) 0%, 
+    rgba(255,255,255,0) 45%
+  );
+  transform: rotate(-30deg) translate(-20%, -20%);
+  pointer-events: none;
+  z-index: 8;
+}
+
+.terminal-shell {
+  position: relative;
+  z-index: 5;
+  font-family: 'VT323', monospace !important;
+  color: #3bf13b; /* Vibrant Phosphor green screen print */
+}
+
+.sys-info {
+  font-family: 'VT323', monospace !important;
+  font-size: 14.5px;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  color: #82e0aa;
+  text-shadow: 0 0 2px rgba(130, 224, 170, 0.5);
+  border-bottom: 2px dashed rgba(59, 241, 59, 0.3);
+  padding-bottom: 8px;
+}
+
+.console-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.console-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'VT323', monospace !important;
+}
+
+.prompt-symbol {
+  font-size: 20px;
+  color: #3bf13b;
+  text-shadow: 0 0 4px #3bf13b;
+}
+
+.status-label {
+  font-size: 15px;
+  color: #27ae60;
+  margin-left: auto;
+  font-family: 'VT323', monospace !important;
+}
+
+/* MAGICAL HOVER EFFECTS
+   1. Matrix terminal neon text selection block
+   2. Reverse coloring phosphor fill
+   3. Terminal prompt shifting */
+.matrix-link {
+  font-family: 'VT323', monospace !important;
+  font-size: 19px;
+  font-weight: 500;
+  color: #3bf13b !important;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding: 1px 6px;
+  transition: all 0.15s ease;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.matrix-link:hover {
+  background-color: #3bf13b;
+  color: #051606 !important;
+  border-radius: 2px;
+  text-shadow: none;
+  box-shadow: 0 0 10px rgba(59, 241, 59, 0.89);
+  transform: translateX(4px);
+}
+
+.active-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2ecc71;
+  font-size: 16px;
+  font-family: 'VT323', monospace !important;
+}
+
+.typing-placeholder {
+  opacity: 0.6;
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.blinking-cursor {
+  animation: cursor-blink 1s infinite;
+  font-weight: bold;
+}
+
+/* =========================================
+   11. LA TAVOLOZZA (App di Grafica / Colori)
+   ========================================= */
+.card-tavolozza {
+    background-color: #e6d5b8; /* Colore legno chiaro/betulla */
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 10px);
+    /* Forma organica asimmetrica tipica di una tavolozza */
+    border-radius: 40% 20% 40% 30% / 30% 40% 40% 30%; 
+    transform: rotate(4deg) translateY(10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset -10px -10px 20px rgba(0,0,0,0.05);
+    border: 3px solid #d4c3a3;
+    position: relative;
+    overflow: visible; /* Necessario per non tagliare l'effetto del buco */
+    padding: 30px 25px 40px 30px;
+    min-height: 440px;
+}
+
+/* Il foro per il pollice in basso a destra */
+.card-tavolozza::after {
+    content: '';
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    background-color: #121826; /* Stesso colore dello sfondo della scrivania per simulare il buco */
+    border-radius: 50%;
+    box-shadow: inset 3px 3px 8px rgba(0,0,0,0.6), 0 0 0 2px #d4c3a3;
+    pointer-events: none;
+}
+
+.card-tavolozza .group-title {
+    font-family: 'Brush Script MT', 'Caveat', 'Pacifico', cursive, sans-serif !important;
+    color: #5c4033; /* Marrone scuro */
+    font-size: 2.2rem;
+    transform: rotate(-3deg);
+    margin-bottom: 20px;
+    margin-left: 10px;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    font-weight: bold;
+}
+
+/* =========================================
+   I LINK DELLA TAVOLOZZA (Incisi nel legno)
+   ========================================= */
+.card-tavolozza .app-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    padding-right: 45px; /* Spazio per non finire nel buco del pollice */
+    list-style: none; 
+    margin-left: 10px;
+}
+
+.card-tavolozza a {
+    display: flex; /* Allinea perfettamente testo e goccia di colore */
+    align-items: center;
+    background: transparent; /* Niente sfondo bianco! Si vede il legno */
+    color: #4a3b22; /* Marrone scurissimo, come inchiostro scuro o legno bruciato */
+    font-weight: 800; /* Molto spesso per essere leggibile */
+    font-size: 1.15rem; 
+    font-family: system-ui, -apple-system, sans-serif;
+    position: relative;
+    padding: 8px 0 8px 40px; /* Spazio a sinistra solo per la goccia */
+    text-decoration: none;
+    /* Effetto "inciso nel legno": ombra bianca sotto il testo scuro */
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: none;
+    box-shadow: none;
+}
+
+/* Le macchie di colore (vernice) a sinistra del testo */
+.card-tavolozza a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px; /* Gocce di vernice belle grandi */
+    height: 24px;
+    /* Forma leggermente irregolare per sembrare vernice fresca */
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    /* Ombra scura sotto la vernice e riflesso di luce sopra (effetto 3D lucido) */
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), inset 2px 2px 4px rgba(255,255,255,0.5), 2px 3px 5px rgba(0,0,0,0.2); 
+    transition: all 0.3s;
+}
+
+/* I colori sgargianti delle tempere */
+.card-tavolozza li:nth-child(1) a::before { background-color: #ef4444; } /* Rosso vivo */
+.card-tavolozza li:nth-child(2) a::before { background-color: #3b82f6; } /* Blu elettrico */
+.card-tavolozza li:nth-child(3) a::before { background-color: #facc15; } /* Giallo sole */
+.card-tavolozza li:nth-child(4) a::before { background-color: #10b981; } /* Verde smeraldo */
+.card-tavolozza li:nth-child(5) a::before { background-color: #a855f7; } /* Viola acceso */
+.card-tavolozza li:nth-child(6) a::before { background-color: #FF00FF; } /* Magenta acceso */
+
+/* Interazione: il testo si scurisce e la goccia "si muove" */
+.card-tavolozza a:hover {
+    color: #291f10; /* Diventa ancora più scuro e marcato */
+    transform: translateX(10px);
+}
+
+.card-tavolozza a:hover::before {
+    /* La goccia ruota e si espande leggermente */
+    transform: translateY(-10%) scale(1.2) rotate(45deg);
+}
+
+/* =========================================
+   📺 RETRO TV WIDGET STYLES
+   ========================================= */
+.tv-box {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  background: #543928; /* Bellissimo legno noce retro */
+  background-image: linear-gradient(135deg, #442a1a 25%, #543928 25%, #543928 50%, #442a1a 50%, #442a1a 75%, #543928 75%, #543928 100%);
+  background-size: 40px 40px;
+  border: 6px solid #2d1c10;
+  border-radius: 24px;
+  padding: 18px;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  width: 100%;
 }
 
 .tv-screen-container {
-  flex: 3;
+  flex: 1;
   background: #111;
-  padding: 12px;
-  border-radius: 20px;
-  box-shadow: inset 0 6px 15px black;
-  border: 3px solid #33281f;
-  min-height: 280px;
+  border: 10px solid #222;
+  border-radius: 18px;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.95);
+  overflow: hidden;
 }
 
 .tv-screen {
-  width: 100%;
-  height: 100%;
-  background: #19221b;
-  border-radius: 12px;
   position: relative;
+  background-color: #031408; /* Colore fosfori spenti/retro */
+  min-height: 240px;
+  height: 100%;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: inset 0 0 30px rgba(0,0,0,0.95);
-  border: 2px solid #222;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.95);
 }
 
-.video-content {
-  width: 100%;
-  height: 100%;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.tv-channels-links {
-  z-index: 10;
-  position: relative;
+/* static snow noise animation */
+@keyframes staticNoise {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(-2%, 2%); }
+  30% { transform: translate(1%, -2%); }
+  40% { transform: translate(-1%, 1%); }
+  50% { transform: translate(2%, -1%); }
+  60% { transform: translate(-2%, 2%); }
+  70% { transform: translate(1%, -1%); }
+  80% { transform: translate(-1%, 1%); }
+  90% { transform: translate(2%, -2%); }
+  100% { transform: translate(0, 0); }
 }
 
 .static {
   position: absolute;
-  inset: 0;
-  background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');
-  opacity: 0.08;
-  animation: static-move 0.1s steps(2) infinite;
+  top: -50%; left: -50%;
+  right: -50%; bottom: -50%;
+  width: 200%; height: 200%;
+  background: repeating-radial-gradient(rgba(0,0,0,0.22), rgba(255,255,255,0.08) 2px);
+  background-size: 3px 3px;
+  opacity: 0.18;
+  animation: staticNoise 0.25s steps(4) infinite;
   pointer-events: none;
-}
-
-@keyframes static-move {
-  to { transform: translate(6px, 6px); }
+  z-index: 2;
 }
 
 .overlay-text {
-  color: #00ff00;
+  position: absolute;
+  top: 10px;
+  right: 12px;
   font-family: monospace;
   font-weight: bold;
-  text-shadow: 0 0 6px #00ff00;
-  font-size: 11px;
-  text-align: right;
-  margin-top: auto;
-  opacity: 0.85;
-}
-
-.scanlines {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.3) 50%), linear-gradient(90deg, rgba(255,0,0,0.05), rgba(0,255,0,0.02), rgba(0,0,255,0.05));
-  background-size: 100% 4px, 3px 100%;
-  pointer-events: none;
+  font-size: 8px;
+  color: rgba(52, 211, 153, 0.4);
+  letter-spacing: 1px;
 }
 
 .tv-controls {
-  flex: 1;
+  width: 54px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 8px;
+  justify-content: space-around;
+  background: #2d1c10;
+  border-radius: 12px;
+  padding: 12px 4px;
   gap: 12px;
-  border-top: 2px dashed #3a2b1f;
-  padding-top: 10px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+}
+
+.dial-large, .dial-small {
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1c1917 20%, #444 80%);
+  border: 2.5px solid #57534e;
+  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.25), 0 3px 6px rgba(0,0,0,0.5);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.dial-large:active, .dial-small:active {
+  transform: rotate(45deg);
 }
 
 .dial-large {
   width: 32px;
   height: 32px;
-  background: conic-gradient(#222, #444, #222);
-  border-radius: 50%;
-  border: 2px solid #1c1917;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.dial-large::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: #d6d3d1;
+  border-radius: 1px;
 }
 
 .dial-small {
   width: 24px;
   height: 24px;
-  background: conic-gradient(#222, #444, #222);
-  border-radius: 50%;
-  border: 2px solid #1c1917;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.dial-small::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5px;
+  height: 7px;
+  background: #d6d3d1;
+  border-radius: 1px;
 }
 
 .vents {
-  width: 45px;
-  height: 24px;
-  background: repeating-linear-gradient(#111 0, #111 2px, transparent 2px, transparent 6px);
-  border-radius: 4px;
-}
-/* =========================================
-   RETRO PC CASE & CRT TERMINAL SCREEN
-   ========================================= */
-.retro-pc-case {
-  width: 100%;
-  background-color: #ded1b8; /* Classic vintage beige computer case color */
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 
-    0 12px 30px rgba(0,0,0,0.5),
-    inset 0 4px 8px rgba(255,255,255,0.7),
-    inset 0 -10px 20px rgba(0,0,0,0.4);
-  border: 8px solid #bbaaa0;
-  position: relative;
-  transition: all 0.2s ease-out;
-}
-
-/* Curved CRT screen frame */
-.monitor-glass {
-  position: relative;
-  background-color: #051606;
-  border-top: 15px solid #1c271d;
-  border-left: 15px solid #223024;
-  border-right: 15px solid #223024;
-  border-bottom: 20px solid #2e3e2f;
-  border-radius: 30px;
-  padding: 20px 18px 24px 18px;
-  box-shadow: 
-    inset 0 10px 30px rgba(0,0,0,0.95),
-    0 10px 0 #2c2c2c;
-  overflow: hidden;
-}
-
-/* CRT Scanlines overlays */
-.crt-scanlines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.4) 50%
-  ), linear-gradient(
-    90deg, 
-    rgba(255, 0, 0, 0.04), 
-    rgba(0, 255, 0, 0.02), 
-    rgba(0, 0, 255, 0.04)
+  width: 34px;
+  height: 35px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 4px,
+    #140a05 4px,
+    #140a05 7px
   );
-  background-size: 100% 4px, 6px 100%;
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* Screen Flicker loop for realistic Retro atmosphere */
-@keyframes crt-flicker-anim {
-  0% { opacity: 0.98; }
-  50% { opacity: 1; }
-  100% { opacity: 0.97; }
-}
-
-.crt-flicker {
-  position: absolute;
-  inset: 0;
-  background: rgba(18, 255, 18, 0.015);
-  opacity: 0.15;
-  animation: crt-flicker-anim 0.1s infinite;
-  z-index: 9;
-  pointer-events: none;
-}
-
-/* Glass mirror reflection */
-.screen-glare {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150%;
-  height: 150%;
-  background: linear-gradient(
-    135deg, 
-    rgba(255,255,255,0.08) 0%, 
-    rgba(255,255,255,0) 45%
-  );
-  transform: rotate(-30deg) translate(-20%, -20%);
-  pointer-events: none;
-  z-index: 8;
-}
-
-.terminal-shell {
-  position: relative;
-  z-index: 5;
-  font-family: 'VT323', monospace !important;
-  color: #3bf13b; /* Vibrant Phosphor green screen print */
-}
-
-.sys-info {
-  font-family: 'VT323', monospace !important;
-  font-size: 14.5px;
-  line-height: 1.3;
-  letter-spacing: 0.5px;
-  color: #82e0aa;
-  text-shadow: 0 0 2px rgba(130, 224, 170, 0.5);
-  border-bottom: 2px dashed rgba(59, 241, 59, 0.3);
-  padding-bottom: 8px;
-}
-
-.console-entries {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.console-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'VT323', monospace !important;
-}
-
-.prompt-symbol {
-  font-size: 20px;
-  color: #3bf13b;
-  text-shadow: 0 0 4px #3bf13b;
-}
-
-.status-label {
-  font-size: 15px;
-  color: #27ae60;
-  margin-left: auto;
-  font-family: 'VT323', monospace !important;
-}
-
-/* MAGICAL HOVER EFFECTS
-   1. Matrix terminal neon text selection block
-   2. Reverse coloring phosphor fill
-   3. Terminal prompt shifting */
-.matrix-link {
-  font-family: 'VT323', monospace !important;
-  font-size: 19px;
-  font-weight: 500;
-  color: #3bf13b !important;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  padding: 1px 6px;
-  transition: all 0.15s ease;
-  letter-spacing: 0.5px;
-  display: inline-block;
-}
-
-.matrix-link:hover {
-  background-color: #3bf13b;
-  color: #051606 !important;
   border-radius: 2px;
-  text-shadow: none;
-  box-shadow: 0 0 10px rgba(59, 241, 59, 0.89);
-  transform: translateX(4px);
+  opacity: 0.85;
 }
 
-.active-prompt {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #2ecc71;
-  font-size: 16px;
-  font-family: 'VT323', monospace !important;
-}
-
-.typing-placeholder {
-  opacity: 0.6;
-}
-
-@keyframes cursor-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
-.blinking-cursor {
-  animation: cursor-blink 1s infinite;
-  font-weight: bold;
-}
-
-/* =========================================
-   RETRO PC CASE & CRT TERMINAL SCREEN
-   ========================================= */
-.retro-pc-case {
-  width: 100%;
-  background-color: #ded1b8; /* Classic vintage beige computer case color */
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 
-    0 12px 30px rgba(0,0,0,0.5),
-    inset 0 4px 8px rgba(255,255,255,0.7),
-    inset 0 -10px 20px rgba(0,0,0,0.4);
-  border: 8px solid #bbaaa0;
-  position: relative;
-  transition: all 0.2s ease-out;
-}
-
-/* Curved CRT screen frame */
-.monitor-glass {
-  position: relative;
-  background-color: #051606;
-  border-top: 15px solid #1c271d;
-  border-left: 15px solid #223024;
-  border-right: 15px solid #223024;
-  border-bottom: 20px solid #2e3e2f;
-  border-radius: 30px;
-  padding: 20px 18px 24px 18px;
-  box-shadow: 
-    inset 0 10px 30px rgba(0,0,0,0.95),
-    0 10px 0 #2c2c2c;
-  overflow: hidden;
-}
-
-/* CRT Scanlines overlays */
-.crt-scanlines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.4) 50%
-  ), linear-gradient(
-    90deg, 
-    rgba(255, 0, 0, 0.04), 
-    rgba(0, 255, 0, 0.02), 
-    rgba(0, 0, 255, 0.04)
-  );
-  background-size: 100% 4px, 6px 100%;
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* Screen Flicker loop for realistic Retro atmosphere */
-@keyframes crt-flicker-anim {
-  0% { opacity: 0.98; }
-  50% { opacity: 1; }
-  100% { opacity: 0.97; }
-}
-
-.crt-flicker {
-  position: absolute;
-  inset: 0;
-  background: rgba(18, 255, 18, 0.015);
-  opacity: 0.15;
-  animation: crt-flicker-anim 0.1s infinite;
-  z-index: 9;
-  pointer-events: none;
-}
-
-/* Glass mirror reflection */
-.screen-glare {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150%;
-  height: 150%;
-  background: linear-gradient(
-    135deg, 
-    rgba(255,255,255,0.08) 0%, 
-    rgba(255,255,255,0) 45%
-  );
-  transform: rotate(-30deg) translate(-20%, -20%);
-  pointer-events: none;
-  z-index: 8;
-}
-
-.terminal-shell {
-  position: relative;
-  z-index: 5;
-  font-family: 'VT323', monospace !important;
-  color: #3bf13b; /* Vibrant Phosphor green screen print */
-}
-
-.sys-info {
-  font-family: 'VT323', monospace !important;
-  font-size: 14.5px;
-  line-height: 1.3;
-  letter-spacing: 0.5px;
-  color: #82e0aa;
-  text-shadow: 0 0 2px rgba(130, 224, 170, 0.5);
-  border-bottom: 2px dashed rgba(59, 241, 59, 0.3);
-  padding-bottom: 8px;
-}
-
-.console-entries {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.console-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'VT323', monospace !important;
-}
-
-.prompt-symbol {
-  font-size: 20px;
-  color: #3bf13b;
-  text-shadow: 0 0 4px #3bf13b;
-}
-
-.status-label {
-  font-size: 15px;
-  color: #27ae60;
-  margin-left: auto;
-  font-family: 'VT323', monospace !important;
-}
-
-/* MAGICAL HOVER EFFECTS
-   1. Matrix terminal neon text selection block
-   2. Reverse coloring phosphor fill
-   3. Terminal prompt shifting */
-.matrix-link {
-  font-family: 'VT323', monospace !important;
-  font-size: 19px;
-  font-weight: 500;
-  color: #3bf13b !important;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  padding: 1px 6px;
-  transition: all 0.15s ease;
-  letter-spacing: 0.5px;
-  display: inline-block;
-}
-
-.matrix-link:hover {
-  background-color: #3bf13b;
-  color: #051606 !important;
-  border-radius: 2px;
-  text-shadow: none;
-  box-shadow: 0 0 10px rgba(59, 241, 59, 0.89);
-  transform: translateX(4px);
-}
-
-.active-prompt {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #2ecc71;
-  font-size: 16px;
-  font-family: 'VT323', monospace !important;
-}
-
-.typing-placeholder {
-  opacity: 0.6;
-}
-
-@keyframes cursor-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
-.blinking-cursor {
-  animation: cursor-blink 1s infinite;
-  font-weight: bold;
-}
 

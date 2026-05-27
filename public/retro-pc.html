@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Mia Computer Classico - Retro Device Vanilla Edition</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Styling elements specific to vintage textures */
+    .wood-grain {
+      background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 12px);
+    }
+    .blinking {
+      animation: blinker 1.5s linear infinite;
+    }
+    @keyframes blinker {
+      50% { opacity: 0; }
+    }
+    .bg-retro-panel {
+      background-color: #E4E3E0;
+    }
+    .text-retro-black {
+      color: #141414;
+    }
+    .border-retro-black {
+      border-color: #141414;
+    }
+  </style>
+</head>
+<body class="bg-stone-950 text-stone-900 font-sans h-screen w-screen flex items-center justify-center p-0.5 antialiased overflow-hidden">
+
+  <!-- Interactive workbench canvas area centering solely the Retro Device -->
+  <main id="wrapper-main" class="w-full h-full flex items-center justify-center">
+    
+    <!-- Inside Vintage Shell casing container -->
+    <div 
+      id="device-body"
+      class="w-full h-full rounded-2xl p-2.5 relative overflow-hidden flex flex-col justify-between shadow-[inset_0_4px_15px_rgba(255,255,255,0.25),_0_12px_28px_rgba(0,0,0,0.8)] transition-transform duration-300"
+      style="background: #8B4513cc; border: 6px solid rgba(255,255,255,0.35); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);"
+    >
+      <!-- Overlay grain and wear patterns -->
+      <div class="absolute inset-0 wood-grain pointer-events-none opacity-10"></div>
+      
+      <svg class="absolute inset-0 w-full h-full opacity-40 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line x1="10" y1="10" x2="15" y2="25" stroke="#4a4a4a" stroke-width="0.3" stroke-linecap="round" />
+        <line x1="80" y1="75" x2="85" y2="70" stroke="#4a4a4a" stroke-width="0.25" stroke-linecap="round" />
+        <line x1="20" y1="85" x2="35" y2="88" stroke="#ffffff" stroke-width="0.2" stroke-linecap="round" />
+      </svg>
+    
+
+      <!-- Drag & Drop sticker layer inside casing -->
+      <div id="device-screen-overlay" class="absolute inset-0 pointer-events-none z-20">
+        
+      <div 
+        id="draggable-sticker"
+        class="absolute select-none transform -translate-x-1/2 -translate-y-1/2 pointer-events-auto filter drop-shadow-md cursor-grab active:cursor-grabbing hover:scale-105 z-30"
+        style="left: 10%; top: 12%;"
+        title="Trascina questo adesivo ovunque sul dispositivo!"
+      >
+        <div class="relative bg-white border-2 border-[#141414] p-1 rounded-full shadow-lg flex items-center justify-center w-10 h-10 hover:rotate-6 transition-transform">
+          <span class="text-2xl">👾</span>
+        </div>
+      </div>
+    
+      </div>
+
+      <!-- Generated Specific Device core elements - positioned responsive inside device-body -->
+      <div class="relative w-full h-full z-10 flex flex-col justify-between">
+        
+        <div class="flex flex-col h-full justify-between p-1.5 gap-2">
+          <!-- Beige monitor display -->
+          <div class="bg-stone-300 border-4 border-stone-400 rounded-2xl p-2 flex-grow flex flex-col justify-between shadow-[inset_0_4px_12px_rgba(0,0,0,0.5)] min-h-0">
+            <div id="pc-screen" class="w-full h-full flex-grow rounded p-2 font-mono text-[9.5px] border-2 flex flex-col justify-between selection:bg-stone-750/50 relative overflow-hidden min-h-0" style="background-color: #0b130e; text-shadow: 0 0 5px currentColor;">
+              
+              <!-- CRT scan line overlays -->
+              <div class="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/0 via-white/5 to-white/10 z-25"></div>
+              <div class="absolute inset-0 pointer-events-none z-30" style="background-image: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.2) 50%); background-size: 100% 4px;"></div>
+
+              <!-- Terminal view element -->
+              <div id="pc-terminal-view" class="w-full h-full flex flex-col justify-between grow min-h-0">
+                <!-- History Output -->
+                <div id="pc-terminal-log" class="grow flex flex-col justify-end overflow-hidden max-h-full select-none leading-relaxed">
+                  <div>VINTAGE PC SYSTEM BIOS V5.10</div>
+                  <div>RAM CONFIGURED OK: 640KB BASE MEMORY</div>
+                  <div id="pc-floppy-line">FLOPPY DISK DRIVE A: VUOTO</div>
+                  <div>FILESYSTEM BOOT: LOCAL CASING DISK C: ACTIVE</div>
+                  <div class="text-[8px] opacity-75">Digita 'EDIT' per aprire l'editor di testo o 'HELP'!</div>
+                  <div>---------------------------------------</div>
+                </div>
+
+                <!-- Input interactive row -->
+                <div class="flex items-center text-[10px] border-t border-white/10 pt-1 mt-1 font-bold shrink-0">
+                  <span>C:\>&nbsp;</span>
+                  <span id="pc-caret-text" class="text-white"></span>
+                  <span class="animate-pulse bg-white text-transparent inline-block w-1.5 h-3.5 ml-0.5">_</span>
+                </div>
+              </div>
+
+              <!-- Blue Text Editor View EDIT.EXE overlay (Hidden by default) -->
+              <div id="pc-editor-view" class="absolute inset-1.5 bg-stone-200 border-2 border-stone-600 rounded p-1.5 font-mono text-xs hidden flex-col justify-between text-neutral-900 shadow-2xl z-40 select-text">
+                <div class="flex justify-between items-center bg-blue-900 text-stone-100 p-1.5 rounded-t text-[8px] font-black uppercase">
+                  <span>📝 DOS EDIT v1.2 (EDITOR ATTIVO)</span>
+                  <div class="flex items-center gap-1.5">
+                    <span id="pc-save-toast" class="bg-yellow-400 text-black px-1.5 py-0.5 rounded text-[7px] font-black tracking-widest leading-none transition-opacity duration-300 opacity-0 uppercase">DISCO SALVATO!</span>
+                    <button onclick="closePcEditor()" class="px-1 text-white bg-red-600 hover:bg-red-500 rounded font-bold font-mono cursor-pointer leading-none h-4">X</button>
+                  </div>
+                </div>
+                <textarea id="pc-editor-textarea" class="grow bg-blue-950 text-yellow-300 font-mono text-[9.5px] p-2 mt-1 rounded resize-none border border-blue-900 outline-none focus:ring-1 focus:ring-yellow-400 leading-normal" placeholder="Scrivi qui il tuo codice o note..."></textarea>
+                <div class="flex gap-2 justify-end mt-1.5 shrink-0 items-center">
+                  <span class="text-[7.5px] text-stone-600 font-bold uppercase">FILE:</span>
+                  <input id="pc-editor-filename" type="text" value="UTENTE.TXT" class="bg-white text-stone-900 font-mono text-[8px] px-1.5 py-0.5 border border-stone-405 rounded w-20 outline-none uppercase font-black" />
+                  <button onclick="newEditorFile()" class="px-1.5 py-0.5 bg-stone-300 hover:bg-stone-400 text-[8px] border border-stone-500 rounded font-black cursor-pointer shadow active:translate-y-px">NUOVO</button>
+                  <button onclick="saveEditorFile()" class="px-1.5 py-0.5 bg-emerald-600 hover:bg-emerald-500 text-[8px] text-white rounded font-black cursor-pointer shadow active:translate-y-px">SALVA</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom micro controls & floppy drawer -->
+          <div class="flex items-center justify-between bg-stone-200 border-2 border-stone-400 p-1.5 rounded-xl select-none shrink-0">
+            <!-- Floppy insert slot -->
+            <div class="flex items-center gap-1.5">
+              <button id="pc-insert-floppy" class="px-1 py-0.5 text-[7.5px] bg-stone-700 hover:bg-stone-600 border border-stone-800 text-stone-200 font-bold shadow active:translate-y-0.5 cursor-pointer">💾 FLOPPY</button>
+              <div id="floppy-led" class="w-1.5 h-1.5 rounded-full bg-stone-800"></div>
+            </div>
+
+            <!-- Virtual keys keyboard mockup row -->
+            <div class="flex gap-0.5 items-center">
+              <button onclick="pcTypeChar('E')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">E</button>
+              <button onclick="pcTypeChar('D')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">D</button>
+              <button onclick="pcTypeChar('I')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">I</button>
+              <button onclick="pcTypeChar('T')" class="w-4.5 h-4.5 bg-stone-100 hover:bg-white text-[8px] font-black border border-stone-400 rounded active:translate-y-px cursor-pointer flex items-center justify-center">T</button>
+              <button onclick="pcEnterKey()" class="px-1 h-4.5 bg-amber-400 hover:bg-amber-300 text-[7.5px] font-black border border-stone-900 rounded active:translate-y-px cursor-pointer flex items-center justify-center uppercase">INVIO</button>
+            </div>
+
+            <!-- Red PC Switch button -->
+            <button id="pc-power-toggle" class="w-6 h-6 rounded-full bg-red-650 hover:bg-red-550 border-2 border-stone-900 active:scale-95 shadow flex items-center justify-center cursor-pointer"></button>
+          </div>
+        </div>
+      
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Core Javascript bindings inside exported page -->
+  <script>
+    // Global notification logging system
+    function showNotification(msg) {
+      console.log("📟 [Retro Device Event]:", msg);
+    }
+
+    // Active Draggable sticker handler bindings
+    const sticker = document.getElementById('draggable-sticker');
+    const container = document.getElementById('device-body');
+
+    if (sticker && container) {
+      let isDragging = false;
+      
+      sticker.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        isDragging = true;
+        sticker.classList.add('cursor-grabbing');
+      });
+
+      // Touch friendly support handles
+      sticker.addEventListener('touchstart', (e) => {
+        isDragging = true;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const rect = container.getBoundingClientRect();
+        
+        let x = ((e.clientX - rect.left) / rect.width) * 100;
+        let y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        x = Math.max(0, Math.min(100, x));
+        y = Math.max(0, Math.min(100, y));
+
+        sticker.style.left = x + '%';
+        sticker.style.top = y + '%';
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length === 0) return;
+        const rect = container.getBoundingClientRect();
+        
+        let x = ((e.touches[0].clientX - rect.left) / rect.width) * 100;
+        let y = ((e.touches[0].clientY - rect.top) / rect.height) * 100;
+
+        x = Math.max(0, Math.min(100, x));
+        y = Math.max(0, Math.min(100, y));
+
+        sticker.style.left = x + '%';
+        sticker.style.top = y + '%';
+      });
+
+      const stopDrag = () => {
+        if (isDragging) {
+          isDragging = false;
+          sticker.classList.remove('cursor-grabbing');
+        }
+      };
+
+      window.addEventListener('mouseup', stopDrag);
+      window.addEventListener('touchend', stopDrag);
+    }
+
+    // Embed specific action script hooks
+    
+        const pcScreen = document.getElementById('pc-screen');
+        const pcLog = document.getElementById('pc-terminal-log');
+        const caretText = document.getElementById('pc-caret-text');
+        const powerToggle = document.getElementById('pc-power-toggle');
+        const floppyBtn = document.getElementById('pc-insert-floppy');
+        const floppyLed = document.getElementById('floppy-led');
+        const floppyLine = document.getElementById('pc-floppy-line');
+
+        // Editor layout hooks
+        const pcTerminalView = document.getElementById('pc-terminal-view');
+        const pcEditorView = document.getElementById('pc-editor-view');
+        const pcEditorTextarea = document.getElementById('pc-editor-textarea');
+
+        let pcOn = true;
+        let command = "";
+        let floppyIn = false;
+        let pcCtx = null;
+
+        // Virtual Filesystem (VFS) with Local Storage
+        const DEFAULT_VFS = {
+          "LEGGIMI.TXT": "Benvenuto nel DOS EDIT!\n\nQuesto editor e completamente operativo.\nPuoi modificare questo testo, scrivere le tue note o codici, e premere SALVA.\n\nComandi del prompt:\n- HELP: Mostra i comandi del prompt\n- DIR: Elenca i file sul disco C:\n- TYPE [FILE.TXT]: Visualizza il contenuto di un file\n- EDIT [FILE.TXT]: Apri o crea un file nell'editor\n- DEL [FILE.TXT]: Cancella un file\n- COLOR [GREEN/AMBER/CYAN/WHITE]: Cambia il colore del monitor\n- CLS: Pulisce lo schermo\n- PLAY: Emette segnali acustici vintage\n- RUN: Esegue un test diagnostico",
+          "AUTORE.TXT": "Sviluppato da Scottino per l'App-Studio.\nUn capolavoro retro programmato con amore nel 2026."
+        };
+
+        function getVFS() {
+          try {
+            const data = localStorage.getItem('retro_pc_vfs');
+            if (data) return JSON.parse(data);
+          } catch(e) {}
+          return DEFAULT_VFS;
+        }
+
+        function saveVFS(vfs) {
+          try {
+            localStorage.setItem('retro_pc_vfs', JSON.stringify(vfs));
+          } catch(e) {}
+        }
+
+        const colors = {
+          green: { term: "#10b981", border: "#064e3b", bg: "#02120b" },
+          amber: { term: "#f59e0b", border: "#78350f", bg: "#1f0901" },
+          cyan: { term: "#22d3ee", border: "#115e59", bg: "#011615" },
+          white: { term: "#f3f4f6", border: "#374151", bg: "#0f172a" }
+        };
+
+        let currentThemeColor = "cyan";
+        function applyColorTheme(themeName) {
+          if (!colors[themeName]) return;
+          currentThemeColor = themeName;
+          pcScreen.style.color = colors[themeName].term;
+          pcScreen.style.backgroundColor = colors[themeName].bg;
+          pcScreen.style.borderColor = colors[themeName].border;
+        }
+        applyColorTheme(currentThemeColor);
+
+        function playKeySound(freq, dur=0.015) {
+          try {
+            if (!pcCtx) pcCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = pcCtx.createOscillator();
+            const gain = pcCtx.createGain();
+            osc.connect(gain);
+            gain.connect(pcCtx.destination);
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, pcCtx.currentTime);
+            gain.gain.setValueAtTime(0.04, pcCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, pcCtx.currentTime + dur);
+            osc.start();
+            osc.stop(pcCtx.currentTime + dur);
+          } catch(e){}
+        }
+
+        window.pcTypeChar = function(char) {
+          if (!pcOn) return;
+          // Only allow typing in classical ASCII range for OS style
+          if (command.length >= 40) return; // Limit size
+          playKeySound(800 + Math.random() * 300);
+          command += char;
+          caretText.textContent = command;
+        };
+
+        window.openPcEditor = function() {
+          playKeySound(700, 0.08);
+          setTimeout(() => playKeySound(1000, 0.08), 85);
+          pcTerminalView.classList.add('hidden');
+          pcEditorView.classList.remove('hidden');
+          
+          // Auto-focus the editable area
+          setTimeout(() => {
+            pcEditorTextarea.focus();
+          }, 100);
+          showNotification("📝 DOS EDIT: editor caricato.");
+        };
+
+        window.closePcEditor = function() {
+          playKeySound(500, 0.1);
+          pcEditorView.classList.add('hidden');
+          pcTerminalView.classList.remove('hidden');
+          showNotification("🖥️ Ritorno al prompt DOS.");
+        };
+
+        window.newEditorFile = function() {
+          playKeySound(900, 0.05);
+          pcEditorTextarea.value = "";
+          document.getElementById('pc-editor-filename').value = "UTENTE.TXT";
+          showNotification("📄 Aperto nuovo file vuoto.");
+        };
+
+        window.saveEditorFile = function() {
+          const filenameInput = document.getElementById('pc-editor-filename');
+          let fname = filenameInput.value.trim().toUpperCase();
+          if (!fname) fname = "UNTITLED.TXT";
+          if (!fname.includes('.')) fname += ".TXT";
+          filenameInput.value = fname;
+          
+          const content = pcEditorTextarea.value;
+          const vfs = getVFS();
+          vfs[fname] = content;
+          saveVFS(vfs);
+
+          playKeySound(1200, 0.1);
+          setTimeout(() => playKeySound(1500, 0.1), 100);
+          showNotification(`💾 File salvato su C:\\${fname}`);
+
+          // Visual confirmation Toast
+          const toast = document.getElementById('pc-save-toast');
+          if (toast) {
+            toast.textContent = `SALVATO SU C:\\${fname}`;
+            toast.style.opacity = "1";
+            setTimeout(() => {
+              toast.style.opacity = "0";
+            }, 2000);
+          }
+        };
+
+        window.pcEnterKey = function() {
+          if (!pcOn) return;
+          playKeySound(500, 0.05);
+          
+          let response = "";
+          const cleanCmdLine = command.trim();
+          const parts = cleanCmdLine.split(/\s+/);
+          const cmd = parts[0].toLowerCase();
+          const arg = parts.slice(1).join(" ").trim().toUpperCase();
+
+          const vfs = getVFS();
+
+          if (cmd === "") {
+            // Empty command, just print newline
+          } else if (cmd === "help") {
+            response = "COMANDI DEL PROMPT DISPONIBILI:\n" +
+                       " * HELP: Mostra questo elenco di aiuto\n" +
+                       " * DIR: Elenca i file del disco virtuale C:\n" +
+                       " * TYPE [FILE.TXT]: Visualizza il contenuto di un file\n" +
+                       " * EDIT [FILE.TXT]: Modifica o crea un file nell'editor\n" +
+                       " * DEL [FILE.TXT]: Cancella definitivamente un file\n" +
+                       " * COLOR [GREEN/AMBER/CYAN/WHITE]: Cambia il colore CRT dello schermo\n" +
+                       " * CLS: Pulisce la cronologia dei log sul monitor\n" +
+                       " * PLAY: Suona una melodia retro 8-bit\n" +
+                       " * RUN: Esegue i test diagnostici hardware";
+          } else if (cmd === "dir") {
+            let filesList = " Directory di C:\\\n\n";
+            let count = 0;
+            let totalBytes = 0;
+            for (const key in vfs) {
+              const size = vfs[key].length;
+              let displayName = key;
+              const dotIdx = key.indexOf('.');
+              let namePart = dotIdx !== -1 ? key.substring(0, dotIdx) : key;
+              let extPart = dotIdx !== -1 ? key.substring(dotIdx + 1) : "";
+              
+              // Pad to classical 8.3 format spacing
+              displayName = namePart.padEnd(8).substring(0, 8) + " " + extPart.padEnd(3).substring(0, 3);
+              filesList += `  ${displayName}   ${String(size).padStart(6)} byte   10-05-2026\n`;
+              count++;
+              totalBytes += size;
+            }
+            filesList += `\n       ${count} File    ${totalBytes} byte totali`;
+            filesList += `\n       Casing Disk  645.120 byte liberi`;
+            response = filesList;
+          } else if (cmd === "type") {
+            if (!arg) {
+              response = "ERRORE: SPECIFICARE UN FILE. Esempio: TYPE LEGGIMI.TXT";
+            } else if (vfs[arg]) {
+              response = vfs[arg];
+            } else {
+              response = `ERRORE: FILE '${arg}' NON TROVATO! Digita 'DIR' per i file esistenti.`;
+            }
+          } else if (cmd === "edit") {
+            command = "";
+            caretText.textContent = "";
+            const filenameInput = document.getElementById('pc-editor-filename');
+            if (arg) {
+              filenameInput.value = arg;
+              pcEditorTextarea.value = vfs[arg] || "";
+            } else {
+              filenameInput.value = "UTENTE.TXT";
+              pcEditorTextarea.value = "";
+            }
+            openPcEditor();
+            return;
+          } else if (cmd === "del") {
+            if (!arg) {
+              response = "ERRORE: SPECIFICARE IL FILE DA CANCELLARE. Esempio: DEL UTENTE.TXT";
+            } else if (vfs[arg]) {
+              delete vfs[arg];
+              saveVFS(vfs);
+              response = `C:\\${arg} cancellato con successo.`;
+            } else {
+              response = `ERRORE: FILE '${arg}' NON TROVATO SU DISCO.`;
+            }
+          } else if (cmd === "color") {
+            const targetColor = arg.toLowerCase();
+            if (colors[targetColor]) {
+              applyColorTheme(targetColor);
+              response = `TIPO TERMINALE IMPOSTATO SU CRT: ${arg}`;
+            } else {
+              response = "ERRORE: SPECIFICARE GREEN, AMBER, CYAN, O WHITE!";
+            }
+          } else if (cmd === "cls") {
+            pcLog.innerHTML = "";
+            command = "";
+            caretText.textContent = "";
+            return;
+          } else if (cmd === "run") {
+            response = "================================================\n" +
+                       "          VINTAGE CORE DIAGNOSTICS SYSTEM       \n" +
+                       "================================================\n" +
+                       " * PROCESSORE: 8086 CLOCK @ 4.77 MHz [OK]\n" +
+                       " * RAM: 640 KB BASE MEMORY ALLOCATED [OK]\n" +
+                       " * HARDDISK: CASING EMULATED VFS SECTORS [STABILE]\n" +
+                       " * DISPLAY: ADATTATORE CGA COLOR MATRIX [ATTIVO]\n" +
+                       " STATO COMPLESSIVO: RETRO PC OPERATIVO AL 100%";
+          } else if (cmd === "play") {
+            playKeySound(523.25, 0.1);
+            setTimeout(() => playKeySound(587.33, 0.1), 80);
+            setTimeout(() => playKeySound(659.25, 0.1), 160);
+            setTimeout(() => playKeySound(523.25, 0.15), 240);
+            response = "ALTOPARLANTE PC: RETRO MUSICA EMESSA.";
+          } else {
+            response = "COMANDO NON CORRETTO. DIGITA 'HELP' PER LA LISTA.";
+          }
+
+          const newLine = document.createElement('div');
+          newLine.className = "mb-2 font-mono text-[9px] whitespace-pre-wrap leading-normal";
+          newLine.innerHTML = `<span class="text-white">C:\\&gt;${cleanCmdLine}</span>\n${response}`;
+          pcLog.appendChild(newLine);
+          
+          command = "";
+          caretText.textContent = "";
+          pcLog.scrollTop = pcLog.scrollHeight;
+        };
+
+        // Support standard physical keyboard inputs inside the terminal
+        window.addEventListener('keydown', (e) => {
+          if (!pcOn) return;
+          // If editor is showing, let keyboard inputs type directly in the textarea/filename natively
+          if (!pcEditorView.classList.contains('hidden')) {
+            return; 
+          }
+
+          // Otherwise, divert keys into the terminal prompt command!
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            window.pcEnterKey();
+          } else if (e.key === 'Backspace') {
+            e.preventDefault();
+            if (command.length > 0) {
+              playKeySound(800 + Math.random() * 200);
+              command = command.slice(0, -1);
+              caretText.textContent = command;
+            }
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            command = "";
+            caretText.textContent = "";
+          } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            e.preventDefault();
+            window.pcTypeChar(e.key.toUpperCase());
+          }
+        });
+
+        floppyBtn.addEventListener('click', () => {
+          floppyIn = !floppyIn;
+          playKeySound(300, 0.2);
+          if (floppyIn) {
+            floppyBtn.textContent = "💾 ESPELLI";
+            floppyLed.className = "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse";
+            floppyLine.textContent = "FLOPPY DRIVE: DISCHETTO CARICATO [LEGGIMI.TXT]";
+            showNotification("💾 Floppy disk caricato correttamente!");
+          } else {
+            floppyBtn.textContent = "💾 FLOPPY";
+            floppyLed.className = "w-1.5 h-1.5 rounded-full bg-stone-800";
+            floppyLine.textContent = "FLOPPY DRIVE: VUOTO";
+            showNotification("💾 Floppy rimosso.");
+          }
+        });
+
+        powerToggle.addEventListener('click', () => {
+          pcOn = !pcOn;
+          playKeySound(150, 0.1);
+          if (pcOn) {
+            pcScreen.style.opacity = "1";
+            powerToggle.classList.remove('bg-stone-500');
+            powerToggle.classList.add('bg-red-650');
+            showNotification("🖥️ BIOS vintage avviato.");
+          } else {
+            pcScreen.style.opacity = "0";
+            pcEditorView.classList.add('hidden');
+            pcTerminalView.classList.remove('hidden');
+            powerToggle.classList.remove('bg-red-650');
+            powerToggle.classList.add('bg-stone-500');
+            showNotification("🖥️ Spegnimento PC terminato.");
+          }
+        });
+      
+  </script>
+</body>
+</html>

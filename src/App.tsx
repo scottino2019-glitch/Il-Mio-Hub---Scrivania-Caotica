@@ -21,6 +21,22 @@ import {
   ChevronRightIcon
 } from 'lucide-react';
 
+import { 
+  IpodCard, 
+  CalendarioCard, 
+  LavagnaCard, 
+  SmartphoneCard, 
+  TvBoxCard, 
+  RetroPcCard, 
+  VsCodeCard, 
+  SnippetCreatorCard, 
+  AgendaCard, 
+  AlbumCssCard, 
+  PortalCardsCard, 
+  CrtMonitorCard, 
+  ArtistPaletteCard 
+} from "./components/StaticCards";
+
 // =========================================
 // TYPES & CONSTANTS
 // =========================================
@@ -1332,414 +1348,218 @@ export default function App() {
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 [column-fill:balance] w-full">
           
           {/* =========================================
-             ORIGINAL APP CARDS
+             GRUPPO 1: UTILITIES (iPod, Calendario, Pomodoro, Mood Board, Sticky Notes)
              ========================================= */}
 
           {/* CARD A: RETRO IPOD PLAYER IFRAME */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="ipod-embed-container bg-black rounded-[2rem] shadow-2xl border-4 border-stone-800 overflow-hidden relative aspect-[5/7.2] w-full max-w-[420px] mx-auto">
-              <iframe 
-                src="https://i-pod-audio-player.vercel.app/" 
-                className="absolute inset-0 w-full h-full border-none"
-                allow="autoplay; clipboard-write; encrypted-media"
-                sandbox="allow-scripts allow-same-origin allow-forms"
-                title="Retro iPod Player"
-              />
+          <IpodCard />
+
+          {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
+          <CalendarioCard />
+
+          {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
+          <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
+              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
             </div>
-          </div>
-            {/* CARD D: LAVAGNA SLATE WOOD CHECKLIST */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="wooden-frame">
-              <div className="slate-surface relative">
-                <div className="chalk-dust-1"></div>
-                <div className="chalk-dust-2"></div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-                   Lingua e Utility
-                  </h3>
-                  <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
-                </div>
 
-                <div className="space-y-4 relative z-10 font-mono text-xs">
-                  <div className="flex gap-2 items-start">
-                    <span>🐉</span>
-                    <div>
-                      <a href="https://scottino2019-glitch.github.io/lingua-cinese/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
-                        1. 中文 (Cinese)
-                      </a>
-                      <span className="block text-[9px] text-white/50">Portale e dizionario linguistico</span>
-                    </div>
-                  </div>
+            <div className="text-center text-white mt-1">
+              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
+              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
+                {currentTime.toLocaleTimeString('it-IT')}
+              </div>
+            </div>
 
-                  <div className="flex gap-2 items-start">
-                    <span>🐅</span>
-                    <div>
-                      <a href="https://linguacoreana.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-blue">
-                        2. 한국어 (Coreano)
-                      </a>
-                      <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
-                    </div>
-                  </div>
+            {/* Swing pendulum container */}
+            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
+              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
+                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
+              </div>
+            </div>
 
-                  <div className="flex gap-2 items-start">
-                    <span>✍</span>
-                    <div>
-                      <a href="https://quaderni-per-esercizi.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-yellow">
-                        3. Laboratorio Linguistico
-                      </a>
-                      <span className="block text-[9px] text-white/50">Quaderni di grammatica attiva</span>
-                    </div>
-                  </div>
+            {/* Focus pomodoro timer interface */}
+            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
+              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
+                <span>STAGE: {pomoMode.toUpperCase()}</span>
+                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
+              </div>
 
-                  <div className="flex gap-2 items-start">
-                    <span>📑</span>
-                    <div>
-                      <a href="https://spazio-creativo.vercel.app/eserciziPDF.html" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-green">
-                        4. Eserciziario PDF
-                      </a>
-                      <span className="block text-[9px] text-white/50">Svolgere i compiti sul tablet</span>
-                    </div>
-                  </div>
+              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
+                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
+              </div>
 
-                  <div className="flex gap-2 items-start">
-                    <span>💻</span>
-                    <div>
-                      <a href="https://quaderno-digitale.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-red">
-                        5. Quaderno Digitale
-                      </a>
-                      <span className="block text-[9px] text-white/50">Raccolta di studi informatici</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Felt eraser representation */}
-                <div className="absolute bottom-3 right-4 flex flex-col w-[60px] h-[18px] shadow-lg rounded overflow-hidden opacity-85">
-                  <div className="bg-[#444] h-[12px] border-b border-black"></div>
-                  <div className="bg-[#c19a6b] h-[6px] text-stone-800 text-[6px] font-bold flex items-center justify-center font-sans uppercase">
-                    Cancellino
-                  </div>
-                </div>
+              <div className="flex gap-2 justify-center mt-3">
+                <button 
+                  onClick={togglePomo} 
+                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
+                >
+                  {pomoActive ? 'PAUSA' : 'START'}
+                </button>
+                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
+                  RESET
+                </button>
               </div>
             </div>
           </div>
- {/* CARD EXTRA: RETRO PERSONAL COMPUTER DEVICE */}
-          <div className="desk-card hover-rot-1 lg:col-span-2 xl:col-span-2" style={{ '--hover-rot': '0.5deg' } as any}>
-            <div className="p-4 bg-stone-900 border-4 border-stone-800 rounded-3xl shadow-2xl relative w-full overflow-hidden">
-              {/* Retro monitor glowing status and knobs */}
-              <div className="flex justify-between items-center px-1.5 mb-2.5">
-                <div className="flex gap-2 items-center">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span className="text-[10px] text-zinc-400 font-mono tracking-wider">VINTAGE MONITOR SYSTEM v5.10</span>
-                </div>
-                <div className="flex gap-2">
-                  <div className="w-3.5 h-3.5 rounded-full bg-stone-750 shadow-inner border border-stone-800"></div>
-                  <div className="w-3.5 h-3.5 rounded-full bg-stone-750 shadow-inner border border-stone-800"></div>
-                </div>
-              </div>
 
-              {/* Sandbox iframe loading local retro-pc.html */}
-              <iframe 
-                src="retro-pc.html" 
-                className="w-full h-[520px] rounded-2xl border-none"
-                allow="autoplay; clipboard-write; encrypted-media"
-                sandbox="allow-scripts allow-same-origin allow-forms"
-                loading="lazy"
-                title="La Mia Computer Classico"
-              />
-
-              <div className="text-[9px] text-stone-500 text-center font-mono mt-3 uppercase tracking-widest">
-                📼 Retro Device Terminal Emulator - DOS Shell v5.10
-              </div>
-            </div>
-          </div>
-          {/* ALBUM CSS GRANDE - CSS Artist Draft */}
-          <div className="desk-card album-css-grande hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
-            {/* Effetti di disordine */}
-            <div className="nastro-adesivo"></div>
-            <div className="segnalibro-postit">ART</div>
-            <div className="segnalibro-2"></div>
-
-            <div className="etichetta-album">Bozze & Codice</div>
-            <h3>CSS Artist</h3>
-            <p className="Progetti-con-css">Progetti con css.</p>
-            
-            {/* LISTA DEI LINK AI TUOI PROGETTI */}
-            <ul className="lista-progetti">
-              <li>
-                <a 
-                  href="https://graphic-atelier.netlify.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Graphic Atelier
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://comic-studio-five.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Comix Studio
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://analog-craft.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  AnalogCraft
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://creative-card-code-editor.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Creative Card
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://hover-craft-tau.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Hover Craft
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://analogue-studio.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Analogue Studio
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://gliph-forge.netlify.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Gliph Forge
-                </a>
-              </li>
-            </ul>
-
-            <a 
-              href="https://artisan-studio-psi.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn-schizzo"
-              onClick={() => playSoundBlip(950, 'sine', 0.06)}
-            >
-              + Crea Nuovo background
-            </a>
-          </div>
-             {/* TV BOX */}
-<div className="tv-box">
-  <div className="tv-screen-container">
-    <div className="tv-screen">
-      {/* Rumore statico di sottofondo */}
-      <div className="static"></div>
-      
-      {/* Contenuto dello Schermo */}
-      <div className="flex flex-col items-center justify-center p-4 h-full relative z-10 select-none">
-        
-        {/* Titolo Canale Retro */}
-        <span className="text-emerald-400 font-mono text-[10px] tracking-widest uppercase mb-3 drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]">
-          📺 MENU PROGETTI
-        </span>
-        
-        {/* Lista di 5 canali (Collegamenti) */}
-        <ul className="space-y-2 font-mono text-[11px] text-left w-full px-2">
-          <li>
-            <a 
-              href="https://v-maker-studio.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
-            >
-              <span>📟</span> CH 01: V-MAKER
-            </a>
-          </li>
-          <li>
-            <a 
-              href="https://toonscriptstudio.netlify.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
-            >
-              <span>📟</span> CH 02: TOONSCRIPT
-            </a>
-          </li>
-          <li>
-            <a 
-              href="slide-text.html" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
-            >
-              <span>📟</span> CH 03: SLIDE TEXT
-            </a>
-          </li>
-          <li>
-            <a 
-              href="slide-con-immagini-e-testo.html" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
-            >
-              <span>📟</span> CH 04: SLIDE IMMAGINI
-            </a>
-          </li>
-          <li>
-            <a 
-              href="https://audio-edu-creator.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
-            >
-              <span>📟</span> CH 05: AUDIO EDU 
-            </a>
-          </li>
-        </ul>
-
-        {/* Testo in sovrimpressione analogico */}
-        <div className="overlay-text">CHANNEL 04</div>
-      </div>
-      
-      {/* Effetti visivi CRT */}
-      <div className="scanlines"></div>
-      <div className="reflection"></div>
-    </div>
-  </div>
-  
-  {/* Componenti fisiche della TV */}
-  <div className="tv-controls">
-    <div className="dial-large"></div>
-    <div className="dial-small"></div>
-    <div className="vents"></div>
-  </div>
-</div>
-          {/* CARD B: NOTEBOOK PREFERITI */}
-          <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="flex items-center gap-2 mb-4">
-              <BookmarkIcon className="w-5 h-5 text-indigo-900" />
-              <div className="font-bold text-stone-900 tracking-wide text-lg">Preferiti 🔖</div>
+          {/* CARD E: MOOD BOARD CORKBOARD */}
+          <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
+              Mood Board 🖼️
             </div>
             
-            <div className="link-input-group mb-4">
+            <div className="flex gap-1.5 mb-4">
               <input 
                 type="text" 
-                placeholder="Titolo" 
-                value={linkTitle}
-                onChange={(e) => setLinkTitle(e.target.value)}
-                className="link-input"
-              />
-              <input 
-                type="text" 
-                placeholder="https://..." 
-                value={linkUrl}
-                onChange={(e) => setLinkUrl(e.target.value)}
-                className="link-input"
+                placeholder="URL Foto o Pensiero..." 
+                value={moodInput}
+                onChange={(e) => setMoodInput(e.target.value)}
+                className="bg-white/95 text-xs text-stone-800 rounded px-2 py-1.5 flex-grow font-sans border border-amber-900/20 shadow-inner"
               />
               <button 
-                onClick={addLink}
-                className="w-full bg-slate-800 hover:bg-slate-700 active:translate-y-[1px] text-white py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all mt-1"
+                onClick={addMoodItem}
+                className="bg-green-700 hover:bg-green-600 font-bold px-3 py-1 text-white rounded cursor-pointer text-xs"
               >
-                Aggiungi Link ＋
+                📌
               </button>
             </div>
 
-            <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1">
-              {links.map(l => (
-                <div key={l.id} className="link-item flex justify-between items-center bg-white/40 hover:bg-white/70 px-2 py-1.5 rounded transition-all">
-                  <a href={l.url} target="_blank" rel="noopener noreferrer" className="truncate max-w-[85%] font-medium">
-                    🔗 {l.title}
-                  </a>
-                  <button 
-                    onClick={() => deleteLink(l.id)}
-                    className="text-stone-400 hover:text-red-500 transition-all text-xs"
-                    title="Rimuovi"
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
-              {links.length === 0 && (
-                <div className="text-xs text-stone-500 italic py-4 text-center">Taccuino vuoto</div>
+            <div className="mood-display">
+              {moods.map(item => {
+                const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
+                return (
+                  <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
+                    <button 
+                      onClick={() => deleteMood(item.id)}
+                      className="remove-mood"
+                    >
+                      ✕
+                    </button>
+                    {isImg ? (
+                      <img src={item.text} alt="Mood board snap" className="rounded-sm" />
+                    ) : null}
+                    <div className="caption truncate">
+                      {isImg ? 'Inspiration' : item.text}
+                    </div>
+                  </div>
+                );
+              })}
+              {moods.length === 0 && (
+                <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
               )}
             </div>
           </div>
 
-          {/* L'AGENDA (Ufficio / Utility) */}
-          <div className="desk-card card-agenda hover-rot-1" style={{ '--hover-rot': '1.5deg' } as any}>
-            {/* Custom spiral loops */}
-            <div className="agenda-rings">
-              {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="agenda-ring" />
-              ))}
+          {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
+          <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
+            <div className="postit-tape"></div>
+            <div className="flex items-center gap-1.5 mb-3 mt-1 text-yellow-950 font-bold font-sans">
+              <SparklesIcon className="w-4 h-4 text-amber-800" />
+              <span className="font-bold tracking-wider text-base">Sticky Note Board 📌</span>
             </div>
 
-            <h2 className="group-title">Utility & Ufficio</h2>
-            <ul className="app-list">
-              <li>
-                <a 
-                  href="https://ufficio-personale.netlify.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
-                >
-                  💼 Ufficio Personale
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://editor-di-testo.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
-                >
-                  📝 Editor di Testo Pro
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://pdf-notepad.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
-                >
-                  📑 Pdf Notepad
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://pdf-editor-text.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(750, 'sine', 0.05)}
-                >
-                  🗒 Pdf Editor Text
-                </a>
-              </li>
-            </ul>
+            <div className="space-y-3 mb-4">
+              <input 
+                type="text" 
+                placeholder="Nuovo appunto..." 
+                value={noteInput} 
+                onChange={(e) => setNoteInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && addNote()}
+                className="w-full bg-white/50 border-b border-yellow-600/30 text-xs py-1 px-2 text-stone-900 focus:outline-none focus:border-yellow-700 font-sans"
+              />
+              <button 
+                onClick={addNote}
+                className="w-full bg-yellow-600/25 hover:bg-yellow-600/40 text-stone-900 text-[10px] font-bold py-1 rounded transition-all "
+              >
+                Aggiungi Nota Rapida
+              </button>
+            </div>
+
+            <div className="space-y-2 max-h-[180px] overflow-y-auto">
+              {notes.map((note, index) => (
+                <div key={index} className="flex justify-between items-start bg-yellow-200/40 p-2 rounded text-xs text-stone-800 font-sans border border-yellow-500/10">
+                  <span className="leading-tight font-medium">{note}</span>
+                  <button onClick={() => deleteNote(index)} className="text-stone-600 hover:text-red-500 pl-2">
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {notes.length === 0 && (
+                <div className="text-center text-[10px] italic text-stone-600">Nessun promemoria attivo.</div>
+              )}
+            </div>
           </div>
 
-          
+          {/* =========================================
+             GRUPPO 2: LAVAGNA, GATTO, TELEFONO, EDITOR TESTO
+             ========================================= */}
+
+          {/* CARD D: LAVAGNA SLATE WOOD CHECKLIST */}
+          <LavagnaCard />
+
+          {/* CARD H: FAT CAT WIDGET WITH MOVING SWAY TAIL */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="relative w-full max-w-[340px] mx-auto mt-6">
+              {/* Cat Ears */}
+              <div className="absolute -top-5 left-6 w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-b-[26px] border-b-orange-400 transform -rotate-12"></div>
+              <div className="absolute -top-5 right-6 w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-b-[26px] border-b-orange-400 transform rotate-12"></div>
+
+              {/* Cat Body Card */}
+              <div className="bg-orange-400 rounded-[2rem] p-6 shadow-2xl relative z-20 border-4 border-orange-500 flex flex-col items-center">
+                {/* Face details */}
+                <div className="flex justify-center items-center gap-6 mb-4 mt-1">
+                  {/* SX eye */}
+                  <div className="w-4 h-4 bg-gray-900 rounded-full relative overflow-hidden">
+                    <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-full"></div>
+                  </div>
+                  {/* Mouth/Whiskers */}
+                  <div className="relative flex flex-col items-center">
+                    <div className="w-3.5 h-2 bg-pink-300 rounded-full z-10"></div>
+                    <div className="absolute top-1 -left-4 w-3 h-0.5 bg-orange-200 rotate-12 rounded-full"></div>
+                    <div className="absolute top-2.5 -left-4 w-3 h-0.5 bg-orange-200 -rotate-12 rounded-full"></div>
+                    <div className="absolute top-1 -right-4 w-3 h-0.5 bg-orange-200 -rotate-12 rounded-full"></div>
+                    <div className="absolute top-2.5 -right-4 w-3 h-0.5 bg-orange-200 rotate-12 rounded-full"></div>
+                  </div>
+                  {/* DX eye */}
+                  <div className="w-4 h-4 bg-gray-900 rounded-full relative overflow-hidden">
+                    <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-full"></div>
+                  </div>
+                </div>
+
+                <h4 className="text-white font-bold text-lg mb-4 tracking-wider font-sans">I Miei Link</h4>
+
+                <div className="w-full bg-white/95 rounded-2xl p-4 flex flex-col gap-2 shadow-inner">
+                  <a href="https://character-marker.vercel.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                    🐱 Character Marker
+                  </a>
+                  <a href="generatore-kawaii.hltm" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                    👑 Generatore di Kawaii
+                  </a>
+                  <a href="character-engine.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                    🦊 CSS_ENGINE v5.1
+                  </a>
+                  <a href="anatomy.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                    🤵 Anatomy Sculptor Pro
+                  </a>
+                  <a href="anatomy2.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                    🧸 Anatomy Blueprint Studio
+                  </a>
+                  <a href="https://css-artist-lab.netlify.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                    🐾 Css Artist Lab
+                  </a>
+                </div>
+              </div>
+
+              {/* Swaying cat tail element */}
+              <div 
+                className="absolute -bottom-5 -right-2 w-16 h-16 border-b-8 border-r-8 border-orange-400 rounded-br-full transition-transform duration-500 ease-in-out hover:rotate-12 cursor-pointer z-10"
+                onClick={() => playSoundBlip(880, 'sine', 0.05)}
+              ></div>
+            </div>
+          </div>
+
+          {/* CARD I: SMARTPHONE BEZEL OVERLAY FOR BOOKS */}
+          <SmartphoneCard playSoundBlip={playSoundBlip} />
 
           {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
@@ -1793,166 +1613,82 @@ export default function App() {
             </div>
           </div>
 
-         {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
-            <div className="app-group card-tavolozza">
-              <h2 className="group-title">🎨 Foto Design</h2>
-              <ul className="app-list">
-                <li>
-                  <a 
-                    href="https://vector-sketch.netlify.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                  >
-                    Vector Sketch
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://arty-scrapbook.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(820, 'sine', 0.05)}
-                  >
-                    Arty Scrapbook
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://scrapbook-magic.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(840, 'sine', 0.05)}
-                  >
-                    Scrapbook magic
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://stickers-creator.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(860, 'sine', 0.05)}
-                  >
-                    Stickers Creator
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://artiscard.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(880, 'sine', 0.05)}
-                  >
-                    ArtisCard
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://arte-libera-studio.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
-                  >
-                    ArteLibera Studio
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+          {/* =========================================
+             GRUPPO 3: TV, PC, VSCODE, SNIPPET CREATOR
+             ========================================= */}
 
+          {/* TV BOX */}
+          <TvBoxCard />
 
-          {/* CARD EXTRA: PORTAL CARDS */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="p-8 flex items-center justify-center min-h-full">
-              <div className="relative w-[320px] h-[560px] rounded-3xl bg-[#ff8f95] p-4 overflow-hidden shadow-2xl">
-                <div className="absolute top-20 -left-5 w-40 h-40 rounded-3xl bg-[#8fd5ff] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div className="absolute bottom-10 -right-5 w-40 h-40 rounded-3xl bg-[#ffd57a] [background-image:linear-gradient(#ffffff55_1px,transparent_1px),linear-gradient(90deg,#ffffff55_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div className="relative w-full h-full bg-white rounded-2xl shadow-lg px-6 pt-6 pb-8 flex flex-col items-center justify-between">
-                  <div className="w-full flex items-center justify-between text-xs font-medium text-gray-700">
-                    <span>3/100</span>
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
-                      <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 shadow-sm text-[10px] font-semibold text-gray-700">10"</div>
-                    </div>
-                  </div>
-                  
-                  <div className="relative flex flex-col items-start justify-center gap-2.5 my-auto w-full">
-                    <ul className="list-none space-y-1 text-sm text-gray-800 font-medium w-full">
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="generatore-card-orientali.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">🧧 Creatore di Card Orientali</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="hanziBuilderPro.html" className="text-gray-700 hover:text-red-500 flex items-center gap-1.5">㊗ Hanzi Builder Pro</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://le-app-studio.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-500 flex items-center gap-1.5">🎓 App-Studio</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://whats-app-chat-designer.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-green-500 flex items-center gap-1.5">🗯 ChatBuilder</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://grammar-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-yellow-600 flex items-center gap-1.5">📔 Grammar Creator</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://librocreator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-orange-500 flex items-center gap-1.5">📙 Libro Creator</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://flashcard-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-indigo-500 flex items-center gap-1.5">🎴 Flashcard Creator</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://linguaeditpro.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-purple-500 flex items-center gap-1.5">🗣 Lingua Edit Pro</a>
-                      </li>
-                      <li className="hover:translate-x-1.5 transition-transform duration-200">
-                        <a href="https://dialogue-creator.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5">💬 Dialogue Creator</a>
-                      </li>
-                    </ul>
-                  </div>
+          {/* CARD EXTRA: RETRO PERSONAL COMPUTER DEVICE */}
+          <RetroPcCard />
 
-                  <div className="w-full flex items-center justify-between text-xs text-gray-500">
-                    <span className="text-[11px]">Tocca per ascoltare</span>
-                    <div className="flex gap-2">
-                      <div className="px-3 py-1.5 rounded-full bg-[#ff8f95] text-[11px] font-semibold text-white shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Indietro</div>
-                      <div className="px-3 py-1.5 rounded-full bg-[#ffbd4a] text-[11px] font-semibold text-gray-900 shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all">Avanti</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
-              <iframe 
-                src="https://calendario-strappato.vercel.app/?embed=true&paper=lined&font=handwriting&tape=transparent" 
-                style={{ border: 'none', overflow: 'hidden', background: 'transparent' }} 
-                width="100%" 
-                height="450" 
-                title="Calendario Strappato"
-              />
-            </div>
-          </div>
-
-        
-         
+          {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
+          <VsCodeCard />
 
           {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="p-3 bg-stone-900 border-4 border-stone-800 rounded-3xl shadow-2xl relative w-full overflow-hidden">
-              {/* Retro monitor glowing line on top */}
-              <div className="h-1.5 w-24 bg-teal-500 rounded-full mx-auto mb-2 opacity-80 animate-pulse"></div>
-              <iframe 
-                src="https://creatore-di-snippet.vercel.app/" 
-                className="w-full h-[520px] rounded-2xl border-none"
-                allow="clipboard-write"
-                loading="lazy"
-                title="Creatore di Card Snippet"
+          <SnippetCreatorCard />
+
+          {/* =========================================
+             GRUPPO 4: ALL OTHERS (Notebook Preferiti, Agenda, CSS Artist, JSON, Portals, Games, Tarot, etc)
+             ========================================= */}
+
+          {/* CARD B: NOTEBOOK PREFERITI */}
+          <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="flex items-center gap-2 mb-4">
+              <BookmarkIcon className="w-5 h-5 text-indigo-900" />
+              <div className="font-bold text-stone-900 tracking-wide text-lg">Preferiti 🔖</div>
+            </div>
+            
+            <div className="link-input-group mb-4">
+              <input 
+                type="text" 
+                placeholder="Titolo" 
+                value={linkTitle}
+                onChange={(e) => setLinkTitle(e.target.value)}
+                className="link-input"
               />
-              <div className="text-[9px] text-stone-500 text-center font-mono mt-2">MONITOR - SNIPPET GENERATOR</div>
+              <input 
+                type="text" 
+                placeholder="https://..." 
+                value={linkUrl}
+                onChange={(e) => setLinkUrl(e.target.value)}
+                className="link-input"
+              />
+              <button 
+                onClick={addLink}
+                className="w-full bg-slate-800 hover:bg-slate-700 active:translate-y-[1px] text-white py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all mt-1"
+              >
+                Aggiungi Link ＋
+              </button>
+            </div>
+
+            <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1">
+              {links.map(l => (
+                <div key={l.id} className="link-item flex justify-between items-center bg-white/40 hover:bg-white/70 px-2 py-1.5 rounded transition-all">
+                  <a href={l.url} target="_blank" rel="noopener noreferrer" className="truncate max-w-[85%] font-medium">
+                    🔗 {l.title}
+                  </a>
+                  <button 
+                    onClick={() => deleteLink(l.id)}
+                    className="text-stone-400 hover:text-red-500 transition-all text-xs"
+                    title="Rimuovi"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {links.length === 0 && (
+                <div className="text-xs text-stone-500 italic py-4 text-center">Taccuino vuoto</div>
+              )}
             </div>
           </div>
+
+          {/* L'AGENDA (Ufficio / Utility) */}
+          <AgendaCard playSoundBlip={playSoundBlip} />
+
+          {/* ALBUM CSS GRANDE - CSS Artist Draft */}
+          <AlbumCssCard playSoundBlip={playSoundBlip} />
 
           {/* CARD H: FAT CAT WIDGET WITH MOVING SWAY TAIL */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
@@ -2102,46 +1838,6 @@ export default function App() {
              NATIVE EXTRA FLUID CARDS
              ========================================= */}
 
-          {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
-          <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
-            <div className="postit-tape"></div>
-            <div className="flex items-center gap-1.5 mb-3 mt-1 text-yellow-950 font-bold font-sans">
-              <SparklesIcon className="w-4 h-4 text-amber-800" />
-              <span className="font-bold tracking-wider text-base">Sticky Note Board 📌</span>
-            </div>
-
-            <div className="space-y-3 mb-4">
-              <input 
-                type="text" 
-                placeholder="Nuovo appunto..." 
-                value={noteInput} 
-                onChange={(e) => setNoteInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && addNote()}
-                className="w-full bg-white/50 border-b border-yellow-600/30 text-xs py-1 px-2 text-stone-900 focus:outline-none focus:border-yellow-700 font-sans"
-              />
-              <button 
-                onClick={addNote}
-                className="w-full bg-yellow-600/25 hover:bg-yellow-600/40 text-stone-900 text-[10px] font-bold py-1 rounded transition-all "
-              >
-                Aggiungi Nota Rapida
-              </button>
-            </div>
-
-            <div className="space-y-2 max-h-[180px] overflow-y-auto">
-              {notes.map((note, index) => (
-                <div key={index} className="flex justify-between items-start bg-yellow-200/40 p-2 rounded text-xs text-stone-800 font-sans border border-yellow-500/10">
-                  <span className="leading-tight font-medium">{note}</span>
-                  <button onClick={() => deleteNote(index)} className="text-stone-600 hover:text-red-500 pl-2">
-                    ✕
-                  </button>
-                </div>
-              ))}
-              {notes.length === 0 && (
-                <div className="text-center text-[10px] italic text-stone-600">Nessun promemoria attivo.</div>
-              )}
-            </div>
-          </div>
-
           {/* EXTRA CARD 2: REFRESHING COLOR MARKERS & COASTER */}
           <div className="desk-card bg-neutral-800/80 p-5 rounded-3xl border border-white/5 hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
             <div className="flex justify-between items-center mb-3">
@@ -2176,237 +1872,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
-          <div className="desk-card bg-[#5c4033] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
-            </div>
-
-            <div className="text-center text-white mt-1">
-              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
-              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
-                {currentTime.toLocaleTimeString('it-IT')}
-              </div>
-            </div>
-
-            {/* Swing pendulum container */}
-            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
-              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
-                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
-              </div>
-            </div>
-
-            {/* Focus pomodoro timer interface */}
-            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
-              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
-                <span>STAGE: {pomoMode.toUpperCase()}</span>
-                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
-              </div>
-
-              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
-                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
-              </div>
-
-              <div className="flex gap-2 justify-center mt-3">
-                <button 
-                  onClick={togglePomo} 
-                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
-                >
-                  {pomoActive ? 'PAUSA' : 'START'}
-                </button>
-                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
-                  RESET
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="retro-pc-case">
-              {/* Glowing CRT Glass Bezel Cover */}
-              <div className="monitor-glass shadow-2xl">
-                {/* Screen Scanlines Mesh */}
-                <div className="crt-scanlines"></div>
-                <div className="crt-flicker"></div>
-                <div className="screen-glare"></div>
-                
-                {/* System Shell Prompt Header */}
-                <div className="terminal-shell">
-                  <div className="sys-info font-mono">
-                    BIOS v4.12 - MEM: 640KB BASE OK
-                    <br />[CODELINK RETRO OS - CONSOLE ATTIVA]
-                  </div>
-                  
-                  {/* List of Hyperlinks in Matrix console screen */}
-                  <div className="console-entries mt-6">
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="Snake Arcade Retro.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(600, 'triangle', 0.1)}
-                      >
-                        🐍 Snake
-                      </a>
-                      <span className="status-label font-mono">[READY]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="memory.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(650, 'triangle', 0.1)}
-                      >
-                        🃏 Memory
-                      </a>
-                      <span className="status-label font-mono">[READY]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="type-invader.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(700, 'triangle', 0.1)}
-                      >
-                        🔠 Type Invaders
-                      </a>
-                      <span className="status-label font-mono">[STABLE]</span>
-                    </div>
-                    
-                    <div className="console-row">
-                      <span className="prompt-symbol">&gt;</span>
-                      <a 
-                        href="campo-minato.html" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="matrix-link"
-                        onClick={() => playSoundBlip(750, 'triangle', 0.1)}
-                      >
-                        💣 Campo minato
-                      </a>
-                      <span className="status-label font-mono">[ONLINE]</span>
-                    </div>
-                  </div>
-                  
-                  {/* Interactive Input Prompt with blinking cursors */}
-                  <div className="active-prompt mt-5 font-mono">
-                    <span className="prompt-symbol">&gt;</span>
-                    <span className="typing-placeholder">SISTEMA PRONTO...</span>
-                    <span className="blinking-cursor">▒</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-           {/* CARD E: MOOD BOARD CORKBOARD */}
-          <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
-              Mood Board 🖼️
-            </div>
-            
-            <div className="flex gap-1.5 mb-4">
-              <input 
-                type="text" 
-                placeholder="URL Foto o Pensiero..." 
-                value={moodInput}
-                onChange={(e) => setMoodInput(e.target.value)}
-                className="bg-white/95 text-xs text-stone-800 rounded px-2 py-1.5 flex-grow font-sans border border-amber-900/20 shadow-inner"
-              />
-              <button 
-                onClick={addMoodItem}
-                className="bg-green-700 hover:bg-green-600 font-bold px-3 py-1 text-white rounded cursor-pointer text-xs"
-              >
-                📌
-              </button>
-            </div>
-
-            <div className="mood-display">
-              {moods.map(item => {
-                const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
-                return (
-                  <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
-                    <button 
-                      onClick={() => deleteMood(item.id)}
-                      className="remove-mood"
-                    >
-                      ✕
-                    </button>
-                    {isImg ? (
-                      <img src={item.text} alt="Mood board snap" className="rounded-sm" />
-                    ) : null}
-                    <div className="caption truncate">
-                      {isImg ? 'Inspiration' : item.text}
-                    </div>
-                  </div>
-                );
-              })}
-              {moods.length === 0 && (
-                <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
-              )}
-            </div>
-          </div>
-
-          {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
-          <div className="desk-card card-editor hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="editor-header">
-              <div className="mac-btn close"></div>
-              <div className="mac-btn min"></div>
-              <div className="mac-btn max"></div>
-              <span className="text-[10px] text-stone-500 font-mono ml-2 mt-0.5">VS Code Lite</span>
-            </div>
-            <div className="p-4 font-mono text-xs">
-              <div className="text-sky-400 font-bold mb-3">&lt;DevTools /&gt;</div>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://scottino2019-glitch.github.io/web-designer/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Web Designer"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://htmlcssedit.netlify.app" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Editor Html"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://tailwind-code-lab.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Tailwind Coding"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://portofolio-pi-kohl.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Portofolio"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://mini-ide.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Mini Ide"
-                  </a>
-                </li>
-                <li className="flex items-center gap-1.5 text-stone-300">
-                  <span className="text-purple-400">import</span>
-                  <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-                    "Div Generator"
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-   {/* CARD EXTRA: JSON EDITOR */}
+          {/* CARD EXTRA: JSON EDITOR */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
             <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900 relative">
               {/* Badge JSON */}
@@ -2476,6 +1942,13 @@ export default function App() {
               </div>
             </div>
           </div>
+
+          {/* CARD EXTRA: PORTAL CARDS */}
+          <PortalCardsCard />
+
+          {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
+          <CrtMonitorCard playSoundBlip={playSoundBlip} />
+
           {/* EXTRA CARD 4: RETRO ARCADE TAMAGOTCHI PET */}
           <div className="desk-card bg-[#38bdf8] p-5 rounded-[2rem] border-4 border-[#0284c7] shadow-2xl relative w-full" style={{ '--hover-rot': '1.5deg' } as any}>
             <div className="flex justify-center mb-1">
@@ -2665,6 +2138,75 @@ export default function App() {
             </button>
           </div>
 
+          {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
+            <div className="app-group card-tavolozza">
+              <h2 className="group-title">🎨 Foto Design</h2>
+              <ul className="app-list">
+                <li>
+                  <a 
+                    href="https://vector-sketch.netlify.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                  >
+                    Vector Sketch
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://arty-scrapbook.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(820, 'sine', 0.05)}
+                  >
+                    Arty Scrapbook
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://scrapbook-magic.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(840, 'sine', 0.05)}
+                  >
+                    Scrapbook magic
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://stickers-creator.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(860, 'sine', 0.05)}
+                  >
+                    Stickers Creator
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://artiscard.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(880, 'sine', 0.05)}
+                  >
+                    ArtisCard
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://arte-libera-studio.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                    ArteLibera Studio
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           {/* EXTRA CARD 8: INTERACTIVE COFFEE DISH FORTUNE MUG */}
           <div className="desk-card bg-amber-900/10 p-5 rounded-3xl border-2 border-amber-900/20 shadow-xl relative w-full" style={{ '--hover-rot': '1deg' } as any}>
             {/* Coffee stain ring behind */}
@@ -2679,7 +2221,7 @@ export default function App() {
               {/* Cup container click to sip */}
               <button 
                 onClick={sipCoffee} 
-                className="w-20 h-20 bg-stone-890 hover:bg-stone-840 rounded-full border-4 border-amber-700 flex flex-col items-center justify-center transition-all active:scale-95 cursor-pointer relative shadow-lg"
+                className="w-20 h-20 bg-stone-800 hover:bg-stone-700 rounded-full border-4 border-amber-700 flex flex-col items-center justify-center transition-all active:scale-95 cursor-pointer relative shadow-lg"
               >
                 <span className="text-3xl filter drop-shadow">☕</span>
                 <div className="absolute top-1 rotate-12 flex space-x-1">
@@ -2711,4 +2253,3 @@ export default function App() {
     </div>
   );
 }
-
