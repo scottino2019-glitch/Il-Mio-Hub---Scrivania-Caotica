@@ -1520,7 +1520,78 @@ export default function App() {
             </a>
           </div>
 
-          {/* CARD B: NOTEBOOK PREFERITI */}
+          {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="p-3 bg-stone-900 border-4 border-stone-800 rounded-3xl shadow-2xl relative w-full overflow-hidden">
+              {/* Retro monitor glowing line on top */}
+              <div className="h-1.5 w-24 bg-teal-500 rounded-full mx-auto mb-2 opacity-80 animate-pulse"></div>
+              <iframe 
+                src="https://creatore-di-snippet.vercel.app/" 
+                className="w-full h-[520px] rounded-2xl border-none"
+                allow="clipboard-write"
+                loading="lazy"
+                title="Creatore di Card Snippet"
+              />
+              <div className="text-[9px] text-stone-500 text-center font-mono mt-2">MONITOR - SNIPPET GENERATOR</div>
+            </div>
+          </div>
+     
+
+          
+
+          {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
+            <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900">
+              <h1 className="text-xl font-black mb-3 text-stone-800 flex items-center gap-2">
+                <span>📝</span> Editor testo
+              </h1>
+
+              <label htmlFor="textInputSelector" className="block text-xs font-bold mb-1.5 text-stone-700">
+                Scrivi o incolla il testo:
+              </label>
+
+              <textarea
+                id="textInputSelector"
+                rows={10}
+                value={textInput}
+                onChange={(e) => {
+                  setTextInput(e.target.value);
+                  localStorage.setItem('editor_text', e.target.value);
+                }}
+                className="w-full p-3 rounded-xl border-2 border-stone-300 focus:outline-none focus:border-blue-500 resize-y font-mono text-xs bg-stone-100 text-stone-900 caret-stone-900 placeholder:text-stone-400"
+                placeholder="Scrivi qui il tuo testo..."
+              />
+
+              <div className="mt-3 flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <input
+                    id="textFilenameSelector"
+                    type="text"
+                    value={textFilename}
+                    onChange={(e) => setTextFilename(e.target.value)}
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border-2 border-stone-400 font-bold bg-white text-stone-800 placeholder:text-stone-400"
+                    placeholder="nomefile.txt"
+                  />
+
+                  <button
+                    id="textSaveBtnSelector"
+                    type="button"
+                    onClick={saveTextFile}
+                    className="px-4 py-1.5 rounded-lg bg-red-500 hover:bg-red-600 text-white font-black border-2 border-red-800 shadow-[0_2.5px_0_#7f1d1d] active:translate-y-0.5 active:shadow-none text-xs transition-all"
+                  >
+                    Salva file
+                  </button>
+                </div>
+                {isStatusVisible && textStatusMsg && (
+                  <p id="textStatusMsgSelector" className="text-[10px] font-bold text-center text-emerald-800 bg-emerald-50 border border-emerald-200 p-1.5 rounded-lg">
+                    {textStatusMsg}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+            {/* CARD B: NOTEBOOK PREFERITI */}
           <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="flex items-center gap-2 mb-4">
               <BookmarkIcon className="w-5 h-5 text-indigo-900" />
@@ -1625,62 +1696,6 @@ export default function App() {
             </ul>
           </div>
 
-          
-
-          {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
-            <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900">
-              <h1 className="text-xl font-black mb-3 text-stone-800 flex items-center gap-2">
-                <span>📝</span> Editor testo
-              </h1>
-
-              <label htmlFor="textInputSelector" className="block text-xs font-bold mb-1.5 text-stone-700">
-                Scrivi o incolla il testo:
-              </label>
-
-              <textarea
-                id="textInputSelector"
-                rows={10}
-                value={textInput}
-                onChange={(e) => {
-                  setTextInput(e.target.value);
-                  localStorage.setItem('editor_text', e.target.value);
-                }}
-                className="w-full p-3 rounded-xl border-2 border-stone-300 focus:outline-none focus:border-blue-500 resize-y font-mono text-xs bg-stone-100 text-stone-900 caret-stone-900 placeholder:text-stone-400"
-                placeholder="Scrivi qui il tuo testo..."
-              />
-
-              <div className="mt-3 flex flex-col gap-2">
-                <div className="flex gap-2">
-                  <input
-                    id="textFilenameSelector"
-                    type="text"
-                    value={textFilename}
-                    onChange={(e) => setTextFilename(e.target.value)}
-                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border-2 border-stone-400 font-bold bg-white text-stone-800 placeholder:text-stone-400"
-                    placeholder="nomefile.txt"
-                  />
-
-                  <button
-                    id="textSaveBtnSelector"
-                    type="button"
-                    onClick={saveTextFile}
-                    className="px-4 py-1.5 rounded-lg bg-red-500 hover:bg-red-600 text-white font-black border-2 border-red-800 shadow-[0_2.5px_0_#7f1d1d] active:translate-y-0.5 active:shadow-none text-xs transition-all"
-                  >
-                    Salva file
-                  </button>
-                </div>
-                {isStatusVisible && textStatusMsg && (
-                  <p id="textStatusMsgSelector" className="text-[10px] font-bold text-center text-emerald-800 bg-emerald-50 border border-emerald-200 p-1.5 rounded-lg">
-                    {textStatusMsg}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
-       
-
           {/* CARD EXTRA: PORTAL CARDS */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="p-8 flex items-center justify-center min-h-full">
@@ -1756,21 +1771,6 @@ export default function App() {
         
          
 
-          {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="p-3 bg-stone-900 border-4 border-stone-800 rounded-3xl shadow-2xl relative w-full overflow-hidden">
-              {/* Retro monitor glowing line on top */}
-              <div className="h-1.5 w-24 bg-teal-500 rounded-full mx-auto mb-2 opacity-80 animate-pulse"></div>
-              <iframe 
-                src="https://creatore-di-snippet.vercel.app/" 
-                className="w-full h-[520px] rounded-2xl border-none"
-                allow="clipboard-write"
-                loading="lazy"
-                title="Creatore di Card Snippet"
-              />
-              <div className="text-[9px] text-stone-500 text-center font-mono mt-2">MONITOR - SNIPPET GENERATOR</div>
-            </div>
-          </div>
 
           {/* CARD H: FAT CAT WIDGET WITH MOVING SWAY TAIL */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
