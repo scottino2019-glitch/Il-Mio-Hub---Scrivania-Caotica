@@ -1018,6 +1018,186 @@
   background: repeating-linear-gradient(#111 0, #111 2px, transparent 2px, transparent 6px);
   border-radius: 4px;
 }
+/* =========================================
+   RETRO PC CASE & CRT TERMINAL SCREEN
+   ========================================= */
+.retro-pc-case {
+  width: 100%;
+  background-color: #ded1b8; /* Classic vintage beige computer case color */
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 
+    0 12px 30px rgba(0,0,0,0.5),
+    inset 0 4px 8px rgba(255,255,255,0.7),
+    inset 0 -10px 20px rgba(0,0,0,0.4);
+  border: 8px solid #bbaaa0;
+  position: relative;
+  transition: all 0.2s ease-out;
+}
+
+/* Curved CRT screen frame */
+.monitor-glass {
+  position: relative;
+  background-color: #051606;
+  border-top: 15px solid #1c271d;
+  border-left: 15px solid #223024;
+  border-right: 15px solid #223024;
+  border-bottom: 20px solid #2e3e2f;
+  border-radius: 30px;
+  padding: 20px 18px 24px 18px;
+  box-shadow: 
+    inset 0 10px 30px rgba(0,0,0,0.95),
+    0 10px 0 #2c2c2c;
+  overflow: hidden;
+}
+
+/* CRT Scanlines overlays */
+.crt-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.4) 50%
+  ), linear-gradient(
+    90deg, 
+    rgba(255, 0, 0, 0.04), 
+    rgba(0, 255, 0, 0.02), 
+    rgba(0, 0, 255, 0.04)
+  );
+  background-size: 100% 4px, 6px 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Screen Flicker loop for realistic Retro atmosphere */
+@keyframes crt-flicker-anim {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.97; }
+}
+
+.crt-flicker {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 255, 18, 0.015);
+  opacity: 0.15;
+  animation: crt-flicker-anim 0.1s infinite;
+  z-index: 9;
+  pointer-events: none;
+}
+
+/* Glass mirror reflection */
+.screen-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(
+    135deg, 
+    rgba(255,255,255,0.08) 0%, 
+    rgba(255,255,255,0) 45%
+  );
+  transform: rotate(-30deg) translate(-20%, -20%);
+  pointer-events: none;
+  z-index: 8;
+}
+
+.terminal-shell {
+  position: relative;
+  z-index: 5;
+  font-family: 'VT323', monospace !important;
+  color: #3bf13b; /* Vibrant Phosphor green screen print */
+}
+
+.sys-info {
+  font-family: 'VT323', monospace !important;
+  font-size: 14.5px;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  color: #82e0aa;
+  text-shadow: 0 0 2px rgba(130, 224, 170, 0.5);
+  border-bottom: 2px dashed rgba(59, 241, 59, 0.3);
+  padding-bottom: 8px;
+}
+
+.console-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.console-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'VT323', monospace !important;
+}
+
+.prompt-symbol {
+  font-size: 20px;
+  color: #3bf13b;
+  text-shadow: 0 0 4px #3bf13b;
+}
+
+.status-label {
+  font-size: 15px;
+  color: #27ae60;
+  margin-left: auto;
+  font-family: 'VT323', monospace !important;
+}
+
+/* MAGICAL HOVER EFFECTS
+   1. Matrix terminal neon text selection block
+   2. Reverse coloring phosphor fill
+   3. Terminal prompt shifting */
+.matrix-link {
+  font-family: 'VT323', monospace !important;
+  font-size: 19px;
+  font-weight: 500;
+  color: #3bf13b !important;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding: 1px 6px;
+  transition: all 0.15s ease;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.matrix-link:hover {
+  background-color: #3bf13b;
+  color: #051606 !important;
+  border-radius: 2px;
+  text-shadow: none;
+  box-shadow: 0 0 10px rgba(59, 241, 59, 0.89);
+  transform: translateX(4px);
+}
+
+.active-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2ecc71;
+  font-size: 16px;
+  font-family: 'VT323', monospace !important;
+}
+
+.typing-placeholder {
+  opacity: 0.6;
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.blinking-cursor {
+  animation: cursor-blink 1s infinite;
+  font-weight: bold;
+}
 
 /* =========================================
    RETRO PC CASE & CRT TERMINAL SCREEN
