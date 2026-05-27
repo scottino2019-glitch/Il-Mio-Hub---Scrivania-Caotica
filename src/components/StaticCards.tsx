@@ -89,7 +89,7 @@ export const LavagnaCard: React.FC = () => {
             <div className="flex gap-2 items-start">
               <span>📑</span>
               <div>
-                <a href="https://spazio-creativo.vercel.app/eserciziPDF.html" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-green">
+                <a href="eserciziPDF.html" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-green">
                   4. Eserciziario PDF
                 </a>
                 <span className="block text-[9px] text-white/50">Svolgere i compiti sul tablet</span>
@@ -185,15 +185,15 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
               </a>
 
               <a 
-                href="https://mdn.mozilla.org" 
+                href="https://z-library.bz/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.05)}
                 className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
               >
-                <span className="text-3xl mb-1.5">💡</span>
+                <span className="text-3xl mb-1.5">🗄</span>
                 <span className="text-[11px] text-white font-bold tracking-tight">Z-Library</span>
-                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">INFO CODIRE ↗</span>
+                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
               </a>
             </div>
           </div>
@@ -381,6 +381,18 @@ export const VsCodeCard: React.FC = () => {
             <span className="text-purple-400">import</span>
             <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
               "Div Generator"
+            </a>
+          </li>
+             <li className="flex items-center gap-1.5 text-stone-300">
+            <span className="text-purple-400">import</span>
+            <a href="https://parallax-studio-sage.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+              "Parallax Studio"
+            </a>
+          </li>
+            <li className="flex items-center gap-1.5 text-stone-300">
+            <span className="text-purple-400">import</span>
+            <a href="https://scroll-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+              "Scroll Studio"
             </a>
           </li>
         </ul>
@@ -740,24 +752,15 @@ export const ArtistPaletteCard: React.FC<StaticCardsProps> = ({ playSoundBlip })
           </li>
           <li>
             <a 
-              href="https://arty-scrapbook.vercel.app/" 
+              href="calligraphy-font-art-editor.vercel.app" 
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={() => playSoundBlip(820, 'sine', 0.05)}
             >
-              Arty Scrapbook
+              Calligraphy Font art
             </a>
           </li>
-          <li>
-            <a 
-              href="https://scrapbook-magic.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              onClick={() => playSoundBlip(840, 'sine', 0.05)}
-            >
-              Scrapbook magic
-            </a>
-          </li>
+         
           <li>
             <a 
               href="https://stickers-creator.vercel.app/" 
@@ -947,14 +950,14 @@ export const PinkPdfNotebookCard: React.FC<StaticCardsProps> = ({ playSoundBlip 
             <div className="font-extrabold text-[8px] uppercase tracking-wide text-pink-800 mb-1 flex items-center gap-1">
               <span>🚀</span> Altri editor PDF sulla scrivania:
             </div>
-            <a href="https://pdf-notepad.vercel.app/" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
-              ➜ 📑 Pdf Notepad (Quadretti integrati)
+            <a href="editor-pdf-quadretti.html" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
+              ➜ 📑 Pdf Editor (Quadretti)
             </a>
-            <a href="https://pdf-editor-text.vercel.app/" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
-              ➜ 🗒 Pdf Editor Text (Linee scritte)
+            <a href="righe-pdf-editor.html" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
+              ➜ 🗒 Pdf Editor  (Righe)
             </a>
-            <a href="https://ufficio-personale.netlify.app/" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
-              ➜ 💼 Ufficio Personale Creator
+            <a href="pdf-creator.html" target="_blank" rel="noopener noreferrer" className="block hover:underline hover:text-pink-600">
+              ➜ 💼 Pdf Creator
             </a>
           </div>
         </div>
@@ -1052,24 +1055,24 @@ export const PolaroidCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
         <span className="text-[7.5px] uppercase font-black text-stone-400 tracking-wider text-center block mb-0.5">🚀 Link Rapidi Applicazioni</span>
         <div className="grid grid-cols-2 gap-1.5">
           <a 
-            href="https://pdf-notepad.vercel.app/" 
+            href="scrapbook-magic.vercel.app" 
             target="_blank" 
             rel="noopener noreferrer" 
             onClick={() => playSoundBlip(950, "sine", 0.05)}
             className="px-1.5 py-1 bg-yellow-100 hover:bg-yellow-200 text-yellow-905 border border-yellow-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
-            title="Apri Pdf Notepad"
+            title=" Apri Scrapbook Magic"
           >
-            📑 PDF Notepad ➜
+            🪟 Scrapbook Magic ➜
           </a>
           <a 
-            href="https://pdf-editor-text.vercel.app/" 
+            href="arty-scrapbook.vercel.app/" 
             target="_blank" 
             rel="noopener noreferrer" 
             onClick={() => playSoundBlip(950, "sine", 0.05)}
             className="px-1.5 py-1 bg-sky-100 hover:bg-sky-200 text-sky-905 border border-sky-300 rounded text-center font-bold hover:underline transition-colors block text-[8px] truncate"
-            title="Apri Pdf Editor Text"
+            title="Apri Arty Scrapbook"
           >
-            🗒 PDF Editor ➜
+             🪟 Arty Scrapbook ➜
           </a>
         </div>
       </div>
