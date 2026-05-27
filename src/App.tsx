@@ -1347,6 +1347,178 @@ export default function App() {
               />
             </div>
           </div>
+            {/* CARD D: LAVAGNA SLATE WOOD CHECKLIST */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="wooden-frame">
+              <div className="slate-surface relative">
+                <div className="chalk-dust-1"></div>
+                <div className="chalk-dust-2"></div>
+                
+                <div className="text-center mb-6">
+                  <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
+                   Lingua e Utility
+                  </h3>
+                  <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
+                </div>
+
+                <div className="space-y-4 relative z-10 font-mono text-xs">
+                  <div className="flex gap-2 items-start">
+                    <span>🐉</span>
+                    <div>
+                      <a href="https://scottino2019-glitch.github.io/lingua-cinese/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
+                        1. 中文 (Cinese)
+                      </a>
+                      <span className="block text-[9px] text-white/50">Portale e dizionario linguistico</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 items-start">
+                    <span>🐅</span>
+                    <div>
+                      <a href="https://linguacoreana.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-blue">
+                        2. 한국어 (Coreano)
+                      </a>
+                      <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 items-start">
+                    <span>✍</span>
+                    <div>
+                      <a href="https://quaderni-per-esercizi.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-yellow">
+                        3. Laboratorio Linguistico
+                      </a>
+                      <span className="block text-[9px] text-white/50">Quaderni di grammatica attiva</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 items-start">
+                    <span>📑</span>
+                    <div>
+                      <a href="https://spazio-creativo.vercel.app/eserciziPDF.html" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-green">
+                        4. Eserciziario PDF
+                      </a>
+                      <span className="block text-[9px] text-white/50">Svolgere i compiti sul tablet</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 items-start">
+                    <span>💻</span>
+                    <div>
+                      <a href="https://quaderno-digitale.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-red">
+                        5. Quaderno Digitale
+                      </a>
+                      <span className="block text-[9px] text-white/50">Raccolta di studi informatici</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Felt eraser representation */}
+                <div className="absolute bottom-3 right-4 flex flex-col w-[60px] h-[18px] shadow-lg rounded overflow-hidden opacity-85">
+                  <div className="bg-[#444] h-[12px] border-b border-black"></div>
+                  <div className="bg-[#c19a6b] h-[6px] text-stone-800 text-[6px] font-bold flex items-center justify-center font-sans uppercase">
+                    Cancellino
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ALBUM CSS GRANDE - CSS Artist Draft */}
+          <div className="desk-card album-css-grande hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
+            {/* Effetti di disordine */}
+            <div className="nastro-adesivo"></div>
+            <div className="segnalibro-postit">ART</div>
+            <div className="segnalibro-2"></div>
+
+            <div className="etichetta-album">Bozze & Codice</div>
+            <h3>CSS Artist</h3>
+            <p className="Progetti-con-css">Progetti con css.</p>
+            
+            {/* LISTA DEI LINK AI TUOI PROGETTI */}
+            <ul className="lista-progetti">
+              <li>
+                <a 
+                  href="https://graphic-atelier.netlify.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Graphic Atelier
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://comic-studio-five.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Comix Studio
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://analog-craft.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  AnalogCraft
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://creative-card-code-editor.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Creative Card
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://hover-craft-tau.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Hover Craft
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://analogue-studio.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Analogue Studio
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://gliph-forge.netlify.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                >
+                  Gliph Forge
+                </a>
+              </li>
+            </ul>
+
+            <a 
+              href="https://artisan-studio-psi.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn-schizzo"
+              onClick={() => playSoundBlip(950, 'sine', 0.06)}
+            >
+              + Crea Nuovo background
+            </a>
+          </div>
 
           {/* CARD B: NOTEBOOK PREFERITI */}
           <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
@@ -1453,101 +1625,7 @@ export default function App() {
             </ul>
           </div>
 
-          {/* ALBUM CSS GRANDE - CSS Artist Draft */}
-          <div className="desk-card album-css-grande hover-rot-1" style={{ '--hover-rot': '-2deg' } as any}>
-            {/* Effetti di disordine */}
-            <div className="nastro-adesivo"></div>
-            <div className="segnalibro-postit">ART</div>
-            <div className="segnalibro-2"></div>
-
-            <div className="etichetta-album">Bozze & Codice</div>
-            <h3>CSS Artist</h3>
-            <p className="Progetti-con-css">Progetti con css.</p>
-            
-            {/* LISTA DEI LINK AI TUOI PROGETTI */}
-            <ul className="lista-progetti">
-              <li>
-                <a 
-                  href="https://graphic-atelier.netlify.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Graphic Atelier
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://comic-studio-five.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Comix Studio
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://analog-craft.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  AnalogCraft
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://creative-card-code-editor.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Creative Card
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://hover-craft-tau.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Hover Craft
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://analogue-studio.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Analogue Studio
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://gliph-forge.netlify.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                >
-                  Gliph Forge
-                </a>
-              </li>
-            </ul>
-
-            <a 
-              href="https://artisan-studio-psi.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn-schizzo"
-              onClick={() => playSoundBlip(950, 'sine', 0.06)}
-            >
-              + Crea Nuovo background
-            </a>
-          </div>
+          
 
           {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
@@ -1675,83 +1753,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* CARD D: LAVAGNA SLATE WOOD CHECKLIST */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="wooden-frame">
-              <div className="slate-surface relative">
-                <div className="chalk-dust-1"></div>
-                <div className="chalk-dust-2"></div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-                   Lingua e Utility
-                  </h3>
-                  <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
-                </div>
-
-                <div className="space-y-4 relative z-10 font-mono text-xs">
-                  <div className="flex gap-2 items-start">
-                    <span>🐉</span>
-                    <div>
-                      <a href="https://scottino2019-glitch.github.io/lingua-cinese/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
-                        1. 中文 (Cinese)
-                      </a>
-                      <span className="block text-[9px] text-white/50">Portale e dizionario linguistico</span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 items-start">
-                    <span>🐅</span>
-                    <div>
-                      <a href="https://linguacoreana.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-blue">
-                        2. 한국어 (Coreano)
-                      </a>
-                      <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 items-start">
-                    <span>✍</span>
-                    <div>
-                      <a href="https://quaderni-per-esercizi.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-yellow">
-                        3. Laboratorio Linguistico
-                      </a>
-                      <span className="block text-[9px] text-white/50">Quaderni di grammatica attiva</span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 items-start">
-                    <span>📑</span>
-                    <div>
-                      <a href="https://spazio-creativo.vercel.app/eserciziPDF.html" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-green">
-                        4. Eserciziario PDF
-                      </a>
-                      <span className="block text-[9px] text-white/50">Svolgere i compiti sul tablet</span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 items-start">
-                    <span>💻</span>
-                    <div>
-                      <a href="https://quaderno-digitale.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-red">
-                        5. Quaderno Digitale
-                      </a>
-                      <span className="block text-[9px] text-white/50">Raccolta di studi informatici</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Felt eraser representation */}
-                <div className="absolute bottom-3 right-4 flex flex-col w-[60px] h-[18px] shadow-lg rounded overflow-hidden opacity-85">
-                  <div className="bg-[#444] h-[12px] border-b border-black"></div>
-                  <div className="bg-[#c19a6b] h-[6px] text-stone-800 text-[6px] font-bold flex items-center justify-center font-sans uppercase">
-                    Cancellino
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        
          
 
           {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
