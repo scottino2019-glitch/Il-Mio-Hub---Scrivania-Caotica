@@ -21,6 +21,22 @@ export const IpodCard: React.FC = () => {
     </div>
   );
 };
+// 1. IPOD CARD (CARD A)
+export const RojiCard: React.FC = () => {
+return (
+    <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+      <div className="roji-embed-container bg-black rounded-[2rem] shadow-2xl border-4 border-stone-800 overflow-hidden relative aspect-[5/7.2] w-full max-w-[420px] mx-auto">
+        <iframe 
+          src="https://roji-tawny.vercel.app/" 
+          className="absolute inset-0 w-full h-full border-none"
+          allow="autoplay; clipboard-write; encrypted-media"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          title="roji"
+        />
+      </div>
+    </div>
+  );
+};
 
 // 2. CALENDARIO STRAPPATO CARD (CARD C)
 export const CalendarioCard: React.FC = () => {
