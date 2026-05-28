@@ -23,6 +23,7 @@ import {
 
 import { 
   IpodCard, 
+  RojiCard,
   CalendarioCard, 
   LavagnaCard, 
   SmartphoneCard, 
@@ -1358,7 +1359,8 @@ export default function App() {
 
           {/* CARD A: RETRO IPOD PLAYER IFRAME */}
           <IpodCard />
-
+          {/* ROJI */}
+          <RojiCard />
           {/* RETRO SNAPSHOT POLAROID CAMERA WIDGET */}
           <PolaroidCard playSoundBlip={playSoundBlip} />
 
