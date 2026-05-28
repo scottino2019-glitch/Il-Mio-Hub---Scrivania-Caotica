@@ -195,7 +195,32 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
                 <span className="text-[11px] text-white font-bold tracking-tight">Z-Library</span>
                 <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
               </a>
+
+  <a 
+                href="https://reactlab-studio.netlify.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => playSoundBlip(880, 'sine', 0.05)}
+                className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
+              >
+                <span className="text-3xl mb-1.5">⚛️</span>
+                <span className="text-[11px] text-white font-bold tracking-tight">ReactLab</span>
+                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
+              </a>
+
+<a 
+                href="https://tailwind-playground-learning-academy.netlify.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => playSoundBlip(880, 'sine', 0.05)}
+                className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
+              >
+                <span className="text-3xl mb-1.5">🫟</span>
+                <span className="text-[11px] text-white font-bold tracking-tight">Tailwind</span>
+                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
+              </a>
             </div>
+
           </div>
 
           {/* iPhone style home button strip bar */}
