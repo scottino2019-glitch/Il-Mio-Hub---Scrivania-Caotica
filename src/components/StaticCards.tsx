@@ -185,7 +185,7 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
               </a>
 
               <a 
-                href="https://z-library.bz/" 
+                href="https://1lib.sk/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.05)}
