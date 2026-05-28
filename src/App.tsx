@@ -1510,66 +1510,7 @@ export default function App() {
           {/* CARD D: LAVAGNA SLATE WOOD CHECKLIST */}
           <LavagnaCard />
 
-          {/* CARD H: FAT CAT WIDGET WITH MOVING SWAY TAIL */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="relative w-full max-w-[340px] mx-auto mt-6">
-              {/* Cat Ears */}
-              <div className="absolute -top-5 left-6 w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-b-[26px] border-b-orange-400 transform -rotate-12"></div>
-              <div className="absolute -top-5 right-6 w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-b-[26px] border-b-orange-400 transform rotate-12"></div>
-
-              {/* Cat Body Card */}
-              <div className="bg-orange-400 rounded-[2rem] p-6 shadow-2xl relative z-20 border-4 border-orange-500 flex flex-col items-center">
-                {/* Face details */}
-                <div className="flex justify-center items-center gap-6 mb-4 mt-1">
-                  {/* SX eye */}
-                  <div className="w-4 h-4 bg-gray-900 rounded-full relative overflow-hidden">
-                    <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-full"></div>
-                  </div>
-                  {/* Mouth/Whiskers */}
-                  <div className="relative flex flex-col items-center">
-                    <div className="w-3.5 h-2 bg-pink-300 rounded-full z-10"></div>
-                    <div className="absolute top-1 -left-4 w-3 h-0.5 bg-orange-200 rotate-12 rounded-full"></div>
-                    <div className="absolute top-2.5 -left-4 w-3 h-0.5 bg-orange-200 -rotate-12 rounded-full"></div>
-                    <div className="absolute top-1 -right-4 w-3 h-0.5 bg-orange-200 -rotate-12 rounded-full"></div>
-                    <div className="absolute top-2.5 -right-4 w-3 h-0.5 bg-orange-200 rotate-12 rounded-full"></div>
-                  </div>
-                  {/* DX eye */}
-                  <div className="w-4 h-4 bg-gray-900 rounded-full relative overflow-hidden">
-                    <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-white rounded-full"></div>
-                  </div>
-                </div>
-
-                <h4 className="text-white font-bold text-lg mb-4 tracking-wider font-sans">I Miei Link</h4>
-
-                <div className="w-full bg-white/95 rounded-2xl p-4 flex flex-col gap-2 shadow-inner">
-                  <a href="https://character-marker.vercel.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🐱 Character Marker
-                  </a>
-                  <a href="generatore-kawaii.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    👑 Generatore di Kawaii
-                  </a>
-                  <a href="character-engine.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🦊 CSS_ENGINE v5.1
-                  </a>
-                  <a href="anatomy.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🤵 Anatomy Sculptor Pro
-                  </a>
-                  <a href="anatomy2.html" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🧸 Anatomy Blueprint Studio
-                  </a>
-                  <a href="https://css-artist-lab.netlify.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🐾 Css Artist Lab
-                  </a>
-                </div>
-              </div>
-
-              {/* Swaying cat tail element */}
-              <div 
-                className="absolute -bottom-5 -right-2 w-16 h-16 border-b-8 border-r-8 border-orange-400 rounded-br-full transition-transform duration-500 ease-in-out hover:rotate-12 cursor-pointer z-10"
-                onClick={() => playSoundBlip(880, 'sine', 0.05)}
-              ></div>
-            </div>
-          </div>
+       
 
           {/* CARD I: SMARTPHONE BEZEL OVERLAY FOR BOOKS */}
           <SmartphoneCard playSoundBlip={playSoundBlip} />
