@@ -21,7 +21,7 @@ export const IpodCard: React.FC = () => {
     </div>
   );
 };
-// 1. IPOD CARD (CARD A)
+// 1. ROJI CARD (CARD A)
 export const RojiCard: React.FC = () => {
 return (
     <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
@@ -246,7 +246,22 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
     </div>
   );
 };
-
+// 1. ROJI CARD (CARD A)
+export const Appunti: React.FC = () => {
+return (
+    <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+      <div className="roji-embed-container bg-black rounded-[2rem] shadow-2xl border-4 border-stone-800 overflow-hidden relative aspect-[5/7.2] w-full max-w-[420px] mx-auto">
+        <iframe 
+          src="appunti.html" 
+          className="absolute inset-0 w-full h-full border-none"
+          allow="autoplay; clipboard-write; encrypted-media"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          title="roji"
+        />
+      </div>
+    </div>
+  );
+};
 // 5. TV BOX CARD
 export const TvBoxCard: React.FC = () => {
   return (
