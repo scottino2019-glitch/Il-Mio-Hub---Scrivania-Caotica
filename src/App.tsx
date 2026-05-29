@@ -1648,26 +1648,14 @@ export default function App() {
 
           {/* PINK RING BINDER & PDF SQUARES/LINES BINDER */}
           <PinkPdfNotebookCard playSoundBlip={playSoundBlip} />
-
-          {/* ALBUM CSS GRANDE - CSS Artist Draft */}
-          <AlbumCssCard playSoundBlip={playSoundBlip} />
-      {/* Appunti (Ufficio / Utility) */}
-          <div className="w-full h-full min-h-[500px] overflow-hidden rounded-2xl bg-white/40 border border-white/20 shadow-xl p-2 flex flex-col">
-  <iframe 
-    src="/appunti.html" 
-    className="w-full flex-grow rounded-xl border-0"
-    style={{ minHeight: '520px', background: 'transparent' }}
-    title="Quaderno Editor"
-    sandbox="allow-scripts allow-same-origin allow-forms"
-  />
-</div>
-          {/* CARD H: FAT CAT WIDGET WITH MOVING SWAY TAIL */}
+           {/* CARD H: FAT CAT WIDGET WITH MOVING SWAY TAIL */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="relative w-full max-w-[340px] mx-auto mt-6">
               {/* Cat Ears */}
               <div className="absolute -top-5 left-6 w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-b-[26px] border-b-orange-400 transform -rotate-12"></div>
               <div className="absolute -top-5 right-6 w-0 h-0 border-l-[18px] border-l-transparent border-r-[18px] border-r-transparent border-b-[26px] border-b-orange-400 transform rotate-12"></div>
 
+            
               {/* Cat Body Card */}
               <div className="bg-orange-400 rounded-[2rem] p-6 shadow-2xl relative z-20 border-4 border-orange-500 flex flex-col items-center">
                 {/* Face details */}
@@ -1711,6 +1699,10 @@ export default function App() {
                   <a href="https://css-artist-lab.netlify.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
                     🐾 Css Artist Lab
                   </a>
+                   <a href="https://ghibli-me-anime-avatar-creator.vercel.app/  " className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
+                    🧙 GhibliMe: Anime Avatar Creator
+                  </a>
+                
                 </div>
               </div>
 
@@ -1721,6 +1713,19 @@ export default function App() {
               ></div>
             </div>
           </div>
+          {/* ALBUM CSS GRANDE - CSS Artist Draft */}
+          <AlbumCssCard playSoundBlip={playSoundBlip} />
+      {/* Appunti (Ufficio / Utility) */}
+          <div className="w-full h-full min-h-[500px] overflow-hidden rounded-2xl bg-white/40 border border-white/20 shadow-xl p-2 flex flex-col">
+  <iframe 
+    src="/appunti.html" 
+    className="w-full flex-grow rounded-xl border-0"
+    style={{ minHeight: '520px', background: 'transparent' }}
+    title="Quaderno Editor"
+    sandbox="allow-scripts allow-same-origin allow-forms"
+  />
+</div>
+         
 
           
 
