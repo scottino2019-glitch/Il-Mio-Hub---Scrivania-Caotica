@@ -29,6 +29,7 @@ import {
   SmartphoneCard, 
   TvBoxCard, 
   RetroPcCard, 
+  AppuntiCard,
   VsCodeCard, 
   SnippetCreatorCard, 
   AgendaCard, 
@@ -1642,6 +1643,9 @@ export default function App() {
 
           {/* L'AGENDA (Ufficio / Utility) */}
           <AgendaCard playSoundBlip={playSoundBlip} />
+          
+          {/* Appunti (Ufficio / Utility) */}
+          <AppuntiCard/>
 
           {/* PINK RING BINDER & PDF SQUARES/LINES BINDER */}
           <PinkPdfNotebookCard playSoundBlip={playSoundBlip} />
