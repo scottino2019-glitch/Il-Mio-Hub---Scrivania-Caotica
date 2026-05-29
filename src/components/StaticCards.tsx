@@ -246,17 +246,17 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
     </div>
   );
 };
-// 1. ROJI CARD (CARD A)
-export const Appunti: React.FC = () => {
+// 1. Appunti CARD (CARD A)
+export const AppuntiCard: React.FC = () => {
 return (
     <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-      <div className="roji-embed-container bg-black rounded-[2rem] shadow-2xl border-4 border-stone-800 overflow-hidden relative aspect-[5/7.2] w-full max-w-[420px] mx-auto">
+      <div className="appunti-embed-container bg-black rounded-[2rem] shadow-2xl border-4 border-stone-800 overflow-hidden relative aspect-[5/7.2] w-full max-w-[420px] mx-auto">
         <iframe 
           src="appunti.html" 
           className="absolute inset-0 w-full h-full border-none"
           allow="autoplay; clipboard-write; encrypted-media"
           sandbox="allow-scripts allow-same-origin allow-forms"
-          title="roji"
+          title="appunti"
         />
       </div>
     </div>
