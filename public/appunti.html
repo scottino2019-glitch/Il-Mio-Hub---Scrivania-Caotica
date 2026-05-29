@@ -6,11 +6,11 @@
     <title>Quaderno Editor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Blocco l'altezza del body per evitare lo scroll della pagina intera */
+        /* Consente lo scroll flessibile complessivo all'interno del frame */
         body { 
             box-sizing: border-box; 
-            height: 100vh; 
-            overflow: hidden; 
+            min-height: 100vh;
+            overflow-y: auto; 
             display: flex; 
             flex-direction: column; 
             padding: 12px;
@@ -23,6 +23,7 @@
             background-size: 30px 30px;
         }
 
+        /* Area di scrittura con righe e griglia extra-large */
         .notes-textarea {
             background-image: 
                 linear-gradient(to right, #d1d5db 1px, transparent 1px),
@@ -35,173 +36,180 @@
             flex: 1;
             width: 100%;
             resize: none;
+            min-height: 250px; /* Evita il collasso della textarea */
         }
 
-        /* Container principale */
+        /* Layout principale reattivo e flessibile */
         .main-container {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            padding: 0.25rem;
-            flex: 1; 
-            min-height: 0; 
+            gap: 1rem;
+            padding: 0.5rem;
+            flex: 1;
+            width: 100%;
         }
 
+        /* Sezione Quaderni: limita l'altezza verticale su mobile lasciando spazio utile sotto */
         .books-section {
             width: 100%;
+            max-height: 190px;
             flex-shrink: 0;
-        }
-
-        .notes-section {
-            width: 100%;
-            flex: 1; 
             display: flex;
             flex-direction: column;
-            min-height: 0;
         }
 
-        /* Su iframe e mobile i quaderni scorrono orizzontalmente per salvare spazio prezioso */
-        .book-grid {
+        /* Sezione di scrittura */
+        .notes-section {
+            width: 100%;
+            flex: 1;
             display: flex;
-            flex-direction: row;
-            overflow-x: auto;
+            flex-direction: column;
+            min-height: 320px; /* Garantisce visibilità ottimale anche su schermi stretti */
+        }
+
+        /* Scaffale dei bottoni con griglia fluida auto-collassabile e scroll integrato */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 0.5rem;
-            padding: 4px;
-            scrollbar-width: thin;
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
         }
 
-        .book-button { 
-            flex-shrink: 0;
-            min-width: 135px;
-            transition: all 0.2s ease; 
-        }
-        .book-button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
-        .book-button.active { border-width: 3px !important; border-color: #2563eb !important; background-color: #eff6ff !important; }
+        .book-button { transition: all 0.25s ease; cursor: pointer; }
+        .book-button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        .book-button.active { border-width: 4px !important; border-color: #2563eb !important; }
 
-        /* Desktop layout (solo quando c'è molto spazio) */
+        /* Layout ottimizzato per Desktop / Schermi Grandi */
         @media (min-width: 1024px) {
             .main-container {
                 flex-direction: row;
                 padding: 1rem;
+                align-items: stretch;
             }
             .books-section {
-                width: 300px;
+                width: 280px;
+                max-height: none;
                 height: 100%;
             }
             .book-grid {
-                display: grid;
                 grid-template-columns: 1fr;
-                gap: 0.5rem;
-                height: 100%;
-                overflow-y: auto;
-                flex-direction: unset;
-                padding: 2px;
-            }
-            .book-button {
-                min-width: unset;
             }
             .notes-textarea {
-                font-size: 26px;
-                background-size: 55px 55px;
-                line-height: 55px;
+                font-size: 24px;
+                background-size: 50px 50px;
+                line-height: 50px;
             }
         }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 font-sans">
 
-    <header class="bg-white shadow-md rounded-2xl mx-2 mt-2 p-3 shrink-0">
+    <!-- Header compatto per adattarsi alla cornice del frame -->
+    <header class="bg-white shadow-md rounded-b-2xl mx-2 mt-1 p-3 shrink-0">
         <div class="text-center">
-            <h1 class="text-2xl font-black text-blue-900 flex items-center justify-center gap-2">📝 <span>Quaderno Editor</span></h1>
+            <h1 class="text-2xl font-bold text-blue-900 flex items-center justify-center gap-2">
+                <span>📝</span> <span>Quaderno Editor</span>
+            </h1>
         </div>
     </header>
 
     <div class="main-container max-w-7xl mx-auto w-full">
-        <div class="books-section bg-white rounded-2xl shadow-md flex flex-col overflow-hidden">
-            <div class="p-2.5 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 flex justify-between items-center shrink-0">
-                <h2 class="font-bold text-xs text-gray-700 flex items-center gap-1.5">📖 <span>I Miei Quaderni</span></h2>
-                <span class="text-[9px] text-gray-400 font-mono italic">Scorri o seleziona ➔</span>
+        <!-- Sezione Selezione Quaderni -->
+        <div class="books-section bg-white rounded-2xl shadow-md border border-gray-150 overflow-hidden">
+            <div class="p-2.5 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 flex-shrink-0">
+                <h2 class="font-bold text-xs text-gray-700 uppercase tracking-wider flex items-center gap-1.5">
+                    <span>📖</span> I Miei Quaderni
+                </h2>
             </div>
-            <div class="overflow-hidden">
+            <div class="overflow-y-auto p-2">
                 <div class="book-grid">
-                    <button class="book-button bg-gradient-to-r from-blue-100 to-blue-200 rounded-xl border border-blue-300 p-2.5" onclick="loadBook('Grammatica Cinese', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">📒</span><h3 class="font-bold text-xs text-gray-800">Cinese Gram.</h3></div>
+                    <!-- Aggiunto ID 'btn-default' per la pre-selezione automatica -->
+                    <button id="btn-default" class="book-button bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg border-2 border-blue-300 p-2.5" onclick="loadBook('Grammatica Cinese', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">📒</span><h3 class="font-bold text-xs mt-1 text-gray-850">Grammatica Cinese</h3></div>
                     </button>
-                    <button class="book-button bg-gradient-to-r from-green-100 to-green-200 rounded-xl border border-green-300 p-2.5" onclick="loadBook('Idee', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">💡</span><h3 class="font-bold text-xs text-gray-800">Idee</h3></div>
+                    <button class="book-button bg-gradient-to-r from-green-100 to-green-200 rounded-lg border-2 border-green-300 p-2.5" onclick="loadBook('Idee', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">💡</span><h3 class="font-bold text-xs mt-1 text-gray-850">Idee</h3></div>
                     </button>
-                    <button class="book-button bg-gradient-to-r from-purple-100 to-purple-200 rounded-xl border border-purple-300 p-2.5" onclick="loadBook('Vari', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">🧾</span><h3 class="font-bold text-xs text-gray-800">Vari</h3></div>
+                    <button class="book-button bg-gradient-to-r from-purple-100 to-purple-200 rounded-lg border-2 border-purple-300 p-2.5" onclick="loadBook('Vari', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">🧾</span><h3 class="font-bold text-xs mt-1 text-gray-850">Vari</h3></div>
                     </button>
-                    <button class="book-button bg-gradient-to-r from-orange-100 to-orange-200 rounded-xl border border-orange-300 p-2.5" onclick="loadBook('Coreano', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">🏯</span><h3 class="font-bold text-xs text-gray-800">Coreano</h3></div>
+                    <button class="book-button bg-gradient-to-r from-orange-100 to-orange-200 rounded-lg border-2 border-orange-300 p-2.5" onclick="loadBook('Coreano', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">🏯</span><h3 class="font-bold text-xs mt-1 text-gray-850">Coreano</h3></div>
                     </button>
-                    <button class="book-button bg-gradient-to-r from-red-100 to-red-200 rounded-xl border border-red-300 p-2.5" onclick="loadBook('Storie Cinesi', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">🏮</span><h3 class="font-bold text-xs text-gray-800">Storie Cinesi</h3></div>
+                    <button class="book-button bg-gradient-to-r from-red-100 to-red-200 rounded-lg border-2 border-red-300 p-2.5" onclick="loadBook('Storie Cinesi', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">🏮</span><h3 class="font-bold text-xs mt-1 text-gray-800">Storie Cinesi</h3></div>
                     </button>
-                    <button class="book-button bg-gradient-to-r from-teal-100 to-teal-200 rounded-xl border border-teal-300 p-2.5" onclick="loadBook('Storie Coreane', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">🥢</span><h3 class="font-bold text-xs text-gray-800">Storie Coreane</h3></div>
+                    <button class="book-button bg-gradient-to-r from-teal-100 to-teal-200 rounded-lg border-2 border-teal-300 p-2.5" onclick="loadBook('Storie Coreane', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">🥢</span><h3 class="font-bold text-xs mt-1 text-gray-850">Storie Coreane</h3></div>
                     </button>
-                    <button class="book-button bg-gradient-to-r from-pink-100 to-pink-200 rounded-xl border border-pink-300 p-2.5" onclick="loadBook('Codici', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">💻</span><h3 class="font-bold text-xs text-gray-800">Codici</h3></div>
+                    <button class="book-button bg-gradient-to-r from-pink-100 to-pink-200 rounded-lg border-2 border-pink-300 p-2.5" onclick="loadBook('Codici', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">💻</span><h3 class="font-bold text-xs mt-1 text-gray-850">Codici</h3></div>
                     </button>
-                    <button class="book-button bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-xl border border-yellow-300 p-2.5" onclick="loadBook('Internet', this)">
-                        <div class="flex flex-col items-center text-center"><span class="text-xl">🌍</span><h3 class="font-bold text-xs text-gray-800">Internet</h3></div>
+                    <button class="book-button bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-lg border-2 border-yellow-300 p-2.5" onclick="loadBook('Internet', this)">
+                        <div class="flex flex-col items-center text-center"><span class="text-xl">🌍</span><h3 class="font-bold text-xs mt-1 text-gray-850">Internet</h3></div>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="notes-section bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
-            <div class="p-3 border-b border-gray-100 bg-gradient-to-r from-green-50 to-emerald-50 shrink-0 flex justify-between items-center">
+        <!-- Area di Scrittura Note -->
+        <div class="notes-section bg-white rounded-3xl shadow-md overflow-hidden border border-gray-200">
+            <div class="p-3.5 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50 shrink-0 flex justify-between items-center">
                 <div>
-                    <h2 id="current-book" class="font-bold text-sm text-gray-800">Note generali</h2>
-                    <p id="save-status" class="text-[10px] text-gray-400 font-mono">Quadretti extra-grandi • Salvataggio Automatico attivo</p>
+                    <h2 id="current-book" class="font-bold text-sm text-gray-800">Inizializzazione...</h2>
+                    <p id="save-status" class="text-[10px] text-gray-500 font-medium">Quadretti extra-grandi</p>
                 </div>
             </div>
             
             <div class="flex-1 flex flex-col overflow-hidden">
-                <textarea id="notes-area" class="notes-textarea focus:outline-none" placeholder="Inizia a scrivere..."></textarea>
+                <textarea id="notes-area" class="notes-textarea focus:outline-none" placeholder="Inizia a scrivere la tua nota..."></textarea>
             </div>
         </div>
     </div>
 
     <script>
+        // Recupero i dati dal LocalStorage o creo un dizionario nuovo
         let bookNotes = JSON.parse(localStorage.getItem('bookNotes') || '{}');
-        let currentBook = 'Grammatica Cinese';
+        let currentBook = 'Grammatica Cinese'; // Default iniziale
 
+        // Funzione per caricare un quaderno specifico
         function loadBook(title, btn) {
             currentBook = title;
             document.getElementById('notes-area').value = bookNotes[title] || '';
             document.getElementById('current-book').textContent = `Note per: ${title}`;
             
+            // Gestione della classe attiva dei bottoni
             document.querySelectorAll('.book-button').forEach(b => b.classList.remove('active'));
             if (btn) {
                 btn.classList.add('active');
             }
         }
 
+        // Funzione per salvare le note nello storage locale con riscontro visivo
         function saveNotes() {
             bookNotes[currentBook] = document.getElementById('notes-area').value;
             localStorage.setItem('bookNotes', JSON.stringify(bookNotes));
             const status = document.getElementById('save-status');
             status.textContent = '✅ Note salvate in tempo reale!';
-            setTimeout(() => { status.textContent = 'Quadretti extra-grandi • Salvataggio Automatico attivo'; }, 1500);
+            setTimeout(() => { status.textContent = 'Quadretti extra-grandi'; }, 1500);
         }
 
+        // Autosave intelligente con debounce (evita di sovraccaricare il browser mentre digiti velocemente)
         let saveTimeout;
         document.getElementById('notes-area').addEventListener('input', () => {
             clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(saveNotes, 600);
+            saveTimeout = setTimeout(saveNotes, 750);
         });
 
+        // Al caricamento, seleziona il primo quaderno automaticamente
         window.onload = () => {
-            // Cerca e attiva il primo libro nell'elenco (Grammatica Cinese)
-            const firstButton = document.querySelector('.book-button');
-            if (firstButton) {
-                firstButton.click();
+            const defaultButton = document.getElementById('btn-default');
+            if (defaultButton) {
+                loadBook('Grammatica Cinese', defaultButton);
             } else {
-                document.getElementById('notes-area').value = bookNotes['Grammatica Cinese'] || '';
+                loadBook('Grammatica Cinese', null);
             }
         };
     </script>
