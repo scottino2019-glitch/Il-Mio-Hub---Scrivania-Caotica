@@ -796,7 +796,7 @@ export const ArtistPaletteCard: React.FC<StaticCardsProps> = ({ playSoundBlip })
           </li>
           <li>
             <a 
-              href="calligraphy-font-art-editor.vercel.app" 
+              href="calligraphy-font-art-editor.vercel.app/" 
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={() => playSoundBlip(820, 'sine', 0.05)}
