@@ -2050,7 +2050,7 @@ export default function App() {
                 </li>
                 <li>
                   <a 
-                    href="calligraphy-font-art-editor.vercel.app" 
+                    href="https://calligraphy-font-art-editor.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(820, 'sine', 0.05)}
