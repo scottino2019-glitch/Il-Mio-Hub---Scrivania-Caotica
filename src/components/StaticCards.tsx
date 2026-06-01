@@ -8,9 +8,11 @@ interface StaticCardsProps {
 // 1. IPOD CARD (CARD A)
 export const IpodCard: React.FC = () => {
 
+ 
   return (
     <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-      <div className="ipod-embed-container bg-black rounded-[2rem] shadow-2xl border-4 border-stone-800 overflow-hidden relative aspect-[5/7.2] w-full max-w-[600px] mx-auto">
+      {/* Ho reimpostato max-w-[420px] e cambiato l'aspect a [5/8.2] per allungarlo */}
+      <div className="ipod-embed-container bg-black rounded-[2rem] shadow-2xl border-4 border-stone-800 overflow-hidden relative aspect-[5/8.2] w-full max-w-[420px] mx-auto">
         <iframe 
           src="https://i-pod-audio-player.vercel.app/" 
           className="absolute inset-0 w-full h-full border-none"
