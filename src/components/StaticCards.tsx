@@ -317,6 +317,18 @@ export const TvBoxCard: React.FC = () => {
                     <span>📟</span> CH 05: AUDIO EDU 
                   </a>
                 </li>
+                   <li>
+                  <a 
+                    href="https://video-creator-seven-phi.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+                  >
+                    <span>📟</span> CH 06: VIDEO CREATOR
+                  </a>
+                </li>
+
+               
               </ul>
 
               {/* Testo in sovrimpressione analogico */}
