@@ -234,7 +234,7 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
                 onClick={() => playSoundBlip(880, 'sine', 0.05)}
                 className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
               >
-                <span className="text-3xl mb-1.5">🫟</span>
+                <span className="text-3xl mb-1.5">🖌</span>
                 <span className="text-[11px] text-white font-bold tracking-tight">Tailwind</span>
                 <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
               </a>
@@ -540,6 +540,17 @@ export const AgendaCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             onClick={() => playSoundBlip(750, 'sine', 0.05)}
           >
             🗒 Pdf Editor Text
+          </a>
+        </li>
+
+        <li>
+          <a 
+            href="https://creative-desk-planner.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={() => playSoundBlip(750, 'sine', 0.05)}
+          >
+            🧾 Creative Desk Planner
           </a>
         </li>
       </ul>
