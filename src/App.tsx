@@ -1592,7 +1592,13 @@ export default function App() {
              GRUPPO 4: ALL OTHERS (Notebook Preferiti, Agenda, CSS Artist, JSON, Portals, Games, Tarot, etc)
              ========================================= */}
 
-          {/* CARD B: NOTEBOOK PREFERITI */}
+        
+
+          {/* L'AGENDA (Ufficio / Utility) */}
+          <AgendaCard playSoundBlip={playSoundBlip} />
+          
+          {/* Appunti (Ufficio / Utility) */}
+            {/* CARD B: NOTEBOOK PREFERITI */}
           <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="flex items-center gap-2 mb-4">
               <BookmarkIcon className="w-5 h-5 text-indigo-900" />
@@ -1642,12 +1648,6 @@ export default function App() {
               )}
             </div>
           </div>
-
-          {/* L'AGENDA (Ufficio / Utility) */}
-          <AgendaCard playSoundBlip={playSoundBlip} />
-          
-          {/* Appunti (Ufficio / Utility) */}
-          
 
           {/* PINK RING BINDER & PDF SQUARES/LINES BINDER */}
           <PinkPdfNotebookCard playSoundBlip={playSoundBlip} />
