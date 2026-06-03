@@ -1912,71 +1912,7 @@ export default function App() {
               </ul>
             </div>
           </div>
-  {/* EXTRA CARD 4: RETRO ARCADE TAMAGOTCHI PET */}
-          <div className="desk-card bg-[#38bdf8] p-5 rounded-[2rem] border-4 border-[#0284c7] shadow-2xl relative w-full" style={{ '--hover-rot': '1.5deg' } as any}>
-            <div className="flex justify-center mb-1">
-              <span className="bg-[#0284c7] text-white font-mono font-black text-[9px] px-3 py-0.5 rounded-full uppercase tracking-wider">
-                Pocket Tamagotchi
-              </span>
-            </div>
-
-            {/* Glowing pixel screen representation */}
-            <div className="bg-[#a8a29e] rounded-xl p-3 border-4 border-stone-800 shadow-inner relative text-stone-900 min-h-[140px] font-mono">
-              <div className="flex justify-between text-[8px] border-b border-stone-900/35 pb-1 mb-2 font-bold uppercase">
-                <span>🍖 Cibo: {100 - petHunger}%</span>
-                <span>❤️ Gioia: {petHappy}%</span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center pt-2">
-                {petAction === 'idle' && (
-                  <div className="bouncing-pet text-4xl cursor-pointer" onClick={() => interactPet('play')}>
-                    👾
-                  </div>
-                )}
-                {petAction === 'eating' && (
-                  <div className="bouncing-pet text-4xl">
-                    🍕 👾
-                  </div>
-                )}
-                {petAction === 'playing' && (
-                  <div className="bouncing-pet text-4xl">
-                    🎾 👾
-                  </div>
-                )}
-                {petAction === 'sleeping' && (
-                  <div className="text-4xl">
-                    💤 👾
-                  </div>
-                )}
-                <span className="text-[10px] font-bold tracking-widest mt-2">{petName.toUpperCase()}</span>
-                {petAction === 'sleeping' && <span className="text-[7.5px] italic">Stanno riposando...</span>}
-              </div>
-            </div>
-
-            {/* Retro Action buttons grid overlay */}
-            <div className="grid grid-cols-3 gap-1.5 mt-4">
-              <button 
-                onClick={() => interactPet('feed')}
-                disabled={petAction === 'sleeping'}
-                className="bg-sky-900 hover:bg-sky-800 disabled:opacity-45 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
-              >
-                Cibo 🍉
-              </button>
-              <button 
-                onClick={() => interactPet('play')}
-                disabled={petAction === 'sleeping'}
-                className="bg-sky-900 hover:bg-sky-800 disabled:opacity-45 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
-              >
-                Gioca 🎾
-              </button>
-              <button 
-                onClick={() => interactPet('sleep')}
-                className="bg-amber-900 hover:bg-amber-800 text-white rounded-lg p-1.5 text-[9px] font-bold cursor-pointer"
-              >
-                {petAction === 'sleeping' ? 'SVEGLIA' : 'SONNO'}
-              </button>
-            </div>
-          </div>
+ 
 
           {/* EXTRA CARD 5: RETRO CASSETTE TAPE RECORDER */}
           <div className="desk-card bg-neutral-900 p-5 rounded-[1.8rem] border-4 border-neutral-750 shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
@@ -2039,110 +1975,10 @@ export default function App() {
             </div>
           </div>
 
-          {/* EXTRA CARD 6: INTERACTIVE TIC-TAC-TOE ON TORN NOTEBOOK */}
-          <div className="desk-card squared-paper p-5 rounded-md hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="flex justify-between items-center mb-3">
-              <span className="text-sm font-bold text-stone-800 font-sans tracking-wide leading-none">Tris del Gatto 🐾</span>
-              <button onClick={resetGame} className="px-2 py-0.5 rounded bg-stone-200 hover:bg-stone-300 text-[9.5px] font-sans font-bold text-stone-800">
-                Resetta
-              </button>
-            </div>
+         
+              
 
-            <p className="text-[10px] text-stone-500 font-sans mb-3 leading-tight">
-              Sfida Cat-Bot in questo vecchio quaderno caotico. Fai 3 segni consecutivi!
-            </p>
-
-            <div className="grid grid-cols-3 gap-1 bg-stone-300 rounded p-1 max-w-[180px] mx-auto">
-              {board.map((cell, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleCellClick(idx)}
-                  className="w-14 h-14 bg-stone-50 hover:bg-stone-100 flex items-center justify-center font-sans font-black text-2xl text-stone-800 transition-all rounded cursor-pointer"
-                >
-                  {cell === 'X' && <span className="text-pink-600">X</span>}
-                  {cell === 'O' && <span className="text-blue-600">O</span>}
-                </button>
-              ))}
-            </div>
-
-            {gameResult && (
-              <div className="text-center font-bold text-xs text-stone-900 mt-3 font-sans leading-none">
-                Risultato: {gameResult}
-              </div>
-            )}
-          </div>
-
-          {/* EXTRA CARD 7: DEVELOPER TAROTS & DIVINATIONS */}
-          <div className="desk-card bg-indigo-950 p-5 rounded-3xl border-4 border-indigo-900 shadow-2xl text-center relative w-full overflow-hidden" style={{ '--hover-rot': '-1.5deg' } as any}>
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-pink-500 via-indigo-500 to-sky-500"></div>
-            
-            <div className="font-bold text-yellow-300 text-xs tracking-wider uppercase mb-3 mt-1 font-mono">
-              🔮 Tarocchi del Programmatore
-            </div>
-
-            <div className="bg-gradient-to-tr from-indigo-900 to-slate-900 rounded-2xl p-4 border border-indigo-800 text-stone-100 min-h-[145px] flex flex-col justify-between mb-4 shadow-inner relative">
-              <div>
-                <span className="text-[10px] text-pink-400 font-semibold uppercase tracking-wider block mb-1">CARTA PRESENTE</span>
-                <h4 className="font-extrabold text-base text-yellow-100 tracking-wide">{activeFortune.text}</h4>
-                <p className="text-[11px] text-stone-300 italic leading-snug tracking-wider mt-3 font-medium">
-                  "{activeFortune.motto}"
-                </p>
-              </div>
-              <div className="text-[8px] border-t border-indigo-800/60 pt-2 text-indigo-300 font-mono tracking-wide uppercase">
-                Stato astrale: {activeFortune.status}
-              </div>
-            </div>
-
-            <button 
-              onClick={shuffleFortune}
-              className="w-full bg-indigo-700 hover:bg-indigo-600 active:translate-y-px text-white rounded-lg text-xs font-bold py-1.5 uppercase tracking-widest transition-all"
-            >
-              Pesca un'altra carta 🔮
-            </button>
-          </div>
-
-          {/* EXTRA CARD 8: INTERACTIVE COFFEE DISH FORTUNE MUG */}
-          <div className="desk-card bg-amber-900/10 p-5 rounded-3xl border-2 border-amber-900/20 shadow-xl relative w-full" style={{ '--hover-rot': '1deg' } as any}>
-            {/* Coffee stain ring behind */}
-            <div className="absolute top-4 left-4 w-24 h-24 rounded-full border-4 border-amber-900/10 pointer-events-none"></div>
-            
-            <div className="flex justify-between items-center mb-3 text-amber-300">
-              <span className="font-bold text-stone-200 text-xs tracking-wider uppercase font-mono">Isola del Caffè ☕</span>
-              <span className="text-[10px] font-mono text-amber-400/90 font-bold">CARICHE: {coffeeSips}/3</span>
-            </div>
-
-            <div className="flex justify-center items-center my-4 relative">
-              {/* Cup container click to sip */}
-              <button 
-                onClick={sipCoffee} 
-                className="w-20 h-20 bg-stone-800 hover:bg-stone-700 rounded-full border-4 border-amber-700 flex flex-col items-center justify-center transition-all active:scale-95 cursor-pointer relative shadow-lg"
-              >
-                <span className="text-3xl filter drop-shadow">☕</span>
-                <div className="absolute top-1 rotate-12 flex space-x-1">
-                  <span className="steam-smoke block w-0.5 h-3 bg-white/40 rounded"></span>
-                  <span className="steam-smoke block w-0.5 h-4 bg-white/40 rounded delay-75"></span>
-                  <span className="steam-smoke block w-0.5 h-3 bg-white/40 rounded delay-150"></span>
-                </div>
-              </button>
-            </div>
-
-            <div className="bg-stone-900/60 rounded-xl p-3 border border-amber-900/15 text-center min-h-[60px] flex items-center justify-center mb-3 select-none">
-              <p className="text-[10px] font-sans italic text-stone-300 leading-normal">
-                {coffeeQuote}
-              </p>
-            </div>
-
-            {coffeeSips === 0 && (
-              <button 
-                onClick={refillCoffee}
-                className="w-full bg-amber-800 hover:bg-amber-700 text-white rounded-lg text-xs font-bold py-1 font-mono uppercase tracking-widest"
-              >
-                Riempi tazza 🔄
-              </button>
-            )}
-          </div>
-
-        </div>
+        
       </main>
     </div>
   );
