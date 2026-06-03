@@ -41,103 +41,7 @@ return (
   );
 };
 
-// 2. CALENDARIO STRAPPATO CARD (CARD C)
-export const CalendarioCard: React.FC = () => {
-  return (
-    <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-      <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
-        <iframe 
-          src="https://calendario-strappato.vercel.app/?embed=true&paper=lined&font=handwriting&tape=transparent" 
-          style={{ border: 'none', overflow: 'hidden', background: 'transparent' }} 
-          width="100%" 
-          height="450" 
-          title="Calendario Strappato"
-        />
-      </div>
-    </div>
-  );
-};
 
-// 3. LAVAGNA SLATE CHALKBOARD CARD (CARD D)
-export const LavagnaCard: React.FC = () => {
-  return (
-    <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-      <div className="wooden-frame">
-        <div className="slate-surface relative">
-          <div className="chalk-dust-1"></div>
-          <div className="chalk-dust-2"></div>
-          
-          <div className="text-center mb-6">
-            <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
-             Lingua e Utility
-            </h3>
-            <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
-          </div>
-
-          <div className="space-y-4 relative z-10 font-mono text-xs">
-            <div className="flex gap-2 items-start">
-              <span>🐉</span>
-              <div>
-                <a href="https://scottino2019-glitch.github.io/lingua-cinese/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
-                  1. 中文 (Cinese)
-                </a>
-                <span className="block text-[9px] text-white/50">Portale e dizionario linguistico</span>
-              </div>
-            </div>
-
-            <div className="flex gap-2 items-start">
-              <span>🐅</span>
-              <div>
-                <a href="https://linguacoreana.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-blue">
-                  2. 한국어 (Coreano)
-                </a>
-                <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
-              </div>
-            </div>
-
-            <div className="flex gap-2 items-start">
-              <span>✍</span>
-              <div>
-                <a href="https://quaderni-per-esercizi.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-yellow">
-                  3. Laboratorio Linguistico
-                </a>
-                <span className="block text-[9px] text-white/50">Quaderni di grammatica attiva</span>
-              </div>
-            </div>
-
-            <div className="flex gap-2 items-start">
-              <span>📑</span>
-              <div>
-                <a href="eserciziPDF.html" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-green">
-                  4. Eserciziario PDF
-                </a>
-                <span className="block text-[9px] text-white/50">Svolgere i compiti sul tablet</span>
-              </div>
-            </div>
-
-            <div className="flex gap-2 items-start">
-              <span>💻</span>
-              <div>
-                <a href="https://quaderno-digitale.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-red">
-                  5. Quaderno Digitale
-                </a>
-                <span className="block text-[9px] text-white/50">Raccolta di studi informatici</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Felt eraser representation */}
-          <div className="absolute bottom-3 right-4 flex flex-col w-[60px] h-[18px] shadow-lg rounded overflow-hidden opacity-85">
-            <div className="bg-[#444] h-[12px] border-b border-black"></div>
-            <div className="bg-[#c19a6b] h-[6px] text-stone-800 text-[6px] font-bold flex items-center justify-center font-sans uppercase">
-              Cancellino
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // 4. SMARTPHONE BEZEL OVERLAY (CARD I)
 export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
@@ -261,7 +165,103 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
     </div>
   );
 };
+// 2. CALENDARIO STRAPPATO CARD (CARD C)
+export const CalendarioCard: React.FC = () => {
+  return (
+    <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+      <div className="bg-[#1e293b]/40 backdrop-blur-md p-4 rounded-3xl border border-white/5 flex justify-center items-center shadow-2xl w-full">
+        <iframe 
+          src="https://calendario-strappato.vercel.app/?embed=true&paper=lined&font=handwriting&tape=transparent" 
+          style={{ border: 'none', overflow: 'hidden', background: 'transparent' }} 
+          width="100%" 
+          height="450" 
+          title="Calendario Strappato"
+        />
+      </div>
+    </div>
+  );
+};
 
+// 3. LAVAGNA SLATE CHALKBOARD CARD (CARD D)
+export const LavagnaCard: React.FC = () => {
+  return (
+    <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+      <div className="wooden-frame">
+        <div className="slate-surface relative">
+          <div className="chalk-dust-1"></div>
+          <div className="chalk-dust-2"></div>
+          
+          <div className="text-center mb-6">
+            <h3 className="font-bold text-white text-base tracking-wide" style={{ textShadow: '0 0 5px rgba(255,255,255,0.8)' }}>
+             Lingua e Utility
+            </h3>
+            <p className="text-white/60 font-mono text-[9px] mt-1">~ Non cancellare questa lavagna ~</p>
+          </div>
+
+          <div className="space-y-4 relative z-10 font-mono text-xs">
+            <div className="flex gap-2 items-start">
+              <span>🐉</span>
+              <div>
+                <a href="https://scottino2019-glitch.github.io/lingua-cinese/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
+                  1. 中文 (Cinese)
+                </a>
+                <span className="block text-[9px] text-white/50">Portale e dizionario linguistico</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2 items-start">
+              <span>🐅</span>
+              <div>
+                <a href="https://linguacoreana.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-blue">
+                  2. 한국어 (Coreano)
+                </a>
+                <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2 items-start">
+              <span>✍</span>
+              <div>
+                <a href="https://quaderni-per-esercizi.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-yellow">
+                  3. Laboratorio Linguistico
+                </a>
+                <span className="block text-[9px] text-white/50">Quaderni di grammatica attiva</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2 items-start">
+              <span>📑</span>
+              <div>
+                <a href="eserciziPDF.html" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-green">
+                  4. Eserciziario PDF
+                </a>
+                <span className="block text-[9px] text-white/50">Svolgere i compiti sul tablet</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2 items-start">
+              <span>💻</span>
+              <div>
+                <a href="https://quaderno-digitale.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-red">
+                  5. Quaderno Digitale
+                </a>
+                <span className="block text-[9px] text-white/50">Raccolta di studi informatici</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Felt eraser representation */}
+          <div className="absolute bottom-3 right-4 flex flex-col w-[60px] h-[18px] shadow-lg rounded overflow-hidden opacity-85">
+            <div className="bg-[#444] h-[12px] border-b border-black"></div>
+            <div className="bg-[#c19a6b] h-[6px] text-stone-800 text-[6px] font-bold flex items-center justify-center font-sans uppercase">
+              Cancellino
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 // 5. TV BOX CARD
 export const TvBoxCard: React.FC = () => {
   return (
