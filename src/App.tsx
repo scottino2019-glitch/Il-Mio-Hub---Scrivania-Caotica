@@ -1290,6 +1290,9 @@ export default function App() {
               )}
             </div>
           </div>
+
+          熟能生巧-Shú néng shēng qiǎo
+
           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
