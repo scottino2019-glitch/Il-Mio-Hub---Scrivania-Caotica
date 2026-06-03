@@ -805,6 +805,9 @@ export default function App() {
         <a href="https://winamp-swart.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Musica" data-tooltip="Musica">🎧</a>
         <a href="https://ide-core.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Coding" data-tooltip="Edu Code">💻</a>
         <a href="https://tutor-programmazione.netlify.app/" target="_blank" rel="noopener noreferrer" className="dock-item Coding" data-tooltip="Tutor">🖥</a>
+        <a href="https://angolo-social.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Social" data-tooltip="Social">👥</a>
+   
+ 
       </nav>
 
       {/* 3. HEADER AND SVG PATH VECTOR TEXT */}
@@ -1453,56 +1456,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* CARD E: MOOD BOARD CORKBOARD */}
-          <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
-            <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
-              Mood Board 🖼️
-            </div>
-            
-            <div className="flex gap-1.5 mb-4">
-              <input 
-                type="text" 
-                placeholder="URL Foto o Pensiero..." 
-                value={moodInput}
-                onChange={(e) => setMoodInput(e.target.value)}
-                className="bg-white/95 text-xs text-stone-800 rounded px-2 py-1.5 flex-grow font-sans border border-amber-900/20 shadow-inner"
-              />
-              <button 
-                onClick={addMoodItem}
-                className="bg-green-700 hover:bg-green-600 font-bold px-3 py-1 text-white rounded cursor-pointer text-xs"
-              >
-                📌
-              </button>
-            </div>
-
-            <div className="mood-display">
-              {moods.map(item => {
-                const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
-                return (
-                  <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
-                    {/* Red thumbtack visual */}
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-sm z-10 pointer-events-none drop-shadow-md select-none">📌</div>
-                    <button 
-                      onClick={() => deleteMood(item.id)}
-                      className="remove-mood"
-                    >
-                      ✕
-                    </button>
-                    {isImg ? (
-                      <img src={item.text} alt="Mood board snap" className="rounded-sm" />
-                    ) : null}
-                    <div className="caption truncate">
-                      {isImg ? 'Inspiration' : item.text}
-                    </div>
-                  </div>
-                );
-              })}
-              {moods.length === 0 && (
-                <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
-              )}
-            </div>
-          </div>
-
+        
          
 
           {/* =========================================
@@ -1566,6 +1520,55 @@ export default function App() {
                   </p>
                 )}
               </div>
+            </div>
+          </div>
+  {/* CARD E: MOOD BOARD CORKBOARD */}
+          <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
+              Mood Board 🖼️
+            </div>
+            
+            <div className="flex gap-1.5 mb-4">
+              <input 
+                type="text" 
+                placeholder="URL Foto o Pensiero..." 
+                value={moodInput}
+                onChange={(e) => setMoodInput(e.target.value)}
+                className="bg-white/95 text-xs text-stone-800 rounded px-2 py-1.5 flex-grow font-sans border border-amber-900/20 shadow-inner"
+              />
+              <button 
+                onClick={addMoodItem}
+                className="bg-green-700 hover:bg-green-600 font-bold px-3 py-1 text-white rounded cursor-pointer text-xs"
+              >
+                📌
+              </button>
+            </div>
+
+            <div className="mood-display">
+              {moods.map(item => {
+                const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
+                return (
+                  <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
+                    {/* Red thumbtack visual */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-sm z-10 pointer-events-none drop-shadow-md select-none">📌</div>
+                    <button 
+                      onClick={() => deleteMood(item.id)}
+                      className="remove-mood"
+                    >
+                      ✕
+                    </button>
+                    {isImg ? (
+                      <img src={item.text} alt="Mood board snap" className="rounded-sm" />
+                    ) : null}
+                    <div className="caption truncate">
+                      {isImg ? 'Inspiration' : item.text}
+                    </div>
+                  </div>
+                );
+              })}
+              {moods.length === 0 && (
+                <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
+              )}
             </div>
           </div>
 
