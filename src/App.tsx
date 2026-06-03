@@ -346,14 +346,7 @@ export default function App() {
     setPomoSeconds(0);
   };
 
-  
 
-   
-
-
-
-
- 
   // G. Ambient Lo-Fi Tape Machine
   const [tapePlaying, setTapePlaying] = useState(false);
   const [activeAmbiences, setActiveAmbiences] = useState<{ [key: string]: boolean }>({
@@ -1290,9 +1283,6 @@ export default function App() {
               )}
             </div>
           </div>
-
-          熟能生巧-Shú néng shēng qiǎo
-
           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
@@ -1404,7 +1394,56 @@ export default function App() {
               </div>
             </div>
           </div>
- 
+  {/* CARD E: MOOD BOARD CORKBOARD */}
+          <div className="desk-card card-mood hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
+            <div className="font-bold text-white tracking-wide text-lg mb-3" style={{ textShadow: '1px 1.5px #5c4033' }}>
+              Mood Board 🖼️
+            </div>
+            
+            <div className="flex gap-1.5 mb-4">
+              <input 
+                type="text" 
+                placeholder="URL Foto o Pensiero..." 
+                value={moodInput}
+                onChange={(e) => setMoodInput(e.target.value)}
+                className="bg-white/95 text-xs text-stone-800 rounded px-2 py-1.5 flex-grow font-sans border border-amber-900/20 shadow-inner"
+              />
+              <button 
+                onClick={addMoodItem}
+                className="bg-green-700 hover:bg-green-600 font-bold px-3 py-1 text-white rounded cursor-pointer text-xs"
+              >
+                📌
+              </button>
+            </div>
+
+            <div className="mood-display">
+              {moods.map(item => {
+                const isImg = item.text.startsWith('http') || item.text.includes('.png') || item.text.includes('.jpg') || item.text.includes('.jpeg') || item.text.includes('picsum');
+                return (
+                  <div key={item.id} className="mood-item" style={{ '--r': `${(item.id % 8) - 4}deg` } as any}>
+                    {/* Red thumbtack visual */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-sm z-10 pointer-events-none drop-shadow-md select-none">📌</div>
+                    <button 
+                      onClick={() => deleteMood(item.id)}
+                      className="remove-mood"
+                    >
+                      ✕
+                    </button>
+                    {isImg ? (
+                      <img src={item.text} alt="Mood board snap" className="rounded-sm" />
+                    ) : null}
+                    <div className="caption truncate">
+                      {isImg ? 'Inspiration' : item.text}
+                    </div>
+                  </div>
+                );
+              })}
+              {moods.length === 0 && (
+                <div className="col-span-2 text-center text-xs text-stone-100 italic py-6">Sughero vuoto</div>
+              )}
+            </div>
+          </div>
+
           {/* =========================================
              GRUPPO 3: TV, PC, VSCODE, SNIPPET CREATOR
              ========================================= */}
@@ -1747,9 +1786,73 @@ export default function App() {
             </div>
           </div>
 
+          
+
+          {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
+            <div className="app-group card-tavolozza">
+              <h2 className="group-title">🎨 Foto Design</h2>
+              <ul className="app-list">
+                <li>
+                  <a 
+                    href="https://vector-sketch.netlify.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                  >
+                    Vector Sketch
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://calligraphy-font-art-editor.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(820, 'sine', 0.05)}
+                  >
+                    calligraphy-font-art
+                  </a>
+                </li>
+                
+                <li>
+                  <a 
+                    href="https://stickers-creator.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(860, 'sine', 0.05)}
+                  >
+                    Stickers Creator
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://artiscard.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(880, 'sine', 0.05)}
+                  >
+                    ArtisCard
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://arte-libera-studio.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                    ArteLibera Studio
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
          
+
         </div>
       </main>
     </div>
   );
 }
+
