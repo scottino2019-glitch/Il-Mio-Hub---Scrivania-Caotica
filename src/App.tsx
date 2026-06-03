@@ -40,6 +40,7 @@ import {
   PolaroidCard,
   AppuntiVolantiCard
 } from "./components/StaticCards";
+import { CatWidget } from "./components/CatWidget";
 
 // =========================================
 // TYPES & CONSTANTS
@@ -353,7 +354,7 @@ export default function App() {
     setPomoSeconds(0);
   };
 
- 
+
 
   // G. Ambient Lo-Fi Tape Machine
   const [tapePlaying, setTapePlaying] = useState(false);
