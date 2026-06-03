@@ -1369,7 +1369,45 @@ export default function App() {
 
           {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
           <CalendarioCard />
+ {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
+          <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
+            <div className="postit-tape"></div>
+            <div className="flex items-center gap-1.5 mb-3 mt-1 text-yellow-950 font-bold font-sans">
+              <SparklesIcon className="w-4 h-4 text-amber-800" />
+              <span className="font-bold tracking-wider text-base">Sticky Note Board 📌</span>
+            </div>
 
+            <div className="space-y-3 mb-4">
+              <input 
+                type="text" 
+                placeholder="Nuovo appunto..." 
+                value={noteInput} 
+                onChange={(e) => setNoteInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && addNote()}
+                className="w-full bg-white/50 border-b border-yellow-600/30 text-xs py-1 px-2 text-stone-900 focus:outline-none focus:border-yellow-700 font-sans"
+              />
+              <button 
+                onClick={addNote}
+                className="w-full bg-yellow-600/25 hover:bg-yellow-600/40 text-stone-900 text-[10px] font-bold py-1 rounded transition-all "
+              >
+                Aggiungi Nota Rapida
+              </button>
+            </div>
+
+            <div className="space-y-2 max-h-[180px] overflow-y-auto">
+              {notes.map((note, index) => (
+                <div key={index} className="flex justify-between items-start bg-yellow-200/40 p-2 rounded text-xs text-stone-800 font-sans border border-yellow-500/10">
+                  <span className="leading-tight font-medium">{note}</span>
+                  <button onClick={() => deleteNote(index)} className="text-stone-600 hover:text-red-500 pl-2">
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {notes.length === 0 && (
+                <div className="text-center text-[10px] italic text-stone-600">Nessun promemoria attivo.</div>
+              )}
+            </div>
+          </div>
           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
@@ -1465,45 +1503,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
-          <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
-            <div className="postit-tape"></div>
-            <div className="flex items-center gap-1.5 mb-3 mt-1 text-yellow-950 font-bold font-sans">
-              <SparklesIcon className="w-4 h-4 text-amber-800" />
-              <span className="font-bold tracking-wider text-base">Sticky Note Board 📌</span>
-            </div>
-
-            <div className="space-y-3 mb-4">
-              <input 
-                type="text" 
-                placeholder="Nuovo appunto..." 
-                value={noteInput} 
-                onChange={(e) => setNoteInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && addNote()}
-                className="w-full bg-white/50 border-b border-yellow-600/30 text-xs py-1 px-2 text-stone-900 focus:outline-none focus:border-yellow-700 font-sans"
-              />
-              <button 
-                onClick={addNote}
-                className="w-full bg-yellow-600/25 hover:bg-yellow-600/40 text-stone-900 text-[10px] font-bold py-1 rounded transition-all "
-              >
-                Aggiungi Nota Rapida
-              </button>
-            </div>
-
-            <div className="space-y-2 max-h-[180px] overflow-y-auto">
-              {notes.map((note, index) => (
-                <div key={index} className="flex justify-between items-start bg-yellow-200/40 p-2 rounded text-xs text-stone-800 font-sans border border-yellow-500/10">
-                  <span className="leading-tight font-medium">{note}</span>
-                  <button onClick={() => deleteNote(index)} className="text-stone-600 hover:text-red-500 pl-2">
-                    ✕
-                  </button>
-                </div>
-              ))}
-              {notes.length === 0 && (
-                <div className="text-center text-[10px] italic text-stone-600">Nessun promemoria attivo.</div>
-              )}
-            </div>
-          </div>
+         
 
           {/* =========================================
              GRUPPO 2: LAVAGNA, GATTO, TELEFONO, EDITOR TESTO
