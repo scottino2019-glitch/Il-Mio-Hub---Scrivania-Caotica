@@ -460,7 +460,6 @@ const CreativeFontCard = () => {
   );
 };
 
-export default CreativeFontCard;
   // G. Ambient Lo-Fi Tape Machine
   const [tapePlaying, setTapePlaying] = useState(false);
   const [activeAmbiences, setActiveAmbiences] = useState<{ [key: string]: boolean }>({
