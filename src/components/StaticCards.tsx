@@ -633,16 +633,7 @@ export const AlbumCssCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             Analogue Studio
           </a>
         </li>
-        <li>
-          <a 
-            href="https://gliph-forge.netlify.app/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            onClick={() => playSoundBlip(800, 'sine', 0.05)}
-          >
-            Gliph Forge
-          </a>
-        </li>
+        
       </ul>
 
       <a 
@@ -832,16 +823,7 @@ export const ArtistPaletteCard: React.FC<StaticCardsProps> = ({ playSoundBlip })
               Vector Sketch
             </a>
           </li>
-          <li>
-            <a 
-              href="https://calligraphy-font-art-editor.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              onClick={() => playSoundBlip(820, 'sine', 0.05)}
-            >
-              Calligraphy Font art
-            </a>
-          </li>
+       
          
           <li>
             <a 
