@@ -349,116 +349,84 @@ export default function App() {
 // ==========================================
 // Creative Font Card
 // ==========================================
-
 const CreativeFontCard = () => {
   const apps = [
     {
       title: "Calligraphy & Font Art Editor",
-      desc: "Crea, personalizza ed esporta scritte in corsivo elegante e decorazioni swash ",
+      desc: "Calligrafia in font OTF/TTF.",
       tag: "Typography",
       url: "https://calligraphy-font-art-editor.vercel.app/",
-      bgPreview: "✨Aa Bb Cc Dd Ee Ff✨"
+      bgPreview: "Aa"
     },
     {
       title: "Kinetic Video Font",
-      desc: "Anima il testo nello spazio 3D e crea scritte in movimento per i video.",
+      desc: "Scritte animate in movimento.",
       tag: "Motion",
       url: "https://example.com/video-fonts",
-      bgPreview: "⚡ MOTION ⚡"
+      bgPreview: "🎞️"
     },
     {
       title: "Gliph Forge",
-      desc: "Generatore di scritte tipografiche e font mostruosi vettoriali.",
+      desc: "Vettorializzazione e rifinitura.",
       tag: "Vector",
       url: "https://gliph-forge.netlify.app/",
-      bgPreview: "👹 Monster "  
+      bgPreview: "👹"
     },
     {
       title: "Stroke Animator",
-      desc: "Esporta i tratti della calligrafia passo-passo in formato SVG o clip video animati.",
+      desc: "Tratti animati passo-passo.",
       tag: "Animation",
       url: "https://example.com/stroke-animator",
-      bgPreview: "🖋️HandMade"
+      bgPreview: "🖋️"
     }
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 md:p-10 bg-[#0F0F11] border border-[#222226] rounded-2xl font-sans text-[#E4E4E7] relative overflow-hidden shadow-2xl">
-      
-      {/* Intestazione fluida con accenti di design */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-12 border-b border-[#222226] pb-8">
-        <div>
-          <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#A1A1AA] block mb-2">
-            Studio Workflow / Hub Strumenti
-          </span>
-          <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white font-serif italic">
-            Laboratorio di Scrittura & <span className="font-sans not-italic font-normal bg-gradient-to-r from-amber-200 via-orange-400 to-rose-500 bg-clip-text text-transparent">Movimento</span>
-          </h2>
-        </div>
-        <p className="text-sm text-[#A1A1AA] max-w-xs md:text-right font-light leading-relaxed">
-          Seleziona un'applicazione specializzata per iniziare a generare caratteri, lettering vettoriale o animazioni tipografiche.
-        </p>
+    <div className="w-full py-4 font-sans text-[#E4E4E7]">
+      {/* Titolo della sezione lineare e leggero, senza box attorno */}
+      <div className="mb-4 flex items-center gap-2 border-b border-[#222226] pb-2">
+        <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#A1A1AA]">
+          Studio Workflow
+        </span>
+        <span className="text-[#52525B] text-xs">//</span>
+        <h2 className="text-sm font-medium tracking-wide text-zinc-300">
+          Scrittura & Movimento
+        </h2>
       </div>
 
-      {/* Griglia Asimmetrica e Dinamica per le 4 App */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Griglia pulita di semplici pulsanti-link (Nessuna card dentro la card) */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {apps.map((app, index) => (
           <a
             key={index}
             href={app.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative block p-6 rounded-xl bg-[#161619] border border-[#27272A] hover:border-[#F59E0B] transition-all duration-500 overflow-hidden hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(245,158,11,0.05)]"
+            className="group relative flex flex-col justify-between p-3 rounded-lg bg-[#161619] border border-[#27272A] hover:border-amber-500/50 transition-all duration-300 overflow-hidden min-h-[80px]"
           >
-            {/* Sfondo Animato che simula lo strumento (Font / Video / Scrittura) */}
-            <div className="absolute right-4 bottom-[-10px] text-4xl md:text-5xl font-serif text-[#222226] font-light tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-[#2A2A35] group-hover:scale-110 transition-all duration-700 pointer-events-none uppercase italic select-none">
+            {/* Piccolo accenno decorativo sul fondo, molto discreto */}
+            <div className="absolute right-2 bottom-1 text-xl font-serif text-[#222226] opacity-30 group-hover:opacity-60 transition-all duration-300 pointer-events-none select-none italic">
               {app.bgPreview}
             </div>
 
-            {/* Contenuto della card dell'app */}
-            <div className="relative z-10 flex flex-col h-full justify-between min-h-[140px]">
-              <div>
-                <div className="flex justify-between items-start mb-3">
-                  <span className="text-[10px] font-mono tracking-widest uppercase bg-[#27272A] group-hover:bg-[#F59E0B]/10 group-hover:text-amber-400 px-2 py-0.5 rounded text-[#A1A1AA] transition-colors">
-                    {app.tag}
-                  </span>
-                  
-                  {/* Freccia di reindirizzamento dinamica */}
-                  <svg 
-                    className="w-5 h-5 text-[#71717A] group-hover:text-[#F59E0B] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </div>
-
-                <h3 className="text-xl font-medium text-white group-hover:text-amber-300 transition-colors mb-2">
-                  {app.title}
-                </h3>
-                
-                <p className="text-sm text-[#A1A1AA] font-light leading-relaxed pr-12">
-                  {app.desc}
-                </p>
-              </div>
+            <div className="relative z-10">
+              <span className="text-[8px] font-mono tracking-wider uppercase text-amber-500/80 block mb-0.5">
+                {app.tag}
+              </span>
+              <h3 className="text-xs font-medium text-white group-hover:text-amber-400 transition-colors truncate">
+                {app.title}
+              </h3>
+              <p className="text-[10px] text-[#A1A1AA] font-light leading-tight mt-0.5 pr-2 line-clamp-2">
+                {app.desc}
+              </p>
             </div>
           </a>
         ))}
       </div>
-
-      {/* Footer Minimalista dell'interfaccia */}
-      <div className="mt-12 pt-6 border-t border-[#222226] flex flex-col sm:flex-row justify-between items-center text-xs font-mono text-[#52525B] gap-2">
-        <div>DESIGN SYSTEM // FONT ENGINE INTEGRATION</div>
-        <div className="flex gap-4">
-          <span>STATUS: READY</span>
-          <span>•</span>
-          <span>4 EXTERNAL LINKS CONFIGURED</span>
-        </div>
-      </div>
     </div>
   );
 };
+
 
   // G. Ambient Lo-Fi Tape Machine
   const [tapePlaying, setTapePlaying] = useState(false);
@@ -1661,9 +1629,9 @@ const CreativeFontCard = () => {
 </div>
          
 {/* Creative Font Card */}
-          <div className="mt-8 w-full">
-            <CreativeFontCard />
-          </div>
+          <div className="mt-6 px-1">
+              <CreativeFontCard />
+            </div>
           
 
           {/* =========================================
