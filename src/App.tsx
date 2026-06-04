@@ -356,7 +356,7 @@ const CreativeFontCard = () => {
       desc: "Font",
       tag: "Typography",
       url: "https://calligraphy-font-art-editor.vercel.app/",
-      bgPreview: "Aa"
+      bgPreview: "🆎"
     },
     {
       title: "Ghiri",
