@@ -352,31 +352,31 @@ export default function App() {
 const CreativeFontCard = () => {
   const apps = [
     {
-      title: "Calligraphy & Font Art Editor",
+      title: "Cally",
       desc: "Calligrafia in font OTF/TTF.",
       tag: "Typography",
       url: "https://calligraphy-font-art-editor.vercel.app/",
       bgPreview: "Aa"
     },
     {
-      title: "Kinetic Video Font",
+      title: "Ghiri",
       desc: "Scritte animate in movimento.",
       tag: "Motion",
-      url: "https://example.com/video-fonts",
+      url: "https://ghiribizzo.vercel.app/",
       bgPreview: "🎞️"
     },
     {
-      title: "Gliph Forge",
+      title: "Gliph",
       desc: "Vettorializzazione e rifinitura.",
       tag: "Vector",
       url: "https://gliph-forge.netlify.app/",
       bgPreview: "👹"
     },
     {
-      title: "Stroke Animator",
+      title: "Scribble",
       desc: "Tratti animati passo-passo.",
       tag: "Animation",
-      url: "https://example.com/stroke-animator",
+      url: "https://scarabocchio.vercel.app/",
       bgPreview: "🖋️"
     }
   ];
