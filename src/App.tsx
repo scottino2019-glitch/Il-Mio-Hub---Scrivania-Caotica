@@ -353,28 +353,28 @@ const CreativeFontCard = () => {
   const apps = [
     {
       title: "Cally",
-      desc: "Calligrafia in font OTF/TTF.",
+      desc: "Font",
       tag: "Typography",
       url: "https://calligraphy-font-art-editor.vercel.app/",
       bgPreview: "Aa"
     },
     {
       title: "Ghiri",
-      desc: "Scritte animate in movimento.",
+      desc: "Scrittura",
       tag: "Motion",
       url: "https://ghiribizzo.vercel.app/",
       bgPreview: "🎞️"
     },
     {
       title: "Gliph",
-      desc: "Vettorializzazione e rifinitura.",
+      desc: "Mostri",
       tag: "Vector",
       url: "https://gliph-forge.netlify.app/",
       bgPreview: "👹"
     },
     {
       title: "Scribble",
-      desc: "Tratti animati passo-passo.",
+      desc: "Tratti",
       tag: "Animation",
       url: "https://scarabocchio.vercel.app/",
       bgPreview: "🖋️"
