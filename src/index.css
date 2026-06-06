@@ -147,7 +147,7 @@
 .dock-item::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: -38px;
+  top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%) scale(0.85);
   background: #ADDD2D;
@@ -163,6 +163,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   pointer-events: none;
+  z-index: 9999;
 }
 
 .dock-item:hover::after {
