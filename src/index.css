@@ -146,9 +146,9 @@
 /* Tooltip a comparsa */
 .dock-item::after {
   content: attr(data-tooltip);
-  position: absolute;
-  top: calc(100% + 10px);
+  position: fixed;
   left: 50%;
+  top: calc(100% + 10px);
   transform: translateX(-50%) scale(0.85);
   background: #ADDD2D;
   color: #923BC9;
@@ -171,7 +171,6 @@
   visibility: visible;
   transform: translateX(-50%) scale(1);
 }
-
 /* =========================================
    SCREENS & CONTEXT CONTAINER
    ========================================= */
