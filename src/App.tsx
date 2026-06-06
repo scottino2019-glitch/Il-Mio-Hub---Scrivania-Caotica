@@ -746,7 +746,7 @@ const CreativeFontCard = () => {
         <a href="https://film-finder-indol.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item film" data-tooltip="Film">🎬</a>
         <a href="https://winamp-swart.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Musica" data-tooltip="Musica">🎧</a>
         <a href="https://ide-core.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Coding" data-tooltip="Edu Code">💻</a>
-        <a href="https://tutor-programmazione.netlify.app/" target="_blank" rel="noopener noreferrer" className="dock-item Coding" data-tooltip="Tutor">🖥</a>
+        <a href="https://tutor-programmazione.netlify.app/" target="_blank" rel="noopener noreferrer" className="dock-item Tutor" data-tooltip="Tutor">🖥</a>
         <a href="https://angolo-social.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Social" data-tooltip="Social">👥</a>
         <a href="https://editor-multiligua.netlify.app/" target="_blank" rel="noopener noreferrer" className="dock-item Editor" data-tooltip="Editor">📝</a>
    
