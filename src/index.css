@@ -170,7 +170,16 @@
   visibility: visible;
   transform: translateX(-50%) scale(1);
 }
+@media (hover: none) and (pointer: coarse) {
+  .top-dock {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 
+  .dock-item::after {
+    display: none;
+  }
+}
 /* =========================================
    SCREENS & CONTEXT CONTAINER
    ========================================= */
