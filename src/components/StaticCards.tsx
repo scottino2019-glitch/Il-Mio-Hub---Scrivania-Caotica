@@ -168,14 +168,14 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
             {/* Icon apps grid list */}
             <div className="grid grid-cols-2 gap-3">
               <a 
-                href="https://libreria-lilac.vercel.app/" 
+                href="https://libreria-jet.vercel.app/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.06)}
                 className="app-tile flex flex-col items-center justify-center p-3.5 bg-amber-950/40 hover:bg-amber-950/60 border border-amber-500/15 hover:border-amber-500/40 rounded-2xl transition-all hover:-translate-y-1"
               >
                 <span className="text-3xl mb-1.5">📚</span>
-                <span className="text-[11px] text-white font-bold tracking-tight">Codex Digital</span>
+                <span className="text-[11px] text-white font-bold tracking-tight">Libreria</span>
                 <span className="text-[7.5px] text-amber-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
               </a>
 
