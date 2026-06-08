@@ -1749,6 +1749,56 @@ const CreativeFontCard = () => {
 
           {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
           <CrtMonitorCard playSoundBlip={playSoundBlip} />
+ {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
+          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
+            <div className="app-group card-tavolozza">
+              <h2 className="group-title">🎨 Foto Design</h2>
+              <ul className="app-list">
+                <li>
+                  <a 
+                    href="https://vector-sketch.netlify.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(800, 'sine', 0.05)}
+                  >
+                    Vector Sketch
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a 
+                    href="https://stickers-creator.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(860, 'sine', 0.05)}
+                  >
+                    Stickers Creator
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://artiscard.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(880, 'sine', 0.05)}
+                  >
+                    ArtisCard
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://arte-libera-studio.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                    ArteLibera Studio
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
 
          
           {/* EXTRA CARD 5: RETRO CASSETTE TAPE RECORDER */}
@@ -1814,66 +1864,7 @@ const CreativeFontCard = () => {
 
           
 
-          {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
-          <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
-            <div className="app-group card-tavolozza">
-              <h2 className="group-title">🎨 Foto Design</h2>
-              <ul className="app-list">
-                <li>
-                  <a 
-                    href="https://vector-sketch.netlify.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(800, 'sine', 0.05)}
-                  >
-                    Vector Sketch
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://calligraphy-font-art-editor.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(820, 'sine', 0.05)}
-                  >
-                    calligraphy-font-art
-                  </a>
-                </li>
-                
-                <li>
-                  <a 
-                    href="https://stickers-creator.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(860, 'sine', 0.05)}
-                  >
-                    Stickers Creator
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://artiscard.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(880, 'sine', 0.05)}
-                  >
-                    ArtisCard
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://arte-libera-studio.vercel.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
-                  >
-                    ArteLibera Studio
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
+         
          
 
         </div>
