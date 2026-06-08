@@ -93,6 +93,15 @@ export const LavagnaCard: React.FC = () => {
                 <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
               </div>
             </div>
+             <div className="flex gap-2 items-start">
+              <span>🪆</span>
+              <div>
+                <a href="https://linguacoreana.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-brown">
+                  2. Русский (Russo)
+                </a>
+                <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
+              </div>
+            </div>
 
             <div className="flex gap-2 items-start">
               <span>✍</span>
