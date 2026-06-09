@@ -96,7 +96,7 @@ export const LavagnaCard: React.FC = () => {
              <div className="flex gap-2 items-start">
               <span>🪆</span>
               <div>
-                <a href="https://lingua-russa.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-brown">
+                <a href="https://lingua-russa.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-purple">
                   2. Русский (Russo)
                 </a>
                 <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
