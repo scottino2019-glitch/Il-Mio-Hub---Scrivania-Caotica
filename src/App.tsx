@@ -1598,15 +1598,7 @@ const CreativeFontCard = () => {
                   <a href="https://css-artist-lab.netlify.app/" className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
                     🐾 Css Artist Lab
                   </a>
-                   <a href="https://ghibli-me-anime-avatar-creator.vercel.app/  " className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🧙 GhibliMe: Anime Avatar Creator
-                  </a>
-                  <a href="https://bichi-creator.vercel.app/ " className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🐭 Bichi Creator
-                  </a>
-                     <a href="https://bichi-sticker-studio.vercel.app/?bichi=%7B%22body%22%3A%22blob%22%2C%22color%22%3A%22%23FF9EAE%22%2C%22colorSecondary%22%3A%22%23FF7086%22%2C%22eyes%22%3A%22anime%22%2C%22eyesScale%22%3A1%2C%22eyesOffsetY%22%3A0%2C%22ears%22%3A%22bunny%22%2C%22earsScale%22%3A1%2C%22earsOffsetY%22%3A0%2C%22nose%22%3A%22snout%22%2C%22noseScale%22%3A1%2C%22noseOffsetY%22%3A0%2C%22mouth%22%3A%22smile%22%2C%22mouthScale%22%3A1%2C%22mouthOffsetY%22%3A0%2C%22accessory%22%3A%22none%22%2C%22accessoryScale%22%3A1%2C%22accessoryOffsetX%22%3A0%2C%22accessoryOffsetY%22%3A0%2C%22background%22%3A%22grid%22%2C%22backgroundColor%22%3A%22%23FFFFFF%22%2C%22filter%22%3A%22normal%22%2C%22animation%22%3A%22none%22%2C%22animationSpeed%22%3A1%2C%22textOverlays%22%3A%5B%5D%7D " className="flex items-center gap-2 p-2.5 bg-orange-50 hover:bg-orange-100 hover:-translate-y-[2px] rounded-xl transition-all text-orange-900 font-semibold text-xs shadow-sm">
-                    🦊 Bichi Stickers Studio
-                  </a>
+                   
                 </div>
               </div>
 
