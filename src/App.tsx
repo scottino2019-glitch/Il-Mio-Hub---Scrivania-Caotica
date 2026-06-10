@@ -40,6 +40,7 @@ import {
   PolaroidCard,
   AppuntiVolantiCard
 } from "./components/StaticCards";
+import ComicLinksCard from "./components/ComicLinksCard";
 
 // =========================================
 // TYPES & CONSTANTS
@@ -1541,8 +1542,8 @@ const CreativeFontCard = () => {
           {/* L'AGENDA (Ufficio / Utility) */}
           <AgendaCard playSoundBlip={playSoundBlip} />
           
-          {/* Appunti (Ufficio / Utility) */}
-          
+          {/* Comic (Chibi ) */}
+          <ComicLinksCard />
 
           {/* PINK RING BINDER & PDF SQUARES/LINES BINDER */}
           <PinkPdfNotebookCard playSoundBlip={playSoundBlip} />
