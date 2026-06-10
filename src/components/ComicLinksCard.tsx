@@ -32,8 +32,16 @@ const defaultLinks: ComicLink[] = [
     label: "Chibi Creator",
     href: "https://chibi-creator.netlify.app/",
     note: "Mini figures"
+  },
+{
+    label: "Bichi Studio",
+    href: "https://chibi-creator.netlify.app/",
+    note: "Cute Crature"
   }
+
 ];
+https://bichi-sticker-studio.vercel.app/
+
 
 export default function ComicLinksCard({
   title = "Anime avatar lab",
