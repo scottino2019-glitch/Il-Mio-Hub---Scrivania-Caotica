@@ -51,7 +51,7 @@ export default function ComicLinksCard({
   links = defaultLinks
 }: ComicLinksCardProps) {
   return (
-    <article className="comic-paper-card desk-card hover-rot-2" style={{ ['--hover-rot' as any]: '1.2deg' }}>
+    <article className="comic-paper-card desk-card hover-rot-2">
       <div className="comic-paper-card__splash" aria-hidden="true" />
       <div className="comic-paper-card__burst" aria-hidden="true">{burstText}</div>
 
