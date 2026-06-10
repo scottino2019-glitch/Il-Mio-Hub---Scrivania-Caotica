@@ -16,44 +16,38 @@ const defaultLinks: ComicLink[] = [
   {
     label: "Ghibli Me",
     href: "https://ghibli-me-anime-avatar-creator.vercel.app/",
-    note: "Avatar style"
+    note: "Avatar style",
   },
   {
     label: "Bichi Creator",
     href: "https://bichi-creator.vercel.app/",
-    note: "Character maker"
+    note: "Character maker",
   },
   {
     label: "Chibi Master",
     href: "https://chibi-master.vercel.app/",
-    note: "Cute editor"
+    note: "Cute editor",
   },
   {
     label: "Chibi Creator",
     href: "https://chibi-creator.netlify.app/",
-    note: "Mini figures"
+    note: "Mini figures",
   },
-{
-    label: "Bichi Studio",
-    href: "https://chibi-creator.netlify.app/",
-    note: "Cute Crature"
-  }
-
 ];
-https://bichi-sticker-studio.vercel.app/
-
 
 export default function ComicLinksCard({
   title = "Anime avatar lab",
   subtitle = "Mini pannello stile fumetto per aprire al volo i creator più carini.",
   burstText = "Pow!",
   badgeText = "Comic links",
-  links = defaultLinks
+  links = defaultLinks,
 }: ComicLinksCardProps) {
   return (
     <article className="comic-paper-card desk-card hover-rot-2">
       <div className="comic-paper-card__splash" aria-hidden="true" />
-      <div className="comic-paper-card__burst" aria-hidden="true">{burstText}</div>
+      <div className="comic-paper-card__burst" aria-hidden="true">
+        {burstText}
+      </div>
 
       <div className="comic-paper-card__content">
         <div className="comic-paper-card__badge">{badgeText}</div>
@@ -79,13 +73,21 @@ export default function ComicLinksCard({
                 <span>{link.note}</span>
               </span>
 
-              <span className="comic-paper-link__cta" aria-hidden="true">↗</span>
+              <span className="comic-paper-link__cta" aria-hidden="true">
+                ↗
+              </span>
             </a>
           ))}
         </div>
 
         <div className="comic-paper-card__footer-note">
-          <svg viewBox="0 0 60 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="comic-paper-card__scribble" aria-hidden="true">
+          <svg
+            viewBox="0 0 60 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="comic-paper-card__scribble"
+            aria-hidden="true"
+          >
             <path
               d="M2 9C10 2 18 11 26 4C34 -1 42 10 58 3"
               stroke="currentColor"
