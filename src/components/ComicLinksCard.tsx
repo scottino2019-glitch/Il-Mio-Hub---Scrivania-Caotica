@@ -38,11 +38,6 @@ const defaultLinks: ComicLink[] = [
     href: "https://chibi-studio.netlify.app/",
     note: "Mini figures",
   },
-{
-    label: "Bichi Studio",
-    href: "https://bichi-sticker-studio.vercel.app/?bichi=%7B%22body%22%3A%22blob%22%2C%22color%22%3A%22%23FF9EAE%22%2C%22colorSecondary%22%3A%22%23FF7086%22%2C%22eyes%22%3A%22anime%22%2C%22eyesScale%22%3A1%2C%22eyesOffsetY%22%3A0%2C%22ears%22%3A%22bunny%22%2C%22earsScale%22%3A1%2C%22earsOffsetY%22%3A0%2C%22nose%22%3A%22snout%22%2C%22noseScale%22%3A1%2C%22noseOffsetY%22%3A0%2C%22mouth%22%3A%22smile%22%2C%22mouthScale%22%3A1%2C%22mouthOffsetY%22%3A0%2C%22accessory%22%3A%22none%22%2C%22accessoryScale%22%3A1%2C%22accessoryOffsetX%22%3A0%2C%22accessoryOffsetY%22%3A0%2C%22background%22%3A%22grid%22%2C%22backgroundColor%22%3A%22%23FFFFFF%22%2C%22filter%22%3A%22normal%22%2C%22animation%22%3A%22none%22%2C%22animationSpeed%22%3A1%2C%22textOverlays%22%3A%5B%5D%7D",
-    note: "Cute Creature",
-  },
 ];
 
 export default function ComicLinksCard({
