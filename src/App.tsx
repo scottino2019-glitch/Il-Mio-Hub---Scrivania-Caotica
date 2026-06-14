@@ -1790,6 +1790,18 @@ const CreativeFontCard = () => {
                     ArteLibera Studio
                   </a>
                 </li>
+  <li>
+                  <a 
+                    href="https://sticker-craft-pro-studio-16148277139.europe-west2.run.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                    Stickers-Craft
+                  </a>
+                </li>
+
+
               </ul>
             </div>
           </div>
