@@ -1317,6 +1317,59 @@ const CreativeFontCard = () => {
 
           {/* CARD C: CALENDARIO STRAPPATO IFRAME */}
           <CalendarioCard />
+ {/* CARD B: NOTEBOOK PREFERITI */}
+          <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="flex items-center gap-2 mb-4">
+              <BookmarkIcon className="w-5 h-5 text-indigo-900" />
+              <div className="font-bold text-stone-900 tracking-wide text-lg">Preferiti 🔖</div>
+            </div>
+            
+            <div className="link-input-group mb-4">
+              <input 
+                type="text" 
+                placeholder="Titolo" 
+                value={linkTitle}
+                onChange={(e) => setLinkTitle(e.target.value)}
+                className="link-input"
+              />
+              <input 
+                type="text" 
+                placeholder="https://..." 
+                value={linkUrl}
+                onChange={(e) => setLinkUrl(e.target.value)}
+                className="link-input"
+              />
+              <button 
+                onClick={addLink}
+                className="w-full bg-slate-800 hover:bg-slate-700 active:translate-y-[1px] text-white py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all mt-1"
+              >
+                Aggiungi Link ＋
+              </button>
+            </div>
+
+            <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1">
+              {links.map(l => (
+                <div key={l.id} className="link-item flex justify-between items-center bg-white/40 hover:bg-white/70 px-2 py-1.5 rounded transition-all">
+                  <a href={l.url} target="_blank" rel="noopener noreferrer" className="truncate max-w-[85%] font-medium">
+                    🔗 {l.title}
+                  </a>
+                  <button 
+                    onClick={() => deleteLink(l.id)}
+                    className="text-stone-400 hover:text-red-500 transition-all text-xs"
+                    title="Rimuovi"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {links.length === 0 && (
+                <div className="text-xs text-stone-500 italic py-4 text-center">Taccuino vuoto</div>
+              )}
+            </div>
+          </div>
+
+
+        
  {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
           <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
             <div className="postit-tape"></div>
@@ -1356,50 +1409,7 @@ const CreativeFontCard = () => {
               )}
             </div>
           </div>
-          {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
-          <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
-            </div>
-
-            <div className="text-center text-white mt-1">
-              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
-              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
-                {currentTime.toLocaleTimeString('it-IT')}
-              </div>
-            </div>
-
-            {/* Swing pendulum container */}
-            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
-              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
-                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
-              </div>
-            </div>
-
-            {/* Focus pomodoro timer interface */}
-            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
-              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
-                <span>STAGE: {pomoMode.toUpperCase()}</span>
-                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
-              </div>
-
-              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
-                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
-              </div>
-
-              <div className="flex gap-2 justify-center mt-3">
-                <button 
-                  onClick={togglePomo} 
-                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
-                >
-                  {pomoActive ? 'PAUSA' : 'START'}
-                </button>
-                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
-                  RESET
-                </button>
-              </div>
-            </div>
-          </div>
+         
 
         
          
@@ -1487,57 +1497,7 @@ const CreativeFontCard = () => {
              GRUPPO 4: ALL OTHERS (Notebook Preferiti, Agenda, CSS Artist, JSON, Portals, Games, Tarot, etc)
              ========================================= */}
 
-          {/* CARD B: NOTEBOOK PREFERITI */}
-          <div className="desk-card card-links-app hover-rot-1" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="flex items-center gap-2 mb-4">
-              <BookmarkIcon className="w-5 h-5 text-indigo-900" />
-              <div className="font-bold text-stone-900 tracking-wide text-lg">Preferiti 🔖</div>
-            </div>
-            
-            <div className="link-input-group mb-4">
-              <input 
-                type="text" 
-                placeholder="Titolo" 
-                value={linkTitle}
-                onChange={(e) => setLinkTitle(e.target.value)}
-                className="link-input"
-              />
-              <input 
-                type="text" 
-                placeholder="https://..." 
-                value={linkUrl}
-                onChange={(e) => setLinkUrl(e.target.value)}
-                className="link-input"
-              />
-              <button 
-                onClick={addLink}
-                className="w-full bg-slate-800 hover:bg-slate-700 active:translate-y-[1px] text-white py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all mt-1"
-              >
-                Aggiungi Link ＋
-              </button>
-            </div>
-
-            <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1">
-              {links.map(l => (
-                <div key={l.id} className="link-item flex justify-between items-center bg-white/40 hover:bg-white/70 px-2 py-1.5 rounded transition-all">
-                  <a href={l.url} target="_blank" rel="noopener noreferrer" className="truncate max-w-[85%] font-medium">
-                    🔗 {l.title}
-                  </a>
-                  <button 
-                    onClick={() => deleteLink(l.id)}
-                    className="text-stone-400 hover:text-red-500 transition-all text-xs"
-                    title="Rimuovi"
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
-              {links.length === 0 && (
-                <div className="text-xs text-stone-500 italic py-4 text-center">Taccuino vuoto</div>
-              )}
-            </div>
-          </div>
-
+         
           {/* L'AGENDA (Ufficio / Utility) */}
           <AgendaCard playSoundBlip={playSoundBlip} />
           
@@ -1608,7 +1568,50 @@ const CreativeFontCard = () => {
               ></div>
             </div>
           </div>
-          
+           {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
+          <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
+              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+            </div>
+
+            <div className="text-center text-white mt-1">
+              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
+              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
+                {currentTime.toLocaleTimeString('it-IT')}
+              </div>
+            </div>
+
+            {/* Swing pendulum container */}
+            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
+              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
+                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
+              </div>
+            </div>
+
+            {/* Focus pomodoro timer interface */}
+            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
+              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
+                <span>STAGE: {pomoMode.toUpperCase()}</span>
+                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
+              </div>
+
+              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
+                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
+              </div>
+
+              <div className="flex gap-2 justify-center mt-3">
+                <button 
+                  onClick={togglePomo} 
+                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
+                >
+                  {pomoActive ? 'PAUSA' : 'START'}
+                </button>
+                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
+                  RESET
+                </button>
+              </div>
+            </div>
+          </div>
           {/* CARD I: SMARTPHONE BEZEL OVERLAY FOR BOOKS */}
           <SmartphoneCard playSoundBlip={playSoundBlip} />
           
