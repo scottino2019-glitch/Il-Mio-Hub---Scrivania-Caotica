@@ -1413,8 +1413,6 @@ const CreativeFontCard = () => {
 
        
 
-          {/* CARD I: SMARTPHONE BEZEL OVERLAY FOR BOOKS */}
-          <SmartphoneCard playSoundBlip={playSoundBlip} />
 
           {/* USER INTERACTIVE EDITOR TESTO (Salva File in .txt) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '0.5deg' } as any}>
@@ -1610,6 +1608,10 @@ const CreativeFontCard = () => {
               ></div>
             </div>
           </div>
+          
+          {/* CARD I: SMARTPHONE BEZEL OVERLAY FOR BOOKS */}
+          <SmartphoneCard playSoundBlip={playSoundBlip} />
+          
           {/* ALBUM CSS GRANDE - CSS Artist Draft */}
           <AlbumCssCard playSoundBlip={playSoundBlip} />
       {/* Appunti (Ufficio / Utility) */}
