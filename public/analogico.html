@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stereo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    <style>
+    /* Sfondo nero assoluto con texture CRT integrata ad alta visibilità */
+    body {
+      background-color: #050505 !important;
+      background-image: 
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04)),
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.8) 100%);
+      background-size: 100% 4px, 6px 100%, 100% 100%;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+   /* SFONDO DINAMICO: Effetto segnale TV mal sintonizzato / Canale fantasma */
+    .bg-static-noise {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.18; 
+      background-image: url('https://images.unsplash.com/photo-1501141178950-e7fa06e4adf5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4MDc1Mjd8MHwxfHNlYXJjaHwxOXx8c2ZhcmZhbGlvJTIwdGVsZXZpc2l2ZXxlbnwwfHx8fDE3ODE0Njg5NDJ8MA&ixlib=rb-4.1.0&q=85');
+      background-size: 400px 400px; 
+      background-repeat: repeat; 
+      pointer-events: none;
+    }
+
+/* --- STILE SYNTH ANALOGICO --- */
+.analog-hardware-card {
+  position: relative;
+  width: 320px;
+  min-height: 290px;
+  background: linear-gradient(135deg, #2c2d30 0%, #17181c 100%);
+  border: 3px solid #3c3f44;
+  border-radius: 14px;
+  padding: 24px;
+  color: #e5e7eb;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 
+              inset 0 1px 3px rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Effetto Hover della Card */
+.analog-hardware-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #f59e0b; /* Ambra */
+  box-shadow: 0 20px 45px rgba(245, 158, 11, 0.15), 
+              0 15px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* Viti Metalliche d'Angolo */
+.card-screw {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #4a4d52;
+  border-radius: 50%;
+  border: 1px solid #111215;
+}
+.card-screw::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  width: 8px;
+  height: 1.5px;
+  background: #1e2022;
+  transform: rotate(45deg);
+  transition: transform 0.5s;
+}
+.analog-hardware-card:hover .card-screw::after {
+  transform: rotate(135deg);
+}
+
+.top-left { top: 8px; left: 8px; }
+.top-right { top: 8px; right: 8px; }
+.bottom-left { bottom: 8px; left: 8px; }
+.bottom-right { bottom: 8px; right: 8px; }
+
+/* Intestazione modulo */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2e3035;
+  padding-bottom: 8px;
+}
+.brand-lbl {
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ef4444; /* Rosso valvola */
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+  font-size: 14px;
+}
+
+/* Spia Led Rossa che diventa Verde */
+.status-indicator-light {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  box-shadow: 0 0 5px #ef4444;
+  transition: background-color 0.4s, box-shadow 0.4s;
+}
+.analog-hardware-card:hover .status-indicator-light {
+  background-color: #10b981; /* Verde smeraldo */
+  box-shadow: 0 0 10px #10b981;
+}
+
+/* Manopola di Regolazione */
+.dial-container {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 16px 0;
+}
+.analog-dial {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #383a3f 30%, #1a1b1e 100%);
+  border: 4px solid #4a4d53;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+}
+.analog-hardware-card:hover .analog-dial {
+  transform: rotate(135deg);
+  border-color: #f59e0b;
+}
+.dial-pointer {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 4px;
+  height: 25px;
+  background: #ef4444;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  transition: background-color 0.4s;
+}
+.analog-hardware-card:hover .dial-pointer {
+  background: #10b981;
+}
+
+.dial-labels {
+  display: flex;
+  flex-direction: column;
+}
+.label-name {
+  font-size: 9px;
+  color: #9ca3af;
+  letter-spacing: 1px;
+}
+.label-value {
+  font-size: 18px;
+  color: #f59e0b;
+  transition: color 0.4s;
+}
+.analog-hardware-card:hover .label-value {
+  color: #10b981;
+}
+
+/* Griglia analogica con canali e barre */
+.vocal-grid {
+  display: flex;
+  gap: 5px;
+  height: 40px;
+  align-items: flex-end;
+  background: #0f1012;
+  border: 1px solid #2e3035;
+  padding: 8px;
+  border-radius: 5px;
+}
+.grid-line {
+  flex: 1;
+  height: 25%;
+  background-color: #2b2e35;
+  border-radius: 1px;
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s;
+}
+.grid-line.active {
+  background-color: #ef4444;
+}
+.analog-hardware-card:hover .grid-line:nth-child(1) { height: 85%; background-color: #10b981; }
+.analog-hardware-card:hover .grid-line:nth-child(2) { height: 50%; background-color: #10b981; }
+.analog-hardware-card:hover .grid-line:nth-child(3) { height: 95%; background-color: #10b981; }
+.analog-hardware-card:hover .grid-line:nth-child(4) { height: 35%; background-color: #10b981; }
+.analog-hardware-card:hover .grid-line:nth-child(5) { height: 70%; background-color: #10b981; }
+
+.panel-footer {
+  font-size: 8px;
+  text-align: center;
+  color: #555760;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}/* --- DETECTOR IN ALLUMINIO SPAZZOLATO --- */
+.brushed-detector-card {
+  position: relative;
+  width: 320px;
+  min-height: 290px;
+  background: linear-gradient(145deg, #e0e0e0, #c8c8c8);
+  border: 4px solid #b5b5b5;
+  border-radius: 16px;
+  padding: 20px;
+  color: #333333;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3),
+              inset 0 1px 3px #ffffff,
+              5px 5px 15px rgba(0,0,0,0.15);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.brushed-detector-card:hover {
+  transform: translateY(-6px);
+  border-color: #8c7853; /* Bronzo metallico */
+  box-shadow: 0 25px 50px rgba(140, 120, 83, 0.2),
+              0 15px 30px rgba(0,0,0,0.25);
+  background: linear-gradient(145deg, #e8e8e8, #cfcfcf);
+}
+
+/* Intestazioni Metalliche */
+.metal-header, .metal-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #b5b5b5;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+.metal-bottom {
+  border-bottom: none;
+  border-top: 2px solid #b5b5b5;
+  padding-top: 6px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-top: 12px;
+}
+
+.station-id, .serial-no {
+  font-size: 11px;
+  font-weight: 800;
+  color: #555;
+  letter-spacing: 1.5px;
+}
+.serial-no {
+  font-size: 9px;
+  color: #777;
+}
+
+/* Borchie/Rivet */
+.rivet {
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #f0f0f0 20%, #888 80%);
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Indicatore Curvo */
+.gauge-area {
+  position: relative;
+  height: 100px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  border: 1px solid #a3a3a3;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gauge-arc {
+  position: relative;
+  width: 140px;
+  height: 70px;
+}
+
+/* Ago di Misurazione */
+.gauge-needle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  height: 55px;
+  background: #ef4444;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-50deg);
+  border-radius: 1px;
+  transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+.brushed-detector-card:hover .gauge-needle {
+  transform: translateX(-50%) rotate(42deg);
+}
+
+.gauge-hub {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #666 30%, #111 100%);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px solid #000;
+  z-index: 3;
+}
+
+.gauge-ticks {
+  position: absolute;
+  top: 10px;
+  width: calc(100% - 24px);
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 10px;
+  font-family: monospace;
+}
+
+/* Barra Led Verticale Accanto */
+.v-meter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.v-channel {
+  flex-grow: 1;
+  height: 12px;
+  background-color: #000000;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  overflow: hidden;
+}
+.v-fill {
+  width: 20%;
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 60%, #eab308 100%);
+  border-radius: 3px;
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brushed-detector-card:hover .v-fill {
+  width: 82%;
+}
+.v-label {
+  font-size: 10px;
+  font-weight: bold;
+  color: #666;
+  white-space: nowrap;
+}
+
+
+
+    /* SPEGNIMENTO COMPLETO DELLE BARRE DI INTERFERENZA */
+    .bg-interference-bar, .bg-interference-bar-2 {
+      display: none !important;
+    }
+    /* Barre di tracking orizzontali (tipiche dei canali fuori frequenza o nastri VHS rovinati) */
+    .bg-interference-bar {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 140px;
+      /* Aumentata la visibilità del bianco per contrastare il nero del body */
+      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05), transparent);
+      filter: blur(4px);
+      z-index: 0;
+      pointer-events: none;
+      animation: trackingPass 10s linear infinite;
+    }
+
+    .bg-interference-bar-2 {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02), transparent);
+      filter: blur(6px);
+      z-index: 0;
+      pointer-events: none;
+      animation: trackingPass 16s linear infinite;
+      animation-delay: -4s;
+    }
+
+    /* Distorsione sussultante dello sfondo */
+    @keyframes trackingPass {
+      0% { top: -20%; transform: scaleY(1) skewX(0deg); }
+      50% { transform: scaleY(1.3) skewX(3deg); }
+      100% { top: 120%; transform: scaleY(1) skewX(0deg); }
+    }
+
+    /* Vignettatura cinematografica attorno alla pagina */
+    .tv-vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 20%, rgba(0, 0, 0, 0.95) 100%) !important;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+    }
+
+    .wood-grain {
+      background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 12px);
+    }
+    .blinking {
+      animation: blinker 1.5s linear infinite;
+    }
+    @keyframes blinker {
+      50% { opacity: 0; }
+    }
+    
+    @media (max-width: 440px) {
+      #wrapper-main { transform: scale(0.85); }
+    }
+    @media (max-width: 375px) {
+      #wrapper-main { transform: scale(0.75); }
+    }
+
+/* --- STYLE NEON SYNTHWAVE --- */
+.synthwave-card {
+  position: relative;
+  width: 320px;
+  height: 310px;
+  background-color: #0b0214;
+  border: 2px solid #ff007f;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 4px 15px rgba(255, 0, 127, 0.15),
+              inset 0 0 15px rgba(255, 0, 127, 0.1);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.synthwave-card:hover {
+  transform: translateY(-10px) rotate(1deg);
+  border-color: #00f0ff;
+  box-shadow: 0 20px 40px rgba(0, 240, 255, 0.3),
+              0 10px 20px rgba(255, 0, 127, 0.2);
+}
+
+/* Il grande sole Retrowave tagliato */
+.sun-sunset {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(180deg, #ff007f 0%, #ff8c00 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+.synthwave-card:hover .sun-sunset {
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
+  background: linear-gradient(180deg, #00f0ff 0%, #ff007f 100%);
+  transform: scale(1.08) translateY(-4px);
+}
+
+/* Griglia Prospettica Sotto al Sole */
+.sun-grid-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 100px;
+  background: 
+    linear-gradient(rgba(255, 0, 127, 0) 20%, rgba(255, 0, 127, 0.35) 100%),
+    linear-gradient(90deg, transparent 48%, rgba(255,0,127,0.4) 48%, rgba(255,0,127,0.4) 52%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(255,0,127,0.4) 48%, rgba(255,0,127,0.4) 52%, transparent 52%);
+  background-size: 100% 100%, 20px 100%, 100% 20px;
+  transform: perspective(60px) rotateX(45deg);
+  transform-origin: bottom center;
+  z-index: 2;
+  transition: all 0.6s ease;
+}
+.synthwave-card:hover .sun-grid-overlay {
+  background-size: 100% 100%, 15px 100%, 100% 15px;
+  filter: hue-rotate(120deg); /* Trasforma rosa in azzurro */
+}
+
+/* Contenuto in sovrimpressione */
+.synth-overlay-content {
+  position: relative;
+  z-index: 5;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, monospace;
+}
+
+.card-genre {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #00f0ff;
+  text-shadow: 0 0 4px rgba(0, 240, 255, 0.4);
+  margin-bottom: 4px;
+}
+.synthwave-card:hover .card-genre {
+  color: #ff007f;
+}
+
+.retro-title {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  margin: 0 0 4px 0;
+  text-shadow: 2px 2px 0px #ff007f;
+}
+.synthwave-card:hover .retro-title {
+  text-shadow: 2px 2px 0px #00f0ff;
+}
+
+.retro-tagline {
+  font-size: 13px;
+  color: #d1d5db;
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+}
+
+.neon-badge-pulse {
+  align-self: flex-start;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  border: 1px solid #ff007f;
+  color: #ff007f;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(255, 0, 127, 0.3);
+  animation: pulseStartNeon 1.5s infinite;
+}
+.synthwave-card:hover .neon-badge-pulse {
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+@keyframes pulseStartNeon {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+/* --- RETRO CRT TERMINAL STYLE --- */
+.retro-crt-card {
+  position: relative;
+  width: 320px;
+  min-height: 290px;
+  background-color: #070e06;
+  border: 5px solid #2f3e2d;
+  border-radius: 18px;
+  padding: 2px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8),
+              inset 0 0 30px rgba(0, 255, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.retro-crt-card:hover {
+  transform: scale(1.03) rotate(-0.5deg);
+  border-color: #4ade80;
+  box-shadow: 0 25px 60px rgba(74, 222, 128, 0.2),
+              inset 0 0 40px rgba(0, 255, 0, 0.08);
+}
+
+/* Filtro Vetro Abbozzato CRT con Linee di Scansione */
+.crt-overlay {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+  background-size: 100% 3px, 6px 100%;
+  z-index: 10;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.crt-screen {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 22px;
+  color: #4ade80;
+  text-shadow: 0 0 4px rgba(74, 222, 128, 0.5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 275px;
+}
+
+/* Intestazione monitor */
+.screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed rgba(74, 222, 128, 0.4);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+.dir-path {
+  font-size: 11px;
+  font-weight: bold;
+}
+.pulse-led {
+  font-size: 9px;
+  animation: pulseCrtGreen 2s infinite;
+}
+
+/* Testi dello schermo */
+.screen-outputs {
+  flex-grow: 1;
+}
+.output-line {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 6px 0;
+  transition: color 0.4s;
+}
+.output-line.success {
+  background-color: rgba(74, 222, 128, 0.1);
+  padding: 1px 6px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.retro-crt-card:hover .output-line.success {
+  background-color: rgba(74, 222, 128, 0.2);
+}
+
+/* Loader d'epoca a caselle */
+.screen-loader {
+  margin-top: 14px;
+}
+.loader-label {
+  font-size: 10px;
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+.discrete-progress {
+  display: flex;
+  gap: 6px;
+}
+.progress-block {
+  width: 20px;
+  height: 12px;
+  border: 1px solid rgba(74, 222, 128, 0.5);
+  background-color: transparent;
+  transition: all 0.4s ease;
+}
+
+/* Effetto d'azione sui blocchi quando si va in hover */
+.retro-crt-card:hover .progress-block:nth-child(1) { background-color: #4ade80; }
+.retro-crt-card:hover .progress-block:nth-child(2) { background-color: #4ade80; }
+.retro-crt-card:hover .progress-block:nth-child(3) { background-color: #4ade80; }
+.retro-crt-card:hover .progress-block:nth-child(4) { background-color: transparent; animation: blinkCrt 0.6s infinite; }
+
+@keyframes pulseCrtGreen {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes blinkCrt {
+  0%, 49% { background-color: #4ade80; }
+  50%, 100% { background-color: transparent; }
+}
+/* --- DASHBOARD TECH RADAR --- */
+.tech-radar-card {
+  position: relative;
+  width: 320px;
+  height: 310px;
+  background-color: #030712; /* Nero notte profonda */
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(16,185,129,0.05);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-radar-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 25px 45px rgba(16, 185, 129, 0.15),
+              inset 0 0 30px rgba(16,185,129,0.1);
+}
+
+/* Griglia d'Assi Circolari del Radar */
+.radar-grid {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+}
+.radar-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1.5px dashed rgba(16, 185, 129, 0.15);
+  border-radius: 50%;
+  transition: border-style 0.4s;
+}
+.circle-1 { width: 100%; height: 100%; }
+.circle-2 { width: 50%; height: 50%; }
+
+.tech-radar-card:hover .radar-circle {
+  border-style: solid;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.radar-cross-x, .radar-cross-y {
+  position: absolute;
+  background: rgba(16, 185, 129, 0.1);
+}
+.radar-cross-x { top: 50%; left: 0; width: 100%; height: 1.5px; }
+.radar-cross-y { top: 0; left: 50%; width: 1.5px; height: 100%; }
+
+/* Lancetta Rotativa Radar */
+.radar-line {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  border-right: 2px solid rgba(16, 185, 129, 0.7);
+  background: conic-gradient(from 0deg, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0) 25%);
+  transform-origin: bottom left;
+  transform: rotate(0deg);
+  animation: sweep 4s linear infinite;
+  z-index: 1;
+}
+.tech-radar-card:hover .radar-line {
+  animation-duration: 1.8s; /* Accelera in Hover! */
+}
+
+/* Informazioni di tracciamento */
+.radar-info {
+  position: relative;
+  z-index: 5;
+  color: #fff;
+  font-family: system-ui, -apple-system, Arial;
+}
+
+.radar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.sweep-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #10b981;
+  letter-spacing: 2px;
+}
+.sweep-val {
+  font-family: monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+.radar-target-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Ping intermittente */
+.blip-ping {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+}
+.blip-ping::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: pingRadial 1.5s infinite;
+}
+
+.target-lbl {
+  font-size: 13px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+.tech-radar-card:hover .target-lbl {
+  color: #fff;
+}
+
+@keyframes sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pingRadial {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+
+  </style>
+</head>
+<body>
+  <body class="text-stone-900 font-sans min-h-screen flex flex-col items-center justify-start p-4 md:p-8 antialiased overflow-y-auto">
+
+  <div class="bg-static-noise"></div>
+  <div class="bg-interference-bar"></div>
+  <div class="bg-interference-bar-2"></div>
+  <div class="tv-vignette"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+   <div class="synthwave-card">
+  <div class="sun-sunset"></div>
+  <div class="sun-grid-overlay"></div>
+  
+  <div class="synth-overlay-content">
+    <div class="card-genre">RETRO FORGE</div>
+    <h3 class="retro-title">OUTRUN_70</h3>
+    <p class="retro-tagline">Disegna Dispositivi storici.</p>
+    
+ <a href="https://retroforgestudio.netlify.app/">   <button class="neon-badge-pulse">PRESS START</button></a>
+  </div>
+</div>
+   <div class="retro-crt-card">
+  <div class="crt-overlay"></div>
+  <div class="crt-screen">
+    <div class="screen-header">
+      <span class="dir-path">A:\&gt; Retro_Craft_Studio</span>
+      <span class="pulse-led">● LIVE</span>
+    </div>
+    
+    <div class="screen-outputs">
+      <p class="output-line">>Progettista & Simulatore di Eccellenze Vintage</p>
+      <p class="output-line success">> SYSTEM_INTEGRITY: OK</p>
+      <p class="output-line">> SPEED: 4.77 MHz</p>
+  <a href="https://retro-ui-creator.netlify.app/"     <button class="progress-block">Vai</button></a>
+    </div>
+    
+    <div class="screen-loader">
+      <span class="loader-label">BUFFERING CORE:</span>
+      <div class="discrete-progress">
+        <div class="progress-block"></div>
+        <div class="progress-block"></div>
+        <div class="progress-block"></div>
+        <div class="progress-block"></div>
+      </div>
+    </div>
+  </div>
+</div>
+   <div class="analog-hardware-card">
+  <div class="card-screw top-left"></div>
+  <div class="card-screw top-right"></div>
+  
+  <div class="panel-header">
+    <span class="brand-lbl">Retro Device</span>
+    <span class="status-indicator-light"></span>
+  </div>
+  
+  <div class="dial-container">
+    <div class="analog-dial">
+      <div class="dial-pointer"></div>
+    </div>
+<a href"https://retro-device-creator.netlify.app/">    <button class="dial-labels">
+      <span class="label-name">CALIBRAZIONE</span>
+      <strong class="label-value">8.4k Hz</strong>
+    </button></a>
+  </div>
+  
+  <div class="vocal-grid">
+    <div class="grid-line active"></div>
+    <div class="grid-line active"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line active"></div>
+  </div>
+  
+  <div class="panel-footer">
+    <span>ANALOG AMPLIFIER MODULE</span>
+  </div>
+  
+  <div class="card-screw bottom-left"></div>
+  <div class="card-screw bottom-right"></div>
+</div>
+<div class="brushed-detector-card">
+  <div class="metal-header">
+    <div class="rivet"></div>
+    <span class="station-id">Analog Craft</span>
+    <div class="rivet"></div>
+  </div>
+  
+  <div class="gauge-area">
+    <div class="gauge-arc">
+      <div class="gauge-needle"></div>
+      <div class="gauge-hub"></div>
+    </div>
+  <a href"https://analog-craft.vercel.app/">  <button class="gauge-ticks">
+      <span>0</span>
+      <span>50</span>
+      <span>100</span>
+    </button></a>
+  </div>
+  
+  <div class="v-meter">
+    <div class="v-channel">
+      <div class="v-fill"></div>
+    </div>
+    <div class="v-label">dB UNITS</div>
+  </div>
+  
+  <div class="metal-bottom">
+    <div class="rivet"></div>
+    <span class="serial-no">MODEL DB-AX90</span>
+    <div class="rivet"></div>
+  </div>
+</div>
+
+
+<div class="card-studio-wrapper">
+ 
+  
+  <div class="tech-radar-card">
+    <div class="radar-scan"></div>
+    <div class="radar-line"></div>
+    
+    <div class="radar-grid">
+      <div class="radar-circle circle-1"></div>
+      <div class="radar-circle circle-2"></div>
+      <div class="radar-cross-x"></div>
+      <div class="radar-cross-y"></div>
+    </div>
+  
+    <div class="radar-info">
+      <div class="radar-header">
+        <span class="sweep-title">ANALOGUE STUDIO</span>
+        <span class="sweep-val">340° N</span>
+      </div>
+      
+      <div class="radar-target-alert">
+        <span class="blip-ping"></span>
+<a href"https://analogue-studio.vercel.app/>        <button class="target-lbl">PROSEGUI</button> </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+         const track = new Audio('la-propria-giornata.mp3');
+        track.volume = 0.3;
+
+       // Elementi DOM
+        const cassette = document.getElementById('mixtape');
+        const statusText = document.getElementById('statusText');
+        
+        const btnPlay = document.getElementById('btn-play');
+        const btnPause = document.getElementById('btn-pause');
+        const btnStop = document.getElementById('btn-stop');
+        const btnRec = document.getElementById('btn-rec');
+
+        function releaseLatches() {
+            btnPlay.classList.remove('latched');
+            btnPause.classList.remove('latched');
+        }
+
+        // PLAY
+        btnPlay.addEventListener('click', () => {
+            releaseLatches();
+            btnPlay.classList.add('latched');
+            
+            track.play();
+            cassette.classList.add('is-playing');
+            statusText.innerText = "► PLAYING";
+        });
+
+        // PAUSE
+        btnPause.addEventListener('click', () => {
+            releaseLatches();
+            btnPause.classList.add('latched');
+            
+            track.pause();
+            cassette.classList.remove('is-playing');
+            statusText.innerText = "⏸ PAUSED";
+        });
+
+        // STOP
+        btnStop.addEventListener('click', () => {
+            releaseLatches();
+            
+            track.pause();
+            track.currentTime = 0; 
+            cassette.classList.remove('is-playing');
+            statusText.innerText = "■ STOPPED";
+        });
+
+        // REC
+        btnRec.addEventListener('click', () => {
+            releaseLatches();
+            track.pause();
+            cassette.classList.remove('is-playing');
+            statusText.innerText = "● RECORDING...";
+            statusText.classList.add('text-red-600');
+            setTimeout(() => {
+                statusText.classList.remove('text-red-600');
+                statusText.innerText = "NO TAPE DECK";
+            }, 1500);
+        });
+
+        // Fine del nastro
+        track.addEventListener('ended', () => {
+            releaseLatches(); 
+            cassette.classList.remove('is-playing');
+            statusText.innerText = "TAPE ENDED";
+        });
+    });
+  </script>
+</body>
+</html>
