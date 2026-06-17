@@ -646,8 +646,16 @@ export const AlbumCssCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
           </a>
         </li>
        
-        
-      </ul>
+          <li>
+          <a 
+            href="https://card-canvas-studio-32343092220.europe-west2.run.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={() => playSoundBlip(800, 'sine', 0.05)}
+          >
+            Card Canvas Studio
+          </a>
+        </li>      </ul>
 
       <a 
         href="https://artisan-studio-psi.vercel.app/" 
