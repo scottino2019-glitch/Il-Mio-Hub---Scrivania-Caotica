@@ -1569,7 +1569,10 @@ const CreativeFontCard = () => {
           </div>
               {/* L'AGENDA (Ufficio / Utility) */}
           <AgendaCard playSoundBlip={playSoundBlip} />
-          
+          {/* Creative Font Card */}
+          <div className="mt-6 px-1">
+              <CreativeFontCard />
+            </div>
           {/* CARD I: SMARTPHONE BEZEL OVERLAY FOR BOOKS */}
           <SmartphoneCard playSoundBlip={playSoundBlip} />
           
@@ -1586,10 +1589,7 @@ const CreativeFontCard = () => {
   />
 </div>
          
-{/* Creative Font Card */}
-          <div className="mt-6 px-1">
-              <CreativeFontCard />
-            </div>
+
           
 
           {/* =========================================
