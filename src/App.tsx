@@ -1321,8 +1321,7 @@ const CreativeFontCard = () => {
           {/* CARD EXTRA: RETRO PERSONAL COMPUTER DEVICE */}
           <RetroPcCard />
 
-          {/* CARD D: LAVAGNA SLATE WOOD CHECKLIST */}
-          <LavagnaCard />
+         
 
        
 
@@ -1381,8 +1380,6 @@ const CreativeFontCard = () => {
           {/* CARD F: MACOS VSCODE DEVTOOLS EDITOR */}
           <VsCodeCard />
 
-          {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
-          <SnippetCreatorCard />
 {/* QUICK NOTEBOOK SCATTERED PAPERS */}
           <AppuntiVolantiCard playSoundBlip={playSoundBlip} />
 
@@ -1439,7 +1436,8 @@ const CreativeFontCard = () => {
             </div>
           </div>
 
-
+ {/* CARD D: LAVAGNA SLATE WOOD CHECKLIST */}
+          <LavagnaCard />
         
  {/* EXTRA CARD 1: STICKY NOTES APP (POST-IT BOARD) */}
           <div className="desk-card postit-card p-6" style={{ '--hover-rot': '1.5deg' } as any}>
@@ -1481,7 +1479,8 @@ const CreativeFontCard = () => {
             </div>
           </div>
          
-
+ {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
+          <SnippetCreatorCard />
         
          
 
@@ -1496,6 +1495,8 @@ const CreativeFontCard = () => {
          
           {/* L'AGENDA (Ufficio / Utility) */}
           <AgendaCard playSoundBlip={playSoundBlip} />
+          
+         
           
           {/* Comic (Chibi ) */}
           <ComicLinksCard />
@@ -1878,4 +1879,12 @@ const CreativeFontCard = () => {
     </div>
   );
 }
+
+
+
+          
+
+         
+         
+
 
