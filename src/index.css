@@ -440,7 +440,34 @@
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(12, 235, 235, 0.18), 0 0 8px rgba(12, 235, 235, 0.1);
 }
+/* =========================================
+   BOOK CARD
+   ========================================= */
+.book-card {
+  width: 100%;
+  max-width: 300px;
+  min-height: 300px;
+  padding: 40px;
+  box-sizing: border-box;
 
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 4px 20px 20px 4px;
+  border-left: 15px solid rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  background-color: #f4e4bc;
+  background-image: url("https://images.unsplash.com/photo-1604342162684-0cb7869cc445?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4MDc1Mjd8MHwxfHNlYXJjaHwyOHx8Y29wZXJ0aW5hJTIwbGlicm98ZW58MHx8fHwxNzgxODE3NzA5fDA&ixlib=rb-4.1.0&q=85");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 /* =========================================
    CARDS DECORATIVE NUOVE ED EFFETTI
    ========================================= */
