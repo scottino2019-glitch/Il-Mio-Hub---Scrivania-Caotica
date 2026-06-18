@@ -437,7 +437,7 @@ export const RetroPcCard: React.FC = () => {
 // BookCard
 export const BookCard: React.FC = () => {
   return (
-    <div className="book-card">
+   <div className="book-card transition-transform duration-300 hover:-translate-y-1">
   <a
     href="https://libro-gen.vercel.app/"
     target="_blank"
