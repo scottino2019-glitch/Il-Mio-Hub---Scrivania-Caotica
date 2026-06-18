@@ -39,7 +39,7 @@ import {
   PinkPdfNotebookCard,
   PolaroidCard,
   AppuntiVolantiCard,
-  BooCard
+  BookCard
 } from "./components/StaticCards";
 import ComicLinksCard from "./components/ComicLinksCard";
 
