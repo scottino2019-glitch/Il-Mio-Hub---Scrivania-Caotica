@@ -468,6 +468,9 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+.book-card a {
+  font-family: "Permanent Marker", cursive;
+}
 /* =========================================
    CARDS DECORATIVE NUOVE ED EFFETTI
    ========================================= */
