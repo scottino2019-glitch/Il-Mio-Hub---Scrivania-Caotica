@@ -448,7 +448,7 @@ export const BookCard: React.FC = () => {
   </a>
 
   <a
-    href="https://libro-gen.vercel.app/"
+    href="https://libro-illustrato.vercel.app/"
     target="_blank"
     rel="noopener noreferrer"
     className="text-2xl font-bold text-white cursor-pointer hover:underline hover:decoration-wavy hover:decoration-red-600 transition-all duration-300 decoration-transparent"
