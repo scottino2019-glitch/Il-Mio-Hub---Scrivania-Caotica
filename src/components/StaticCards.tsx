@@ -434,7 +434,30 @@ export const RetroPcCard: React.FC = () => {
     </div>
   );
 };
+// BookCard
+export const BookCard: React.FC = () => {
+  return (
+    <div className="book-card">
+  <a
+    href="https://libro-gen.vercel.app/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-2xl font-bold text-white cursor-pointer hover:underline hover:decoration-wavy hover:decoration-red-600 transition-all duration-300 decoration-transparent"
+  >
+    LibroGen
+  </a>
 
+  <a
+    href="https://libro-gen.vercel.app/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-2xl font-bold text-white cursor-pointer hover:underline hover:decoration-wavy hover:decoration-red-600 transition-all duration-300 decoration-transparent"
+  >
+    Libro Illustrato
+  </a>
+</div>
+     );
+};
 // 7. MACOS VSCODE DEVTOOLS EDITOR CARD (CARD F)
 export const VsCodeCard: React.FC = () => {
   return (
