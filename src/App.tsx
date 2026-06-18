@@ -38,7 +38,8 @@ import {
   ArtistPaletteCard,
   PinkPdfNotebookCard,
   PolaroidCard,
-  AppuntiVolantiCard
+  AppuntiVolantiCard,
+  BooCard
 } from "./components/StaticCards";
 import ComicLinksCard from "./components/ComicLinksCard";
 
@@ -1478,7 +1479,8 @@ const CreativeFontCard = () => {
               )}
             </div>
           </div>
-         
+          {/* Book Card*/}
+          <BookCard />
  {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
           <SnippetCreatorCard />
         
