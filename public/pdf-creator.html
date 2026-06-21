@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -22,7 +21,7 @@
             height: 100vh; 
             overflow: hidden; 
         }
-        
+
         .toolbar {
             flex-shrink: 0; 
             background: #ffffff;
@@ -54,7 +53,7 @@
 
         }
 
-        /* Simulazione Pagine A4 (Tuo CSS Originale) */
+        /* Simulazione Pagine A4 */
         #paper {
             width: 210mm;
             min-height: 297mm;
@@ -68,7 +67,7 @@
             position: relative;
         }
 
-        /* Tipografia (Tua Originale) */
+        /* Tipografia */
         #paper h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; }
         #paper h2 { font-size: 2rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 0.75rem; }
         #paper h3 { font-size: 1.5rem; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.5rem; }
@@ -78,8 +77,8 @@
         #paper ul { list-style-type: disc !important; margin-left: 1.5rem !important; margin-bottom: 1rem !important; }
         #paper ol { list-style-type: decimal !important; margin-left: 1.5rem !important; margin-bottom: 1rem !important; }
         #paper li { display: list-item !important; margin-bottom: 0.25rem; }
-        #paper table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-        #paper table, #paper th, #paper td { border: 1px solid #d1d5db; padding: 8px; text-align: left; min-width: 50px; }
+        #paper table { width: 100%; border-collapse: collapse; margin: 1rem 0; table-layout: fixed; }
+        #paper table, #paper th, #paper td { border: 1px solid #d1d5db; padding: 8px; text-align: left; min-width: 50px; word-wrap: break-word; }
         .red-underline { border-bottom: 2px solid #ef4444; padding-bottom: 1px; display: inline-block; text-decoration: none !important; }
         .blue-underline { border-bottom: 2px solid #3b82f6; padding-bottom: 1px; display: inline-block; text-decoration: none !important; }
 
@@ -99,7 +98,6 @@
 <body>
 
     <header class="toolbar no-print">
-        <!-- RIGA 1: Azioni Principali e Formattazione Base -->
         <div class="toolbar-row">
             <button onmousedown="event.preventDefault()" onclick="newDoc()" class="t-btn text-red-600 font-bold">Nuovo</button>
            <button onmousedown="event.preventDefault()" onclick="pdf()" class="t-btn bg-blue-600 text-white ml-auto px-4">Esporta PDF</button>
@@ -114,20 +112,15 @@
                 <button title="Corsivo" onmousedown="event.preventDefault()" onclick="exec('italic')" class="t-btn italic">I</button>
                 <button title="Sottolinea Rosso" onmousedown="event.preventDefault()" onclick="applyCustomUnderline('red-underline')" class="t-btn text-red-500 border-b-2 border-red-500">A</button>
                 <button title="Sottolinea Blu" onmousedown="event.preventDefault()" onclick="applyCustomUnderline('blue-underline')" class="t-btn text-blue-500 border-b-2 border-blue-500">A</button>
-<button title="Inserisci Linea" onmousedown="event.preventDefault()" onclick="exec('insertHorizontalRule')" class="t-btn">— Linea</button>
-           
-            
+                <button title="Inserisci Linea" onmousedown="event.preventDefault()" onclick="exec('insertHorizontalRule')" class="t-btn">— Linea</button>
                 <button title="Allinea a Sinistra" onmousedown="event.preventDefault()" onclick="exec('justifyLeft')" class="t-btn">S</button>
                 <button title="Allinea al Centro" onmousedown="event.preventDefault()" onclick="exec('justifyCenter')" class="t-btn">C</button>
                 <button title="Allinea a Destra" onmousedown="event.preventDefault()" onclick="exec('justifyRight')" class="t-btn">D</button>
                 <button title="Giustificato" onmousedown="event.preventDefault()" onclick="exec('justifyFull')" class="t-btn">G</button>
-<label class="text-[10px] px-1 text-gray-500 uppercase font-bold"></label>
                 <input type="color" id="fontColor" class="color-picker" title="Colore Font" oninput="exec('foreColor', this.value)">
             </div>
- 
         </div>
 
-        <!-- RIGA 2: Font e Dimensioni -->
         <div class="toolbar-row">
             <div class="t-group">
                 <button title="Inter" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Inter')" class="t-btn">Inter</button>
@@ -135,13 +128,12 @@
                 <button title="My Soul" onmousedown="event.preventDefault()" onclick="exec('fontName', 'My Soul')" class="t-btn">My Soul</button>
                 <button title="Special Elite" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Special Elite')" class="t-btn">Special Elite</button>
                 <button title="Splash" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Splash')" class="t-btn">Splash</button>
-</div>
-<div class="t-group">
+            </div>
+            <div class="t-group">
                 <button title="Monsieur La Doulaise" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Monsieur La Doulaise')" class="t-btn">Monsieur</button>
                 <button title="Nabla" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Nabla')" class="t-btn">Nabla</button>
                 <button title="Kablammo" onmousedown="event.preventDefault()" onclick="exec('fontName', 'Kablammo')" class="t-btn">Kablammo</button>
-            
-            
+
                 <button title="Piccolo" onmousedown="event.preventDefault()" onclick="exec('fontSize', '1')" class="t-btn">P</button>
                 <button title="Normale" onmousedown="event.preventDefault()" onclick="exec('fontSize', '3')" class="t-btn">N</button>
                 <button title="Grande" onmousedown="event.preventDefault()" onclick="exec('fontSize', '5')" class="t-btn">G</button>
@@ -149,28 +141,24 @@
             </div>
         </div>
 
-        <!-- RIGA 3: Elementi e Colore -->
         <div class="toolbar-row">
             <div class="t-group">
                 <button title="Lista Puntata" onmousedown="event.preventDefault()" onclick="exec('insertUnorderedList')" class="t-btn">• Elenco</button>
                 <button title="Lista Ordinata" onmousedown="event.preventDefault()" onclick="exec('insertOrderedList')" class="t-btn">1. Elenco</button>
                 <button title="Box Evidenziato" onmousedown="event.preventDefault()" onclick="insBox()" class="t-btn bg-blue-100 text-blue-700">Box</button>
-                
-         
+
                 <button title="Crea Tabella" onmousedown="event.preventDefault()" onclick="insT()" class="t-btn text-blue-600 font-bold">Tabella</button>
                 <input type="number" id="r" value="2" class="t-input ml-1" title="Righe">
                 <span class="text-[10px] text-gray-400">x</span>
                 <input type="number" id="c" value="2" class="t-input" title="Colonne">
-            
-                
             </div>
         </div>
     </header>
 
     <div class="editor-container">
         <div id="paper" contenteditable="true">
-            <h1>Documento Aggiornato</h1>
-            <p>Il menu ora è organizzato in righe fisse in alto. Tutte le funzioni del tuo file originale sono presenti e il foglio scorre correttamente.</p>
+            <h1>Documento Pronto</h1>
+            <p>Clicca sul pulsante "Tabella" per inserire una tabella nel punto in cui si trova il cursore.</p>
         </div>
     </div>
 
@@ -180,7 +168,6 @@
         const paper = document.getElementById('paper');
         const toast = document.getElementById('toast');
 
-        // Funzioni Originali (Intatte)
         function exec(command, value = null) {
             paper.focus();
             document.execCommand(command, false, value);
@@ -228,23 +215,25 @@
             } catch (e) { console.error(e); }
         }
 
+        // FUNZIONE TABELLA CORRETTA
         function insT() {
             const rows = document.getElementById('r').value || 2;
             const cols = document.getElementById('c').value || 2;
+            
             let html = '<table>';
             for (let i = 0; i < rows; i++) {
                 html += '<tr>';
-                for (let j = 0; j < cols; j++) { html += '<td>Cella</td>'; }
+                for (let j = 0; j < cols; j++) { 
+                    html += '<td>Cella</td>'; 
+                }
                 html += '</tr>';
             }
             html += '</table><p><br></p>';
-            const sel = window.getSelection();
-            if (sel.rangeCount) {
-                const range = sel.getRangeAt(0);
-                const frag = range.createContextualFragment(html);
-                range.insertNode(frag);
-                paper.focus();
-            }
+            
+            paper.focus();
+            // Utilizzo di insertHTML per una migliore compatibilità e posizionamento
+            document.execCommand('insertHTML', false, html);
+            showToast("Tabella inserita");
         }
 
         function pdf() {
