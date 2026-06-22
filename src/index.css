@@ -148,6 +148,13 @@
   border-color: #088E94;
 }
 
+.dock-item.Playground:hover {
+  box-shadow: 0 10px 20px rgba(6, 182, 212, 0.45);
+  border-color: #73729F;
+}
+
+
+
 /* Tooltip a comparsa */
 .dock-item::after {
   content: attr(data-tooltip);
