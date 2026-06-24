@@ -167,11 +167,11 @@ export default function CssLabsIndex() {
     <div className={`w-full mx-auto py-12 px-4 transition-all duration-500 ${isBento ? 'max-w-5xl' : 'max-w-2xl'}`} id="artistic-index-card">
       <div className="mb-10 text-center">
         <h1 className="font-sans font-black tracking-wider text-slate-900 uppercase text-3xl sm:text-4xl mb-3 inline-block px-4 py-2 border-3 border-slate-900 shadow-[4px_4px_0px_#1e293b] rotate-[-1deg] bg-white rounded-md">
-          ${config.title || 'Indice Laboratori'}
+          Indice Laboratori
         </h1>
         {true && (
           <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest mt-2">
-            ${config.subtitle || ''}
+            Sperimentazioni artistiche realizzate in puro CSS
           </p>
         )}
       </div>
@@ -384,3 +384,4 @@ export default function CssLabsIndex() {
     </div>
   );
 }
+
