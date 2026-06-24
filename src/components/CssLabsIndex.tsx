@@ -1,7 +1,4 @@
-
-
 import React from 'react';
-import { motion } from 'framer-motion'; // o 'motion/react'
 import {
   Coffee,
   Cat,
@@ -131,7 +128,7 @@ const iconsMap = {
 };
 
 export default function CssLabsIndex() {
-  const theme = colorThemes['indigo'];
+  const theme = colorThemes['violet'];
   const isBento = true;
 
   // Border radius shape
@@ -192,11 +189,8 @@ export default function CssLabsIndex() {
             const isDarkCard = bentoColor.isDark;
 
             return (
-              <motion.div
+              <div
                 key={lab.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.05 }}
                 className={`${colSpan} relative group`}
               >
                 {true && (
@@ -298,7 +292,7 @@ export default function CssLabsIndex() {
                     </div>
                   )}
                 </a>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -311,11 +305,8 @@ export default function CssLabsIndex() {
             const hoverShadow = getShadowStyle(true, index);
 
             return (
-              <motion.div
+              <div
                 key={lab.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.08 }}
                 className="group relative"
               >
                 <a
@@ -385,7 +376,7 @@ export default function CssLabsIndex() {
                     </div>
                   </div>
                 </a>
-              </motion.div>
+              </div>
             );
           })}
         </div>
