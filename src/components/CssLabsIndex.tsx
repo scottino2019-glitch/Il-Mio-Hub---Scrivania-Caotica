@@ -1,10 +1,4 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- * 
- * Componente Indice Multimediale CSS Labs (Artistico Neo-Brutalista)
- * Integrabile con React, Tailwind CSS, Lucide Icons e Framer Motion.
- */
+
 
 import React from 'react';
 import { motion } from 'framer-motion'; // o 'motion/react'
