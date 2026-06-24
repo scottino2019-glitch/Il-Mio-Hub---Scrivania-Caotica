@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stereo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    :root{--bg:#111224;--panel:#1c1a36;--text:#f5f4ff;--muted:#b7b2df;--line:rgba(255,255,255,.1);--accent:#7bf08a;--accent2:#89a9ff}
+*{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at top,#2d285c 0%,var(--bg) 50%);color:var(--text);padding:12px;overflow:hidden}
+.app{height:calc(100vh - 24px);display:grid;grid-template-columns:minmax(760px,1fr) minmax(760px,1fr);gap:12px}
+.panel{background:rgba(28,26,54,.96);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 34px rgba(0,0,0,.28);min-height:0;overflow:hidden}
+.panel-inner{height:100%;display:flex;flex-direction:column;padding:14px;min-height:0}
+.header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px;flex:0 0 auto} h1{margin:0;font-size:1.1rem;line-height:1.1}.hint{margin-top:6px;color:var(--muted);font-size:.86rem;line-height:1.35;max-width:54ch}
+.pill{font-size:.78rem;color:#d9d6ff;border:1px solid var(--line);background:rgba(255,255,255,.03);padding:6px 10px;border-radius:999px;white-space:nowrap}
+.tabs{display:flex;gap:8px;margin:8px 0 10px;flex:0 0 auto}.tab{border:1px solid var(--line);background:#2a2550;color:var(--text);border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:700}.tab.active{background:var(--accent2);color:#0f1730}
+.editor-wrap{display:flex;flex-direction:column;gap:10px;flex:1 1 auto;min-height:0}
+.editor{flex:1 1 auto;min-height:0;width:100%;resize:none;border-radius:16px;border:1px solid var(--line);background:#0f0d1f;color:#ffffff;padding:16px;font:inherit;line-height:1.75;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:17px;outline:none;overflow:auto;tab-size:2;caret-color:#fff}
+.editor:focus{box-shadow:0 0 0 2px rgba(137,169,255,.25)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;flex:0 0 auto}.action{border:0;border-radius:999px;padding:10px 14px;cursor:pointer;background:#342f67;color:var(--text)}.action.primary{background:var(--accent);color:#132218;font-weight:800}.action.ghost{background:transparent;border:1px solid var(--line)}
+.status{color:var(--muted);font-size:.9rem;min-height:1.3em;flex:0 0 auto}
+.preview-wrap{height:100%;display:flex;flex-direction:column;min-height:0;padding:14px}.preview-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex:0 0 auto;margin-bottom:10px}.badge{background:rgba(122,180,255,.14);color:#dbe8ff;border:1px solid rgba(122,180,255,.24);padding:7px 10px;border-radius:999px;font-size:.82rem;white-space:nowrap}
+.stage{position:relative;flex:1 1 auto;min-height:0;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,#2b2658 0%, #181533 100%)}
+.stage::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);background-size:32px 32px;opacity:.35}
+.errorbox{flex:0 0 110px;margin-top:10px;background:#100d21;border:1px solid var(--line);border-radius:16px;padding:12px;color:#d8ffd9;font-family:ui-monospace, monospace;white-space:pre-wrap;overflow:auto;font-size:14px}
+.canvas{position:relative;width:100%;height:100%;min-height:100%;background:#1a1733}
+@media (max-width:1200px){body{overflow:auto}.app{height:auto;grid-template-columns:1fr}.panel{min-height:720px}.editor{font-size:16px;min-height:360px}.stage{min-height:520px}}
+     /* --- STILE GATTINO ADDORMENTATO --- */
+:root {
+  --canvas-bg: #ffeaa7;
+  --rug-color: #fab1a0;
+  --cat-orange: #e17055;
+  --cat-light: #ff7675;
+  --cat-stripe: #d63031;
+  --nose-pink: #ff7675;
+  --dark-accent: #2d3436;
+}
+
+.room {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rug {
+  position: absolute;
+  width: 280px;
+  height: 100px;
+  background: var(--rug-color);
+  border-radius: 50%;
+  bottom: 80px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.cat {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  bottom: 85px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Corpo con effetto respiro reale */
+.cat-body {
+  position: absolute;
+  width: 140px;
+  height: 95px;
+  background: var(--cat-orange);
+  border-radius: 70px 70px 50px 50px;
+  bottom: 5px;
+  left: 20px;
+  box-shadow: inset -5px -5px 15px rgba(0,0,0,0.1);
+  animation: breathing 3s ease-in-out infinite;
+}
+
+/* Coda morbida */
+.tail {
+  position: absolute;
+  width: 90px;
+  height: 24px;
+  background: var(--cat-orange);
+  border-radius: 20px;
+  left: -40px;
+  bottom: 30px;
+  transform-origin: right center;
+  transform: rotate(-10deg);
+  animation: wag 4s ease-in-out infinite;
+}
+
+/* Testa */
+.cat-head {
+  position: absolute;
+  width: 100px;
+  height: 85px;
+  background: var(--cat-orange);
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  right: 15px;
+  top: 15px;
+  z-index: 5;
+  box-shadow: inset 3px 3px 10px rgba(255,255,255,0.15);
+}
+
+/* Orecchie */
+.cat-ear {
+  position: absolute;
+  width: 32px;
+  height: 38px;
+  background: var(--cat-orange);
+  border-radius: 4px 30px 4px 4px;
+  z-index: -1;
+}
+
+.left-ear {
+  left: 5px;
+  top: -15px;
+  transform: rotate(-25deg);
+}
+
+.right-ear {
+  right: 5px;
+  top: -15px;
+  transform: rotate(50deg) scaleX(-1);
+}
+
+/* Occhi addormentati */
+.sleeping-eye {
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  border-bottom: 3px solid var(--dark-accent);
+  border-radius: 0 0 10px 10px;
+  top: 38px;
+}
+
+.left-eye {
+  left: 22px;
+}
+
+.right-eye {
+  right: 22px;
+}
+
+/* Strisce ornamentali */
+.stripe-head {
+  position: absolute;
+  width: 6px;
+  height: 18px;
+  background: var(--cat-stripe);
+  border-radius: 3px;
+  top: 5px;
+}
+
+.left-sh {
+  left: 42px;
+}
+
+.right-sh {
+  right: 42px;
+}
+
+/* Nasino rosa */
+.nose {
+  position: absolute;
+  width: 8px;
+  height: 5px;
+  background: var(--nose-pink);
+  border-radius: 4px 4px 10px 10px;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Baffetti */
+.whisker {
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+}
+
+.wl1 { left: -10px; top: 48px; transform: rotate(-5deg); }
+.wl2 { left: -10px; top: 56px; transform: rotate(10deg); }
+.wr1 { right: -10px; top: 48px; transform: rotate(5deg); }
+.wr2 { right: -10px; top: 56px; transform: rotate(-10deg); }
+
+/* Zampine conserte */
+.paw {
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  background: var(--cat-orange);
+  border-radius: 10px;
+  bottom: 5px;
+  z-index: 6;
+}
+
+.left-paw {
+  right: 70px;
+}
+
+.right-paw {
+  right: 48px;
+}
+
+/* Animazione di respiro */
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1);
+    height: 95px;
+  }
+  50% {
+    transform: scale(1.02, 1.05);
+    height: 100px;
+  }
+}
+
+/* Codina scodinzolante */
+@keyframes wag {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+/* Fumetto Zzz.. animato */
+.zzz-container {
+  position: absolute;
+  right: -5px;
+  top: -20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.z {
+  color: #c0392b;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  opacity: 0;
+  position: absolute;
+}
+
+.z1 { font-size: 18px; top: -10px; left: 0; animation: zzz 3s infinite 0s; }
+.z2 { font-size: 14px; top: -25px; left: 10px; animation: zzz 3s infinite 1s; }
+.z3 { font-size: 10px; top: -35px; left: 20px; animation: zzz 3s infinite 2s; }
+
+@keyframes zzz {
+  0% { transform: translate(0, 5px) scale(0.6); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translate(8px, -15px) scale(1.2); opacity: 0; }
+}
+  </style>
+</head>
+<body>
+  
+<main class="app">
+<section class="panel"><div class="panel-inner">
+<div class="header"><div><h1>Editor</h1><div class="hint">Cambia il tab per vedere HTML o CSS. L'editor deve occupare quasi tutto lo spazio disponibile.</div></div><div><span class="pill">tab intercambiabili</span></div></div>
+<div class="tabs"><button class="tab active" id="htmlTab">HTML</button><button class="tab" id="cssTab">CSS</button></div>
+<div class="editor-wrap"><textarea class="editor" id="editor" spellcheck="false"></textarea><div class="toolbar"><button class="action primary" id="renderBtn">Aggiorna ora</button><button class="action" id="sampleBtn">Esempio</button><button class="action ghost" id="clearBtn">Pulisci</button></div><div class="status" id="status">Pronto.</div></div>
+</div></section>
+<section class="panel"><div class="preview-wrap">
+<div class="preview-head"><div><h1 style="margin:0;font-size:1.1rem;">Anteprima grande</h1><div class="hint">Deve restare visibile e non tagliata, con aggiornamento automatico mentre scrivi.</div></div><span class="badge">auto update</span></div>
+<div class="stage" id="stage"></div>
+<div class="errorbox" id="debugBox">Nessun errore.</div>
+</div></section>
+</main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const htmlTab=document.getElementById('htmlTab'),cssTab=document.getElementById('cssTab'),editor=document.getElementById('editor'),stage=document.getElementById('stage'),debugBox=document.getElementById('debugBox'),statusEl=document.getElementById('status'),renderBtn=document.getElementById('renderBtn'),sampleBtn=document.getElementById('sampleBtn'),clearBtn=document.getElementById('clearBtn');
+const sampleHTML=`<div class="canvas">
+
+   <div class="room">
+    <!-- Tappeto morbido -->
+    <div class="rug"></div>
+    
+    <div class="cat">
+      <!-- Coda sinuosa che si agita -->
+      <div class="tail"></div>
+      
+      <!-- Corpo con respiro -->
+      <div class="cat-body">
+        <div class="stripes stripe-body"></div>
+      </div>
+      
+      <!-- Testa con orecchie e muso -->
+      <div class="cat-head">
+        <div class="cat-ear left-ear"></div>
+        <div class="cat-ear right-ear"></div>
+        
+        <!-- Strisce tigrate -->
+        <div class="stripe-head left-sh"></div>
+        <div class="stripe-head right-sh"></div>
+        
+        <!-- Occhi chiusi -->
+        <div class="sleeping-eye left-eye"></div>
+        <div class="sleeping-eye right-eye"></div>
+        
+        <!-- Naso e baffi -->
+        <div class="nose"></div>
+        <div class="whisker wl1"></div>
+        <div class="whisker wl2"></div>
+        <div class="whisker wr1"></div>
+        <div class="whisker wr2"></div>
+        
+        <!-- Guancette -->
+        <div class="cat-blush"></div>
+      </div>
+      
+      <!-- Zampette anteriori conserte -->
+      <div class="paw left-paw"></div>
+      <div class="paw right-paw"></div>
+
+      <!-- Fumetto Zzz.. -->
+      <div class="zzz-container">
+        <span class="z z1">Z</span>
+        <span class="z z2">z</span>
+        <span class="z z3">z</span>
+      </div>
+    </div>
+  </div>
+</div>`;
+const sampleCSS=`.canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  background: #1a1733;
+}
+   /* --- STILE GATTINO ADDORMENTATO --- */
+:root {
+  --canvas-bg: #ffeaa7;
+  --rug-color: #fab1a0;
+  --cat-orange: #e17055;
+  --cat-light: #ff7675;
+  --cat-stripe: #d63031;
+  --nose-pink: #ff7675;
+  --dark-accent: #2d3436;
+}
+
+
+
+.room {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rug {
+  position: absolute;
+  width: 280px;
+  height: 100px;
+  background: var(--rug-color);
+  border-radius: 50%;
+  bottom: 80px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.cat {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  bottom: 85px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Corpo con effetto respiro reale */
+.cat-body {
+  position: absolute;
+  width: 140px;
+  height: 95px;
+  background: var(--cat-orange);
+  border-radius: 70px 70px 50px 50px;
+  bottom: 5px;
+  left: 20px;
+  box-shadow: inset -5px -5px 15px rgba(0,0,0,0.1);
+  animation: breathing 3s ease-in-out infinite;
+}
+
+/* Coda morbida */
+.tail {
+  position: absolute;
+  width: 90px;
+  height: 24px;
+  background: var(--cat-orange);
+  border-radius: 20px;
+  left: -40px;
+  bottom: 30px;
+  transform-origin: right center;
+  transform: rotate(-10deg);
+  animation: wag 4s ease-in-out infinite;
+}
+
+/* Testa */
+.cat-head {
+  position: absolute;
+  width: 100px;
+  height: 85px;
+  background: var(--cat-orange);
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  right: 15px;
+  top: 15px;
+  z-index: 5;
+  box-shadow: inset 3px 3px 10px rgba(255,255,255,0.15);
+}
+
+/* Orecchie */
+.cat-ear {
+  position: absolute;
+  width: 32px;
+  height: 38px;
+  background: var(--cat-orange);
+  border-radius: 4px 30px 4px 4px;
+  z-index: -1;
+}
+
+.left-ear {
+  left: 5px;
+  top: -15px;
+  transform: rotate(-25deg);
+}
+
+.right-ear {
+  right: 5px;
+  top: -15px;
+  transform: rotate(50deg) scaleX(-1);
+}
+
+/* Occhi addormentati */
+.sleeping-eye {
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  border-bottom: 3px solid var(--dark-accent);
+  border-radius: 0 0 10px 10px;
+  top: 38px;
+}
+
+.left-eye {
+  left: 22px;
+}
+
+.right-eye {
+  right: 22px;
+}
+
+/* Strisce ornamentali */
+.stripe-head {
+  position: absolute;
+  width: 6px;
+  height: 18px;
+  background: var(--cat-stripe);
+  border-radius: 3px;
+  top: 5px;
+}
+
+.left-sh {
+  left: 42px;
+}
+
+.right-sh {
+  right: 42px;
+}
+
+/* Nasino rosa */
+.nose {
+  position: absolute;
+  width: 8px;
+  height: 5px;
+  background: var(--nose-pink);
+  border-radius: 4px 4px 10px 10px;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Baffetti */
+.whisker {
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+}
+
+.wl1 { left: -10px; top: 48px; transform: rotate(-5deg); }
+.wl2 { left: -10px; top: 56px; transform: rotate(10deg); }
+.wr1 { right: -10px; top: 48px; transform: rotate(5deg); }
+.wr2 { right: -10px; top: 56px; transform: rotate(-10deg); }
+
+/* Zampine conserte */
+.paw {
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  background: var(--cat-orange);
+  border-radius: 10px;
+  bottom: 5px;
+  z-index: 6;
+}
+
+.left-paw {
+  right: 70px;
+}
+
+.right-paw {
+  right: 48px;
+}
+
+/* Animazione di respiro */
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1);
+    height: 95px;
+  }
+  50% {
+    transform: scale(1.02, 1.05);
+    height: 100px;
+  }
+}
+
+/* Codina scodinzolante */
+@keyframes wag {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+/* Fumetto Zzz.. animato */
+.zzz-container {
+  position: absolute;
+  right: -5px;
+  top: -20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.z {
+  color: #c0392b;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  opacity: 0;
+  position: absolute;
+}
+
+.z1 { font-size: 18px; top: -10px; left: 0; animation: zzz 3s infinite 0s; }
+.z2 { font-size: 14px; top: -25px; left: 10px; animation: zzz 3s infinite 1s; }
+.z3 { font-size: 10px; top: -35px; left: 20px; animation: zzz 3s infinite 2s; }
+
+@keyframes zzz {
+  0% { transform: translate(0, 5px) scale(0.6); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translate(8px, -15px) scale(1.2); opacity: 0; }
+}
+`;
+let mode='html',timer=null,html=sampleHTML,css=sampleCSS;editor.value=html;
+function apply(){if(mode==='html') html=editor.value; else css=editor.value; stage.innerHTML=html; let s=document.getElementById('sandbox-style'); if(!s){s=document.createElement('style'); s.id='sandbox-style'; document.head.appendChild(s)} s.textContent=css; debugBox.textContent='Preview aggiornata.'; statusEl.textContent='Aggiornato automaticamente.'}
+function setMode(m){mode=m; htmlTab.classList.toggle('active',m==='html'); cssTab.classList.toggle('active',m==='css'); editor.value=m==='html'?html:css; statusEl.textContent=m==='html'?'Modalità HTML':'Modalità CSS'; editor.focus()}
+function live(){clearTimeout(timer); timer=setTimeout(apply,80)}
+htmlTab.addEventListener('click',()=>setMode('html')); cssTab.addEventListener('click',()=>setMode('css')); editor.addEventListener('input',live); renderBtn.addEventListener('click',apply); sampleBtn.addEventListener('click',()=>{html=sampleHTML; css=sampleCSS; editor.value=mode==='html'?html:css; apply()}); clearBtn.addEventListener('click',()=>{html=''; css=''; editor.value=''; stage.innerHTML=''; debugBox.textContent='Area pulita.'; statusEl.textContent='Pulisci completato.'; apply()}); apply();
+    });
+  </script>
+</body>
+</html>
