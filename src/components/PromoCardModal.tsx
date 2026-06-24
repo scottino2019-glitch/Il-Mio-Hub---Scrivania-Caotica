@@ -1,3 +1,11 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ * 
+ * Componente Promo Card + Modal per Galleria Laboratori CSS
+ * Integra una splendida card interattiva con trigger overlay.
+ */
+
 import React, { useState } from 'react';
 import { Sparkles, ExternalLink, X, ChevronRight } from 'lucide-react';
 import CssLabsIndex from './CssLabsIndex'; // Modifica il percorso secondo le tue esigenze
@@ -86,3 +94,4 @@ export default function PromoCardModal() {
     </>
   );
 }
+
