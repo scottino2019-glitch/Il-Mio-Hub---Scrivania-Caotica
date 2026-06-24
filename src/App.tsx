@@ -42,6 +42,7 @@ import {
   BookCard
 } from "./components/StaticCards";
 import ComicLinksCard from "./components/ComicLinksCard";
+import PromoCardModal from "./components/PromoCardModal";
 
 // =========================================
 // TYPES & CONSTANTS
@@ -1746,6 +1747,8 @@ const CreativeFontCard = () => {
 
           {/* CARD EXTRA: PORTAL CARDS */}
           <PortalCardsCard />
+          {/* CARD EXTRA: Lab CSS */}
+          <PromoCardModal />
 
           {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
           <CrtMonitorCard playSoundBlip={playSoundBlip} />
