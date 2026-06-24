@@ -1,3 +1,11 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ * 
+ * Componente Indice Multimediale CSS Labs (Artistico Neo-Brutalista)
+ * Integrabile con React, Tailwind CSS e Lucide Icons (Nessuna libreria esterna per le animazioni!).
+ */
+
 import React from 'react';
 import {
   Coffee,
@@ -215,9 +223,7 @@ export default function CssLabsIndex() {
                   href={lab.url}
                   target={lab.isExternal ? '_blank' : '_self'}
                   rel="noreferrer"
-                  className={`block w-full h-full p-5 sm:p-6 transition-all duration-300 border-slate-900 relative ${
-                    borderWidthText === '2px' ? 'border-2' : borderWidthText === '4px' ? 'border-4' : 'border-[3px]'
-                  } ${bentoColor.bg} ${isDarkCard ? 'text-white' : 'text-slate-800 hover:text-slate-950'}`}
+                  className={`block w-full h-full p-5 sm:p-6 transition-all duration-300 border-slate-900 relative border-[3px] ${bentoColor.bg} ${isDarkCard ? 'text-white' : 'text-slate-800 hover:text-slate-950'}`}
                   style={{
                     borderRadius: borderRadius,
                     boxShadow: restShadow,
@@ -384,4 +390,5 @@ export default function CssLabsIndex() {
     </div>
   );
 }
+
 
