@@ -52,7 +52,7 @@ const LABS_DATA: LabLink[] = [
     id: '03',
     title: 'CSS Black Studio',
     subtitle: 'Elegante interfaccia scura con bagliori neon e accenti futuristici',
-    url: 'CSS-Black-Studio.html',
+    url: 'Css-Black-Studio.html',
     iconName: 'CodeXml',
     isExternal: false,
     status: 'completato',
