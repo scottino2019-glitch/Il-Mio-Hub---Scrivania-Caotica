@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Sparkles, ExternalLink, X, ChevronRight } from 'lucide-react';
-import CssLabsIndex from 'CssLabsIndex'; // Modifica il percorso secondo le tue esigenze
+import CssLabsIndex from './CssLabsIndex'; // Modifica il percorso secondo le tue esigenze
 
 export default function PromoCardModal() {
   const [isOpen, setIsOpen] = useState(false);
