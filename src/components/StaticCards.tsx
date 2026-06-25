@@ -271,7 +271,7 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
                 <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
               </a>
                    <a 
-                href="https://react-sandox-studio.netlify.app/" 
+                href="https://react-playground-sandbox.netlify.app/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.05)}
