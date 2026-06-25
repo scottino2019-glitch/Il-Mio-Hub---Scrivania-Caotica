@@ -153,6 +153,11 @@
   border-color: #73729F;
 }
 
+.dock-item.Code-Editor:hover {
+  box-shadow: 0 10px 20px rgba(6, 182, 212, 0.45);
+  border-color: #BC1340;
+}
+
 
 
 /* Tooltip a comparsa */
