@@ -77,7 +77,7 @@ export const LavagnaCard: React.FC = () => {
             <div className="flex gap-2 items-start">
               <span>🐉</span>
               <div>
-                <a href="https://scottino2019-glitch.github.io/lingua-cinese/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
+                <a href="https://lingua-cinese.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
                   1. 中文 (Cinese)
                 </a>
                 <span className="block text-[9px] text-white/50">Portale e dizionario linguistico</span>
