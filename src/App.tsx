@@ -1816,7 +1816,7 @@ const CreativeFontCard = () => {
             </div>
           </div>
          
-        
+        </div>
       </main>
     </div>
   );
