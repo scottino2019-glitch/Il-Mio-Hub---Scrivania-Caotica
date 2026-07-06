@@ -1816,73 +1816,7 @@ const CreativeFontCard = () => {
             </div>
           </div>
          
-          {/* EXTRA CARD 5: RETRO CASSETTE TAPE RECORDER */}
-          <div className="desk-card bg-neutral-900 p-5 rounded-[1.8rem] border-4 border-neutral-750 shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="flex justify-between items-center mb-3">
-              <span className="font-bold text-amber-500 font-mono text-xs tracking-wider">SOUND DECK CASSETTE</span>
-              <button 
-                onClick={toggleTapePlay}
-                className={`py-1 px-3.5 rounded-lg text-[10px] font-mono font-bold flex items-center gap-1.5 shadow ${tapePlaying ? 'bg-amber-500 text-black animate-pulse' : 'bg-stone-800 text-amber-500'} cursor-pointer`}
-              >
-                {tapePlaying ? 'ACTIVE' : 'POWER'}
-              </button>
-            </div>
-
-            {/* Simulated Tape reels graphic wrapper */}
-            <div className="relative bg-stone-950 rounded-xl p-3 border-2 border-stone-850 h-[80px] flex justify-around items-center mb-4 overflow-hidden shadow-inner">
-              <div className="w-10 h-10 rounded-full bg-slate-800 border-4 border-dashed border-slate-600 flex items-center justify-center">
-                <div className={`w-3 h-3 bg-stone-950 rounded-full ${tapePlaying ? 'spinning-reel' : ''}`}></div>
-              </div>
-              <div className="w-[80px] h-2 bg-stone-900/80 rounded relative">
-                <div className="absolute left-2 w-3 h-2 bg-red-600 rounded"></div>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-slate-800 border-4 border-dashed border-slate-600 flex items-center justify-center">
-                <div className={`w-3 h-3 bg-stone-950 rounded-full ${tapePlaying ? 'spinning-reel' : ''}`}></div>
-              </div>
-            </div>
-
-            {/* Toggle ambient sounds */}
-            <div className="flex flex-col gap-2 font-mono text-[9.5px]">
-              <button 
-                onClick={() => toggleSoundLayer('rain')}
-                className={`flex justify-between items-center p-1.5 px-2.5 rounded transition-all ${activeAmbiences.rain ? 'bg-sky-900/60 text-sky-200 border border-sky-400/30' : 'bg-stone-850 text-stone-400 hover:text-stone-300'} cursor-pointer`}
-              >
-                <span>🌧️ Pioggia Autunnale</span>
-                <span className="font-bold">{activeAmbiences.rain ? 'ON' : 'OFF'}</span>
-              </button>
-
-              <button 
-                onClick={() => toggleSoundLayer('cafe')}
-                className={`flex justify-between items-center p-1.5 px-2.5 rounded transition-all ${activeAmbiences.cafe ? 'bg-amber-900/60 text-amber-200 border border-amber-400/30' : 'bg-stone-850 text-stone-400 hover:text-stone-300'} cursor-pointer`}
-              >
-                <span>☕ Rumore Caffetteria</span>
-                <span className="font-bold">{activeAmbiences.cafe ? 'ON' : 'OFF'}</span>
-              </button>
-
-              <button 
-                onClick={() => toggleSoundLayer('keyboards')}
-                className={`flex justify-between items-center p-1.5 px-2.5 rounded transition-all ${activeAmbiences.keyboards ? 'bg-purple-900/60 text-purple-200 border border-purple-400/30' : 'bg-stone-850 text-stone-400 hover:text-stone-300'} cursor-pointer`}
-              >
-                <span>⌨️ Tastiera Meccanica</span>
-                <span className="font-bold">{activeAmbiences.keyboards ? 'ON' : 'OFF'}</span>
-              </button>
-
-              <button 
-                onClick={() => toggleSoundLayer('vinyl')}
-                className={`flex justify-between items-center p-1.5 px-2.5 rounded transition-all ${activeAmbiences.vinyl ? 'bg-emerald-900/60 text-emerald-200 border border-emerald-400/30' : 'bg-stone-850 text-stone-400 hover:text-stone-300'} cursor-pointer`}
-              >
-                <span>📻 Fruscio Vinile</span>
-                <span className="font-bold">{activeAmbiences.vinyl ? 'ON' : 'OFF'}</span>
-              </button>
-            </div>
-          </div>
-
-          
-
-         
-         
-
-        </div>
+        
       </main>
     </div>
   );
