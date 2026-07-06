@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROOT://SECURE_NODE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['Fira Code', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* CRT Scanline Effect Overlay */
+    .crt::after {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      aspect-ratio: auto;
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    .cursor-blink::after {
+      content: "_";
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-[#050B06] text-[#33FF33] font-mono p-4 md:p-8 crt selection:bg-[#33FF33] selection:text-black">
+
+  <div class="max-w-4xl mx-auto border-2 border-[#33FF33] bg-[#020502] p-4 md:p-6 shadow-[0_0_20px_rgba(51,255,51,0.2)]">
+    
+    <!-- Top Bar Controls -->
+    <div class="flex justify-between items-center border-b border-[#33FF33] pb-4 mb-6">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#33FF33] animate-ping"></span>
+        <span class="text-xs uppercase font-bold tracking-widest text-[#33FF33]">NODE://SECURE_ONLINE</span>
+      </div>
+      <div class="text-[10px] text-[#33FF33]/60 flex gap-4">
+        <span>Studio_V1.9</span>
+        <span>PORT: 8080</span>
+      </div>
+    </div>
+
+    <!-- Terminal Banner -->
+    <pre class="text-[8px] md:text-xs leading-none text-[#33FF33] font-bold overflow-x-auto mb-6 opacity-90">
+██████  ██████  █████  ███████ ████████
+██   ██ ██     ██   ██ ██         ██   
+██████  ██████ ███████ ██         ██    
+██   ██ ██     ██   ██ ██         ██    
+██   ██ ██████ ██   ██ ███████    ██      
+    </pre>
+
+    <!-- Interactive Console Info -->
+    <section class="space-y-6 text-sm">
+      <div class="bg-[#33FF33]/5 border border-[#33FF33]/30 p-4 rounded">
+        <p class="text-xs text-[#33FF33]/60 font-bold uppercase mb-2">// Laboratorio</p>
+        <a href="https://reactlab-studio.netlify.app/" class="mb-2"><span class="text-[#FFB90F]">React Lab</span></a>
+        <p class="text-white">Identità: Laboratorio.</p>
+        <p class="text-white mt-1">Template da modificare, e crerne altri con l'aiuto dell'ia</p>
+      </div>
+
+      <!-- Core Services Simulated Command Log -->
+      <div>
+        <p class="text-xs text-[#33FF33]/60 font-bold uppercase mb-3">// React Components</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="border border-[#33FF33]/40 p-4 bg-[#020502] hover:bg-[#33FF33]/10 transition-colors">
+            <a href="https://component-react-vault.netlify.app/" class="text-xs text-[#FFB90F] font-bold">[01] React Craft UI</a>
+            <p class="text-xs text-white mt-2 leading-relaxed">
+             Componenti react già pronti, o semplice html+tailwind e
+un editor builder per progettare componenti da zero.
+            </p>
+          </div>
+          <div class="border border-[#33FF33]/40 p-4 bg-[#020502] hover:bg-[#33FF33]/10 transition-colors">
+            <a href="https://componenti-react.netlify.app/" class="text-xs text-[#FFB90F] font-bold">[02] UI-Lib v1.0 </a>
+            <p class="text-xs text-white mt-2 leading-relaxed">
+           Codici pronti, 100% client-side, senza backend complicati..
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Logs -->
+      <div class="border border-[#33FF33]/30 rounded p-4 font-mono text-xs space-y-1.5 bg-[#010301]">
+        <p class="text-[#33FF33]/50">// REACT STUDIO</p>
+        <p><span class="text-white">[
+React Code IDE & Companion]</span> Ambiente didattico completo. Ora puoi visualizzare TUTTI i file strutturali e modificarli in tempo reale!..<a href="https://react-code-companion.vercel.app/" class="text-[#33FF33]">OK</a></p>
+        <p><span class="text-white">[React Sandbox Studio]</span> Impara i concetti chiave di React esplorando, modificando ed eseguendo codice live.... <a href="https://react-playground-sandbox.netlify.app/" class="text-[#FF3333]">0 DETECTED</a></p>
+       
+      </div>
+
+      <!-- Call To Action Terminal Form -->
+      <div class="border border-[#33FF33]/50 p-4 bg-[#051106]">
+        <p class="text-[#FFB90F] font-bold mb-3">> CONTACT_INTERFACE_INITIATED</p>
+        <div class="space-y-3">
+          <div class="flex flex-col md:flex-row gap-2 items-baseline">
+            <span class="text-[#33FF33]/70 shrink-0">Inserisci mail:</span>
+            <input type="text" class="bg-transparent border-b border-[#33FF33] text-white focus:outline-none flex-grow w-full md:w-auto px-2 font-mono text-xs py-1" placeholder="nome@dominio.com">
+          </div>
+          <div class="flex flex-col md:flex-row gap-2 items-baseline">
+            <span class="text-[#33FF33]/70 shrink-0">Inserisci messaggio:</span>
+            <input type="text" class="bg-transparent border-b border-[#33FF33] text-white focus:outline-none flex-grow w-full md:w-auto px-2 font-mono text-xs py-1" placeholder="Invia richiesta di aiuto...">
+          </div>
+<br>
+    <a href="https://code-editor-khaki-one.vercel.app/"      <button class="px-4 py-2 border-2 border-[#33FF33] hover:bg-[#33FF33] hover:text-black text-xs font-bold uppercase transition-all tracking-wider mt-4">
+            Editor React
+          </button> </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="mt-8 border-t border-[#33FF33]/40 pt-4 text-center text-[10px] text-[#33FF33]/50">
+      <span>SH-SESSION ID: F981-0010-AA38B // ENCRYPTED NODE</span>
+    </div>
+  </div>
+
+</body>
+</html>
