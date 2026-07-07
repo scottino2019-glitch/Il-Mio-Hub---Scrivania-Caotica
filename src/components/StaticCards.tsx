@@ -342,6 +342,16 @@ export const TvBoxCard: React.FC = () => {
                   >
                     <span>📟</span> CH 06: VIDEO CREATOR
                   </a>
+                      <a 
+                    href="https://cartoonia-studio.netlify.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+                  >
+                    <span>📟</span> CH 07: CARTOONIA
+                  </a>
+                     
+              
                 </li>
 
                
