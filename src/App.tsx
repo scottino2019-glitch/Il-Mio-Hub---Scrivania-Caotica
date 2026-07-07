@@ -1644,11 +1644,12 @@ const CreativeFontCard = () => {
           
           {/* ALBUM CSS GRANDE - CSS Artist Draft */}
           <AlbumCssCard playSoundBlip={playSoundBlip} />
-      {/* Appunti (Ufficio / Utility) */}
-          <div className="w-full h-full min-h-[500px] overflow-hidden rounded-2xl bg-white/40 border border-white/20 shadow-xl p-2 flex flex-col">
-            {/* Retro Crt Card */}
+              {/* Retro Crt Card */}
           
       <RetroCrtCard  playSoundBlip={playSoundBlip} />
+      {/* Appunti (Ufficio / Utility) */}
+          <div className="w-full h-full min-h-[500px] overflow-hidden rounded-2xl bg-white/40 border border-white/20 shadow-xl p-2 flex flex-col">
+        
   <iframe 
     src="/appunti.html" 
     className="w-full flex-grow rounded-xl border-0"
