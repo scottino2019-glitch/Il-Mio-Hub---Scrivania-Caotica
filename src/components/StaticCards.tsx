@@ -423,6 +423,14 @@ export const BookCard: React.FC = () => {
   >
     Libro Illustrato
   </a>
+     <a
+    href="https://giornale-sfogliabile.vercel.app/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-2xl font-bold text-white cursor-pointer hover:underline hover:decoration-wavy hover:decoration-red-600 transition-all duration-300 decoration-transparent"
+  >
+    Giornale
+  </a>
 </div>
      );
 };
@@ -482,6 +490,13 @@ export const VsCodeCard: React.FC = () => {
               "Scroll Studio"
             </a>
           </li>
+          <li className="flex items-center gap-1.5 text-stone-300">
+            <span className="text-purple-400">import</span>
+            <a href="https://editor-di-codice.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+              "Editor con template"
+            </a>
+          </li>
+          
         </ul>
       </div>
     </div>
