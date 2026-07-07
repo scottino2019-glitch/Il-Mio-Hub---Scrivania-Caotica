@@ -1646,6 +1646,9 @@ const CreativeFontCard = () => {
           <AlbumCssCard playSoundBlip={playSoundBlip} />
       {/* Appunti (Ufficio / Utility) */}
           <div className="w-full h-full min-h-[500px] overflow-hidden rounded-2xl bg-white/40 border border-white/20 shadow-xl p-2 flex flex-col">
+            {/* Retro Crt Card */}
+          
+      <RetroCrtCard  playSoundBlip={playSoundBlip} />
   <iframe 
     src="/appunti.html" 
     className="w-full flex-grow rounded-xl border-0"
@@ -1659,9 +1662,7 @@ const CreativeFontCard = () => {
           <div className="mt-6 px-1">
               <CreativeFontCard />
             </div>
-{/* Retro Crt Card */}
-          
-      <RetroCrtCard  playSoundBlip={playSoundBlip} />
+
     
 
           {/* =========================================
