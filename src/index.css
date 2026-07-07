@@ -488,6 +488,135 @@
 .book-card a {
   font-family: "Permanent Marker", cursive;
 }
+
+/* =========================================
+   Retro CTR Card
+   ========================================= */
+/* --- RETRO CRT TERMINAL STYLE --- */
+.retro-crt-card {
+  position: relative;
+  width: 320px;
+  min-height: 290px;
+  background-color: #070e06;
+  border: 5px solid #2f3e2d;
+  border-radius: 18px;
+  padding: 2px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8),
+              inset 0 0 30px rgba(0, 255, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.retro-crt-card:hover {
+  transform: scale(1.03) rotate(-0.5deg);
+  border-color: #4ade80;
+  box-shadow: 0 25px 60px rgba(74, 222, 128, 0.2),
+              inset 0 0 40px rgba(0, 255, 0, 0.08);
+}
+
+/* Filtro Vetro Abbozzato CRT con Linee di Scansione */
+.crt-overlay {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+  background-size: 100% 3px, 6px 100%;
+  z-index: 10;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.crt-screen {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 22px;
+  color: #4ade80;
+  text-shadow: 0 0 4px rgba(74, 222, 128, 0.5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 275px;
+}
+
+/* Intestazione monitor */
+.screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed rgba(74, 222, 128, 0.4);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+.dir-path {
+  font-size: 11px;
+  font-weight: bold;
+}
+.pulse-led {
+  font-size: 9px;
+  animation: pulseCrtGreen 2s infinite;
+}
+
+/* Testi dello schermo */
+.screen-outputs {
+  flex-grow: 1;
+}
+.output-line {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 6px 0;
+  transition: color 0.4s;
+}
+.output-line.success {
+  background-color: rgba(74, 222, 128, 0.1);
+  padding: 1px 6px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.retro-crt-card:hover .output-line.success {
+  background-color: rgba(74, 222, 128, 0.2);
+}
+
+/* Loader d'epoca a caselle */
+.screen-loader {
+  margin-top: 14px;
+}
+.loader-label {
+  font-size: 10px;
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+.discrete-progress {
+  display: flex;
+  gap: 6px;
+}
+.progress-block {
+  width: 20px;
+  height: 12px;
+  border: 1px solid rgba(74, 222, 128, 0.5);
+  background-color: transparent;
+  transition: all 0.4s ease;
+}
+
+/* Effetto d'azione sui blocchi quando si va in hover */
+.retro-crt-card:hover .progress-block:nth-child(1) { background-color: #4ade80; }
+.retro-crt-card:hover .progress-block:nth-child(2) { background-color: #4ade80; }
+.retro-crt-card:hover .progress-block:nth-child(3) { background-color: #4ade80; }
+.retro-crt-card:hover .progress-block:nth-child(4) { background-color: transparent; animation: blinkCrt 0.6s infinite; }
+
+@keyframes pulseCrtGreen {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes blinkCrt {
+  0%, 49% { background-color: #4ade80; }
+  50%, 100% { background-color: transparent; }
+}
+
+
 /* =========================================
    CARDS DECORATIVE NUOVE ED EFFETTI
    ========================================= */
