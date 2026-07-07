@@ -43,6 +43,7 @@ import {
 } from "./components/StaticCards";
 import ComicLinksCard from "./components/ComicLinksCard";
 import PromoCardModal from "./components/PromoCardModal";
+import RetroCrtCard from "./components/RetroCrtCard";
 
 // =========================================
 // TYPES & CONSTANTS
