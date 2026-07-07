@@ -1658,7 +1658,10 @@ const CreativeFontCard = () => {
           <div className="mt-6 px-1">
               <CreativeFontCard />
             </div>
+{/* Retro Crt Card */}
           
+      <RetroCrtCard  playSoundBlip={playSoundBlip} />
+    
 
           {/* =========================================
              NATIVE EXTRA FLUID CARDS
