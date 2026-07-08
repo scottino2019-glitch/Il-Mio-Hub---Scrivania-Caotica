@@ -29,7 +29,9 @@ const RetroCrtCard = () => {
               OK
             </a>
           </p>
-<br>
+
+          <br />
+
           <a
             href="https://tailwind-code-lab.vercel.app/"
             className="output-line"
@@ -38,8 +40,8 @@ const RetroCrtCard = () => {
           >
             &gt; TAILWIND LAB
           </a>
-        </div>
-             <p className="output-line success">
+
+          <p className="output-line success">
             &gt; Creative Card Artistiche:{" "}
             <a
               href="https://creative-card-artist.netlify.app/"
@@ -49,6 +51,7 @@ const RetroCrtCard = () => {
               OK
             </a>
           </p>
+        </div>
 
         <div className="screen-loader">
           <span className="loader-label">BUFFERING CORE:</span>
