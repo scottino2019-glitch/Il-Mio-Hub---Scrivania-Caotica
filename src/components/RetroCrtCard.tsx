@@ -51,6 +51,18 @@ const RetroCrtCard = () => {
               OK
             </a>
           </p>
+
+        <br />
+
+       <a
+            href="https://disegno-vettoriale.vercel.app/"
+            className="output-line"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            &gt; Disegno Vettoriale
+          </a>
+
         </div>
 
         <div className="screen-loader">
