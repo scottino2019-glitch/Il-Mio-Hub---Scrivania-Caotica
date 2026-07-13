@@ -1784,8 +1784,7 @@ const CreativeFontCard = () => {
 
           {/* CARD EXTRA: RETRO CRT MONITOR PORTAL ENTRÈE */}
           <CrtMonitorCard playSoundBlip={playSoundBlip} />
-                 {/* Scrittura Card */}
-<Scrittura playSoundBlip={playSoundBlip} />
+                
  {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
             <div className="app-group card-tavolozza">
@@ -1844,11 +1843,23 @@ const CreativeFontCard = () => {
                   </a>
                 </li>
 
+                 <li>
+                  <a 
+                    href="https://vector-studio-pearl.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                    Vector Studio
+                  </a>
+                </li>
+
 
               </ul>
             </div>
           </div>
-         
+          {/* Scrittura Card */}
+<Scrittura playSoundBlip={playSoundBlip} />
         </div>
       </main>
     </div>
