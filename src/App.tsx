@@ -44,6 +44,7 @@ import {
 import ComicLinksCard from "./components/ComicLinksCard";
 import PromoCardModal from "./components/PromoCardModal";
 import RetroCrtCard from "./components/RetroCrtCard";
+import Scrittura from "./components/Scrittura";
 
 // =========================================
 // TYPES & CONSTANTS
@@ -1658,7 +1659,9 @@ const CreativeFontCard = () => {
     sandbox="allow-scripts allow-same-origin allow-forms"
   />
 </div>
-         
+            {/* Scrittura Card */}
+<Scrittura playSoundBlip={playSoundBlip} />
+            
 {/* Creative Font Card */}
           <div className="mt-6 px-1">
               <CreativeFontCard />
