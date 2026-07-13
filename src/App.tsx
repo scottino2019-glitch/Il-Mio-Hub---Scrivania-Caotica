@@ -1525,12 +1525,21 @@ const CreativeFontCard = () => {
              GRUPPO 4: ALL OTHERS (Notebook Preferiti, Agenda, CSS Artist, JSON, Portals, Games, Tarot, etc)
              ========================================= */}
 
-         
+          {/* Appunti (Ufficio / Utility) */}
+          <div className="w-full h-full min-h-[500px] overflow-hidden rounded-2xl bg-white/40 border border-white/20 shadow-xl p-2 flex flex-col">
+        
+  <iframe 
+    src="/appunti.html" 
+    className="w-full flex-grow rounded-xl border-0"
+    style={{ minHeight: '520px', background: 'transparent' }}
+    title="Quaderno Editor"
+    sandbox="allow-scripts allow-same-origin allow-forms"
+  />
+</div>
           
          
           
-          {/* Comic (Chibi ) */}
-          <ComicLinksCard />
+         
 
           {/* PINK RING BINDER & PDF SQUARES/LINES BINDER */}
           <PinkPdfNotebookCard playSoundBlip={playSoundBlip} />
@@ -1608,17 +1617,9 @@ const CreativeFontCard = () => {
               {/* Retro Crt Card */}
           
       <RetroCrtCard  playSoundBlip={playSoundBlip} />
-      {/* Appunti (Ufficio / Utility) */}
-          <div className="w-full h-full min-h-[500px] overflow-hidden rounded-2xl bg-white/40 border border-white/20 shadow-xl p-2 flex flex-col">
-        
-  <iframe 
-    src="/appunti.html" 
-    className="w-full flex-grow rounded-xl border-0"
-    style={{ minHeight: '520px', background: 'transparent' }}
-    title="Quaderno Editor"
-    sandbox="allow-scripts allow-same-origin allow-forms"
-  />
-</div>
+           {/* Comic (Chibi ) */}
+          <ComicLinksCard />
+     
      
 
 
