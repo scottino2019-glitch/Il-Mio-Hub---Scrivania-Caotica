@@ -1512,50 +1512,10 @@ const CreativeFontCard = () => {
  {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
           <SnippetCreatorCard />
         
-            {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
-          <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+           {/* Creative Font Card */}
+          <div className="mt-6 px-1">
+              <CreativeFontCard />
             </div>
-
-            <div className="text-center text-white mt-1">
-              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
-              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
-                {currentTime.toLocaleTimeString('it-IT')}
-              </div>
-            </div>
-
-            {/* Swing pendulum container */}
-            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
-              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
-                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
-              </div>
-            </div>
-
-            {/* Focus pomodoro timer interface */}
-            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
-              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
-                <span>STAGE: {pomoMode.toUpperCase()}</span>
-                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
-              </div>
-
-              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
-                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
-              </div>
-
-              <div className="flex gap-2 justify-center mt-3">
-                <button 
-                  onClick={togglePomo} 
-                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
-                >
-                  {pomoActive ? 'PAUSA' : 'START'}
-                </button>
-                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
-                  RESET
-                </button>
-              </div>
-            </div>
-          </div>
 
           {/* =========================================
              GRUPPO 2: LAVAGNA, GATTO, TELEFONO, EDITOR TESTO
@@ -1659,12 +1619,52 @@ const CreativeFontCard = () => {
     sandbox="allow-scripts allow-same-origin allow-forms"
   />
 </div>
-     
-            
-{/* Creative Font Card */}
-          <div className="mt-6 px-1">
-              <CreativeFontCard />
+      {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
+          <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
+              <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
             </div>
+
+            <div className="text-center text-white mt-1">
+              <span className="font-semibold text-xs text-yellow-400 uppercase tracking-widest block mb-1">Cuckoo Timepiece & Pomodoro</span>
+              <div className="font-mono text-xl bg-orange-950/80 text-orange-200 py-1.5 rounded-xl border border-orange-900 inline-block px-4 font-bold tracking-widest shadow-inner">
+                {currentTime.toLocaleTimeString('it-IT')}
+              </div>
+            </div>
+
+            {/* Swing pendulum container */}
+            <div className="flex justify-center my-4 h-12 relative overflow-hidden">
+              <div className="pendulum-arm w-1 bg-amber-700 h-10 rounded-full relative">
+                <div className="absolute bottom-0 -left-2 w-5 h-5 bg-yellow-500 rounded-full border border-yellow-600"></div>
+              </div>
+            </div>
+
+            {/* Focus pomodoro timer interface */}
+            <div className="bg-stone-950/70 rounded-2xl p-3 border border-amber-900/30">
+              <div className="flex justify-between text-[10px] text-orange-200/70 font-mono mb-2">
+                <span>STAGE: {pomoMode.toUpperCase()}</span>
+                <span>STATE: {pomoActive ? 'WORKING' : 'PAUSED'}</span>
+              </div>
+
+              <div className="text-center font-mono text-3xl font-bold tracking-widest my-1 text-amber-400">
+                {String(pomoMinutes).padStart(2, '0')}:{String(pomoSeconds).padStart(2, '0')}
+              </div>
+
+              <div className="flex gap-2 justify-center mt-3">
+                <button 
+                  onClick={togglePomo} 
+                  className={`px-3 py-1 rounded text-[10px] font-bold flex items-center gap-1 ${pomoActive ? 'bg-red-800 text-red-150 hover:bg-red-700' : 'bg-emerald-800 text-emerald-150 hover:bg-emerald-700'} cursor-pointer`}
+                >
+                  {pomoActive ? 'PAUSA' : 'START'}
+                </button>
+                <button onClick={resetPomo} className="bg-[#3d2a21] hover:bg-[#52382c] px-3 py-1 text-stone-200 rounded text-[10px] font-bold flex items-center gap-1">
+                  RESET
+                </button>
+              </div>
+            </div>
+          </div>
+            
+
 
     
 
@@ -1845,16 +1845,24 @@ const CreativeFontCard = () => {
 
                  <li>
                   <a 
+                    href="https://github.com/scottino2019-glitch/Disegno-vettoriale" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                   Disegno Vettoriale
+                  </a>
+                </li>
+                 <li>
+                  <a 
                     href="https://vector-studio-pearl.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(900, 'sine', 0.05)}
                   >
-                    Vector Studio
+                   Vector Studio
                   </a>
                 </li>
-
-
               </ul>
             </div>
           </div>
