@@ -403,8 +403,17 @@ const CreativeFontCard = () => {
       desc: "Tratti",
       tag: "Disegno",
       url: "https://atelier-digitale-364179054019.europe-west2.run.app/",
-      bgPreview: "✒"
+      bgPreview: "✏️"
+    },
+    {
+      title: " Json",
+      desc: "Widget",
+      tag: "file",
+      url: "https://lettore-json-universale.vercel.app/",
+      bgPreview: "🖥️"
     }
+
+
 
     
   ];
