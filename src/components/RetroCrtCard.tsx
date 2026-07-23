@@ -20,7 +20,7 @@ const RetroCrtCard = () => {
           </a>
 
           <p className="output-line success">
-            &gt; Impare Html e Css:{" "}
+            &gt; Imparare Html e Css:{" "}
             <a
               href="https://impara-html-e-css-579414217719.europe-west2.run.app/"
               target="_blank"
@@ -52,9 +52,9 @@ const RetroCrtCard = () => {
             </a>
           </p>
 
-        <br />
+          <br />
 
-       <a
+          <a
             href="https://disegno-vettoriale.vercel.app/"
             className="output-line"
             target="_blank"
@@ -62,7 +62,8 @@ const RetroCrtCard = () => {
           >
             &gt; Disegno Vettoriale
           </a>
-           <p className="output-line success">
+
+          <p className="output-line success">
             &gt; Lettore JSON Universale:{" "}
             <a
               href="https://lettore-json-universale.vercel.app/"
@@ -72,7 +73,6 @@ const RetroCrtCard = () => {
               OK
             </a>
           </p>
-          
         </div>
 
         <div className="screen-loader">
