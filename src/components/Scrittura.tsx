@@ -80,7 +80,24 @@ const Scrittura = () => {
               <span className="mt-[1px] text-[1.1rem] text-[#57606f]">
                 ~ Quaderni e App
               </span>
+            </li>  
+            <li className="flex flex-col relative">
+              <span className="absolute left-[-28px] top-[2px] font-inter text-[0.95rem] text-[#778ca3]">
+                &#9634;
+              </span>
+              <a
+                href="https://scrittura-coreana.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block self-start relative no-underline text-[1.35rem] font-bold text-[#0c2461] px-[4px] py-0 rounded-[4px] transition-all duration-300 ease-in hover:text-black hover:rotate-[-0.5deg] hover:scale-[1.02] before:content-[''] before:absolute before:inset-[1px_-2px] before:bg-[#fff200] before:opacity-0 before:-z-10 before:rounded-[4px_10px_4px_6px] before:scale-y-[0.7] before:scale-x-0 before:origin-left before:transition-[transform,opacity] before:duration-[200ms,150ms] before:[transition-timing-function:cubic-bezier(0.19,1,0.22,1),ease] hover:before:opacity-[0.65] hover:before:scale-y-100 hover:before:scale-x-100"
+              >
+              Lingua Coreana
+              </a>
+              <span className="mt-[1px] text-[1.1rem] text-[#57606f]">
+                ~ App e pdf
+              </span>
             </li>
+            
              <li className="flex flex-col relative">
               <span className="absolute left-[-28px] top-[2px] font-inter text-[0.95rem] text-[#778ca3]">
                 &#9634;
