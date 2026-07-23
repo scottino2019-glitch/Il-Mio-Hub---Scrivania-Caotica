@@ -592,7 +592,17 @@ export const AgendaCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             rel="noopener noreferrer"
             onClick={() => playSoundBlip(750, 'sine', 0.05)}
           >
-            🧾 Creative Desk Planner
+            📅 Creative Desk Planner
+          </a>
+        </li>
+          <li>
+          <a 
+            href="https://badge-calendar-creator.vercel.app/ 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={() => playSoundBlip(750, 'sine', 0.05)}
+          >
+            📆 Badge Calendar Creator
           </a>
         </li>
       </ul>
