@@ -542,6 +542,7 @@ export const SnippetCreatorCard: React.FC = () => {
   );
 };
 
+
 // 9. L'AGENDA CARD
 export const AgendaCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
   return (
@@ -585,7 +586,7 @@ export const AgendaCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             📑 Pdf Notepad
           </a>
         </li>
-       <li>
+        <li>
           <a 
             href="https://creative-desk-planner.vercel.app/" 
             target="_blank" 
@@ -595,9 +596,9 @@ export const AgendaCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             📅 Creative Desk Planner
           </a>
         </li>
-          <li>
+        <li>
           <a 
-            href="https://badge-calendar-creator.vercel.app/ 
+            href="https://badge-calendar-creator.vercel.app/" 
             target="_blank" 
             rel="noopener noreferrer"
             onClick={() => playSoundBlip(750, 'sine', 0.05)}
