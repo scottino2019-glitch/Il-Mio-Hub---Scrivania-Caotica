@@ -55,23 +55,14 @@ const RetroCrtCard = () => {
         <br />
 
        <a
-            href="https://disegno-vettoriale.vercel.app/"
+            href="https://lettore-json-universale.vercel.app/"
             className="output-line"
             target="_blank"
             rel="noopener noreferrer"
           >
-            &gt; Disegno Vettoriale
+          &gt; Lettore JSON Universale:{" "}
           </a>
-           <p className="output-line success">
-            &gt; Lettore JSON Universale:{" "}
-            <a
-              href="https://lettore-json-universale.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              OK
-            </a>
-          </p>
+          
           
         </div>
 
