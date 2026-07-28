@@ -1,6 +1,6 @@
 const Scrittura = () => {
   return (
-    <div className="flex w-full max-w-[580px] mx-auto relative">
+    <div className="flex w-full max-w-[580px] mx-auto relative" style={{ '--hover-rot': '1.5deg' } >
       <div className="flex flex-col justify-around w-[40px] py-[40px] bg-transparent z-10">
         <div className="w-[14px] h-[14px] rounded-full bg-[#2c3e50] relative left-[30px] shadow-[inset_2px_2px_4px_rgba(0,0,0,0.8),2px_2px_0px_rgba(255,255,255,0.4)]"></div>
         <div className="w-[14px] h-[14px] rounded-full bg-[#2c3e50] relative left-[30px] shadow-[inset_2px_2px_4px_rgba(0,0,0,0.8),2px_2px_0px_rgba(255,255,255,0.4)]"></div>
