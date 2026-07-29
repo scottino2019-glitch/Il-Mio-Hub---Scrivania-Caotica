@@ -40,7 +40,7 @@ const RetroCrtCard = () => {
           >
             &gt; TAILWIND LAB
           </a>
-
+          <br />
           <p className="output-line success">
             &gt; Python Vivo:{" "}
             <a
