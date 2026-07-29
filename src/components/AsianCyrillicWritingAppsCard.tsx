@@ -8,12 +8,13 @@ export default function AsianCyrillicWritingAppsCard({
 }) {
   // Lista di default specializzata per la scrittura di Cinese, Coreano e Russo
   const defaultApps = [
-    { name: "Skritter", category: "Cinese & Giapponese", script: "汉字", rating: "4.9", url: "#" },
-    { name: "Write It! Korean", category: "Tratti Hangul", script: "한글", rating: "4.8", url: "#" },
-    { name: "Write It! Russian", category: "Corsivo Cirillico", script: "Русс", rating: "4.8", url: "#" },
-    { name: "HanziCraft", category: "Decomposizione Cinese", script: "中文", rating: "4.7", url: "#" },
-    { name: "Mirinae Korean", category: "Sintassi & Tratti", script: "한국어", rating: "4.8", url: "#" },
-    { name: "Tocaboca Cyrillic", category: "Calligrafia Russa", script: "АБВ", rating: "4.6", url: "#" }
+    { name: "Skritter", category: "Cinese", script: "汉字", rating: "4.9", url: "https://hanzi-pro-build.netlify.app/" },
+    { name: "Write It! Korean", category: "Tratti Hangul", script: "한글", rating: "4.8", url: "https://scrittura-coreana.vercel.app/" },
+     { name: "Write It! Korean", category: "Tratti Hangul", script: "한글", rating: "4.8", url: "https://generatore-di-fogli-di-scrittura-co.vercel.app/" },
+    { name: "Write It! Russian", category: "Corsivo Cirillico", script: "Русс", rating: "4.8", url: "https://generatore-di-esercizi-di-scrittura.vercel.app/" },
+    { name: "HanziCraft", category: "Decomposizione Cinese", script: "中文", rating: "4.7", url: "https://pinyin-converter-ashen.vercel.app/" },
+    { name: "Mirinae Korean", category: "Sintassi & Tratti", script: "한국어", rating: "4.8", url: "https://eserciziario-di-lingua-coreana.vercel.app/" },
+    { name: "Lingue", category: "Quaderni", script: "CKR", rating: "4.6", url: "https://quaderni-di-scrittura.vercel.app/" }
   ];
 
   const appList = apps.length > 0 ? apps : defaultApps;
