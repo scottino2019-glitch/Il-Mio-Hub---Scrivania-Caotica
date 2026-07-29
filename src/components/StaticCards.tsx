@@ -315,7 +315,7 @@ export const TvBoxCard: React.FC = () => {
                 </li>
                    <li>
                   <a 
-                    href="slide-con-immagini-e-testo.html"" 
+                    href="slide-con-immagini-e-testo.html"
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
