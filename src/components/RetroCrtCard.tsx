@@ -42,9 +42,9 @@ const RetroCrtCard = () => {
           </a>
 
           <p className="output-line success">
-            &gt; Creative Card Artistiche:{" "}
+            &gt; Python Vivo:{" "}
             <a
-              href="https://creative-card-artist.netlify.app/"
+              href="https://python-vivo.netlify.app/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -60,9 +60,18 @@ const RetroCrtCard = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-          &gt; Lettore JSON Universale:{" "}
+          &gt; Lettore JSON Universale
           </a>
-          
+            <p className="output-line success">
+            &gt; Base64 Studio:{" "}
+            <a
+              href="https://base64-studio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              OK
+            </a>
+          </p>
           
         </div>
 
