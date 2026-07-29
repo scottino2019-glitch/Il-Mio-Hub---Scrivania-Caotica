@@ -792,6 +792,8 @@ const CreativeFontCard = () => {
         <a href="https://editor-multiligua.netlify.app/" target="_blank" rel="noopener noreferrer" className="dock-item Editor" data-tooltip="Editor">📝</a>
          <a href="https://playground-web-ten.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Playground" data-tooltip="Playground">🖲</a>
         <a href="https://code-editor-khaki-one.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Code-Editor" data-tooltip="Code-Editor">🖱</a>
+        <a href="https://ufficio-virtuale.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item Ufficio-Virtuale" data-tooltip="Ufficio-Virtuale">🧰</a>
+   
    
 
       </nav>
