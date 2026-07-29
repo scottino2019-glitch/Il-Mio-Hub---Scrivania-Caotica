@@ -493,22 +493,11 @@ export const VsCodeCard: React.FC = () => {
           </li>
           <li className="flex items-center gap-1.5 text-stone-300">
             <span className="text-purple-400">import</span>
-            <a href="https://div-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-              "Div Generator"
+            <a href="https://sito-console-frame.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
+              "Sito Console Frame"
             </a>
           </li>
-             <li className="flex items-center gap-1.5 text-stone-300">
-            <span className="text-purple-400">import</span>
-            <a href="https://parallax-studio-sage.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-              "Parallax Studio"
-            </a>
-          </li>
-            <li className="flex items-center gap-1.5 text-stone-300">
-            <span className="text-purple-400">import</span>
-            <a href="https://scroll-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
-              "Scroll Studio"
-            </a>
-          </li>
+           
           <li className="flex items-center gap-1.5 text-stone-300">
             <span className="text-purple-400">import</span>
             <a href="https://editor-di-codice.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-amber-200 hover:underline">
@@ -666,16 +655,7 @@ export const AlbumCssCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
             Creative Card
           </a>
         </li>
-        <li>
-          <a 
-            href="https://hover-craft-tau.vercel.app/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            onClick={() => playSoundBlip(800, 'sine', 0.05)}
-          >
-            Hover Craft
-          </a>
-        </li>
+      
        
           <li>
           <a 
@@ -689,13 +669,13 @@ export const AlbumCssCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
         </li>      </ul>
 
       <a 
-        href="https://artisan-studio-psi.vercel.app/" 
+        href="https://creative-card-artist.netlify.app/ 
         target="_blank" 
         rel="noopener noreferrer"
         className="btn-schizzo"
         onClick={() => playSoundBlip(950, 'sine', 0.06)}
       >
-        + Crea Nuovo background
+        + Crea Card Artistiche
       </a>
     </div>
   );
@@ -750,10 +730,15 @@ export const PortalCardsCard: React.FC = () => {
                  <li className="hover:translate-x-1.5 transition-transform duration-200">
                   <a href="https://polyglot-pix.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold"> 🃏 Poliglot pix  </a>
                 </li>
-<li className="hover:translate-x-1.5 transition-transform duration-200">
+                 <li className="hover:translate-x-1.5 transition-transform duration-200">
                   <a href="https://creatore-di-esercizi-di-ascolto-225982531026.europe-west2.run.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold"> 🎧 Es Audio Creator  </a>
                 </li>
-
+                  <li className="hover:translate-x-1.5 transition-transform duration-200">
+                  <a href="https://quiz-vocab-card-generator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold"> 🧧 Card & Quiz Creator  </a>
+                </li>
+                  <li className="hover:translate-x-1.5 transition-transform duration-200">
+                  <a href="https://schede-didattiche.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold"> 🀄 Schede Didattiche  </a>
+                </li>
 
               </ul>
             </div>
