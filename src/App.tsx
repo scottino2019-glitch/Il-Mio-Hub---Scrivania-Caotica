@@ -44,7 +44,7 @@ import {
 import ComicLinksCard from "./components/ComicLinksCard";
 import PromoCardModal from "./components/PromoCardModal";
 import RetroCrtCard from "./components/RetroCrtCard";
-import Scrittura from "./components/Scrittura";
+import AsianCyrillicWritingAppsCard from "./components/AsianCyrillicWritingAppsCard";
 
 // =========================================
 // TYPES & CONSTANTS
@@ -1832,8 +1832,8 @@ const CreativeFontCard = () => {
               </ul>
             </div>
           </div>
-          {/* Scrittura Card */}
-<Scrittura playSoundBlip={playSoundBlip} />
+          {/* AsianCyrillicWritingAppsCard */}
+<AsianCyrillicWritingAppsCard playSoundBlip={playSoundBlip} />
            {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#3d2a21] rounded-full flex items-center justify-center">
