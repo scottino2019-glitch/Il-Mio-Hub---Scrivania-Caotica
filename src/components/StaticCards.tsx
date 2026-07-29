@@ -313,16 +313,18 @@ export const TvBoxCard: React.FC = () => {
                     <span>📟</span> CH 03: SLIDE TEXT
                   </a>
                 </li>
-                <li>
+                   <li>
                   <a 
-                    href="slide-con-immagini-e-testo.html" 
+                    href="slide-con-immagini-e-testo.html"" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-emerald-305 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
+                    className="text-emerald-300 hover:text-white transition-colors duration-150 flex items-center gap-1 drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]"
                   >
-                    <span>📟</span> CH 04: SLIDE IMMAGINI
+                    <span>📟</span> CH 04: SLIDE IMG+TEXT
                   </a>
                 </li>
+
+                
                 <li>
                   <a 
                     href="https://audio-edu-creator.vercel.app/" 
