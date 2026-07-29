@@ -669,7 +669,7 @@ export const AlbumCssCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
         </li>      </ul>
 
       <a 
-        href="https://creative-card-artist.netlify.app/ 
+        href="https://creative-card-artist.netlify.app/" 
         target="_blank" 
         rel="noopener noreferrer"
         className="btn-schizzo"
