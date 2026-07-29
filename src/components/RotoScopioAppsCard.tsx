@@ -9,12 +9,13 @@ export default function RotoScopioAppsCard({
 }) {
   // Lista di default delle app se non vengono passati dati tramite props
   const defaultApps = [
-    { name: "Adobe After Effects", category: "Compositing & VFX", rating: "4.9", url: "#" },
-    { name: "Spine 2D", category: "Skeletal Animation", rating: "4.8", url: "#" },
-    { name: "TVPaint Animation", category: "Traditional Bitmap", rating: "4.7", url: "#" },
-    { name: "Rive", category: "Interactive Web Motion", rating: "4.9", url: "#" },
-    { name: "Opentoonz", category: "Open Source Studio", rating: "4.6", url: "#" },
-    { name: "Moho Pro", category: "Vector Rigging", rating: "4.8", url: "#" }
+    { name: "CSS Art Studio", category: "Animation", rating: "4.9", url: "https://css-art-animation-studio.vercel.app/" },
+    { name: "CSS.PLAYGROUND", category: "Skeletal Animation", rating: "4.8", url: "https://css-animation-laboratory.vercel.app/" },
+    { name: "HoverCraft", category: "Hover Animation", rating: "4.7", url: "https://hover-craft-tau.vercel.app/" },
+    { name: "Artistic.Box", category: "Div Generator", rating: "4.9", url: "https://div-generator.vercel.app/" },
+    { name: "Parallax Studio", category: "Background Animation", rating: "4.6", url: "https://parallax-studio-sage.vercel.app/" },
+    { name: "Scroll Creator", category: "Background", rating: "4.8", url: "https://scroll-creator.vercel.app/" },
+     { name: "Artisan Studio", category: "Siti Creator", rating: "4.8", url: "https://artisan-studio-psi.vercel.app/" },
   ];
 
   const appList = apps.length > 0 ? apps : defaultApps;
