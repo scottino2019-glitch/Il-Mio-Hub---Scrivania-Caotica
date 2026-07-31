@@ -16,7 +16,7 @@ export default function RotoScopioAppsCard({
     { name: "Parallax Studio", category: "Background Animation", rating: "4.6", url: "https://parallax-studio-sage.vercel.app/" },
     { name: "Scroll Creator", category: "Background", rating: "4.8", url: "https://scroll-creator.vercel.app/" },
      { name: "Artisan Studio", category: "Siti Creator", rating: "4.8", url: "https://artisan-studio-psi.vercel.app/" },
-    { name: "Modal Code Studio", category: "Siti Creator", rating: "4.8", url: "https://modal-code-studio.vercel.app/ },
+    { name: "Modal Code Studio", category: "Siti Creator", rating: "4.8", url: "https://modal-code-studio.vercel.app/" },
   ];
   const appList = apps.length > 0 ? apps : defaultApps;
 
