@@ -99,8 +99,8 @@ const LABS_DATA: LabLink[] = [
     subtitle: 'Editor per sperimentare con griglie CSS Grid.',
     url: 'https://css-grid-container-layout-studio.vercel.app/',
     iconName: 'Layout',
-    isExternal: false,
-    status: 'completato',
+    isExternal: true,
+    status: 'sperimentale',
   },
 ];
 
@@ -111,7 +111,8 @@ const colorThemes = {
   amber: { primary: '#d97706', bg: 'bg-amber-50/50', badge: 'text-amber-600', border: 'border-amber-600/20' },
   violet: { primary: '#7c3aed', bg: 'bg-violet-50/50', badge: 'text-violet-600', border: 'border-violet-600/20' },
   sky: { primary: '#0284c7', bg: 'bg-sky-50/50', badge: 'text-sky-600', border: 'border-sky-600/20' },
-  slate: { primary: '#475569', bg: 'bg-slate-100/50', badge: 'text-slate-700', border: 'border-slate-700/20' },
+  red: { primary: '#8F0705', bg: 'bg-red-100/50', badge: 'text-red-700', border: 'border-red-700/20' },
+  blue: { primary: '#0916E4', bg: 'bg-blue-100/50', badge: 'text-blue-700', border: 'border-blue-700/20' },
 };
 
 const organicBlobs = [
@@ -122,16 +123,19 @@ const organicBlobs = [
   '70% 30% 30% 70% / 60% 40% 60% 40%',
   '20% 80% 20% 80% / 20% 80% 20% 80%',
   '9999px',
+  '70% 30% 30% 70% / 60% 40% 60% 40%',
 ];
 
 const bentoColors = [
   { shadow: '#4f46e5', accent: 'text-indigo-600', bg: 'bg-white', isDark: false },
   { shadow: '#fbbf24', accent: 'text-amber-500', bg: 'bg-white', isDark: false },
-  { shadow: '#f43f5e', accent: 'text-rose-500', bg: 'bg-[#1e293b]', isDark: true },
+  { shadow: '#f43f5e', accent: 'text-rose-500', bg: 'bg-[#1e293b]', isDark: false },
   { shadow: '#10b981', accent: 'text-emerald-500', bg: 'bg-white', isDark: false },
   { shadow: '#8b5cf6', accent: 'text-violet-500', bg: 'bg-white', isDark: false },
   { shadow: '#0ea5e9', accent: 'text-sky-500', bg: 'bg-white', isDark: false },
   { shadow: '#1e293b', accent: 'text-indigo-600', bg: 'bg-[#f1f5f9]', isDark: false },
+  { shadow: '#f43f5e', accent: 'text-rose-500', bg: 'bg-[#1e293b]', isDark: false },
+  
 ];
 
 const iconsMap = {
@@ -142,6 +146,7 @@ const iconsMap = {
   Flame,
   Mountain,
   Sparkles,
+   Layout,
 };
 
 export default function CssLabsIndex() {
