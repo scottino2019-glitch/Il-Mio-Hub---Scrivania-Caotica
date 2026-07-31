@@ -129,12 +129,12 @@ const organicBlobs = [
 const bentoColors = [
   { shadow: '#4f46e5', accent: 'text-indigo-600', bg: 'bg-white', isDark: false },
   { shadow: '#fbbf24', accent: 'text-amber-500', bg: 'bg-white', isDark: false },
-  { shadow: '#f43f5e', accent: 'text-rose-500', bg: 'bg-black', isDark: true },
+  { shadow: '#fbbf24', accent: 'text-amber-500', bg: 'bg-white', isDark: false },
   { shadow: '#10b981', accent: 'text-emerald-500', bg: 'bg-white', isDark: false },
   { shadow: '#8b5cf6', accent: 'text-violet-500', bg: 'bg-white', isDark: false },
   { shadow: '#0ea5e9', accent: 'text-sky-500', bg: 'bg-white', isDark: false },
   { shadow: '#1e293b', accent: 'text-indigo-600', bg: 'bg-[#f1f5f9]', isDark: false },
-  { shadow: '#f43f5e', accent: 'text-rose-500', bg: 'bg-black', isDark: true },
+  { shadow: '#8b5cf6', accent: 'text-violet-500', bg: 'bg-white', isDark: false },
   
 ];
 
