@@ -93,6 +93,15 @@ const LABS_DATA: LabLink[] = [
     isExternal: true,
     status: 'completato',
   },
+    {
+    id: '08',
+    title: 'CSS Grid',
+    subtitle: 'Editor per sperimentare con griglie CSS Grid.',
+    url: 'https://css-grid-container-layout-studio.vercel.app/',
+    iconName: 'Layout',
+    isExternal: false,
+    status: 'completato',
+  },
 ];
 
 const colorThemes = {
