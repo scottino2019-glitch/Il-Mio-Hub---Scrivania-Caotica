@@ -291,7 +291,7 @@ export default function CssLabsIndex() {
                     <div className="flex flex-col h-full justify-between">
                       <div className="flex justify-between items-start">
                         <span className="text-3xl sm:text-4xl group-hover:scale-110 transition-transform duration-300">
-                          {index === 0 ? '☕' : index === 1 ? '🐱' : index === 2 ? '🌑' : index === 4 ? '🐉' : '⛰️'}
+                          {index === 0 ? '☕' : index === 1 ? '🐱' : index === 2 ? '⛰️' : index === 4 ? '🐉' : '⛰️'}
                         </span>
                         <div className="w-7 h-7 rounded-full border border-slate-300 group-hover:border-slate-900 flex items-center justify-center text-slate-400 group-hover:text-slate-900 transition-colors">
                           <ChevronRight className="w-4 h-4" />
