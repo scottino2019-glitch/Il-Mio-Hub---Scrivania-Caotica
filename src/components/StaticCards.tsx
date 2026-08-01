@@ -750,6 +750,9 @@ export const PortalCardsCard: React.FC = () => {
                   <li className="hover:translate-x-1.5 transition-transform duration-200">
                   <a href="https://schede-didattiche.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold"> 🀄 Schede Didattiche  </a>
                 </li>
+                 <li className="hover:translate-x-1.5 transition-transform duration-200">
+                  <a href="https://language-graphic-creator.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-500 flex items-center gap-1.5 font-bold"> 🐼 Language Graphic Creator  </a>
+                </li>
 
               </ul>
             </div>
