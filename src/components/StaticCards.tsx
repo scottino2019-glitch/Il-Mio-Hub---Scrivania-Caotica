@@ -665,7 +665,7 @@ export const AlbumCssCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
           >
             Creative Card
           </a>
-        </li>
+         </li>
       
        
           <li>
@@ -677,7 +677,22 @@ export const AlbumCssCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
           >
             Card Canvas Studio
           </a>
-        </li>      </ul>
+        </li>  
+
+        
+          <li>
+          <a 
+            href="https://analog-card-studio.netlify.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={() => playSoundBlip(800, 'sine', 0.05)}
+          >
+           Analog Card Studio
+          </a>
+        </li>  
+      
+
+      </ul>
 
       <a 
         href="https://creative-card-artist.netlify.app/" 
