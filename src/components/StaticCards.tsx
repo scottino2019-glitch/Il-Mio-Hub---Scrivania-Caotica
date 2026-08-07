@@ -177,7 +177,7 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
             {/* Icon apps grid list */}
             <div className="grid grid-cols-2 gap-3">
               <a 
-                href="https://libreria-jet.vercel.app/" 
+                href="https://libreria-pdf.vercel.app/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.06)}
