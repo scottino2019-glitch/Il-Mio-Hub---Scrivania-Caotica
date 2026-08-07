@@ -607,12 +607,12 @@ export const AgendaCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
         </li>
         <li>
           <a 
-            href="https://badge-calendar-creator.vercel.app/" 
+            href="https://confronto-e-evidenziatore-pdf.ai.studio/" 
             target="_blank" 
             rel="noopener noreferrer"
             onClick={() => playSoundBlip(750, 'sine', 0.05)}
           >
-            📆 Badge Calendar Creator
+            🗒️ Lettore PDF multiplo
           </a>
         </li>
       </ul>
