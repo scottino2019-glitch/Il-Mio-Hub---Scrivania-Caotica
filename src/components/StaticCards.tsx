@@ -607,7 +607,7 @@ export const AgendaCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) => {
         </li>
         <li>
           <a 
-            href="https://confronto-e-evidenziatore-pdf.ai.studio/" 
+            href="https://lettore-pdf-affiancato.ai.studio/" 
             target="_blank" 
             rel="noopener noreferrer"
             onClick={() => playSoundBlip(750, 'sine', 0.05)}
