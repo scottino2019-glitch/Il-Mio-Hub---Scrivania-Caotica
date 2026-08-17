@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Reader - Homepage</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-gray-100 h-screen flex flex-col font-sans overflow-hidden">
+
+  <!-- TOOLBAR SUPERIORE MINIMAL STYLE PDF -->
+  <header class="bg-slate-950 border-b border-indigo-900/50 px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-lg relative z-20 shrink-0">
+    
+    <!-- Sinistra: Pallini e Nome della Homepage -->
+    <div class="flex items-center space-x-3 min-w-0">
+      <div class="flex space-x-1.5 mr-1 shrink-0">
+        <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-rose-500 rounded-full inline-block shadow-sm"></span>
+        <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-amber-400 rounded-full inline-block shadow-sm"></span>
+        <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-emerald-400 rounded-full inline-block shadow-sm"></span>
+      </div>
+      <div class="flex items-center space-x-2 border-l border-slate-800 pl-3 min-w-0">
+        <span class="text-[10px] sm:text-xs bg-indigo-500/20 text-indigo-300 font-semibold px-2 py-0.5 rounded border border-indigo-500/30 shrink-0">PDF</span>
+        <span class="text-xs sm:text-sm font-medium text-slate-200 truncate">Indice_Applicazione.pdf</span>
+      </div>
+    </div>
+
+    <!-- Destra: Indicatore Pagina e Zoom Proporzionati -->
+    <div class="flex items-center space-x-1.5 sm:space-x-2 text-xs shrink-0">
+      <span class="bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-700/80 text-[11px] font-mono">1 / 1</span>
+      <span class="bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-700/80 text-[11px] font-mono">100%</span>
+    </div>
+  </header>
+
+  <!-- AREA PRINCIPALE SOTTO LA TOOLBAR -->
+  <main class="flex-1 bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-900 overflow-y-auto p-4 sm:p-6 md:p-8 flex justify-center items-start md:items-center relative">
+    
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent pointer-events-none"></div>
+
+    <!-- FOGLIO PDF CENTRALE -->
+    <div class="bg-white text-slate-900 w-full max-w-2xl my-auto py-8 px-6 sm:p-10 shadow-2xl rounded-xl flex flex-col justify-between border border-slate-200/80 relative z-10">
+      
+      <div>
+        <!-- Intestazione Foglio -->
+        <div class="border-b-2 border-indigo-100 pb-5 mb-6 flex justify-between items-start gap-4">
+          <div>
+            <span class="inline-block px-2.5 py-1 bg-indigo-50 text-indigo-700 text-[10px] sm:text-xs font-bold rounded-full mb-2 uppercase tracking-wide">
+              Documento d'Accesso
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight leading-tight">Benvenuto nell'Applicazione</h1>
+          </div>
+          <span class="text-xs bg-slate-100 text-slate-500 font-mono px-2 py-1 rounded shrink-0">v2.0</span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6 sm:mb-8">
+          Fai clic su una delle schede sottostanti per aprire la relativa applicazione web in una nuova pagina del browser.
+        </p>
+
+        <!-- I TRE LINK APRIBILE IN NUOVA SCHEDA -->
+        <div class="space-y-3 sm:space-y-4">
+          
+          <!-- Link 1: Quaderni e Lettore PDF -->
+          <a href="https://quaderni-e-lettore-pdf.vercel.app/" target="_blank" rel="noopener noreferrer" 
+             class="group block p-3.5 sm:p-4 rounded-xl border border-indigo-100 bg-gradient-to-r from-indigo-50/50 to-blue-50/30 hover:from-indigo-100/70 hover:to-blue-100/50 hover:border-indigo-300 transition-all duration-200 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center space-x-3 sm:space-x-4">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-base sm:text-lg shadow-md shadow-indigo-200 shrink-0">
+                  📁
+                </div>
+                <div>
+                  <h2 class="text-xs sm:text-sm font-bold text-indigo-950 group-hover:text-indigo-600 transition-colors">1. Quaderni & Lettore PDF</h2>
+                  <p class="text-[11px] sm:text-xs text-indigo-900/60 mt-0.5">Apri l'applicazione per la gestione dei quaderni e lettore PDF.</p>
+                </div>
+              </div>
+              <span class="text-[11px] sm:text-xs font-bold text-indigo-600 group-hover:translate-x-1 transition-transform flex items-center gap-1 shrink-0">
+                Apri ↗
+              </span>
+            </div>
+          </a>
+
+          <!-- Link 2: Strumenti & Preferenze -->
+          <a href="https://quaderni-e-lettore-pdf.vercel.app/" target="_blank" rel="noopener noreferrer" 
+             class="group block p-3.5 sm:p-4 rounded-xl border border-amber-100 bg-gradient-to-r from-amber-50/50 to-orange-50/30 hover:from-amber-100/70 hover:to-orange-100/50 hover:border-amber-300 transition-all duration-200 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center space-x-3 sm:space-x-4">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-base sm:text-lg shadow-md shadow-amber-200 shrink-0">
+                  🛠️
+                </div>
+                <div>
+                  <h2 class="text-xs sm:text-sm font-bold text-amber-950 group-hover:text-amber-600 transition-colors">2. Strumenti & Preferenze</h2>
+                  <p class="text-[11px] sm:text-xs text-amber-900/60 mt-0.5">Accedi direttamente alla sezione strumenti dell'app.</p>
+                </div>
+              </div>
+              <span class="text-[11px] sm:text-xs font-bold text-amber-600 group-hover:translate-x-1 transition-transform flex items-center gap-1 shrink-0">
+                Apri ↗
+              </span>
+            </div>
+          </a>
+
+          <!-- Link 3: Workspace Principale -->
+          <a href="https://quaderni-e-lettore-pdf.vercel.app/" target="_blank" rel="noopener noreferrer" 
+             class="group block p-3.5 sm:p-4 rounded-xl border border-purple-100 bg-gradient-to-r from-purple-50/50 to-pink-50/30 hover:from-purple-100/70 hover:to-pink-100/50 hover:border-purple-300 transition-all duration-200 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center space-x-3 sm:space-x-4">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold text-base sm:text-lg shadow-md shadow-purple-200 shrink-0">
+                  ⚡
+                </div>
+                <div>
+                  <h2 class="text-xs sm:text-sm font-bold text-purple-950 group-hover:text-purple-600 transition-colors">3. Workspace Principale</h2>
+                  <p class="text-[11px] sm:text-xs text-purple-900/60 mt-0.5">Avvia l'ambiente di lavoro interattivo in un'altra scheda.</p>
+                </div>
+              </div>
+              <span class="text-[11px] sm:text-xs font-bold text-purple-600 group-hover:translate-x-1 transition-transform flex items-center gap-1 shrink-0">
+                Apri ↗
+              </span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Piè di pagina Foglio -->
+      <div class="border-t border-slate-100 pt-4 mt-6 sm:mt-8 flex justify-between items-center text-[11px] sm:text-xs text-slate-400 font-medium">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Documento pronto
+        </span>
+        <span>Pagina 1 di 1</span>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
