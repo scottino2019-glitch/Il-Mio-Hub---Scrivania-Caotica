@@ -779,7 +779,7 @@ const CreativeFontCard = () => {
       <nav className="top-dock">
         <a href="https://androidmain.netlify.app/" target="_blank" rel="noopener noreferrer" className="dock-item android" data-tooltip="Ambiente Android">🤖</a>
         <a href="https://scuola-virtuale.netlify.app/" target="_blank" rel="noopener noreferrer" className="dock-item school" data-tooltip="Scuola Virtuale">🎓</a>
-        <a href="https://libro-folle.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item eserciziario" data-tooltip="Libro Folle">✍</a>
+        <a href="pdf-home.html" target="_blank" rel="noopener noreferrer" className="dock-item eserciziario" data-tooltip="Pdf Home">✍</a>
         <a href="https://laboratorio-programmazione.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item windows" data-tooltip="Ambiente Windows">🪟</a>
    <a href="https://mela-os.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item apple" data-tooltip="IPad Scriba">🍎</a>
         <a href="https://photo-finder-kohl.vercel.app/" target="_blank" rel="noopener noreferrer" className="dock-item immagini" data-tooltip="Ricerca immagini">🖼</a>
