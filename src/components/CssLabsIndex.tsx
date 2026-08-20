@@ -8,15 +8,17 @@
 
 import React from 'react';
 import {
-  Coffee,
+  ArrowUpRight,
+  Book,
   Cat,
-  CodeXml,
-  Layout,
-  Flame,
-  Mountain,
-  Sparkles,
   ChevronRight,
-  ArrowUpRight
+  CodeXml,
+  Coffee,
+  Flame,
+  Heart,
+  Layout,
+  Mountain,
+  Sparkles
 } from 'lucide-react';
 
 interface LabLink {
@@ -24,84 +26,13 @@ interface LabLink {
   title: string;
   subtitle: string;
   url: string;
-  iconName: 'Coffee' | 'Cat' | 'CodeXml' | 'Layout' | 'Flame' | 'Mountain' | 'Sparkles';
+  iconName: string;
   isExternal: boolean;
   status: 'completato' | 'in_corso' | 'sperimentale';
 }
 
 const LABS_DATA: LabLink[] = [
-  {
-    id: '01',
-    title: 'Coffee Studio',
-    subtitle: 'Caffetteria virtuale con animazioni fluide e vapore realistico',
-    url: 'coffe-studio.html',
-    iconName: 'Coffee',
-    isExternal: false,
-    status: 'completato',
-  },
-  {
-    id: '02',
-    title: 'Gatto Studio',
-    subtitle: 'Gattino interattivo con tracciamento occhi e coda animata',
-    url: 'gatto-studio.html',
-    iconName: 'Cat',
-    isExternal: false,
-    status: 'completato',
-  },
-  {
-    id: '03',
-    title: 'CSS Black Studio',
-    subtitle: 'Elegante interfaccia scura con bagliori neon e accenti futuristici',
-    url: 'Css-Black-Studio.html',
-    iconName: 'CodeXml',
-    isExternal: false,
-    status: 'completato',
-  },
-  {
-    id: '04',
-    title: 'CSS Studio',
-    subtitle: 'Laboratorio interattivo di sperimentazione e test per fogli di stile',
-    url: 'css-studio.html',
-    iconName: 'Layout',
-    isExternal: false,
-    status: 'completato',
-  },
-  {
-    id: '05',
-    title: 'Dragon Studio',
-    subtitle: 'Drago animato sputafuoco con cicli di movimento in puro CSS',
-    url: 'dragon-studio.html',
-    iconName: 'Flame',
-    isExternal: false,
-    status: 'sperimentale',
-  },
-  {
-    id: '06',
-    title: 'Mountain Studio',
-    subtitle: 'Paesaggio montano con parallasse dinamico e ciclo giorno/notte',
-    url: 'montain-studio.html',
-    iconName: 'Mountain',
-    isExternal: false,
-    status: 'completato',
-  },
-  {
-    id: '07',
-    title: 'Pure Code Canvas',
-    subtitle: 'La galleria web centrale di visual art e pittura con puro codice',
-    url: 'https://pure-code-canvas-579414217719.europe-west2.run.app/',
-    iconName: 'Sparkles',
-    isExternal: true,
-    status: 'completato',
-  },
-    {
-    id: '08',
-    title: 'CSS Grid',
-    subtitle: 'Editor per sperimentare con griglie CSS Grid.',
-    url: 'https://css-grid-container-layout-studio.vercel.app/',
-    iconName: 'Layout',
-    isExternal: true,
-    status: 'sperimentale',
-  },
+${serializedLabsData}
 ];
 
 const colorThemes = {
@@ -111,8 +42,7 @@ const colorThemes = {
   amber: { primary: '#d97706', bg: 'bg-amber-50/50', badge: 'text-amber-600', border: 'border-amber-600/20' },
   violet: { primary: '#7c3aed', bg: 'bg-violet-50/50', badge: 'text-violet-600', border: 'border-violet-600/20' },
   sky: { primary: '#0284c7', bg: 'bg-sky-50/50', badge: 'text-sky-600', border: 'border-sky-600/20' },
-  red: { primary: '#8F0705', bg: 'bg-red-100/50', badge: 'text-red-700', border: 'border-red-700/20' },
-  blue: { primary: '#0916E4', bg: 'bg-blue-100/50', badge: 'text-blue-700', border: 'border-blue-700/20' },
+  slate: { primary: '#475569', bg: 'bg-slate-100/50', badge: 'text-slate-700', border: 'border-slate-700/20' },
 };
 
 const organicBlobs = [
@@ -123,34 +53,34 @@ const organicBlobs = [
   '70% 30% 30% 70% / 60% 40% 60% 40%',
   '20% 80% 20% 80% / 20% 80% 20% 80%',
   '9999px',
-  '70% 30% 30% 70% / 60% 40% 60% 40%',
 ];
 
 const bentoColors = [
   { shadow: '#4f46e5', accent: 'text-indigo-600', bg: 'bg-white', isDark: false },
   { shadow: '#fbbf24', accent: 'text-amber-500', bg: 'bg-white', isDark: false },
-  { shadow: '#fbbf24', accent: 'text-amber-500', bg: 'bg-white', isDark: false },
+  { shadow: '#f43f5e', accent: 'text-rose-500', bg: 'bg-[#1e293b]', isDark: true },
   { shadow: '#10b981', accent: 'text-emerald-500', bg: 'bg-white', isDark: false },
   { shadow: '#8b5cf6', accent: 'text-violet-500', bg: 'bg-white', isDark: false },
   { shadow: '#0ea5e9', accent: 'text-sky-500', bg: 'bg-white', isDark: false },
   { shadow: '#1e293b', accent: 'text-indigo-600', bg: 'bg-[#f1f5f9]', isDark: false },
-  { shadow: '#8b5cf6', accent: 'text-violet-500', bg: 'bg-white', isDark: false },
-  
 ];
 
-const iconsMap = {
-  Coffee,
+const iconsMap: Record<string, React.ComponentType<any>> = {
+  ArrowUpRight,
+  Book,
   Cat,
+  ChevronRight,
   CodeXml,
-  Layout,
+  Coffee,
   Flame,
+  Heart,
+  Layout,
   Mountain,
-  Sparkles,
-   Layout,
+  Sparkles
 };
 
 export default function CssLabsIndex() {
-  const theme = colorThemes['violet'];
+  const theme = colorThemes['indigo'];
   const isBento = true;
 
   // Border radius shape
@@ -290,9 +220,15 @@ export default function CssLabsIndex() {
                   ) : (
                     <div className="flex flex-col h-full justify-between">
                       <div className="flex justify-between items-start">
-                        <span className="text-3xl sm:text-4xl group-hover:scale-110 transition-transform duration-300">
-                          {index === 0 ? '☕' : index === 1 ? '🐱' : index === 2 ? '⛰️' : index === 4 ? '🐉' : '⛰️'}
-                        </span>
+                        <div 
+                          className="flex items-center justify-center w-10 h-10 text-white border-2 border-slate-900 transition-transform group-hover:rotate-6 shadow-[2px_2px_0px_#1e293b]"
+                          style={{
+                            borderRadius: borderRadius,
+                            backgroundColor: bentoColor.shadow,
+                          }}
+                        >
+                          <IconComponent className="w-5 h-5 stroke-[2.5]" />
+                        </div>
                         <div className="w-7 h-7 rounded-full border border-slate-300 group-hover:border-slate-900 flex items-center justify-center text-slate-400 group-hover:text-slate-900 transition-colors">
                           <ChevronRight className="w-4 h-4" />
                         </div>
@@ -404,5 +340,7 @@ export default function CssLabsIndex() {
     </div>
   );
 }
+
+
 
 
