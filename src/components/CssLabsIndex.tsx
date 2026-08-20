@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Componente Indice Multimediale CSS Labs (Artistico Neo-Brutalista)
- * Integrabile con React, Tailwind CSS e Lucide Icons (Nessuna libreria esterna per le animazioni!).
+ * Integrabile con React, Tailwind CSS e Lucide Icons.
  */
 
 import React from 'react';
@@ -32,7 +32,94 @@ interface LabLink {
 }
 
 const LABS_DATA: LabLink[] = [
-${serializedLabsData}
+  {
+    id: '01',
+    title: 'Coffee Studio',
+    url: 'coffe-studio.html',
+    iconName: 'Coffee',
+    isExternal: false,
+    status: 'completato',
+  },
+  {
+    id: '02',
+    title: 'Gatto Studio',
+    url: 'gatto-studio.html',
+    iconName: 'Cat',
+    isExternal: false,
+    status: 'completato',
+  },
+  {
+    id: '03',
+    title: 'CSS Black Studio',
+    url: 'Css-Black-Studio.html',
+    iconName: 'CodeXml',
+    isExternal: false,
+    status: 'completato',
+  },
+  {
+    id: '04',
+    title: 'CSS Studio',
+    url: 'css-studio.html',
+    iconName: 'Layout',
+    isExternal: false,
+    status: 'completato',
+  },
+  {
+    id: '05',
+    title: 'Dragon Studio',
+    url: 'dragon-studio.html',
+    iconName: 'Flame',
+    isExternal: false,
+    status: 'sperimentale',
+  },
+  {
+    id: '06',
+    title: 'Mountain Studio',
+    url: 'montain-studio.html',
+    iconName: 'Mountain',
+    isExternal: false,
+    status: 'completato',
+  },
+  {
+    id: '07',
+    title: 'Pure Code Canvas',
+    url: 'https://pure-code-canvas-579414217719.europe-west2.run.app/',
+    iconName: 'Sparkles',
+    isExternal: true,
+    status: 'completato',
+  },
+  {
+    id: '08',
+    title: 'CSS Grid',
+    url: 'https://css-grid-container-layout-studio.vercel.app/',
+    iconName: 'Layout',
+    isExternal: true,
+    status: 'sperimentale',
+  },
+  {
+    id: '09',
+    title: 'CSS Clip-Path Studio',
+    url: 'https://studio-clip-path.vercel.app/',
+    iconName: 'Book',
+    isExternal: true,
+    status: 'sperimentale',
+  },
+  {
+    id: '10',
+    title: 'CSS CLIP PATH',
+   url: 'https://clip-path-studio-two.vercel.app/',
+    iconName: 'Heart',
+    isExternal: true,
+    status: 'completato',
+  },
+  {
+    id: '11',
+    title: 'Grid Coordinate Canvas',
+    url: 'https://grid-coordinate-canvas.vercel.app/',
+    iconName: 'ArrowUpRight',
+    isExternal: true,
+    status: 'in_corso',
+  },
 ];
 
 const colorThemes = {
@@ -63,6 +150,10 @@ const bentoColors = [
   { shadow: '#8b5cf6', accent: 'text-violet-500', bg: 'bg-white', isDark: false },
   { shadow: '#0ea5e9', accent: 'text-sky-500', bg: 'bg-white', isDark: false },
   { shadow: '#1e293b', accent: 'text-indigo-600', bg: 'bg-[#f1f5f9]', isDark: false },
+  { shadow: '#e11d48', accent: 'text-rose-600', bg: 'bg-white', isDark: false },
+  { shadow: '#059669', accent: 'text-emerald-600', bg: 'bg-white', isDark: false },
+  { shadow: '#d97706', accent: 'text-amber-600', bg: 'bg-white', isDark: false },
+  { shadow: '#7c3aed', accent: 'text-violet-600', bg: 'bg-white', isDark: false },
 ];
 
 const iconsMap: Record<string, React.ComponentType<any>> = {
@@ -83,20 +174,12 @@ export default function CssLabsIndex() {
   const theme = colorThemes['indigo'];
   const isBento = true;
 
-  // Border radius shape
   const getBorderRadius = (index: number) => {
-    const shape = 'organic-blob';
-    if (shape === 'organic-blob') return organicBlobs[index % organicBlobs.length];
-    if (shape === 'pill-blob') return '9999px';
-    if (shape === 'rounded-rect') return '16px';
-    return '0px';
+    return organicBlobs[index % organicBlobs.length];
   };
 
-  // Shadow calculation
   const getShadowStyle = (isHovered: boolean, itemIndex: number) => {
-    const offset = '10px';
-    if (offset === 'none') return 'none';
-    const size = { '6px': isHovered ? 10 : 6, '10px': isHovered ? 14 : 10, '14px': isHovered ? 18 : 14 }[offset] || 10;
+    const size = isHovered ? 14 : 10;
     const baseColor = isBento ? bentoColors[itemIndex % bentoColors.length].shadow : theme.primary;
     const shadowColor = isHovered ? '#1e293b' : baseColor;
     return `${size}px ${size}px 0px ${shadowColor}`;
@@ -111,7 +194,11 @@ export default function CssLabsIndex() {
       case 4: return 'md:col-span-3 h-[180px]';
       case 5: return 'md:col-span-4 h-[180px]';
       case 6: return 'md:col-span-7 h-[180px]';
-      default: return 'md:col-span-4';
+      case 7: return 'md:col-span-5 h-[180px]';
+      case 8: return 'md:col-span-4 h-[180px]';
+      case 9: return 'md:col-span-3 h-[180px]';
+      case 10: return 'md:col-span-12 h-[180px]';
+      default: return 'md:col-span-4 h-[180px]';
     }
   };
 
@@ -121,15 +208,13 @@ export default function CssLabsIndex() {
         <h1 className="font-sans font-black tracking-wider text-slate-900 uppercase text-3xl sm:text-4xl mb-3 inline-block px-4 py-2 border-3 border-slate-900 shadow-[4px_4px_0px_#1e293b] rotate-[-1deg] bg-white rounded-md">
           Indice Laboratori
         </h1>
-        {true && (
-          <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest mt-2">
-            Sperimentazioni artistiche realizzate in puro CSS
-          </p>
-        )}
+        <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest mt-2">
+          Sperimentazioni artistiche realizzate in puro CSS
+        </p>
       </div>
 
       {isBento ? (
-        <div className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {LABS_DATA.map((lab, index) => {
             const IconComponent = iconsMap[lab.iconName] || Sparkles;
             const borderRadius = getBorderRadius(index);
@@ -145,19 +230,17 @@ export default function CssLabsIndex() {
                 key={lab.id}
                 className={`${colSpan} relative group`}
               >
-                {true && (
-                  <div 
-                    className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full border-2 border-slate-900 font-black text-xs flex items-center justify-center shadow-[2px_2px_0px_#000] z-20"
-                    style={{ 
-                      backgroundColor: bentoColor.shadow,
-                      color: isDarkCard ? '#ffffff' : '#1e293b'
-                    }}
-                  >
-                    {lab.id}
-                  </div>
-                )}
+                <div 
+                  className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full border-2 border-slate-900 font-black text-xs flex items-center justify-center shadow-[2px_2px_0px_#000] z-20"
+                  style={{ 
+                    backgroundColor: bentoColor.shadow,
+                    color: isDarkCard ? '#ffffff' : '#1e293b'
+                  }}
+                >
+                  {lab.id}
+                </div>
 
-                {index === 6 && (
+                {lab.isExternal && (
                   <div className="absolute -top-2.5 left-6 px-3 py-0.5 bg-slate-900 text-white text-[9px] font-black uppercase tracking-wider border-2 border-slate-900 z-20">
                     Sito Esterno
                   </div>
@@ -187,7 +270,7 @@ export default function CssLabsIndex() {
                       <h3 className="font-sans font-black text-2xl sm:text-3xl uppercase tracking-tighter leading-none mt-2">
                         {lab.title}
                       </h3>
-                      {false && lab.subtitle && (
+                      {lab.subtitle && (
                         <p className="text-xs font-bold uppercase tracking-wider mt-2 px-3 py-1 bg-emerald-50 rounded-lg text-emerald-600 border border-emerald-100">
                           {lab.subtitle}
                         </p>
@@ -198,7 +281,7 @@ export default function CssLabsIndex() {
                         <div className="w-2.5 h-2.5 bg-slate-900 rounded-full opacity-20" />
                       </div>
                     </div>
-                  ) : index === 6 ? (
+                  ) : index === 6 || index === 10 ? (
                     <div className="flex items-center justify-between h-full px-2 sm:px-6">
                       <div className="flex items-center gap-4 sm:gap-6">
                         <span className="text-4xl sm:text-5xl group-hover:animate-bounce">⚡</span>
@@ -206,7 +289,7 @@ export default function CssLabsIndex() {
                           <h3 className="font-sans font-black text-lg sm:text-2xl uppercase tracking-tight leading-tight">
                             {lab.title}
                           </h3>
-                          {false && lab.subtitle && (
+                          {lab.subtitle && (
                             <p className="text-xs font-bold text-indigo-600 uppercase italic opacity-80 truncate max-w-[280px] sm:max-w-md">
                               {lab.subtitle}
                             </p>
@@ -239,7 +322,7 @@ export default function CssLabsIndex() {
                             {lab.title}
                           </h3>
                         </div>
-                        {false && lab.subtitle && (
+                        {lab.subtitle && (
                           <p className={`text-[10px] font-bold uppercase mt-1 tracking-wider ${isDarkCard ? 'text-rose-300' : 'text-slate-400'}`}>
                             {lab.subtitle.split(' con ')[0]}
                           </p>
@@ -284,19 +367,10 @@ export default function CssLabsIndex() {
                   }}
                 >
                   <div className="flex items-center gap-4 sm:gap-6 p-5 sm:p-6">
-                    {/* Badge Number */}
-                    {true && (
-                      <div className={`hidden sm:flex items-center justify-center font-black text-xs sm:text-sm w-10 h-10 border rounded-full shrink-0 font-mono transition-colors group-hover:bg-slate-50 ${theme.border} ${theme.badge}`}>
-                        {lab.id}
-                      </div>
-                    )}
+                    <div className={`hidden sm:flex items-center justify-center font-black text-xs sm:text-sm w-10 h-10 border rounded-full shrink-0 font-mono transition-colors group-hover:bg-slate-50 ${theme.border} ${theme.badge}`}>
+                      {lab.id}
+                    </div>
 
-                    {/* Circular Dot */}
-                    {false && (
-                      <div className="hidden sm:block w-3.5 h-3.5 rounded-full border-2 border-slate-900 shrink-0" style={{ backgroundColor: theme.primary }} />
-                    )}
-
-                    {/* Icon Frame */}
                     <div
                       className="flex items-center justify-center w-12 h-12 shrink-0 text-white border-3 border-slate-900 transition-transform group-hover:rotate-6"
                       style={{
@@ -307,7 +381,6 @@ export default function CssLabsIndex() {
                       <IconComponent className="w-6 h-6 stroke-[2.5]" />
                     </div>
 
-                    {/* Title & Subtitle */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-sans font-black tracking-wide text-base sm:text-lg uppercase leading-tight group-hover:text-slate-950">
@@ -319,14 +392,13 @@ export default function CssLabsIndex() {
                           </span>
                         )}
                       </div>
-                      {false && lab.subtitle && (
+                      {lab.subtitle && (
                         <p className="text-xs sm:text-sm font-semibold opacity-70 mt-1 leading-normal text-slate-500 group-hover:text-slate-700">
                           {lab.subtitle}
                         </p>
                       )}
                     </div>
 
-                    {/* Action Link */}
                     <div className="flex items-center justify-center w-8 h-8 rounded-full border-2 border-slate-300 group-hover:border-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-all">
                       {lab.isExternal ? <ArrowUpRight className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                     </div>
@@ -340,7 +412,3 @@ export default function CssLabsIndex() {
     </div>
   );
 }
-
-
-
-
