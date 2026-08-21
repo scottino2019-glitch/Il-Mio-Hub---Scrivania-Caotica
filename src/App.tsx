@@ -1777,12 +1777,12 @@ const CreativeFontCard = () => {
                 
                 <li>
                   <a 
-                    href="https://stickers-creator.vercel.app/" 
+                    href="https://carta-lucida.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(860, 'sine', 0.05)}
                   >
-                    Stickers Creator
+                    Carta Lucida
                   </a>
                 </li>
                 <li>
@@ -1807,7 +1807,7 @@ const CreativeFontCard = () => {
                 </li>
   <li>
                   <a 
-                    href="https://sticker-craft-pro-studio-16148277139.europe-west2.run.app/" 
+                    href="https://tavolo-luminoso.netlify.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(900, 'sine', 0.05)}
