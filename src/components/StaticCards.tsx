@@ -907,12 +907,12 @@ export const ArtistPaletteCard: React.FC<StaticCardsProps> = ({ playSoundBlip })
          
           <li>
             <a 
-              href="https://stickers-creator.vercel.app/" 
+              https://carta-lucida.vercel.app/" 
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={() => playSoundBlip(860, 'sine', 0.05)}
             >
-              Stickers Creator
+              Carta Lucida
             </a>
           </li>
           <li>
