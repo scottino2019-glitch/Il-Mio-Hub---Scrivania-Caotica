@@ -891,7 +891,7 @@ export const ArtistPaletteCard: React.FC<StaticCardsProps> = ({ playSoundBlip })
   return (
     <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
       <div className="app-group card-tavolozza">
-        <h2 className="group-title">🎨 Foto Design</h2>
+        <h2 className="group-title">🎨 Disegno</h2>
         <ul className="app-list">
           <li>
             <a 
