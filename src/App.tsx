@@ -1812,7 +1812,7 @@ const CreativeFontCard = () => {
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(900, 'sine', 0.05)}
                   >
-                    Stickers-Craft
+                   Tavolo Luminoso
                   </a>
                 </li>
 
