@@ -1818,7 +1818,7 @@ const CreativeFontCard = () => {
 
                  <li>
                   <a 
-                    href="https://github.com/scottino2019-glitch/Disegno-vettoriale" 
+                    href="https://disegno-vettoriale.vercel.app/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => playSoundBlip(900, 'sine', 0.05)}
@@ -1834,6 +1834,16 @@ const CreativeFontCard = () => {
                     onClick={() => playSoundBlip(900, 'sine', 0.05)}
                   >
                    Vector Studio
+                  </a>
+                </li>
+                 <li>
+                  <a 
+                    href="https://side-sketch.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSoundBlip(900, 'sine', 0.05)}
+                  >
+                   Side scketch
                   </a>
                 </li>
               </ul>
