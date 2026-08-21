@@ -1256,6 +1256,8 @@
 .card-tavolozza li:nth-child(4) a::before { background-color: #10b981; } /* Verde smeraldo */
 .card-tavolozza li:nth-child(5) a::before { background-color: #a855f7; } /* Viola acceso */
 .card-tavolozza li:nth-child(6) a::before { background-color: #FF00FF; } /* Magenta acceso */
+.card-tavolozza li:nth-child(5) a::before { background-color: #E31A98; } /* Rosa acceso */
+.card-tavolozza li:nth-child(6) a::before { background-color: #EB5028; } /*Arrancio acceso */
 
 /* Interazione: il testo si scurisce e la goccia "si muove" */
 .card-tavolozza a:hover {
