@@ -1761,7 +1761,7 @@ const CreativeFontCard = () => {
  {/* EXTRA CARD 7.5: ARTIST PALETTE WITH 6 LINKS (PENULTIMA CARD) */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '-1.5deg' } as any}>
             <div className="app-group card-tavolozza">
-              <h2 className="group-title">🎨 Foto Design</h2>
+              <h2 className="group-title">🎨 Disegno </h2>
               <ul className="app-list">
                 <li>
                   <a 
