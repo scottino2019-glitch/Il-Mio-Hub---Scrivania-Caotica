@@ -394,20 +394,7 @@ const CreativeFontCard = () => {
       url: "https://generatore-di-testo-ascii-16148277139.europe-west2.run.app/",
       bgPreview: "💟"
     },
-      {
-      title: "Sketch",
-      desc: "Tratti",
-      tag: "Disegno",
-      url: "https://side-sketch.vercel.app/",
-      bgPreview: "🖍"
-    },
-    {
-      title: "Atelier",
-      desc: "Tratti",
-      tag: "Disegno",
-      url: "https://atelier-digitale-364179054019.europe-west2.run.app/",
-      bgPreview: "✏️"
-    },
+     
     {
       title: " Json",
       desc: "Widget",
