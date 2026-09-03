@@ -1553,7 +1553,9 @@ const CreativeFontCard = () => {
           
            {/* Book Card*/}
         
-  <Book Card />
+ <div className="h-fit">
+  <BookCard />
+</div>
 
           
          
