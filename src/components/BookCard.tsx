@@ -108,7 +108,7 @@ export default function HardcoverBookCard() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto py-6 px-2 flex flex-col items-center">
+   <div className="w-full max-w-xl mx-auto py-6 px-2 flex flex-col items-center h-min">
       {/* Book Container with Realistic Hardcover & Deckle Page Edges */}
       <div className="relative w-full">
         {/* Silk Ribbon Bookmark hanging from the book top down to the bottom */}
@@ -155,7 +155,7 @@ export default function HardcoverBookCard() {
           </div>
 
           {/* Book Inner Page Body */}
-          <div className="flex-1 p-5 sm:p-7 flex flex-col justify-between relative bg-[#fffdfa]">
+          <div className="flex-none w-full p-5 sm:p-7 flex flex-col justify-between relative bg-[#fffdfa]">
             {/* Page Header with Chapter number & Bookmark toggle */}
             <div className="flex items-center justify-between pb-3 border-b-2 border-black/80">
               <div className="flex items-center gap-2">
