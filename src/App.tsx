@@ -1553,9 +1553,7 @@ const CreativeFontCard = () => {
           
            {/* Book Card*/}
         
- <div className="h-fit">
-  <BookCard />
-</div>
+
 
           
          
@@ -1682,6 +1680,10 @@ const CreativeFontCard = () => {
             </div>
           </div>
 
+ <div className="h-fit">
+  <BookCard />
+</div>
+          
           {/* CARD EXTRA: JSON EDITOR */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
             <div className="w-full bg-white border-4 border-stone-800 rounded-2xl shadow-[6px_6px_0_#292524] p-5 select-none text-stone-900 relative">
