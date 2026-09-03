@@ -1551,8 +1551,7 @@ const CreativeFontCard = () => {
   />
 </div>
           
-           {/* Book Card*/}
-        
+     
 
 
           
@@ -1680,9 +1679,7 @@ const CreativeFontCard = () => {
             </div>
           </div>
 
- <div className="h-fit">
-  <BookCard />
-</div>
+
           
           {/* CARD EXTRA: JSON EDITOR */}
           <div className="desk-card hover-rot-1" style={{ '--hover-rot': '1deg' } as any}>
@@ -1858,6 +1855,11 @@ const CreativeFontCard = () => {
 <AsianCyrillicWritingAppsCard playSoundBlip={playSoundBlip} />
 {/* RotoScopioAppsCard */}
 <RotoScopioAppsCard  playSoundBlip={playSoundBlip} />
+
+                {/* Book Card*/}
+         <div className="h-fit">
+  <BookCard />
+</div>
                  
            {/* EXTRA CARD 3: RETRO SWISS CUCKOO CLOCK */}
           <div className="desk-card bg-[#5c4533] p-5 rounded-[2rem] border-4 border-[#3d2a21] shadow-2xl relative w-full" style={{ '--hover-rot': '-1deg' } as any}>
