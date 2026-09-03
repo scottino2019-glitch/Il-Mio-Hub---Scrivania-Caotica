@@ -1522,8 +1522,7 @@ const CreativeFontCard = () => {
               )}
             </div>
           </div>
-          {/* Book Card*/}
-          <BookCard />
+        
  {/* CARD G: MONITOR IFRAME FOR SNIPPET CREATOR */}
           <SnippetCreatorCard />
         
@@ -1552,7 +1551,10 @@ const CreativeFontCard = () => {
   />
 </div>
           
-         
+           {/* Book Card*/}
+        <div className="h-fit">
+  <Book Card />
+</div>
           
          
 
