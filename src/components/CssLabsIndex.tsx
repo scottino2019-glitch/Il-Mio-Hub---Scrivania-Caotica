@@ -131,6 +131,15 @@ const LABS_DATA: LabLink[] = [
     iconName: 'Compass',
     isExternal: true,
     status: 'in_corso',
+  },
+   {
+    id: '12',
+    title: 'Css Art Studio',
+    subtitle: '',
+    url: 'https://css-art-studio.netlify.app/',
+    iconName: 'Cat',
+    isExternal: true,
+    status: 'in_corso',
   }
 ];
 
