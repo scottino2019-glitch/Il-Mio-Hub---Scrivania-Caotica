@@ -95,6 +95,18 @@ const CHAPTERS: BookChapter[] = [
     appName: 'Foto Libro',
     appUrl: 'https://fotolibro2000.netlify.app/',
   },
+   {
+    id: 7,
+    number: 'App VII',
+    title: 'Le storie',
+    subtitle: 'Le avventure accadono a chi le sa raccontare',
+    excerpt:
+      '«"A furia di raccontare le sue storie, un uomo diventa quelle storie. Esse continuano a vivere dopo di lui, e così egli diventa immortale."»',
+    pageNumber: 264,
+    note: 'Riferimento: architettura dei dati e persistenza dell’informazione nell’era moderna.',
+    appName: 'Libro Storie',
+    appUrl: 'https://libro-storie-creator.netlify.app/',
+  },
 ];
 
 export default function HardcoverBookCard() {
