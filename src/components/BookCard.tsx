@@ -101,9 +101,9 @@ const CHAPTERS: BookChapter[] = [
     title: 'Le storie',
     subtitle: 'Le avventure accadono a chi le sa raccontare',
     excerpt:
-      '«"A furia di raccontare le sue storie, un uomo diventa quelle storie. Esse continuano a vivere dopo di lui, e così egli diventa immortale."»',
+      '«"Il mondo possibile della narrativa è l’unico universo in cui noi possiamo essere assolutamente sicuri di qualcosa, e che ci fornisce una idea molto forte di Verità."»',
     pageNumber: 264,
-    note: 'Riferimento: architettura dei dati e persistenza dell’informazione nell’era moderna.',
+    note: 'A furia di raccontare le sue storie, un uomo diventa quelle storie. Esse continuano a vivere dopo di lui, e così egli diventa immortale.',
     appName: 'Libro Storie',
     appUrl: 'https://libro-storie-creator.netlify.app/',
   },
