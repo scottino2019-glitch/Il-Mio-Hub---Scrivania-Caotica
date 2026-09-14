@@ -407,14 +407,22 @@ const CreativeFontCard = () => {
       url: "https://stickers-creator.vercel.app/",
       bgPreview: "🏖"
     },
-     
-    {
+     {
       title: " Json",
       desc: "Widget",
       tag: "file",
       url: "https://lettore-json-universale.vercel.app/",
       bgPreview: "🖥️"
+    },
+      {
+      title: " Emoji",
+      desc: "Stickers3",
+      tag: "immagini",
+      url: "https://wemoji-studio-maker.netlify.app/",
+      bgPreview: "🤪"
     }
+
+    
 
 
 
