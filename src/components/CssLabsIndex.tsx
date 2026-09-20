@@ -1,25 +1,18 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- * 
- * Componente Indice Multimediale CSS Labs (Artistico Neo-Brutalista)
- * Integrabile con React, Tailwind CSS e Lucide Icons.
- */
-
 import React from 'react';
 import {
   ArrowUpRight,
+  Book,
   Cat,
   ChevronRight,
   CodeXml,
   Coffee,
-  Compass,
   Flame,
   Heart,
   Image,
   Layout,
   Mountain,
-  Sparkles
+  Sparkles,
+  Terminal
 } from 'lucide-react';
 
 interface LabLink {
@@ -36,7 +29,7 @@ const LABS_DATA: LabLink[] = [
   {
     id: '01',
     title: 'Coffee Studio',
-    subtitle: 'Caffetteria virtuale con animazioni fluide e vapore realistico',
+    subtitle: 'Caffetteria virtuale ',
     url: 'coffe-studio.html',
     iconName: 'Coffee',
     isExternal: false,
@@ -45,34 +38,34 @@ const LABS_DATA: LabLink[] = [
   {
     id: '02',
     title: 'Gatto Studio',
-    subtitle: 'Gattino interattivo con tracciamento occhi e coda animata',
+    subtitle: 'Gattino ',
     url: 'gatto-studio.html',
     iconName: 'Cat',
     isExternal: false,
-    status: 'completato',
+    status: 'in_corso',
   },
   {
     id: '03',
     title: 'CSS Black Studio',
-    subtitle: 'Elegante interfaccia scura con bagliori neon e accenti futuristici',
-    url: 'Css-Black-Studio.html',
+    subtitle: 'Studio vuoto',
+    url: 'CSS-Black-Studio.html',
     iconName: 'CodeXml',
     isExternal: false,
-    status: 'completato',
+    status: 'in_corso',
   },
   {
     id: '04',
     title: 'CSS Studio',
-    subtitle: 'Laboratorio interattivo di sperimentazione e test per fogli di stile',
+    subtitle: 'Laboratorio',
     url: 'css-studio.html',
     iconName: 'Layout',
     isExternal: false,
-    status: 'completato',
+    status: 'in_corso',
   },
   {
     id: '05',
     title: 'Dragon Studio',
-    subtitle: 'Drago animato sputafuoco con cicli di movimento in puro CSS',
+    subtitle: 'Drago',
     url: 'dragon-studio.html',
     iconName: 'Flame',
     isExternal: false,
@@ -80,64 +73,73 @@ const LABS_DATA: LabLink[] = [
   },
   {
     id: '06',
-    title: 'Mountain Studio',
-    subtitle: 'Paesaggio montano con parallasse dinamico e ciclo giorno/notte',
-    url: 'montain-studio.html',
-    iconName: 'Mountain',
-    isExternal: false,
-    status: 'completato',
+    title: 'Clip Path',
+    subtitle: 'icone',
+    url: 'https://clip-path-studio-two.vercel.app/',
+    iconName: 'Sparkles',
+    isExternal: true,
+    status: 'in_corso',
   },
   {
     id: '07',
-    title: 'Pure Code Canvas',
-    subtitle: 'La galleria web centrale di visual art e pittura con puro codice',
-    url: 'https://pure-code-canvas-579414217719.europe-west2.run.app/',
-    iconName: 'Sparkles',
-    isExternal: true,
-    status: 'completato',
+    title: 'Mountain studio',
+    subtitle: 'Montagne',
+    url: 'montain-studio.html',
+    iconName: 'Mountain',
+    isExternal: false,
+    status: 'in_corso',
   },
   {
     id: '08',
-    title: 'CSS Grid',
-    subtitle: '',
-    url: 'https://css-grid-container-layout-studio.vercel.app/',
-    iconName: 'Layout',
+    title: 'Pure Code Canvas',
+    subtitle: 'studio creativo',
+    url: 'https://pure-code-canvas-579414217719.europe-west2.run.app/',
+    iconName: 'Terminal',
     isExternal: true,
     status: 'in_corso',
   },
   {
     id: '09',
-    title: 'CSS Clip-Path Studio',
+    title: 'CSS GRID',
+    subtitle: '',
+    url: 'https://css-grid-container-layout-studio.vercel.app/',
+    iconName: 'Book',
+    isExternal: true,
+    status: 'completato',
+  },
+  {
+    id: '10',
+    title: 'STUDIO CLIP PATH',
     subtitle: '',
     url: 'https://studio-clip-path.vercel.app/',
+    iconName: 'Cat',
+    isExternal: true,
+    status: 'completato',
+  },
+  {
+    id: '11',
+    title: 'Css Art Studio',
+    subtitle: 'chibi',
+    url: 'https://css-art-studio.netlify.app/',
     iconName: 'Image',
     isExternal: true,
     status: 'in_corso',
   },
   {
-    id: '10',
-    title: 'CSS CLIP PATH',
-    subtitle: '',
-    url: 'https://clip-path-studio-two.vercel.app/',
-    iconName: 'Heart',
+    id: '12',
+    title: 'Css Character Studio',
+    subtitle: 'avatar',
+    url: 'https://css-character-studio-kappa.vercel.app/',
+    iconName: 'Cat',
     isExternal: true,
     status: 'in_corso',
   },
   {
-    id: '11',
-    title: 'Grid Coordinate Canvas',
-    subtitle: '',
-    url: 'https://grid-coordinate-canvas.vercel.app/',
-    iconName: 'Compass',
-    isExternal: true,
-    status: 'in_corso',
-  },
-   {
-    id: '12',
-    title: 'Css Art Studio',
-    subtitle: '',
-    url: 'https://css-art-studio.netlify.app/',
-    iconName: 'Cat',
+    id: '13',
+    title: 'Css pure birds studio',
+    subtitle: 'uccellini',
+    url: 'https://css-pure-birds-studio-omega.vercel.app/',
+    iconName: 'Heart',
     isExternal: true,
     status: 'in_corso',
   }
@@ -175,17 +177,18 @@ const bentoColors = [
 
 const iconsMap: Record<string, React.ComponentType<any>> = {
   ArrowUpRight,
+  Book,
   Cat,
   ChevronRight,
   CodeXml,
   Coffee,
-  Compass,
   Flame,
   Heart,
   Image,
   Layout,
   Mountain,
-  Sparkles
+  Sparkles,
+  Terminal
 };
 
 export default function CssLabsIndex() {
@@ -290,7 +293,7 @@ export default function CssLabsIndex() {
                       <h3 className="font-sans font-black text-2xl sm:text-3xl uppercase tracking-tighter leading-none mt-2">
                         {lab.title}
                       </h3>
-                      {false && lab.subtitle && (
+                      {true && lab.subtitle && (
                         <p className="text-xs font-bold uppercase tracking-wider mt-2 px-3 py-1 bg-emerald-50 rounded-lg text-emerald-600 border border-emerald-100">
                           {lab.subtitle}
                         </p>
@@ -328,7 +331,7 @@ export default function CssLabsIndex() {
                             </span>
                           )}
                         </div>
-                        {false && lab.subtitle && (
+                        {true && lab.subtitle && (
                           <p className={`text-[10px] font-bold uppercase mt-1 tracking-wider ${isDarkCard ? 'text-rose-300' : 'text-slate-400'}`}>
                             {lab.subtitle}
                           </p>
@@ -408,7 +411,7 @@ export default function CssLabsIndex() {
                           </span>
                         )}
                       </div>
-                      {false && lab.subtitle && (
+                      {true && lab.subtitle && (
                         <p className="text-xs sm:text-sm font-semibold opacity-70 mt-1 leading-normal text-slate-500 group-hover:text-slate-700">
                           {lab.subtitle}
                         </p>
