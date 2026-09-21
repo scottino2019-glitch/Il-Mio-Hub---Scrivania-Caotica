@@ -142,6 +142,15 @@ const LABS_DATA: LabLink[] = [
     iconName: 'Heart',
     isExternal: true,
     status: 'in_corso',
+  },
+{
+    id: '14',
+    title: 'Css study',
+    subtitle: 'studio',
+    url: 'https://css-study-ten.vercel.app/',
+    iconName: 'Terminal',
+    isExternal: true,
+    status: 'in_corso',
   }
 ];
 
