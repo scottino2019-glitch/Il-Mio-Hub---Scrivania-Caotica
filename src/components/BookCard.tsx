@@ -107,6 +107,20 @@ const CHAPTERS: BookChapter[] = [
     appName: 'Libro Storie',
     appUrl: 'https://libro-storie-creator.netlify.app/',
   },
+{
+    id: 8,
+    number: 'App VIII',
+    title: 'Le storie',
+    subtitle: 'Le avventure accadono a chi le sa raccontare',
+    excerpt:
+      '«"Non leggiamo per ritirarci dalla vita, ma per non lasciarcela sfuggire."»',
+    pageNumber: 264,
+    note: 'la lettura non è un modo per fuggire dalla realtà o isolarsi dal mondo, ma al contrario, è lo strumento che ci permette di comprendere la vita più a fondo e viverla appieno.',
+    appName: 'Storie Cinese',
+    appUrl: 'https://storie-cinesi.netlify.app/',
+  },
+
+
 ];
 
 export default function HardcoverBookCard() {
