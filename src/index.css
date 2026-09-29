@@ -163,6 +163,11 @@
   border-color: #298B9B;
 }
 
+.dock-item.BlogCraft:hover {
+  box-shadow: 0 10px 20px rgba(6, 182, 212, 0.45);
+  border-color: #DF80AE;
+}
+
 
 
 /* Tooltip a comparsa */
