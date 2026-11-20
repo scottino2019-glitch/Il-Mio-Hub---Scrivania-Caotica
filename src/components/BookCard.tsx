@@ -31,7 +31,7 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«Non v’è bellezza senza rigore matematico, né arte senza il coraggio di rompere il rettangolo comune. Ogni curva racchiude un pensiero, ogni spigolo vivo traccia un confine tra l’inerzia e la creazione.»',
     pageNumber: 42,
-    note: 'Nota a margine: la forma non segue la funzione, la forma definisce l’esperienza.',
+    note: 'Sfoglia i tuoi libri illustrati, leggili importali da file JSON esterni in un click.',
     appName: 'LibriGen',
     appUrl: 'https://libro-gen.vercel.app/',
   },
@@ -43,7 +43,7 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«Nel silenzio della pagina bianca, il nero più profondo risalta non per assenza, ma per autorità. Accostato al giallo vivo dell’ambra, il testo cessa di essere semplice scrittura e diviene scultura tipografica.»',
     pageNumber: 87,
-    note: 'Nota: verificare la saturazione ottica su supporti editoriali ad alta grammatura.',
+    note: 'Crea e Disegna: trascina ed organizza testi artistici e sfondi personali, poi esporta in un libro PDF',
     appName: 'StoryCraft',
     appUrl: 'https://libro-illustrato.vercel.app/',
   },
@@ -55,7 +55,7 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«Un libro non è soltanto un contenitore di parole: è un edificio portatile, una cassaforte di idee rilegate con filo di lino e protette da spessi piatti di cartone rivestito in tela cerata.»',
     pageNumber: 138,
-    note: 'Riferimento: edizioni private e copertine d’autore del XX secolo.',
+    note: 'Crere un giornale sfogliabile a più pagine',
     appName: 'Giornale',
     appUrl: 'https://giornale-sfogliabile.vercel.app/',
   },
@@ -67,7 +67,7 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«Ogni carattere tipografico porta con sé il peso della storia e la leggerezza dell’intuizione. Disegnare una lettera significa edificare uno spazio dove il pensiero può finalmente abitare.»',
     pageNumber: 175,
-    note: 'Nota a margine: il bilanciamento dei bianchi è la chiave di ogni ritmo di lettura.',
+    note: 'Editor diGiornali vintage',
     appName: 'Vintage neswpaper studio',
     appUrl: 'https://vintage-newspaper-studio.netlify.app/',
   },
@@ -79,7 +79,7 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«L’interattività non è semplice movimento: è un dialogo tacito tra il gesto dell’utente e la risposta della superficie numerica. Il buon design rende questo passaggio del tutto invisibile.»',
     pageNumber: 210,
-    note: 'Osservazione: ridurre le transizioni superflue per preservare la chiarezza dell’azione.',
+    note: 'Creare libri illustati per bambini',
     appName: 'Libro delle fiabe',
     appUrl: 'https://libro-delle-fiabe.vercel.app/',
   },
@@ -91,7 +91,7 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«Conservare il sapere nel flusso digitale richiede nuove forme di custodia: non più polvere sui volumi, ma strutture capaci di evolvere e adattarsi al trascorrere del tempo.»',
     pageNumber: 264,
-    note: 'Riferimento: architettura dei dati e persistenza dell’informazione nell’era moderna.',
+    note: 'Creare libriillustati con Audio',
     appName: 'Foto Libro',
     appUrl: 'https://fotolibro2000.netlify.app/',
   },
@@ -103,7 +103,7 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«"Il mondo possibile della narrativa è l’unico universo in cui noi possiamo essere assolutamente sicuri di qualcosa, e che ci fornisce una idea molto forte di Verità."»',
     pageNumber: 264,
-    note: 'A furia di raccontare le sue storie, un uomo diventa quelle storie. Esse continuano a vivere dopo di lui, e così egli diventa immortale.',
+    note: 'Creare libro con foto e audio sfogliabile',
     appName: 'Libro Storie',
     appUrl: 'https://libro-storie-creator.netlify.app/',
   },
@@ -115,9 +115,21 @@ const CHAPTERS: BookChapter[] = [
     excerpt:
       '«"Non leggiamo per ritirarci dalla vita, ma per non lasciarcela sfuggire."»',
     pageNumber: 264,
-    note: 'la lettura non è un modo per fuggire dalla realtà o isolarsi dal mondo, ma al contrario, è lo strumento che ci permette di comprendere la vita più a fondo e viverla appieno.',
+    note: 'Creare storie con pinyin e audio',
     appName: 'Storie Cinese',
     appUrl: 'https://storie-cinesi.netlify.app/',
+  },
+  {
+    id: 8,
+    number: 'App IX',
+    title: 'Notizie',
+    subtitle: 'Le avventure accadono a chi le sa raccontare',
+    excerpt:
+      '«"la lettura non è un modo per fuggire dalla realtà o isolarsi dal mondo, ma al contrario, è lo strumento che ci permette di comprendere la vita più a fondo e viverla appieno."»',
+    pageNumber: 264,
+    note: 'Creare pagine editoriali vintage con foto e testi',
+    appName: 'Gazzetta Studio',
+    appUrl: 'https://vintage-style-editorial-layout.vercel.app/',
   },
 
 
