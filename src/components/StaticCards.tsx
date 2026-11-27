@@ -364,14 +364,26 @@ export const SmartphoneCard: React.FC<StaticCardsProps> = ({ playSoundBlip }) =>
               </a>
 
               <a 
-                href="https://lettore-pdf.vercel.app//" 
+                href="https://docu-pdf.netlify.app/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => playSoundBlip(880, 'sine', 0.05)}
                 className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
               >
                 <span className="text-3xl mb-1.5">📔</span>
-                <span className="text-[11px] text-white font-bold tracking-tight">Lettore Pdf</span>
+                <span className="text-[11px] text-white font-bold tracking-tight">DocuPDF</span>
+                <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
+              </a>
+
+               <a 
+                href="https://archivio-app-eight.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => playSoundBlip(880, 'sine', 0.05)}
+                className="app-tile flex flex-col items-center justify-center p-3.5 bg-teal-950/40 hover:bg-teal-950/60 border border-teal-500/15 hover:border-teal-500/40 rounded-2xl transition-all hover:-translate-y-1"
+              >
+                <span className="text-3xl mb-1.5">🗃</span>
+                <span className="text-[11px] text-white font-bold tracking-tight">Archivio App</span>
                 <span className="text-[7.5px] text-teal-400 font-mono mt-1 opacity-85">LINK DIRETTO ↗</span>
               </a>
             </div>
@@ -667,30 +679,30 @@ export const LavagnaCard: React.FC = () => {
 
           <div className="space-y-4 relative z-10 font-mono text-xs">
             <div className="flex gap-2 items-start">
-              <span>🐉</span>
+              <span>🖥</span>
               <div>
-                <a href="https://lingua-cinese.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
-                  1. 中文 (Cinese)
+                <a href="https://lettore-html-y25r.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-pink">
+                  1. Lettore HTML
                 </a>
                 <span className="block text-[9px] text-white/50">Portale e dizionario linguistico</span>
               </div>
             </div>
 
             <div className="flex gap-2 items-start">
-              <span>🐅</span>
+              <span>📝</span>
               <div>
-                <a href="https://linguacoreana.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-blue">
-                  2. 한국어 (Coreano)
+                <a href="https://markdown-editor-flax-rho.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-blue">
+                  2. Markdown Editor
                 </a>
                 <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
               </div>
             </div>
 
             <div className="flex gap-2 items-start">
-              <span>🪆</span>
+              <span>💻</span>
               <div>
-                <a href="https://lingua-russa.vercel.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-purple">
-                  2. Русский (Russo)
+                <a href="https://docucode-studio.netlify.app/" target="_blank" rel="noopener noreferrer" className="chalk-link chalk-purple">
+                  2. DocuCode
                 </a>
                 <span className="block text-[9px] text-white/50">Risorse di apprendimento e pronuncia</span>
               </div>
