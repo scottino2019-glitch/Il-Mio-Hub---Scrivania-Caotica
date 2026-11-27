@@ -1,0 +1,263 @@
+====================================================================
+IL MIO HUB - SCRIVANIA CAOTICA
+Elenco completo delle app e dei link divisi per menu e card
+====================================================================
+
+--------------------------------------------------------------------
+MENU DOCK SUPERIORE (18 link)
+--------------------------------------------------------------------
+1. Ambiente Android           -> https://androidmain.netlify.app/
+2. Scuola Virtuale            -> https://scuola-virtuale.netlify.app/
+3. Pdf Home                   -> pdf-home.html
+4. Ambiente Windows           -> https://laboratorio-programmazione.vercel.app/
+5. IPad Scriba                -> https://mela-os.vercel.app/
+6. Ricerca immagini           -> https://photo-finder-kohl.vercel.app/
+7. Ricettario                 -> https://ricettario-internazionale.vercel.app/
+8. Film                       -> https://film-finder-indol.vercel.app/
+9. Musica                     -> https://winamp-swart.vercel.app/
+10. Edu Code                  -> https://ide-core.vercel.app/
+11. Tutor                     -> https://tutor-programmazione.netlify.app/
+12. Social                    -> social.html
+13. Bunko                     -> https://bunko-rho.vercel.app/
+14. Playground                -> https://playground-web-ten.vercel.app/
+15. Code-Editor               -> https://code-editor-khaki-one.vercel.app/
+16. Ufficio-Virtuale          -> https://ufficio-virtuale.vercel.app/
+17. LearnCode                 -> https://web-coding-study-studio.ai.studio/
+18. BlogCraft                 -> BlogCraft.html
+
+
+====================================================================
+CARD DELLA SCRIVANIA (28 card)
+====================================================================
+
+--------------------------------------------------------------------
+1. IpodCard (Retro iPod Player)
+--------------------------------------------------------------------
+- Player audio incorporato (iframe) -> https://i-pod-audio-player.vercel.app/
+
+--------------------------------------------------------------------
+2. TextEditorCard (Editor testo)
+--------------------------------------------------------------------
+- Widget locale per scrivere e scaricare file .txt (appunti.txt)
+
+--------------------------------------------------------------------
+3. PreferitiCard (Preferiti)
+--------------------------------------------------------------------
+- Taccuino dinamico per salvare link personali (default iniziali):
+  * Google AI Studio          -> https://aistudio.google.com/
+  * GitHub Progetti           -> https://github.com/
+
+--------------------------------------------------------------------
+4. PinkPdfNotebookCard (Quaderno Creatore PDF)
+--------------------------------------------------------------------
+- Generatore PDF locale (quadretti / righe) + link agli editor PDF:
+  * Pdf Editor (Quadretti)    -> editor-pdf-quadretti.html
+  * Pdf Editor (Righe)        -> righe-pdf-editor.html
+  * Pdf Creator               -> pdf-creator.html
+
+--------------------------------------------------------------------
+5. JsonEditorCard (Incolla e salva JSON)
+--------------------------------------------------------------------
+- Widget locale per validare, formattare e scaricare file .json (miei_dati.json)
+
+--------------------------------------------------------------------
+6. AppuntiVolantiCard (Appunti Volanti)
+--------------------------------------------------------------------
+- Widget locale post-it / blocco appunti rapido salvato nel browser
+
+--------------------------------------------------------------------
+7. QuadernoEditorCard (Quaderno Editor)
+--------------------------------------------------------------------
+- Editor incorporato (iframe) -> /appunti.html
+
+--------------------------------------------------------------------
+8. AgendaCard (La Mia Agenda)
+--------------------------------------------------------------------
+- Ufficio Personale           -> https://ufficio-personale.netlify.app/
+- Editor di Testo Pro         -> https://editor-di-testo.vercel.app/
+- Pdf Notepad                 -> https://pdf-notepad.vercel.app/
+- Creative Desk Planner       -> https://creative-desk-planner.vercel.app/
+- Lettore PDF multiplo        -> https://lettore-pdf-affiancato.ai.studio/
+
+--------------------------------------------------------------------
+9. ComicLinksCard (Anime avatar lab)
+--------------------------------------------------------------------
+- Ghibli Me                   -> https://ghibli-me-anime-avatar-creator.vercel.app/
+- Bichi Creator               -> https://bichi-creator.vercel.app/
+- Chibi Master                -> https://chibi-master.vercel.app/
+- Chibi Creator               -> https://chibi-creator.netlify.app/
+- Chibi Sudio                 -> https://chibi-studio.netlify.app/
+
+--------------------------------------------------------------------
+10. SmartphoneCard (Libri & Codex)
+--------------------------------------------------------------------
+- Libreria                    -> https://libreria-pdf.vercel.app/
+- VoxLibro                    -> https://vox-libro.vercel.app/
+- Biblioteca                  -> https://biblioteca-six-plum.vercel.app/
+- Z-Library                   -> https://1lib.sk/
+- ReactLab                    -> Laboratorio-programmazione.html
+- Lettore Pdf                 -> https://lettore-pdf.vercel.app//
+
+--------------------------------------------------------------------
+11. RetroPcCard (Vintage Monitor System v5.10)
+--------------------------------------------------------------------
+- Terminale retro incorporato (iframe) -> retro-pc.html
+
+--------------------------------------------------------------------
+12. LavagnaCard (Lingua e Utility)
+--------------------------------------------------------------------
+- 1. 中文 (Cinese)            -> https://lingua-cinese.vercel.app/
+- 2. 한국어 (Coreano)         -> https://linguacoreana.netlify.app/
+- 2. Русский (Russo)          -> https://lingua-russa.vercel.app/
+- 3. Laboratorio Linguistico  -> https://quaderni-per-esercizi.vercel.app/
+- 4. Eserciziario PDF         -> eserciziPDF.html
+- 5. Quaderno Digitale        -> https://quaderno-digitale.vercel.app/
+
+--------------------------------------------------------------------
+13. RojiCard (Roji Player)
+--------------------------------------------------------------------
+- App incorporata (iframe)    -> https://roji-tawny.vercel.app/
+
+--------------------------------------------------------------------
+14. AlbumCssCard (CSS Artist)
+--------------------------------------------------------------------
+- Graphic Atelier             -> https://graphic-atelier.netlify.app/
+- Comix Studio                -> https://comic-studio-five.vercel.app/
+- Analogue-Studio             -> analogico.html
+- Creative Card               -> https://creative-card-code-editor.vercel.app/
+- Card Canvas Studio          -> https://card-canvas-studio-32343092220.europe-west2.run.app/
+- Analog Card Studio          -> https://analog-card-studio.netlify.app/
+- + Crea Card Artistiche      -> https://creative-card-artist.netlify.app/
+
+--------------------------------------------------------------------
+15. SnippetCreatorCard (Monitor - Snippet Generator)
+--------------------------------------------------------------------
+- App incorporata (iframe)    -> https://creatore-di-snippet.vercel.app/
+
+--------------------------------------------------------------------
+16. CuckooClockCard (Cuckoo Timepiece & Pomodoro)
+--------------------------------------------------------------------
+- Widget locale con orologio in tempo reale e timer Pomodoro (25/5 min)
+
+--------------------------------------------------------------------
+17. PolaroidCard (Vintage Polaroid)
+--------------------------------------------------------------------
+- Widget foto istantanea con filtri (Sepia / Cold / Mono) + link rapidi:
+  * Scrapbook Magic           -> https://scrapbook-magic.vercel.app/
+  * Arty Scrapbook            -> https://arty-scrapbook.vercel.app/
+
+--------------------------------------------------------------------
+18. StickyNoteCard (Sticky Note Board)
+--------------------------------------------------------------------
+- Widget locale per aggiungere/rimuovere promemoria rapidi
+
+--------------------------------------------------------------------
+19. FatCatCard (I Miei Link)
+--------------------------------------------------------------------
+- Character Marker            -> https://character-marker.vercel.app/
+- Generatore di Kawaii        -> generatore-kawaii.html
+- CSS_ENGINE v5.1             -> character-engine.html
+- Anatomy Sculptor Pro        -> anatomy.html
+- Anatomy Blueprint Studio    -> anatomy2.html
+- Css Artist Lab              -> https://css-artist-lab.netlify.app/
+
+--------------------------------------------------------------------
+20. ArtistPaletteCard (Disegno)
+--------------------------------------------------------------------
+- Vector Sketch               -> https://vector-sketch.netlify.app/
+- Carta Lucida                -> https://carta-lucida.vercel.app/
+- ArtisCard                   -> https://artiscard.vercel.app/
+- ArteLibera Studio           -> https://arte-libera-studio.vercel.app/
+- Tavolo Luminoso             -> https://tavolo-luminoso.netlify.app/
+- Disegno Vettoriale          -> https://disegno-vettoriale.vercel.app/
+- Vector Studio               -> https://vector-studio-pearl.vercel.app/
+- Side Sketch                 -> https://side-sketch.vercel.app/
+
+--------------------------------------------------------------------
+21. TvBoxCard (TV Menu Progetti)
+--------------------------------------------------------------------
+- CH 01: V-MAKER              -> https://v-maker-studio.vercel.app/
+- CH 02: TOONSCRIPT           -> https://toonscriptstudio.netlify.app/
+- CH 03: SLIDE TEXT           -> slide-text.html
+- CH 04: SLIDE IMG+TEXT       -> slide-con-immagini-e-testo.html
+- CH 05: AUDIO EDU            -> https://audio-edu-creator.vercel.app/
+- CH 06: VIDEO CREATOR        -> https://video-creator-seven-phi.vercel.app/
+- CH 07: CARTOONIA            -> https://cartoonia-studio.netlify.app/
+- CH 08: TikTok Viral Clip    -> https://tik-tok-reels-social-video-maker.vercel.app/
+
+--------------------------------------------------------------------
+22. RetroCrtCard (A:> SYS_DIAGNOSTICS)
+--------------------------------------------------------------------
+- Mini Siti Builder           -> https://mini-siti-builder.netlify.app/
+- Impare Html e Css           -> https://impara-html-e-css-579414217719.europe-west2.run.app/
+- TAILWIND LAB                -> https://tailwind-code-lab.vercel.app/
+- Python Vivo                 -> https://python-vivo.netlify.app/
+- Lettore JSON Universale     -> https://lettore-json-universale.vercel.app/
+- Base64 Studio               -> https://base64-studio.vercel.app/
+
+--------------------------------------------------------------------
+23. ColorMarkersCard (Colored Markers)
+--------------------------------------------------------------------
+- Widget locale generatore palette HEX con copia negli appunti
+
+--------------------------------------------------------------------
+24. CreativeFontCard (Scrittura & Movimento)
+--------------------------------------------------------------------
+- Cally (Font)                -> https://calligraphy-font-art-editor.vercel.app/
+- Ghiri (Scrittura)           -> https://ghiribizzo.vercel.app/
+- Gliph (Mostri)              -> https://gliph-forge.netlify.app/
+- Scribble (Tratti)           -> https://scarabocchio.vercel.app/
+- ASCII (Tratti)              -> https://generatore-di-testo-ascii-16148277139.europe-west2.run.app/
+- Stickers! (Disegni)         -> https://site-craft-studio.netlify.app/
+- Stickers!! (Disegni)        -> https://stickers-creator.vercel.app/
+- Json (Widget)               -> https://lettore-json-universale.vercel.app/
+- Emoji (Stickers3)           -> https://wemoji-studio-maker.netlify.app/
+
+--------------------------------------------------------------------
+25. RotoScopioAppsCard (Animazione 2D & VFX)
+--------------------------------------------------------------------
+- CSS Art Studio              -> https://css-art-animation-studio.vercel.app/
+- CSS.PLAYGROUND              -> https://css-animation-laboratory.vercel.app/
+- HoverCraft                  -> https://hover-craft-tau.vercel.app/
+- Artistic.Box                -> https://div-generator.vercel.app/
+- Parallax Studio             -> https://parallax-studio-sage.vercel.app/
+- Scroll Creator              -> https://scroll-creator.vercel.app/
+- Artisan Studio              -> https://artisan-studio-psi.vercel.app/
+- Modal Code Studio           -> https://modal-code-studio.vercel.app/
+- Parallax Creator            -> parallax.html
+
+--------------------------------------------------------------------
+26. PromoCardModal / CssLabsIndex (CSS Labs Playground)
+--------------------------------------------------------------------
+- 01. Coffee Studio           -> coffe-studio.html
+- 02. Gatto Studio            -> gatto-studio.html
+- 03. CSS Black Studio        -> CSS-Black-Studio.html
+- 04. CSS Studio              -> css-studio.html
+- 05. Dragon Studio           -> dragon-studio.html
+- 06. Clip Path               -> https://clip-path-studio-two.vercel.app/
+- 07. Mountain studio         -> montain-studio.html
+- 08. Pure Code Canvas        -> https://pure-code-canvas-579414217719.europe-west2.run.app/
+- 09. CSS GRID                -> https://css-grid-container-layout-studio.vercel.app/
+- 10. STUDIO CLIP PATH        -> https://studio-clip-path.vercel.app/
+- 11. Css Art Studio          -> https://css-art-studio.netlify.app/
+- 12. Css Character Studio    -> https://css-character-studio-kappa.vercel.app/
+- 13. Css pure birds studio   -> https://css-pure-birds-studio-omega.vercel.app/
+- 14. Css study               -> https://css-study-ten.vercel.app/
+
+--------------------------------------------------------------------
+27. CrtMonitorCard (BIOS & Giochi)
+--------------------------------------------------------------------
+- Snake                       -> Snake Arcade Retro.html
+- Memory                      -> memory.html
+- Type Invaders               -> type-invader.html
+- Campo minato                -> campo-minato.html
+
+--------------------------------------------------------------------
+28. VsCodeCard (VS Code Lite - DevTools)
+--------------------------------------------------------------------
+- Web Designer                -> https://scottino2019-glitch.github.io/web-designer/
+- Editor Html                 -> https://htmlcssedit.netlify.app
+- Portofolio                  -> https://portofolio-pi-kohl.vercel.app/
+- Mini Ide                    -> https://mini-ide.vercel.app/
+- Sito Console Frame          -> https://sito-console-frame.netlify.app/
+- Editor con template         -> https://editor-di-codice.vercel.app/
