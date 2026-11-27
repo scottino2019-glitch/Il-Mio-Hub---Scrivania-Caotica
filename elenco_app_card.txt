@@ -96,7 +96,8 @@ CARD DELLA SCRIVANIA (28 card)
 - Biblioteca                  -> https://biblioteca-six-plum.vercel.app/
 - Z-Library                   -> https://1lib.sk/
 - ReactLab                    -> Laboratorio-programmazione.html
-- Lettore Pdf                 -> https://lettore-pdf.vercel.app//
+- Docu Pdf                    -> https://docu-pdf.netlify.app/
+- Archivio App                -> https://archivio-app-eight.vercel.app//
 
 --------------------------------------------------------------------
 11. RetroPcCard (Vintage Monitor System v5.10)
@@ -106,12 +107,12 @@ CARD DELLA SCRIVANIA (28 card)
 --------------------------------------------------------------------
 12. LavagnaCard (Lingua e Utility)
 --------------------------------------------------------------------
-- 1. 中文 (Cinese)            -> https://lingua-cinese.vercel.app/
-- 2. 한국어 (Coreano)         -> https://linguacoreana.netlify.app/
-- 2. Русский (Russo)          -> https://lingua-russa.vercel.app/
-- 3. Laboratorio Linguistico  -> https://quaderni-per-esercizi.vercel.app/
-- 4. Eserciziario PDF         -> eserciziPDF.html
-- 5. Quaderno Digitale        -> https://quaderno-digitale.vercel.app/
+- 1. Lettore HtML              -> https://lettore-html-y25r.vercel.app/
+- 2. Markdown Editor           -> https://markdown-editor-flax-rho.vercel.app/
+- 2. DocuCode                  -> https://docucode-studio.netlify.app/
+- 3. Laboratorio Linguistico   -> https://quaderni-per-esercizi.vercel.app/
+- 4. Eserciziario PDF          -> eserciziPDF.html
+- 5. Quaderno Digitale         -> https://quaderno-digitale.vercel.app/
 
 --------------------------------------------------------------------
 13. RojiCard (Roji Player)
