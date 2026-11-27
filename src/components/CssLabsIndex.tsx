@@ -215,7 +215,7 @@ export default function CssLabsIndex() {
 
   // Shadow calculation
   const getShadowStyle = (isHovered: boolean, itemIndex: number) => {
-    const offset = '10px';
+    const offset = '10px' as 'none' | '6px' | '10px' | '14px';
     if (offset === 'none') return 'none';
     const size = { '6px': isHovered ? 10 : 6, '10px': isHovered ? 14 : 10, '14px': isHovered ? 18 : 14 }[offset] || 10;
     const baseColor = isBento ? bentoColors[itemIndex % bentoColors.length].shadow : theme.primary;
